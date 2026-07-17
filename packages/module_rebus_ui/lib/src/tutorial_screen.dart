@@ -59,8 +59,9 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             // Gate the first paint on the orientation lock to avoid a
-            // one-frame wrong-orientation flash.
-            return const SizedBox.shrink();
+            // one-frame wrong-orientation flash; a bare themed Scaffold
+            // serves as the neutral placeholder frame meanwhile.
+            return const Scaffold(body: SizedBox.shrink());
           }
           return _buildContent(context);
         },
