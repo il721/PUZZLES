@@ -1,0 +1,8 @@
+name: puzzle_book_workspace
+publish_to: none
+environment:
+  sdk: ^3.5.0
+workspace:
+  - packages/core
+  - packages/module_rebus
+  - tools/solver

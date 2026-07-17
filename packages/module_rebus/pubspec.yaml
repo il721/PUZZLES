@@ -1,0 +1,13 @@
+name: module_rebus
+description: The "rebus" arithmetic-square puzzle module — model, evaluator, verifier, solver, and puzzle data. Flutter UI is added in M2.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  puzzle_core:
+    path: ../core
+
+dev_dependencies:
+  test: ^1.25.0

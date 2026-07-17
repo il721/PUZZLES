@@ -1,0 +1,10 @@
+name: rebus_verify
+description: Thin CLI over module_rebus that validates puzzle data (canonical solution correctness and solution-count uniqueness).
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  module_rebus:
+    path: ../../packages/module_rebus
