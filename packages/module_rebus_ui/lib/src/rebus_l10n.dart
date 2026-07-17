@@ -61,6 +61,34 @@ abstract class RebusL10n {
 
   /// Banner text shown when the grid is complete but violates a rule.
   String get hasErrors;
+
+  /// Title of the guided tutorial screen.
+  String get tutorialTitle;
+
+  /// Label for the tutorial's "Next" action.
+  String get tutorialNext;
+
+  /// Label for the tutorial's "Back" action.
+  String get tutorialBack;
+
+  /// Label for the tutorial's "Skip" action.
+  String get tutorialSkip;
+
+  /// Label for the tutorial's final "Done" action.
+  String get tutorialDone;
+
+  /// Step counter text, e.g. "Step 3 of 15".
+  String tutorialStepCounter(int current, int total);
+
+  /// The explanatory text of tutorial step [index] (1..15).
+  String tutorialStepText(int index);
+
+  /// Accessibility (screen reader) label for a pre-filled, immutable grid
+  /// cell.
+  String get cellSemanticsGiven;
+
+  /// Accessibility (screen reader) label for an editable grid cell.
+  String get cellSemanticsEditable;
 }
 
 /// Supplies the [RebusL10n] implementation for the current app locale. Must

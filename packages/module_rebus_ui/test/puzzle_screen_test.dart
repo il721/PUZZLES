@@ -49,6 +49,24 @@ class _FakeRebusL10n implements RebusL10n {
   String winChecks(int count) => 'Checks: $count';
   @override
   String get hasErrors => 'Has errors';
+  @override
+  String get tutorialTitle => 'How to solve';
+  @override
+  String get tutorialNext => 'Next';
+  @override
+  String get tutorialBack => 'Back';
+  @override
+  String get tutorialSkip => 'Skip';
+  @override
+  String get tutorialDone => 'Done';
+  @override
+  String tutorialStepCounter(int current, int total) => 'Step $current of $total';
+  @override
+  String tutorialStepText(int index) => 'step $index';
+  @override
+  String get cellSemanticsGiven => 'given digit';
+  @override
+  String get cellSemanticsEditable => 'editable digit';
 }
 
 List<RebusPuzzle> _loadPuzzles() {

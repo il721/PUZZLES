@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'puzzle_screen.dart';
 import 'rebus_l10n.dart';
 import 'rebus_providers.dart';
+import 'tutorial_screen.dart';
 
 enum _PuzzleStatus { untouched, inProgress, solved }
 
@@ -29,7 +30,20 @@ class PuzzleListScreen extends ConsumerWidget {
     final saveDataAsync = ref.watch(rebusSaveDataProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.puzzleListTitle)),
+      appBar: AppBar(
+        title: Text(l10n.puzzleListTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: l10n.tutorialTitle,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const TutorialScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: puzzlesAsync.when(
         data: (puzzles) {
           final list = puzzles.where((p) => !p.tutorial).toList()

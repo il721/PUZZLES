@@ -120,6 +120,92 @@ class AppLocalizationsDe extends AppLocalizations {
       'Das Quadrat ist vollständig ausgefüllt, aber etwas stimmt nicht. Prüfen Sie die markierten Felder.';
 
   @override
+  String get cellSemanticsGiven => 'vorgegebene Ziffer';
+
+  @override
+  String get cellSemanticsEditable => 'editierbare Ziffer';
+
+  @override
   String get tutorialComingSoon =>
       'Die geführte Einführung folgt in einem späteren Update.';
+
+  @override
+  String get tutorialTitle => 'So wird gelöst';
+
+  @override
+  String get tutorialNext => 'Weiter';
+
+  @override
+  String get tutorialBack => 'Zurück';
+
+  @override
+  String get tutorialSkip => 'Überspringen';
+
+  @override
+  String get tutorialDone => 'Fertig';
+
+  @override
+  String tutorialStepCounter(int current, int total) {
+    return 'Schritt $current von $total';
+  }
+
+  @override
+  String get tutorialStep1 =>
+      'Jedes Kästchen steht für genau eine Ziffer. Keine Zahl ist gleich null, und keine Zahl beginnt mit einer Null (sie darf aber auf null enden).';
+
+  @override
+  String get tutorialStep2 =>
+      'Die Rechenschritte einer Zeile werden strikt der Reihe nach ausgeführt, von links nach rechts — als wäre jede Zeile vollständig eingeklammert.';
+
+  @override
+  String get tutorialStep3 =>
+      'Die Zahlen jeder senkrechten Spalte ergeben zusammen das Ergebnis der entsprechenden Zeile. Die fünfte Zeile enthält diese Summen und die Gesamtsumme.';
+
+  @override
+  String get tutorialStep4 =>
+      'Das Ergebnis der 1. Zeile beginnt mit 3 — es ist zugleich die erste Zahl der fünften Zeile. Und die zweite Zahl der fünften Zeile endet auf 6, also endet auch das Ergebnis der 2. Zeile auf 6.';
+
+  @override
+  String get tutorialStep5 =>
+      'Zeile 2: Die Summe zweier einstelliger Zahlen ist höchstens 18, also beginnt die dritte Zahl mit 1 — sie ist 16. Die Summe der ersten beiden Zahlen ist 17 oder 18.';
+
+  @override
+  String get tutorialStep6 =>
+      'Wäre die Summe 17, dann wäre (17 − 16) × 8 einstellig, doch das Ergebnis hat zwei Kästchen. Widerspruch.';
+
+  @override
+  String get tutorialStep7 =>
+      'Also ist die Summe 18: die erste Zahl 9, die zweite 9. Dann ist (18 − 16) × 8 = 16: die vierte Zahl ist 8, und das Zeilenergebnis 16 ist zugleich die zweite Zahl der fünften Zeile.';
+
+  @override
+  String get tutorialStep8 =>
+      'Zweite senkrechte Spalte: 2 + 9 ergeben bereits 11 von 16. Für die dritte und vierte Zahl bleiben 5 — jede ist kleiner als 5.';
+
+  @override
+  String get tutorialStep9 =>
+      'Die Analyse der 3. Zeile lässt für deren zweite Zahl nur 3 oder 8 zu. Kleiner als 5 — also 3. Dann ist die zweite Zahl der 4. Zeile 2.';
+
+  @override
+  String get tutorialStep10 =>
+      'Das Ergebnis der 1. Zeile beginnt mit 3 und ist durch 5 teilbar — 30 oder 35. Dasselbe gilt für die erste Zahl der fünften Zeile.';
+
+  @override
+  String get tutorialStep11 =>
+      'Die erste Zahl der 3. Zeile endet auf 7: 17, 27, 37 … Schon bei 27 überstiege die Summe der ersten Spalte 35. Also 17 — und die 3. Zeile lautet 17 + 3 : 5 × 8 = 32.';
+
+  @override
+  String get tutorialStep12 =>
+      'Angenommen, das Ergebnis der 1. Zeile wäre 35. Dann wäre (erste Zahl + 2) × dritte = 7, und in der dritten Spalte blieben 32 − 1 − 16 − 5 = 10 für die vierte, einstellige Zahl. Widerspruch — also 30.';
+
+  @override
+  String get tutorialStep13 =>
+      'Zeile 1: 1 + 2 × 2 × 5 = 30, von links nach rechts.';
+
+  @override
+  String get tutorialStep14 =>
+      'Die erste und zweite Spalte legen nun Zeile 4 fest: 3 + 2 × 9 − 12 = 33.';
+
+  @override
+  String get tutorialStep15 =>
+      'Zur Probe: 30 + 16 + 32 + 33 = 111. Das Rätsel ist gelöst!';
 }

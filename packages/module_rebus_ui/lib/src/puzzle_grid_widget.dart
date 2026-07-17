@@ -22,6 +22,18 @@ class PuzzleGridWidget extends StatelessWidget {
   /// Called when the player taps a cell.
   final ValueChanged<CellRef> onCellTap;
 
+  /// Cells to visually emphasize (e.g. for the guided tutorial), with a
+  /// `primaryContainer` background and `primary` border. Takes precedence
+  /// over the given/selected styling, but never overrides the violation
+  /// highlight.
+  final Set<CellRef> emphasized;
+
+  /// Accessibility (screen reader) label for a pre-filled, immutable cell.
+  final String givenSemanticsLabel;
+
+  /// Accessibility (screen reader) label for an editable cell.
+  final String editableSemanticsLabel;
+
   /// Creates a grid widget.
   const PuzzleGridWidget({
     super.key,
@@ -29,6 +41,9 @@ class PuzzleGridWidget extends StatelessWidget {
     required this.selected,
     required this.violations,
     required this.onCellTap,
+    required this.givenSemanticsLabel,
+    required this.editableSemanticsLabel,
+    this.emphasized = const {},
   });
 
   @override
@@ -109,12 +124,18 @@ class PuzzleGridWidget extends StatelessWidget {
     final given = grid.isGiven(ref);
     final isSelected = ref == selected;
     final hasViolation = violations?.involves(ref) ?? false;
+    final isEmphasized = emphasized.contains(ref);
 
     Color background = given ? scheme.surfaceContainerHighest : scheme.surface;
     Color textColor = given ? scheme.onSurfaceVariant : scheme.onSurface;
     Color borderColor = scheme.outline;
     var borderWidth = 1.5;
 
+    if (isEmphasized) {
+      background = scheme.primaryContainer;
+      borderColor = scheme.primary;
+      borderWidth = 2.0;
+    }
     if (hasViolation) {
       background = scheme.errorContainer;
       borderColor = scheme.error;
@@ -129,7 +150,7 @@ class PuzzleGridWidget extends StatelessWidget {
     return Semantics(
       button: true,
       selected: isSelected,
-      label: given ? 'given digit' : 'editable digit',
+      label: given ? givenSemanticsLabel : editableSemanticsLabel,
       value: digit?.toString(),
       child: GestureDetector(
         onTap: () => onCellTap(ref),

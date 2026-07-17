@@ -158,6 +158,8 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                     _focusNode.requestFocus();
                     ref.read(puzzleSessionProvider(widget.puzzleId).notifier).selectCell(ref0);
                   },
+                  givenSemanticsLabel: l10n.cellSemanticsGiven,
+                  editableSemanticsLabel: l10n.cellSemanticsEditable,
                 ),
               ),
               Padding(

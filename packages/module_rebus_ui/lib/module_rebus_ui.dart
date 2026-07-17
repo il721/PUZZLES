@@ -19,3 +19,4 @@ export 'src/puzzle_session_controller.dart';
 export 'src/rebus_l10n.dart';
 export 'src/rebus_module.dart';
 export 'src/rebus_providers.dart';
+export 'src/tutorial_screen.dart';

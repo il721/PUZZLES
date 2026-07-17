@@ -412,10 +412,15 @@ class PuzzleSessionNotifier extends Notifier<PuzzleSessionState> {
   Future<void> _persistNow() async {
     _saveTimer?.cancel();
     final namespaceData = await _saveService.load(rebusSaveNamespace);
+    // Copy the whole namespace map (not just 'puzzles') so unrelated
+    // top-level keys — e.g. the tutorial-completion flag written by
+    // TutorialScreen — survive this write instead of being dropped.
+    final merged = Map<String, dynamic>.from(namespaceData);
     final rawPuzzles = namespaceData['puzzles'];
     final puzzlesMap =
         (rawPuzzles is Map) ? Map<String, dynamic>.from(rawPuzzles) : <String, dynamic>{};
     puzzlesMap[puzzleId] = _buildEntryPayload();
-    await _saveService.save(rebusSaveNamespace, <String, dynamic>{'puzzles': puzzlesMap});
+    merged['puzzles'] = puzzlesMap;
+    await _saveService.save(rebusSaveNamespace, merged);
   }
 }

@@ -298,11 +298,149 @@ abstract class AppLocalizations {
   /// **'Квадрат заполнен, но есть ошибка. Проверьте клетки.'**
   String get hasErrors;
 
+  /// Accessibility (screen reader) label for a pre-filled, immutable grid cell.
+  ///
+  /// In ru, this message translates to:
+  /// **'заданная цифра'**
+  String get cellSemanticsGiven;
+
+  /// Accessibility (screen reader) label for an editable grid cell.
+  ///
+  /// In ru, this message translates to:
+  /// **'цифра для заполнения'**
+  String get cellSemanticsEditable;
+
   /// Placeholder note for the not-yet-built guided tutorial.
   ///
   /// In ru, this message translates to:
   /// **'Обучение появится в следующем обновлении.'**
   String get tutorialComingSoon;
+
+  /// Title of the guided tutorial screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Как решать'**
+  String get tutorialTitle;
+
+  /// Label for the tutorial's Next action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Далее'**
+  String get tutorialNext;
+
+  /// Label for the tutorial's Back action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Назад'**
+  String get tutorialBack;
+
+  /// Label for the tutorial's Skip action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропустить'**
+  String get tutorialSkip;
+
+  /// Label for the tutorial's final Done action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Готово'**
+  String get tutorialDone;
+
+  /// Step counter shown on the tutorial screen, e.g. "Step 3 of 15".
+  ///
+  /// In ru, this message translates to:
+  /// **'Шаг {current} из {total}'**
+  String tutorialStepCounter(int current, int total);
+
+  /// Tutorial step 1 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Каждый квадратик — одна цифра. Ни одно число не равно нулю и не начинается с нуля (но может нулём оканчиваться).'**
+  String get tutorialStep1;
+
+  /// Tutorial step 2 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Действия в строке выполняются строго по порядку, слева направо — как будто каждая строка снабжена скобками.'**
+  String get tutorialStep2;
+
+  /// Tutorial step 3 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сумма чисел каждого вертикального ряда равна результату соответствующей строки. Пятая строка — эти суммы и общий итог.'**
+  String get tutorialStep3;
+
+  /// Tutorial step 4 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Результат первой строки начинается с 3 — он же первое число пятой строки. А второе число пятой строки оканчивается на 6 — значит, и результат второй строки оканчивается на 6.'**
+  String get tutorialStep4;
+
+  /// Tutorial step 5 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вторая строка: сумма двух однозначных чисел не больше 18, поэтому третье число начинается с 1 — это 16. Сумма первых двух чисел — 17 или 18.'**
+  String get tutorialStep5;
+
+  /// Tutorial step 6 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Если сумма равна 17, то (17 − 16) × 8 — однозначное число, а в результате два квадратика. Противоречие.'**
+  String get tutorialStep6;
+
+  /// Tutorial step 7 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Значит, сумма равна 18: первое число 9 и второе 9. Тогда (18 − 16) × 8 = 16: четвёртое число 8, результат строки 16 — он же второе число пятой строки.'**
+  String get tutorialStep7;
+
+  /// Tutorial step 8 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Второй вертикальный ряд: 2 + 9 уже дают 11 из 16. На третье и четвёртое числа остаётся 5 — каждое из них меньше 5.'**
+  String get tutorialStep8;
+
+  /// Tutorial step 9 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Анализ третьей строки допускает для её второго числа только 3 или 8. Меньше 5 — значит 3. Тогда второе число четвёртой строки — 2.'**
+  String get tutorialStep9;
+
+  /// Tutorial step 10 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Результат первой строки начинается с 3 и делится на 5 — это 30 или 35. То же верно для первого числа пятой строки.'**
+  String get tutorialStep10;
+
+  /// Tutorial step 11 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Первое число третьей строки оканчивается на 7: 17, 27, 37… Уже при 27 сумма первого ряда превысила бы 35. Значит, 17 — и третья строка: 17 + 3 : 5 × 8 = 32.'**
+  String get tutorialStep11;
+
+  /// Tutorial step 12 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пусть результат первой строки равен 35. Тогда (первое число + 2) × третье = 7, и в третьем вертикальном ряду на четвёртое число остаётся 32 − 1 − 16 − 5 = 10 — но оно однозначное. Противоречие — значит, 30.'**
+  String get tutorialStep12;
+
+  /// Tutorial step 13 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Первая строка: 1 + 2 × 2 × 5 = 30 (слева направо).'**
+  String get tutorialStep13;
+
+  /// Tutorial step 14 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Первый и второй ряды подсказывают четвёртую строку: 3 + 2 × 9 − 12 = 33.'**
+  String get tutorialStep14;
+
+  /// Tutorial step 15 of 15.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проверим итог: 30 + 16 + 32 + 33 = 111. Ребус решён!'**
+  String get tutorialStep15;
 }
 
 class _AppLocalizationsDelegate
