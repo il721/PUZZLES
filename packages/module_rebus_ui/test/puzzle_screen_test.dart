@@ -290,7 +290,7 @@ void main() {
     expect(recordingAudio.played, [Sfx.tap, Sfx.place]);
   });
 
-  testWidgets('grid columns align: slot 0 cells share the same left edge across rows', (tester) async {
+  testWidgets('grid columns align: slot 0 groups share left and right edges across rows', (tester) async {
     await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
     await _settle(tester);
 
@@ -298,6 +298,12 @@ void main() {
     final summaryRowLeft = tester.getTopLeft(_cellContainer(const CellRef(4, 0, 0))).dx;
 
     expect(summaryRowLeft, closeTo(equationRowLeft, 0.5));
+
+    // Right alignment across different-width groups in the same slot:
+    // p01 row 0 slot 0 has 2 boxes ("27"), row 1 slot 0 has 1 box ("6").
+    final wideRight = tester.getTopRight(_cellContainer(const CellRef(0, 0, 1))).dx;
+    final narrowRight = tester.getTopRight(_cellContainer(const CellRef(1, 0, 0))).dx;
+    expect(narrowRight, closeTo(wideRight, 0.5));
   });
 
   testWidgets('right-clicking a filled cell clears it', (tester) async {

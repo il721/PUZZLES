@@ -142,15 +142,16 @@ class PuzzleGridWidget extends StatelessWidget {
 
   /// Renders the box group at `(row, slot)` inside a fixed-width slot of
   /// [maxWidth] boxes (the widest this slot is anywhere in the grid),
-  /// centering the (possibly narrower) actual group within it so this
-  /// slot's column aligns across every row.
+  /// right-aligning the (possibly narrower) actual group within it so
+  /// every slot column shares one right edge across rows, matching the
+  /// source book's layout.
   Widget _numberBoxGroup(BuildContext context, int row, int slot, int maxWidth) {
     final width = grid.widthOf(row, slot);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: SizedBox(
         width: maxWidth * _boxExtent,
-        child: Center(
+        child: Align(alignment: Alignment.centerRight,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
