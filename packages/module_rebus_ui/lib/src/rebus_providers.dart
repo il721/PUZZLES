@@ -36,3 +36,9 @@ final FutureProvider<Map<String, dynamic>> rebusSaveDataProvider =
   final saveService = ref.watch(saveServiceProvider);
   return saveService.load(rebusSaveNamespace);
 });
+
+/// The [AudioService] used to play SFX from this module's screens. Defaults
+/// to a no-op so pure module_rebus_ui tests/tools don't need an audio
+/// backend; the app shell overrides this with its real [AudioService]
+/// instance (the same one behind its own `audioServiceProvider`).
+final Provider<AudioService> rebusAudioServiceProvider = Provider<AudioService>((ref) => const NoopAudioService());

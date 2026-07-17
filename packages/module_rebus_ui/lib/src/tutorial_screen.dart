@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_rebus/module_rebus.dart';
+import 'package:puzzle_core/puzzle_core.dart';
 
 import 'puzzle_grid_widget.dart';
 import 'rebus_l10n.dart';
@@ -107,7 +108,10 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              ref.read(rebusAudioServiceProvider).play(Sfx.tap);
+              Navigator.of(context).pop();
+            },
             child: Text(l10n.tutorialSkip),
           ),
         ],
@@ -147,13 +151,23 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                   if (!isFirst)
                     OutlinedButton(
                       key: const ValueKey('tutorialBackButton'),
-                      onPressed: () => setState(() => _stepIndex -= 1),
+                      onPressed: () {
+                        ref.read(rebusAudioServiceProvider).play(Sfx.tap);
+                        setState(() => _stepIndex -= 1);
+                      },
                       child: Text(l10n.tutorialBack),
                     ),
                   if (!isFirst) const SizedBox(width: 12),
                   FilledButton(
                     key: const ValueKey('tutorialNextButton'),
-                    onPressed: () => isLast ? _finish() : setState(() => _stepIndex += 1),
+                    onPressed: () {
+                      ref.read(rebusAudioServiceProvider).play(isLast ? Sfx.win : Sfx.tap);
+                      if (isLast) {
+                        _finish();
+                      } else {
+                        setState(() => _stepIndex += 1);
+                      }
+                    },
                     child: Text(isLast ? l10n.tutorialDone : l10n.tutorialNext),
                   ),
                 ],

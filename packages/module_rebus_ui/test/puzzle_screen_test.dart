@@ -69,6 +69,15 @@ class _FakeRebusL10n implements RebusL10n {
   String get cellSemanticsEditable => 'editable digit';
 }
 
+/// A recording [AudioService] test double: every [play] call is appended to
+/// [played] in order, with no actual playback.
+class _RecordingAudio implements AudioService {
+  final List<Sfx> played = [];
+
+  @override
+  void play(Sfx sfx) => played.add(sfx);
+}
+
 List<RebusPuzzle> _loadPuzzles() {
   // Tests run from the package directory (`flutter test` in
   // packages/module_rebus_ui); module_rebus is a sibling package.
@@ -94,12 +103,14 @@ Widget _wrapScreen({
   required String puzzleId,
   required SaveService saveService,
   required List<RebusPuzzle> puzzles,
+  AudioService? audioService,
 }) {
   return ProviderScope(
     overrides: [
       rebusPuzzlesProvider.overrideWith((ref) async => puzzles),
       saveServiceProvider.overrideWithValue(saveService),
       rebusL10nProvider.overrideWithValue(const _FakeRebusL10n()),
+      if (audioService != null) rebusAudioServiceProvider.overrideWithValue(audioService),
     ],
     child: MaterialApp(
       home: PuzzleScreen(puzzleId: puzzleId),
@@ -122,6 +133,7 @@ void main() {
   late List<RebusPuzzle> puzzles;
   late Directory tempDir;
   late SaveService saveService;
+  late _RecordingAudio recordingAudio;
 
   setUpAll(() {
     puzzles = _loadPuzzles();
@@ -136,6 +148,7 @@ void main() {
         .setMockMethodCallHandler(SystemChannels.platform, (call) async => null);
     tempDir = Directory.systemTemp.createTempSync('module_rebus_ui_test_');
     saveService = SaveService(() => tempDir);
+    recordingAudio = _RecordingAudio();
   });
 
   tearDown(() {
@@ -252,5 +265,22 @@ void main() {
     final container = tester.widget<Container>(_cellContainer(rowZeroCells.first));
     final decoration = container.decoration as BoxDecoration;
     expect(decoration.color, errorContainerColor);
+  });
+
+  testWidgets('tapping a cell then a digit key plays tap then place', (tester) async {
+    await tester.pumpWidget(
+      _wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles, audioService: recordingAudio),
+    );
+    await _settle(tester);
+
+    // Row 0 slot 0 pos 0 is editable in p01 (no given there).
+    const ref = CellRef(0, 0, 0);
+    await tester.tap(_cellContainer(ref));
+    await tester.pump();
+
+    await tester.tap(find.byKey(const ValueKey('digitPad_2')));
+    await tester.pump();
+
+    expect(recordingAudio.played, [Sfx.tap, Sfx.place]);
   });
 }

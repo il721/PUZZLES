@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatf
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:puzzle_core/puzzle_core.dart';
 
 import 'digit_pad.dart';
 import 'puzzle_grid_widget.dart';
@@ -116,6 +117,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
           ref.listenManual<PuzzleSessionState>(puzzleSessionProvider(widget.puzzleId),
               (previous, next) {
             if ((previous?.winSeq ?? 0) != next.winSeq) {
+              ref.read(rebusAudioServiceProvider).play(Sfx.win);
               _showWinDialog(next);
             }
           });
@@ -156,6 +158,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                   violations: state.checkViolations,
                   onCellTap: (ref0) {
                     _focusNode.requestFocus();
+                    ref.read(rebusAudioServiceProvider).play(Sfx.tap);
                     ref.read(puzzleSessionProvider(widget.puzzleId).notifier).selectCell(ref0);
                   },
                   givenSemanticsLabel: l10n.cellSemanticsGiven,
@@ -171,7 +174,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                     if (!state.reviewMode)
                       FilledButton(
                         key: const ValueKey('checkButton'),
-                        onPressed: () => ref.read(puzzleSessionProvider(widget.puzzleId).notifier).check(),
+                        onPressed: () => _onCheckPressed(),
                         child: Text(l10n.check),
                       ),
                     if (!state.solved)
@@ -193,8 +196,14 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                 padding: const EdgeInsets.only(bottom: 16),
                 child: DigitPad(
                   enabled: !state.reviewMode,
-                  onDigit: (d) => ref.read(puzzleSessionProvider(widget.puzzleId).notifier).inputDigit(d),
-                  onBackspace: () => ref.read(puzzleSessionProvider(widget.puzzleId).notifier).backspace(),
+                  onDigit: (d) {
+                    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).inputDigit(d);
+                    ref.read(rebusAudioServiceProvider).play(Sfx.place);
+                  },
+                  onBackspace: () {
+                    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).backspace();
+                    ref.read(rebusAudioServiceProvider).play(Sfx.tap);
+                  },
                 ),
               ),
             ],
@@ -236,10 +245,12 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
 
     if (key == LogicalKeyboardKey.backspace) {
       notifier.backspace();
+      ref.read(rebusAudioServiceProvider).play(Sfx.tap);
       return KeyEventResult.handled;
     }
     if (digitKeys.containsKey(key)) {
       notifier.inputDigit(digitKeys[key]!);
+      ref.read(rebusAudioServiceProvider).play(Sfx.place);
       return KeyEventResult.handled;
     }
     if (key == LogicalKeyboardKey.arrowRight || key == LogicalKeyboardKey.arrowDown) {
@@ -251,6 +262,15 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
+  }
+
+  /// Runs a Check pass and plays [Sfx.error] if it just found a violation,
+  /// or [Sfx.tap] otherwise.
+  void _onCheckPressed() {
+    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).check();
+    final violations = ref.read(puzzleSessionProvider(widget.puzzleId)).checkViolations;
+    final hasViolations = violations != null && violations.isNotEmpty;
+    ref.read(rebusAudioServiceProvider).play(hasViolations ? Sfx.error : Sfx.tap);
   }
 
   void _moveSelection(int delta) {

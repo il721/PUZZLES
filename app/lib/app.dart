@@ -61,6 +61,7 @@ class PuzzleBookApp extends ConsumerWidget {
         return ProviderScope(
           overrides: [
             rebusL10nProvider.overrideWithValue(AppRebusL10n(AppLocalizations.of(context))),
+            rebusAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
           ],
           child: child!,
         );

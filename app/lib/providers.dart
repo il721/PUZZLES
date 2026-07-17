@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
+import 'audio.dart';
+
 /// The app's [SettingsService], initialized in `main` before [runApp] and
 /// supplied here via an override.
 final Provider<SettingsService> settingsServiceProvider = Provider<SettingsService>((ref) {
@@ -14,10 +16,13 @@ final Provider<ModuleRegistry> moduleRegistryProvider = Provider<ModuleRegistry>
   throw UnimplementedError('moduleRegistryProvider must be overridden with a concrete ModuleRegistry before use.');
 });
 
-/// The app's [AudioService]. Real SFX playback (via `audioplayers`) is
-/// wired up in milestone M4; for now this is always a no-op.
+/// The app's [AudioService], backed by [AudioPlayersAudioService]. Reads
+/// [soundOnProvider] fresh on every `play` call (rather than once at
+/// construction) so toggling sound in Settings applies immediately.
 final Provider<AudioService> audioServiceProvider = Provider<AudioService>((ref) {
-  return const NoopAudioService();
+  final service = AudioPlayersAudioService(isSoundOn: () => ref.read(soundOnProvider));
+  ref.onDispose(service.dispose);
+  return service;
 });
 
 /// The user's language preference: `system`, `ru`, `en`, or `de`. Seeded
