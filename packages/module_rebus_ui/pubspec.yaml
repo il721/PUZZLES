@@ -1,0 +1,22 @@
+name: module_rebus_ui
+description: Flutter UI for the "rebus" arithmetic-square puzzle module — grid rendering, digit input, puzzle screen/list, and session persistence.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  module_rebus:
+    path: ../module_rebus
+  puzzle_core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

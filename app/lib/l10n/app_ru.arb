@@ -1,0 +1,92 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Головоломки",
+  "@appTitle": {"description": "The application's display name."},
+  "moduleRebusTitle": "Ребусы с квадратиками",
+  "@moduleRebusTitle": {"description": "Title of Module 01."},
+  "moduleRebusDescription": "Арифметические ребусы: заполните квадратики цифрами, чтобы все уравнения сошлись.",
+  "@moduleRebusDescription": {"description": "Short description of Module 01, shown on its home-screen card."},
+  "homeModuleProgress": "Решено: {solved} из {total}",
+  "@homeModuleProgress": {
+    "description": "Progress line on a module card.",
+    "placeholders": {
+      "solved": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "homeSettingsTooltip": "Настройки",
+  "@homeSettingsTooltip": {"description": "Tooltip for the settings icon button on the home screen."},
+  "homeHelpTooltip": "Справка",
+  "@homeHelpTooltip": {"description": "Tooltip for the help icon button on the home screen."},
+  "settingsTitle": "Настройки",
+  "@settingsTitle": {"description": "Title of the settings screen."},
+  "settingsLanguage": "Язык",
+  "@settingsLanguage": {"description": "Label for the language selector."},
+  "languageSystem": "Как в системе",
+  "@languageSystem": {"description": "Language option: follow the device locale."},
+  "languageRu": "Русский",
+  "@languageRu": {"description": "Language option: Russian."},
+  "languageEn": "English",
+  "@languageEn": {"description": "Language option: English."},
+  "languageDe": "Deutsch",
+  "@languageDe": {"description": "Language option: German."},
+  "settingsSound": "Звук",
+  "@settingsSound": {"description": "Label for the sound-effects toggle."},
+  "helpTitle": "Справка",
+  "@helpTitle": {"description": "Title of the help screen."},
+  "helpBody": "Каждая головоломка — это квадрат из четырёх строк вида «a op b op c op d = результат», где действия выполняются строго слева направо, без порядка операций. Сумма чисел в каждом столбце равна результату соответствующей строки, а в нижней строке показаны эти четыре суммы и их общий итог. Некоторые цифры уже вписаны и их нельзя менять. Головоломка решена, когда все клетки заполнены и ни одно правило не нарушено — даже если ваш вариант отличается от авторского.",
+  "@helpBody": {"description": "Concise explanation of the puzzle rules."},
+  "puzzleListTitle": "Ребусы",
+  "@puzzleListTitle": {"description": "Title of the puzzle list screen."},
+  "puzzleN": "Ребус {n}",
+  "@puzzleN": {
+    "description": "Title for puzzle number n, used on the puzzle screen and list tiles.",
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "puzzleStatusUntouched": "Не начато",
+  "@puzzleStatusUntouched": {"description": "Status label: a puzzle that has never been opened."},
+  "puzzleStatusInProgress": "В процессе",
+  "@puzzleStatusInProgress": {"description": "Status label: a puzzle with saved progress that is not yet solved."},
+  "puzzleStatusSolved": "Решено",
+  "@puzzleStatusSolved": {"description": "Status label: a solved puzzle."},
+  "check": "Проверить",
+  "@check": {"description": "Label for the Check action."},
+  "reset": "Сбросить",
+  "@reset": {"description": "Label for the Reset action."},
+  "replay": "Повторить",
+  "@replay": {"description": "Label for the Replay action."},
+  "next": "Следующий ребус",
+  "@next": {"description": "Label for the Next puzzle action in the win dialog."},
+  "backToList": "К списку",
+  "@backToList": {"description": "Label for the Back to list action in the win dialog."},
+  "resetConfirmTitle": "Сбросить ребус?",
+  "@resetConfirmTitle": {"description": "Title of the reset confirmation dialog."},
+  "resetConfirmBody": "Все введённые цифры будут удалены. Подсказки останутся на месте.",
+  "@resetConfirmBody": {"description": "Body text of the reset confirmation dialog."},
+  "resetConfirmCancel": "Отмена",
+  "@resetConfirmCancel": {"description": "Cancel button of the reset confirmation dialog."},
+  "resetConfirmOk": "Сбросить",
+  "@resetConfirmOk": {"description": "Confirm button of the reset confirmation dialog."},
+  "winTitle": "Ребус решён!",
+  "@winTitle": {"description": "Title of the win dialog."},
+  "winTime": "Время: {time}",
+  "@winTime": {
+    "description": "Elapsed-time line of the win dialog, e.g. \"Time: 03:47\".",
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "winChecks": "Проверок: {count}",
+  "@winChecks": {
+    "description": "Check-count line of the win dialog.",
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hasErrors": "Квадрат заполнен, но есть ошибка. Проверьте клетки.",
+  "@hasErrors": {"description": "Banner shown when the grid is complete but violates a rule."},
+  "tutorialComingSoon": "Обучение появится в следующем обновлении.",
+  "@tutorialComingSoon": {"description": "Placeholder note for the not-yet-built guided tutorial."}
+}

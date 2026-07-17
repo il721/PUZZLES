@@ -11,3 +11,10 @@ dependencies:
 
 dev_dependencies:
   test: ^1.25.0
+
+# Consumed by Flutter apps that depend on this package (e.g. module_rebus_ui)
+# so the puzzle data bundles as an asset. Pure-Dart tooling (`dart test`,
+# `dart analyze`) ignores this section.
+flutter:
+  assets:
+    - assets/puzzles/

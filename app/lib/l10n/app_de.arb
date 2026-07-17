@@ -1,0 +1,58 @@
+{
+  "@@locale": "de",
+  "appTitle": "Rätselbuch",
+  "moduleRebusTitle": "Zahlenrätsel-Quadrate",
+  "moduleRebusDescription": "Rechenrätsel: Füllen Sie die Kästchen so aus, dass jede Gleichung aufgeht.",
+  "homeModuleProgress": "Gelöst: {solved} von {total}",
+  "@homeModuleProgress": {
+    "placeholders": {
+      "solved": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "homeSettingsTooltip": "Einstellungen",
+  "homeHelpTooltip": "Hilfe",
+  "settingsTitle": "Einstellungen",
+  "settingsLanguage": "Sprache",
+  "languageSystem": "Systemsprache",
+  "languageRu": "Русский",
+  "languageEn": "English",
+  "languageDe": "Deutsch",
+  "settingsSound": "Ton",
+  "helpTitle": "Hilfe",
+  "helpBody": "Jedes Rätsel besteht aus vier Zeilen der Form „a op b op c op d = Ergebnis“, die strikt von links nach rechts ausgewertet werden, ohne Punkt-vor-Strich-Regel. Die Summe der Zahlen jeder Spalte ergibt das Ergebnis der zugehörigen Zeile, und die untere Zeile zeigt diese vier Summen sowie deren Gesamtsumme. Einige Ziffern sind bereits vorgegeben und lassen sich nicht ändern. Ein Rätsel gilt als gelöst, sobald alle Felder ausgefüllt sind und keine Regel verletzt wird — auch wenn Ihre Lösung von der des Buches abweicht.",
+  "puzzleListTitle": "Zahlenrätsel",
+  "puzzleN": "Rätsel {n}",
+  "@puzzleN": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "puzzleStatusUntouched": "Nicht begonnen",
+  "puzzleStatusInProgress": "In Bearbeitung",
+  "puzzleStatusSolved": "Gelöst",
+  "check": "Prüfen",
+  "reset": "Zurücksetzen",
+  "replay": "Wiederholen",
+  "next": "Nächstes Rätsel",
+  "backToList": "Zur Übersicht",
+  "resetConfirmTitle": "Rätsel zurücksetzen?",
+  "resetConfirmBody": "Alle eingegebenen Ziffern werden gelöscht. Vorgegebene Ziffern bleiben erhalten.",
+  "resetConfirmCancel": "Abbrechen",
+  "resetConfirmOk": "Zurücksetzen",
+  "winTitle": "Rätsel gelöst!",
+  "winTime": "Zeit: {time}",
+  "@winTime": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "winChecks": "Prüfungen: {count}",
+  "@winChecks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hasErrors": "Das Quadrat ist vollständig ausgefüllt, aber etwas stimmt nicht. Prüfen Sie die markierten Felder.",
+  "tutorialComingSoon": "Die geführte Einführung folgt in einem späteren Update."
+}

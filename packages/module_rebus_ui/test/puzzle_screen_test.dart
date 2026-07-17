@@ -1,0 +1,238 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:module_rebus/module_rebus.dart';
+import 'package:module_rebus_ui/module_rebus_ui.dart';
+import 'package:puzzle_core/puzzle_core.dart';
+
+/// A minimal [RebusL10n] for widget tests, independent of any real
+/// localization setup.
+class _FakeRebusL10n implements RebusL10n {
+  const _FakeRebusL10n();
+
+  @override
+  String get puzzleListTitle => 'Rebuses';
+  @override
+  String puzzleN(int n) => 'Puzzle $n';
+  @override
+  String get statusUntouched => 'Untouched';
+  @override
+  String get statusInProgress => 'In progress';
+  @override
+  String get statusSolved => 'Solved';
+  @override
+  String get check => 'Check';
+  @override
+  String get reset => 'Reset';
+  @override
+  String get replay => 'Replay';
+  @override
+  String get next => 'Next';
+  @override
+  String get backToList => 'Back';
+  @override
+  String get resetConfirmTitle => 'Reset?';
+  @override
+  String get resetConfirmBody => 'Are you sure?';
+  @override
+  String get resetConfirmCancel => 'Cancel';
+  @override
+  String get resetConfirmOk => 'OK';
+  @override
+  String get winTitle => 'You win!';
+  @override
+  String winTime(String formattedTime) => 'Time: $formattedTime';
+  @override
+  String winChecks(int count) => 'Checks: $count';
+  @override
+  String get hasErrors => 'Has errors';
+}
+
+List<RebusPuzzle> _loadPuzzles() {
+  // Tests run from the package directory (`flutter test` in
+  // packages/module_rebus_ui); module_rebus is a sibling package.
+  final file = File('../module_rebus/assets/puzzles/module01.json');
+  return RebusPuzzle.listFromJsonString(file.readAsStringSync());
+}
+
+RebusPuzzle _byId(List<RebusPuzzle> puzzles, String id) => puzzles.firstWhere((p) => p.id == id);
+
+/// The canonical digit at [ref] for [puzzle], derived from its canonical
+/// solution strings.
+int _canonicalDigitAt(RebusPuzzle puzzle, CellRef ref) {
+  final String s;
+  if (ref.row <= 3) {
+    s = ref.slot <= 3 ? puzzle.rows[ref.row].nums[ref.slot] : puzzle.rows[ref.row].result;
+  } else {
+    s = ref.slot <= 3 ? puzzle.rows[ref.slot].result : puzzle.total;
+  }
+  return int.parse(s[ref.pos]);
+}
+
+Widget _wrapScreen({
+  required String puzzleId,
+  required SaveService saveService,
+  required List<RebusPuzzle> puzzles,
+}) {
+  return ProviderScope(
+    overrides: [
+      rebusPuzzlesProvider.overrideWith((ref) async => puzzles),
+      saveServiceProvider.overrideWithValue(saveService),
+      rebusL10nProvider.overrideWithValue(const _FakeRebusL10n()),
+    ],
+    child: MaterialApp(
+      home: PuzzleScreen(puzzleId: puzzleId),
+    ),
+  );
+}
+
+Future<void> _settle(WidgetTester tester) async {
+  // Lets the (test-default-Android) orientation-lock future, the puzzle
+  // FutureProvider, and the session's async persisted-state load all
+  // resolve.
+  await tester.pump();
+  await tester.pump();
+  await tester.pump();
+}
+
+Finder _cellContainer(CellRef ref) => find.byKey(ValueKey('cell_${ref.key}'));
+
+void main() {
+  late List<RebusPuzzle> puzzles;
+  late Directory tempDir;
+  late SaveService saveService;
+
+  setUpAll(() {
+    puzzles = _loadPuzzles();
+  });
+
+  setUp(() {
+    // In widget tests un-mocked platform channels never respond, so the
+    // SystemChrome orientation-lock future would never complete and the
+    // screen would stay gated on its first-frame SizedBox forever.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SystemChannels.platform, (call) async => null);
+    tempDir = Directory.systemTemp.createTempSync('module_rebus_ui_test_');
+    saveService = SaveService(() => tempDir);
+  });
+
+  tearDown(() {
+    if (tempDir.existsSync()) {
+      tempDir.deleteSync(recursive: true);
+    }
+  });
+
+  testWidgets('grid renders every cell for p01, and given cells show their digit', (tester) async {
+    final puzzle = _byId(puzzles, 'p01');
+    await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
+    await _settle(tester);
+
+    final grid = PlayerGrid.fromPuzzle(puzzle);
+    final expectedCellCount = grid.orderedEditableCells.length + puzzle.givens.length;
+
+    final cellFinder = find.byWidgetPredicate(
+      (widget) => widget is Container && widget.key is ValueKey && (widget.key! as ValueKey).value.toString().startsWith('cell_'),
+    );
+    expect(cellFinder, findsNWidgets(expectedCellCount));
+
+    for (final given in puzzle.givens) {
+      final ref = CellRef(given.row, given.slot, given.pos);
+      final digitText = find.descendant(of: _cellContainer(ref), matching: find.text('${given.digit}'));
+      expect(digitText, findsOneWidget, reason: 'given cell $ref should display digit ${given.digit}');
+    }
+  });
+
+  testWidgets('tapping a cell then a digit pad key enters the digit and autosaves it', (tester) async {
+    await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
+    await _settle(tester);
+
+    // Row 0 slot 0 pos 0 is editable in p01 (no given there).
+    const ref = CellRef(0, 0, 0);
+    await tester.tap(_cellContainer(ref));
+    await tester.pump();
+
+    await tester.tap(find.byKey(const ValueKey('digitPad_2')));
+    await tester.pump();
+
+    expect(find.descendant(of: _cellContainer(ref), matching: find.text('2')), findsOneWidget);
+
+    // Let the coalesced (~300ms) autosave timer fire.
+    await tester.pump(const Duration(milliseconds: 400));
+
+    // The save pipeline mixes real dart:io awaits (which only complete
+    // while runAsync runs the real event loop) with continuations queued
+    // on the test's FakeAsync microtask queue (which only drain on pump).
+    // Ratchet both until the write lands on disk.
+    Map<String, dynamic>? saved;
+    for (var i = 0; i < 50 && saved == null; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
+      await tester.pump();
+      final data = (await tester.runAsync(() => saveService.load('module_rebus')))!;
+      if (((data['puzzles'] as Map?)?['p01'] as Map?)?['cells'] != null) {
+        saved = data;
+      }
+    }
+    expect(saved, isNotNull, reason: 'autosave never landed on disk');
+    final cells = ((saved!['puzzles'] as Map)['p01'] as Map)['cells'] as Map;
+    expect(cells['0:0:0'], 2);
+  });
+
+  testWidgets('entering the full canonical solution of the tutorial example triggers the win dialog', (tester) async {
+    final example = _byId(puzzles, 'example');
+    await tester.pumpWidget(_wrapScreen(puzzleId: 'example', saveService: saveService, puzzles: puzzles));
+    await _settle(tester);
+
+    final grid = PlayerGrid.fromPuzzle(example);
+    final ordered = grid.orderedEditableCells;
+    expect(ordered, isNotEmpty);
+
+    await tester.tap(_cellContainer(ordered.first));
+    await tester.pump();
+
+    for (final ref in ordered) {
+      final digit = _canonicalDigitAt(example, ref);
+      await tester.tap(find.byKey(ValueKey('digitPad_$digit')));
+      await tester.pump();
+    }
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('You win!'), findsOneWidget);
+  });
+
+  testWidgets('pressing Check with a wrong digit flashes a violation highlight', (tester) async {
+    final puzzle = _byId(puzzles, 'p01');
+    await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
+    await _settle(tester);
+
+    // Fill row 0 entirely with the canonical values, except deliberately
+    // corrupt the result's second digit (canonical "50" -> "51"), so
+    // Check finds a rowEquation violation without needing the whole grid
+    // complete.
+    final rowZeroCells = PlayerGrid.fromPuzzle(puzzle).orderedEditableCells.where((c) => c.row == 0).toList();
+    expect(rowZeroCells, isNotEmpty);
+
+    await tester.tap(_cellContainer(rowZeroCells.first));
+    await tester.pump();
+
+    for (final ref in rowZeroCells) {
+      final canonical = _canonicalDigitAt(puzzle, ref);
+      final digit = (ref.row == 0 && ref.slot == 4 && ref.pos == 1) ? (canonical + 1) % 10 : canonical;
+      await tester.tap(find.byKey(ValueKey('digitPad_$digit')));
+      await tester.pump();
+    }
+
+    await tester.tap(find.byKey(const ValueKey('checkButton')));
+    await tester.pump();
+
+    final context = tester.element(_cellContainer(rowZeroCells.first));
+    final errorContainerColor = Theme.of(context).colorScheme.errorContainer;
+    final container = tester.widget<Container>(_cellContainer(rowZeroCells.first));
+    final decoration = container.decoration as BoxDecoration;
+    expect(decoration.color, errorContainerColor);
+  });
+}

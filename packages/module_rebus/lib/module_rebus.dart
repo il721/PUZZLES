@@ -10,5 +10,6 @@ library module_rebus;
 
 export 'src/evaluator.dart';
 export 'src/model.dart';
+export 'src/player_grid.dart';
 export 'src/solver.dart';
 export 'src/verifier.dart';

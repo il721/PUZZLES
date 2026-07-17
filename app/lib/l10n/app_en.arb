@@ -1,0 +1,58 @@
+{
+  "@@locale": "en",
+  "appTitle": "Puzzle Book",
+  "moduleRebusTitle": "Square Rebuses",
+  "moduleRebusDescription": "Arithmetic rebuses: fill in the boxes so every equation checks out.",
+  "homeModuleProgress": "Solved: {solved} of {total}",
+  "@homeModuleProgress": {
+    "placeholders": {
+      "solved": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "homeSettingsTooltip": "Settings",
+  "homeHelpTooltip": "Help",
+  "settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "languageSystem": "System default",
+  "languageRu": "Русский",
+  "languageEn": "English",
+  "languageDe": "Deutsch",
+  "settingsSound": "Sound",
+  "helpTitle": "Help",
+  "helpBody": "Each puzzle is a square of four rows in the form \"a op b op c op d = result\", evaluated strictly left to right, with no operator precedence. The sum of each column's numbers equals that row's result, and the bottom row shows those four sums plus their grand total. Some digits are already filled in and cannot be changed. A puzzle is solved once every cell is filled and no rule is broken — even if your answer differs from the book's.",
+  "puzzleListTitle": "Rebuses",
+  "puzzleN": "Puzzle {n}",
+  "@puzzleN": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "puzzleStatusUntouched": "Not started",
+  "puzzleStatusInProgress": "In progress",
+  "puzzleStatusSolved": "Solved",
+  "check": "Check",
+  "reset": "Reset",
+  "replay": "Replay",
+  "next": "Next puzzle",
+  "backToList": "Back to list",
+  "resetConfirmTitle": "Reset this puzzle?",
+  "resetConfirmBody": "Every digit you've entered will be cleared. Given digits stay in place.",
+  "resetConfirmCancel": "Cancel",
+  "resetConfirmOk": "Reset",
+  "winTitle": "Puzzle solved!",
+  "winTime": "Time: {time}",
+  "@winTime": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "winChecks": "Checks: {count}",
+  "@winChecks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hasErrors": "The grid is full, but something doesn't add up. Check the highlighted cells.",
+  "tutorialComingSoon": "The guided tutorial is coming in a future update."
+}

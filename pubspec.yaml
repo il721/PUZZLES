@@ -3,6 +3,8 @@ publish_to: none
 environment:
   sdk: ^3.5.0
 workspace:
+  - app
   - packages/core
   - packages/module_rebus
+  - packages/module_rebus_ui
   - tools/solver
