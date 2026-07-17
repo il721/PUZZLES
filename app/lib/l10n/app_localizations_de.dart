@@ -51,6 +51,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSound => 'Ton';
 
   @override
+  String get settingsTheme => 'Design';
+
+  @override
+  String get themeDark => 'Dunkel';
+
+  @override
+  String get themeLight => 'Hell';
+
+  @override
   String get helpTitle => 'Hilfe';
 
   @override

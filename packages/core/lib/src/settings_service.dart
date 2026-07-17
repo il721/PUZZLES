@@ -9,6 +9,7 @@ class SettingsService {
   static const String _namespace = 'settings';
   static const String _keyLanguage = 'language';
   static const String _keySoundOn = 'soundOn';
+  static const String _keyTheme = 'theme';
 
   /// Sentinel language value meaning "follow the device locale". Resolved
   /// to a concrete supported language via [resolveLanguage].
@@ -17,10 +18,15 @@ class SettingsService {
   /// Default value for [soundOn] before any settings have been persisted.
   static const bool defaultSoundOn = true;
 
+  /// Default value for [theme] before any settings have been persisted.
+  /// Valid values are `'dark'` and `'light'`.
+  static const String defaultTheme = 'dark';
+
   final SaveService _saveService;
 
   String _language = defaultLanguage;
   bool _soundOn = defaultSoundOn;
+  String _theme = defaultTheme;
   bool _initialized = false;
 
   /// Creates a settings service backed by [saveService].
@@ -42,6 +48,11 @@ class SettingsService {
       _soundOn = sound;
     }
 
+    final theme = data[_keyTheme];
+    if (theme is String) {
+      _theme = theme;
+    }
+
     _initialized = true;
   }
 
@@ -53,6 +64,9 @@ class SettingsService {
 
   /// Whether sound effects are enabled.
   bool get soundOn => _soundOn;
+
+  /// The configured color theme: `dark` or `light`.
+  String get theme => _theme;
 
   /// Sets and persists the configured language.
   Future<void> setLanguage(String language) async {
@@ -66,10 +80,17 @@ class SettingsService {
     await _persist();
   }
 
+  /// Sets and persists the configured color theme.
+  Future<void> setTheme(String theme) async {
+    _theme = theme;
+    await _persist();
+  }
+
   Future<void> _persist() {
     return _saveService.save(_namespace, <String, dynamic>{
       _keyLanguage: _language,
       _keySoundOn: _soundOn,
+      _keyTheme: _theme,
     });
   }
 

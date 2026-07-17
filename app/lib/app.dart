@@ -11,9 +11,37 @@ import 'screens/help_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/settings_screen.dart';
 
-/// Material 3 seed color shared by the light and dark themes — a calm,
-/// desaturated teal.
-const Color _seedColor = Color(0xFF2E6E62);
+/// Material 3 seed color shared by the light and dark themes, per
+/// DESIGN.md's "Modern Dark" palette — the primary accent blue.
+const Color _seedColor = Color(0xFF2B79C2);
+
+/// DESIGN.md "Modern Dark" background/surface color.
+const Color _darkSurface = Color(0xFF1E1E1E);
+
+/// DESIGN.md "Modern Dark" primary text color.
+const Color _darkOnSurface = Color(0xFFE6E6E6);
+
+/// DESIGN.md "Modern Dark" secondary text color.
+const Color _darkOnSurfaceVariant = Color(0xFF969696);
+
+/// DESIGN.md "Modern Dark" standard button background.
+const Color _darkButtonBackground = Color(0xFF3C3C3C);
+
+/// Shared corner radius for buttons and cards, per DESIGN.md's 10-15px
+/// rounded-corner guidance.
+const double _cornerRadius = 12;
+
+/// Button and card theming shared by the light and dark themes: rounded
+/// corners per DESIGN.md.
+ThemeData _applySharedShapeThemes(ThemeData base) {
+  final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(_cornerRadius));
+  return base.copyWith(
+    cardTheme: base.cardTheme.copyWith(shape: shape),
+    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: shape)),
+    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: shape)),
+    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: shape)),
+  );
+}
 
 /// The app's root widget: theme, localization, and routing.
 class PuzzleBookApp extends ConsumerWidget {
@@ -24,19 +52,29 @@ class PuzzleBookApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final languageOverride = ref.watch(languageOverrideProvider);
     final localeOverride = languageOverride == SettingsService.defaultLanguage ? null : Locale(languageOverride);
+    final themeOverride = ref.watch(themeOverrideProvider);
 
     return MaterialApp(
       title: 'Puzzle Book',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      theme: _applySharedShapeThemes(ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: _seedColor, brightness: Brightness.light),
-      ),
-      darkTheme: ThemeData(
+      )),
+      darkTheme: _applySharedShapeThemes(ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: _seedColor, brightness: Brightness.dark),
-      ),
-      themeMode: ThemeMode.system,
+        colorScheme: ColorScheme.fromSeed(seedColor: _seedColor, brightness: Brightness.dark).copyWith(
+          surface: _darkSurface,
+          onSurface: _darkOnSurface,
+          onSurfaceVariant: _darkOnSurfaceVariant,
+          primary: _seedColor,
+          surfaceContainerHighest: _darkButtonBackground,
+        ),
+        scaffoldBackgroundColor: _darkSurface,
+        dialogTheme: const DialogThemeData(backgroundColor: _darkSurface),
+      )),
+      // Dark is the default; never ThemeMode.system, per DESIGN.md.
+      themeMode: themeOverride == 'light' ? ThemeMode.light : ThemeMode.dark,
       locale: localeOverride,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

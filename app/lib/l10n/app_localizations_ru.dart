@@ -51,6 +51,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsSound => 'Звук';
 
   @override
+  String get settingsTheme => 'Тема';
+
+  @override
+  String get themeDark => 'Тёмная';
+
+  @override
+  String get themeLight => 'Светлая';
+
+  @override
   String get helpTitle => 'Справка';
 
   @override

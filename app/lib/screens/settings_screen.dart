@@ -17,6 +17,7 @@ class SettingsScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final language = ref.watch(languageOverrideProvider);
     final soundOn = ref.watch(soundOnProvider);
+    final theme = ref.watch(themeOverrideProvider);
     final settingsService = ref.read(settingsServiceProvider);
 
     return Scaffold(
@@ -47,6 +48,27 @@ class SettingsScreen extends ConsumerWidget {
               ref.read(soundOnProvider.notifier).state = value;
               unawaited(settingsService.setSoundOn(value));
             },
+          ),
+          ListTile(title: Text(l10n.settingsTheme)),
+          RadioGroup<String>(
+            groupValue: theme,
+            onChanged: (value) {
+              if (value == null) return;
+              ref.read(themeOverrideProvider.notifier).state = value;
+              unawaited(settingsService.setTheme(value));
+            },
+            child: Column(
+              children: [
+                RadioListTile<String>(
+                  title: Text(l10n.themeDark),
+                  value: 'dark',
+                ),
+                RadioListTile<String>(
+                  title: Text(l10n.themeLight),
+                  value: 'light',
+                ),
+              ],
+            ),
           ),
         ],
       ),

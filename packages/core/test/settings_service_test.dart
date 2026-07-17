@@ -22,10 +22,12 @@ void main() {
     final settings = SettingsService(saveService);
     expect(settings.language, SettingsService.defaultLanguage);
     expect(settings.soundOn, SettingsService.defaultSoundOn);
+    expect(settings.theme, SettingsService.defaultTheme);
 
     await settings.init();
     expect(settings.language, SettingsService.defaultLanguage);
     expect(settings.soundOn, SettingsService.defaultSoundOn);
+    expect(settings.theme, SettingsService.defaultTheme);
   });
 
   test('set values persist across a fresh instance and reload', () async {
@@ -33,11 +35,13 @@ void main() {
     await settings.init();
     await settings.setLanguage('de');
     await settings.setSoundOn(false);
+    await settings.setTheme('light');
 
     final reloaded = SettingsService(saveService);
     await reloaded.init();
     expect(reloaded.language, 'de');
     expect(reloaded.soundOn, false);
+    expect(reloaded.theme, 'light');
   });
 
   group('resolveLanguage', () {

@@ -4,17 +4,18 @@ import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatf
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:module_rebus/module_rebus.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
-import 'digit_pad.dart';
 import 'puzzle_grid_widget.dart';
 import 'puzzle_session_controller.dart';
 import 'rebus_l10n.dart';
 import 'rebus_providers.dart';
 
-/// The single-puzzle play screen: grid, Check/Reset/Replay actions, and a
-/// digit pad. Handles the Android landscape lock, desktop keyboard input,
-/// the "has errors" banner, and the win dialog.
+/// The single-puzzle play screen: grid and Check/Reset/Replay actions.
+/// Digits are entered via a compact popup menu anchored at the tapped
+/// cell, or via the keyboard. Handles the Android landscape lock, desktop
+/// keyboard input, the "has errors" banner, and the win dialog.
 class PuzzleScreen extends ConsumerStatefulWidget {
   /// The id of the puzzle to play (e.g. `p01`).
   final String puzzleId;
@@ -159,9 +160,9 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                   violations: state.checkViolations,
                   onCellTap: (ref0) {
                     _focusNode.requestFocus();
-                    ref.read(rebusAudioServiceProvider).play(Sfx.tap);
-                    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).selectCell(ref0);
                   },
+                  onCellTapDown: (ref0, globalPosition) => _handleCellTapDown(ref0, globalPosition),
+                  onCellClear: (ref0) => _handleCellClear(ref0),
                   givenSemanticsLabel: l10n.cellSemanticsGiven,
                   editableSemanticsLabel: l10n.cellSemanticsEditable,
                 ),
@@ -191,20 +192,6 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                         child: Text(l10n.replay),
                       ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: DigitPad(
-                  enabled: !state.reviewMode,
-                  onDigit: (d) {
-                    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).inputDigit(d);
-                    ref.read(rebusAudioServiceProvider).play(Sfx.place);
-                  },
-                  onBackspace: () {
-                    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).backspace();
-                    ref.read(rebusAudioServiceProvider).play(Sfx.tap);
-                  },
                 ),
               ),
             ],
@@ -263,6 +250,74 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
+  }
+
+  /// Handles a tap-down on [cellRef] at [globalPosition]: for an editable
+  /// cell (not a given, not locked for review), plays [Sfx.tap], selects
+  /// the cell, and opens a compact popup digit menu anchored at the tap.
+  /// If a digit is picked, enters it and plays [Sfx.place]. A silent no-op
+  /// for given cells or while the grid is locked for review.
+  Future<void> _handleCellTapDown(CellRef cellRef, Offset globalPosition) async {
+    final session = ref.read(puzzleSessionProvider(widget.puzzleId));
+    if (session.reviewMode || session.grid.isGiven(cellRef)) return;
+
+    final notifier = ref.read(puzzleSessionProvider(widget.puzzleId).notifier);
+    ref.read(rebusAudioServiceProvider).play(Sfx.tap);
+    notifier.selectCell(cellRef);
+
+    final digit = await showMenu<int>(
+      context: context,
+      position: RelativeRect.fromLTRB(
+        globalPosition.dx,
+        globalPosition.dy,
+        globalPosition.dx,
+        globalPosition.dy,
+      ),
+      items: [
+        PopupMenuItem<int>(
+          enabled: false,
+          padding: EdgeInsets.zero,
+          child: _digitTileRow(0, 4),
+        ),
+        PopupMenuItem<int>(
+          enabled: false,
+          padding: EdgeInsets.zero,
+          child: _digitTileRow(5, 9),
+        ),
+      ],
+    );
+
+    if (!mounted || digit == null) return;
+    notifier.inputDigit(digit);
+    ref.read(rebusAudioServiceProvider).play(Sfx.place);
+  }
+
+  /// A row of five 40x40 digit tiles for [start]..[end], each popping the
+  /// enclosing popup menu route with the tapped digit.
+  Widget _digitTileRow(int start, int end) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (var d = start; d <= end; d++)
+          InkWell(
+            key: ValueKey('digitMenu_$d'),
+            onTap: () => Navigator.pop(context, d),
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: Center(child: Text('$d', style: Theme.of(context).textTheme.titleMedium)),
+            ),
+          ),
+      ],
+    );
+  }
+
+  /// Handles a clear request (right-click or long-press) on [cellRef]:
+  /// plays [Sfx.tap] and clears the cell. A no-op (via the notifier's own
+  /// guards) for given cells or while the grid is locked for review.
+  void _handleCellClear(CellRef cellRef) {
+    ref.read(rebusAudioServiceProvider).play(Sfx.tap);
+    ref.read(puzzleSessionProvider(widget.puzzleId).notifier).clearCell(cellRef);
   }
 
   /// Runs a Check pass and plays [Sfx.error] if it just found a violation,

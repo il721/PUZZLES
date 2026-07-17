@@ -242,6 +242,17 @@ class PuzzleSessionNotifier extends Notifier<PuzzleSessionState> {
     _afterMutation();
   }
 
+  /// Clears [ref] if it holds a digit, selecting it in the process. A
+  /// no-op if [ref] is a given or the grid is locked for review.
+  void clearCell(CellRef ref) {
+    if (state.reviewMode) return;
+    if (state.grid.isGiven(ref)) return;
+
+    state.grid.clearDigit(ref);
+    state = state.copyWith(selected: ref);
+    _scheduleSave();
+  }
+
   /// Clears the selected cell if it holds a digit; if it is already empty,
   /// steps back to the previous editable cell and clears that one instead.
   /// A no-op if nothing is selected, the selection is a given, or the grid

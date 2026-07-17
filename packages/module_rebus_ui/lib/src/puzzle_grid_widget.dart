@@ -22,6 +22,15 @@ class PuzzleGridWidget extends StatelessWidget {
   /// Called when the player taps a cell.
   final ValueChanged<CellRef> onCellTap;
 
+  /// Called (in addition to [onCellTap]) when the player taps a cell,
+  /// carrying the tap's global position — used by [PuzzleScreen] to anchor
+  /// the popup digit menu at the tap location.
+  final void Function(CellRef ref, Offset globalPosition)? onCellTapDown;
+
+  /// Called when the player right-clicks (desktop) or long-presses
+  /// (Android) a cell, requesting it be cleared.
+  final ValueChanged<CellRef>? onCellClear;
+
   /// Cells to visually emphasize (e.g. for the guided tutorial), with a
   /// `primaryContainer` background and `primary` border. Takes precedence
   /// over the given/selected styling, but never overrides the violation
@@ -34,6 +43,20 @@ class PuzzleGridWidget extends StatelessWidget {
   /// Accessibility (screen reader) label for an editable cell.
   final String editableSemanticsLabel;
 
+  /// Side length of a single digit cell, in logical pixels.
+  static const double _cellSize = 50;
+
+  /// Margin applied to every side of a digit cell.
+  static const double _cellMargin = 1.5;
+
+  /// Total horizontal (or vertical) space one digit cell occupies within
+  /// its box group, including its margins on both sides.
+  static const double _boxExtent = _cellSize + _cellMargin * 2;
+
+  /// Fixed width of an operator glyph's container, so every operator
+  /// column lines up across rows regardless of which glyph it holds.
+  static const double _operatorWidth = 40;
+
   /// Creates a grid widget.
   const PuzzleGridWidget({
     super.key,
@@ -43,11 +66,24 @@ class PuzzleGridWidget extends StatelessWidget {
     required this.onCellTap,
     required this.givenSemanticsLabel,
     required this.editableSemanticsLabel,
+    this.onCellTapDown,
+    this.onCellClear,
     this.emphasized = const {},
   });
 
   @override
   Widget build(BuildContext context) {
+    // Each of the 5 slots (4 operands + result) must line up in a straight
+    // vertical column across all 5 rows (4 equations + summary), even
+    // though individual box groups may have different widths (e.g. a
+    // 2-digit operand in one row, a 1-digit operand in another). Computing
+    // the widest box-group per slot up front lets every row reserve
+    // identical fixed-width space for that slot.
+    final slotWidths = <int, int>{
+      for (var slot = 0; slot < 5; slot++)
+        slot: [for (var r = 0; r < 5; r++) grid.widthOf(r, slot)].reduce((a, b) => a > b ? a : b),
+    };
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return Center(
@@ -60,14 +96,14 @@ class PuzzleGridWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   for (var r = 0; r < 4; r++) ...[
-                    _buildEquationRow(context, r),
+                    _buildEquationRow(context, r, slotWidths),
                     const SizedBox(height: 8),
                   ],
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Divider(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
-                  _buildSummaryRow(context),
+                  _buildSummaryRow(context, slotWidths),
                 ],
               ),
             ),
@@ -77,42 +113,51 @@ class PuzzleGridWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildEquationRow(BuildContext context, int row) {
+  Widget _buildEquationRow(BuildContext context, int row, Map<int, int> slotWidths) {
     final ops = grid.puzzle.rows[row].ops;
     final children = <Widget>[];
     for (var slot = 0; slot < 4; slot++) {
-      children.add(_numberBoxGroup(context, row, slot));
+      children.add(_numberBoxGroup(context, row, slot, slotWidths[slot]!));
       if (slot < 3) {
         children.add(_operatorGlyph(context, ops[slot]));
       }
     }
     children.add(_operatorGlyph(context, '='));
-    children.add(_numberBoxGroup(context, row, 4));
+    children.add(_numberBoxGroup(context, row, 4, slotWidths[4]!));
     return Row(mainAxisSize: MainAxisSize.min, children: children);
   }
 
-  Widget _buildSummaryRow(BuildContext context) {
+  Widget _buildSummaryRow(BuildContext context, Map<int, int> slotWidths) {
     final children = <Widget>[];
     for (var slot = 0; slot < 4; slot++) {
-      children.add(_numberBoxGroup(context, 4, slot));
+      children.add(_numberBoxGroup(context, 4, slot, slotWidths[slot]!));
       if (slot < 3) {
         children.add(_operatorGlyph(context, '+'));
       }
     }
     children.add(_operatorGlyph(context, '='));
-    children.add(_numberBoxGroup(context, 4, 4));
+    children.add(_numberBoxGroup(context, 4, 4, slotWidths[4]!));
     return Row(mainAxisSize: MainAxisSize.min, children: children);
   }
 
-  Widget _numberBoxGroup(BuildContext context, int row, int slot) {
+  /// Renders the box group at `(row, slot)` inside a fixed-width slot of
+  /// [maxWidth] boxes (the widest this slot is anywhere in the grid),
+  /// centering the (possibly narrower) actual group within it so this
+  /// slot's column aligns across every row.
+  Widget _numberBoxGroup(BuildContext context, int row, int slot, int maxWidth) {
     final width = grid.widthOf(row, slot);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (var pos = 0; pos < width; pos++) _digitCell(context, CellRef(row, slot, pos)),
-        ],
+      child: SizedBox(
+        width: maxWidth * _boxExtent,
+        child: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (var pos = 0; pos < width; pos++) _digitCell(context, CellRef(row, slot, pos)),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -153,12 +198,17 @@ class PuzzleGridWidget extends StatelessWidget {
       label: given ? givenSemanticsLabel : editableSemanticsLabel,
       value: digit?.toString(),
       child: GestureDetector(
-        onTap: () => onCellTap(ref),
+        onTapUp: (details) {
+          onCellTap(ref);
+          onCellTapDown?.call(ref, details.globalPosition);
+        },
+        onSecondaryTap: onCellClear == null ? null : () => onCellClear!(ref),
+        onLongPress: onCellClear == null ? null : () => onCellClear!(ref),
         child: Container(
           key: ValueKey('cell_${ref.key}'),
-          width: 38,
-          height: 38,
-          margin: const EdgeInsets.all(1.5),
+          width: _cellSize,
+          height: _cellSize,
+          margin: const EdgeInsets.all(_cellMargin),
           decoration: BoxDecoration(
             color: background,
             border: Border.all(color: borderColor, width: borderWidth),
@@ -167,7 +217,7 @@ class PuzzleGridWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             digit?.toString() ?? '',
-            style: theme.textTheme.titleLarge?.copyWith(
+            style: theme.textTheme.headlineSmall?.copyWith(
               color: textColor,
               fontWeight: given ? FontWeight.w700 : FontWeight.w500,
             ),
@@ -184,13 +234,15 @@ class PuzzleGridWidget extends StatelessWidget {
       ':' => ':',
       _ => op,
     };
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6),
-      child: Text(
-        glyph,
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+    return SizedBox(
+      width: _operatorWidth,
+      child: Center(
+        child: Text(
+          glyph,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+        ),
       ),
     );
   }

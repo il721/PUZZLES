@@ -178,6 +178,24 @@ abstract class AppLocalizations {
   /// **'Звук'**
   String get settingsSound;
 
+  /// Settings label: color theme selector.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тема'**
+  String get settingsTheme;
+
+  /// Theme option: dark scheme.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тёмная'**
+  String get themeDark;
+
+  /// Theme option: light scheme.
+  ///
+  /// In ru, this message translates to:
+  /// **'Светлая'**
+  String get themeLight;
+
   /// Title of the help screen.
   ///
   /// In ru, this message translates to:

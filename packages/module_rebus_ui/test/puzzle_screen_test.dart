@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -129,6 +130,18 @@ Future<void> _settle(WidgetTester tester) async {
 
 Finder _cellContainer(CellRef ref) => find.byKey(ValueKey('cell_${ref.key}'));
 
+/// Taps [ref], letting the popup digit menu fully open, then taps the
+/// [digit] tile in it and lets the menu's pop/close settle. Mirrors the
+/// real player flow that replaced the old on-screen digit pad.
+Future<void> _enterDigitViaPopup(WidgetTester tester, CellRef ref, int digit) async {
+  await tester.tap(_cellContainer(ref));
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 300));
+  await tester.tap(find.byKey(ValueKey('digitMenu_$digit')));
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 300));
+}
+
 void main() {
   late List<RebusPuzzle> puzzles;
   late Directory tempDir;
@@ -177,7 +190,8 @@ void main() {
     }
   });
 
-  testWidgets('tapping a cell then a digit pad key enters the digit and autosaves it', (tester) async {
+  testWidgets('tapping a cell opens the digit menu; tapping a tile enters the digit and autosaves it',
+      (tester) async {
     await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
     await _settle(tester);
 
@@ -185,9 +199,13 @@ void main() {
     const ref = CellRef(0, 0, 0);
     await tester.tap(_cellContainer(ref));
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
-    await tester.tap(find.byKey(const ValueKey('digitPad_2')));
+    expect(find.byKey(const ValueKey('digitMenu_2')), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('digitMenu_2')));
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.descendant(of: _cellContainer(ref), matching: find.text('2')), findsOneWidget);
 
@@ -221,13 +239,9 @@ void main() {
     final ordered = grid.orderedEditableCells;
     expect(ordered, isNotEmpty);
 
-    await tester.tap(_cellContainer(ordered.first));
-    await tester.pump();
-
     for (final ref in ordered) {
       final digit = _canonicalDigitAt(example, ref);
-      await tester.tap(find.byKey(ValueKey('digitPad_$digit')));
-      await tester.pump();
+      await _enterDigitViaPopup(tester, ref, digit);
     }
     await tester.pump();
     await tester.pump();
@@ -247,14 +261,10 @@ void main() {
     final rowZeroCells = PlayerGrid.fromPuzzle(puzzle).orderedEditableCells.where((c) => c.row == 0).toList();
     expect(rowZeroCells, isNotEmpty);
 
-    await tester.tap(_cellContainer(rowZeroCells.first));
-    await tester.pump();
-
     for (final ref in rowZeroCells) {
       final canonical = _canonicalDigitAt(puzzle, ref);
       final digit = (ref.row == 0 && ref.slot == 4 && ref.pos == 1) ? (canonical + 1) % 10 : canonical;
-      await tester.tap(find.byKey(ValueKey('digitPad_$digit')));
-      await tester.pump();
+      await _enterDigitViaPopup(tester, ref, digit);
     }
 
     await tester.tap(find.byKey(const ValueKey('checkButton')));
@@ -267,7 +277,7 @@ void main() {
     expect(decoration.color, errorContainerColor);
   });
 
-  testWidgets('tapping a cell then a digit key plays tap then place', (tester) async {
+  testWidgets('tapping a cell then a digit menu tile plays tap then place', (tester) async {
     await tester.pumpWidget(
       _wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles, audioService: recordingAudio),
     );
@@ -275,12 +285,33 @@ void main() {
 
     // Row 0 slot 0 pos 0 is editable in p01 (no given there).
     const ref = CellRef(0, 0, 0);
-    await tester.tap(_cellContainer(ref));
-    await tester.pump();
-
-    await tester.tap(find.byKey(const ValueKey('digitPad_2')));
-    await tester.pump();
+    await _enterDigitViaPopup(tester, ref, 2);
 
     expect(recordingAudio.played, [Sfx.tap, Sfx.place]);
+  });
+
+  testWidgets('grid columns align: slot 0 cells share the same left edge across rows', (tester) async {
+    await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
+    await _settle(tester);
+
+    final equationRowLeft = tester.getTopLeft(_cellContainer(const CellRef(0, 0, 0))).dx;
+    final summaryRowLeft = tester.getTopLeft(_cellContainer(const CellRef(4, 0, 0))).dx;
+
+    expect(summaryRowLeft, closeTo(equationRowLeft, 0.5));
+  });
+
+  testWidgets('right-clicking a filled cell clears it', (tester) async {
+    await tester.pumpWidget(_wrapScreen(puzzleId: 'p01', saveService: saveService, puzzles: puzzles));
+    await _settle(tester);
+
+    // Row 0 slot 0 pos 0 is editable in p01 (no given there).
+    const ref = CellRef(0, 0, 0);
+    await _enterDigitViaPopup(tester, ref, 2);
+    expect(find.descendant(of: _cellContainer(ref), matching: find.text('2')), findsOneWidget);
+
+    await tester.tap(_cellContainer(ref), buttons: kSecondaryMouseButton);
+    await tester.pump();
+
+    expect(find.descendant(of: _cellContainer(ref), matching: find.text('2')), findsNothing);
   });
 }

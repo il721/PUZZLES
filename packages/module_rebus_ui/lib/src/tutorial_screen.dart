@@ -137,10 +137,14 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
                 children: [
                   Text(
                     l10n.tutorialStepCounter(_stepIndex + 1, tutorialSteps.length),
-                    style: Theme.of(context).textTheme.labelMedium,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                   const SizedBox(height: 4),
-                  Text(l10n.tutorialStepText(_stepIndex + 1), textAlign: TextAlign.center),
+                  Text(
+                    l10n.tutorialStepText(_stepIndex + 1),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ],
               ),
             ),

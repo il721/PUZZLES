@@ -38,3 +38,9 @@ final StateProvider<String> languageOverrideProvider = StateProvider<String>((re
 final StateProvider<bool> soundOnProvider = StateProvider<bool>((ref) {
   return ref.watch(settingsServiceProvider).soundOn;
 });
+
+/// The user's color-theme preference (`dark` or `light`), mirrored the same
+/// way as [languageOverrideProvider].
+final StateProvider<String> themeOverrideProvider = StateProvider<String>((ref) {
+  return ref.watch(settingsServiceProvider).theme;
+});
