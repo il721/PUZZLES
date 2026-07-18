@@ -6,5 +6,6 @@ workspace:
   - app
   - packages/core
   - packages/module_rebus
+  - packages/module_digit_rebus
   - packages/module_rebus_ui
   - tools/solver

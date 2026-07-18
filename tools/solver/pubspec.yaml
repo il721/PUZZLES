@@ -8,3 +8,5 @@ environment:
 dependencies:
   module_rebus:
     path: ../../packages/module_rebus
+  module_digit_rebus:
+    path: ../../packages/module_digit_rebus
