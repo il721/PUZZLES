@@ -8,7 +8,7 @@ import 'package:module_digit_rebus/module_digit_rebus.dart';
 /// both the light and dark themes; blue is avoided because entered digits
 /// render in the theme's blue primary.
 const Map<Glyph, Color> _glyphColors = {
-  Glyph.g1: Color(0xFFE53935), // red - {0, 8, 9}
+  Glyph.g1: Color(0xFFBDBDBD), // light grey - {0, 8, 9}
   Glyph.g2: Color(0xFF43A047), // green - {0, 6, 8}
   Glyph.g3: Color(0xFFFB8C00), // orange - {1, 4, 7}
   Glyph.g4: Color(0xFFAB47BC), // purple - {2, 3}
