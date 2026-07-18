@@ -83,9 +83,9 @@ class _ModuleCard extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                radius: 28,
+                radius: 36,
                 backgroundColor: theme.colorScheme.primaryContainer,
-                child: Icon(Icons.grid_4x4, color: theme.colorScheme.onPrimaryContainer, size: 28),
+                child: Icon(Icons.grid_4x4, color: theme.colorScheme.onPrimaryContainer, size: 36),
               ),
               const SizedBox(width: 16),
               Expanded(

@@ -55,7 +55,7 @@ class PuzzleGridWidget extends StatelessWidget {
 
   /// Fixed width of an operator glyph's container, so every operator
   /// column lines up across rows regardless of which glyph it holds.
-  static const double _operatorWidth = 40;
+  static const double _operatorWidth = 48;
 
   /// Creates a grid widget.
   const PuzzleGridWidget({
@@ -173,7 +173,8 @@ class PuzzleGridWidget extends StatelessWidget {
     final isEmphasized = emphasized.contains(ref);
 
     Color background = given ? scheme.surfaceContainerHighest : scheme.surface;
-    Color textColor = given ? scheme.onSurfaceVariant : scheme.onSurface;
+    final isDark = theme.brightness == Brightness.dark;
+    Color textColor = given ? (isDark ? Colors.white : Colors.black) : scheme.primary;
     Color borderColor = scheme.outline;
     var borderWidth = 1.5;
 
@@ -219,8 +220,9 @@ class PuzzleGridWidget extends StatelessWidget {
           child: Text(
             digit?.toString() ?? '',
             style: theme.textTheme.headlineSmall?.copyWith(
+              fontSize: 30,
               color: textColor,
-              fontWeight: given ? FontWeight.w700 : FontWeight.w500,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
@@ -241,7 +243,9 @@ class PuzzleGridWidget extends StatelessWidget {
         child: Text(
           glyph,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                fontSize: 34,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black87,
               ),
         ),
       ),

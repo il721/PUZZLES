@@ -134,6 +134,11 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
     // Ids are normally `pNN`, but the tutorial puzzle's id is `example`.
     final puzzleNumber = int.tryParse(widget.puzzleId.substring(1)) ?? 0;
 
+    final actionButtonStyle = OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
+      textStyle: theme.textTheme.titleLarge,
+    );
+
     return Scaffold(
       appBar: AppBar(title: Text(l10n.puzzleN(puzzleNumber))),
       body: Focus(
@@ -174,20 +179,23 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                   spacing: 8,
                   children: [
                     if (!state.reviewMode)
-                      FilledButton(
+                      OutlinedButton(
                         key: const ValueKey('checkButton'),
+                        style: actionButtonStyle,
                         onPressed: () => _onCheckPressed(),
                         child: Text(l10n.check),
                       ),
                     if (!state.solved)
                       OutlinedButton(
                         key: const ValueKey('resetButton'),
+                        style: actionButtonStyle,
                         onPressed: () => _confirmReset(context, l10n),
                         child: Text(l10n.reset),
                       ),
                     if (state.solved && !state.replayInProgress)
                       OutlinedButton(
                         key: const ValueKey('replayButton'),
+                        style: actionButtonStyle,
                         onPressed: () => ref.read(puzzleSessionProvider(widget.puzzleId).notifier).startReplay(),
                         child: Text(l10n.replay),
                       ),

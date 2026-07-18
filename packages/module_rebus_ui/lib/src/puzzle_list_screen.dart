@@ -136,8 +136,8 @@ class _PuzzleTile extends StatelessWidget {
                 Text('$number', style: theme.textTheme.headlineMedium?.copyWith(color: foreground)),
                 const SizedBox(height: 6),
                 SizedBox(
-                  height: 20,
-                  child: icon == null ? null : Icon(icon, color: foreground, size: 20),
+                  height: 26,
+                  child: icon == null ? null : Icon(icon, color: foreground, size: 26),
                 ),
               ],
             ),

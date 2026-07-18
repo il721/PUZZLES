@@ -40,6 +40,11 @@ ThemeData _applySharedShapeThemes(ThemeData base) {
     filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: shape)),
     outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: shape)),
     textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: shape)),
+    iconTheme: base.iconTheme.copyWith(size: 28),
+    appBarTheme: base.appBarTheme.copyWith(
+      iconTheme: const IconThemeData(size: 28),
+      actionsIconTheme: const IconThemeData(size: 28),
+    ),
   );
 }
 
