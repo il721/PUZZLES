@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'digit_rebus_l10n.dart';
 import 'digit_rebus_providers.dart';
 import 'digit_rebus_puzzle_screen.dart';
+import 'digit_rebus_tutorial_screen.dart';
 
 enum _PuzzleStatus { untouched, inProgress, solved }
 
@@ -16,8 +17,8 @@ _PuzzleStatus _statusFor(String id, Map<String, dynamic> saveData) {
 }
 
 /// Lists the 18 playable puzzles (`p01`..`p18`; the tutorial puzzle
-/// `example` is excluded — its guided-tutorial UI is a phase M-d
-/// addition), each tile showing its number and completion status.
+/// `example` is excluded — it is played through the guided tutorial
+/// instead), each tile showing its number and completion status.
 class DigitRebusPuzzleListScreen extends ConsumerWidget {
   /// Creates the puzzle list screen.
   const DigitRebusPuzzleListScreen({super.key});
@@ -29,7 +30,20 @@ class DigitRebusPuzzleListScreen extends ConsumerWidget {
     final saveDataAsync = ref.watch(digitRebusSaveDataProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.puzzleListTitle)),
+      appBar: AppBar(
+        title: Text(l10n.puzzleListTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: l10n.tutorialTitle,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const DigitRebusTutorialScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: puzzlesAsync.when(
         data: (puzzles) {
           final list = puzzles.where((p) => !p.tutorial).toList()

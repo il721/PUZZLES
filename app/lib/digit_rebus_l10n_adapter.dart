@@ -7,7 +7,9 @@ import 'l10n/app_localizations.dart';
 /// so that package can stay decoupled from this app's generated
 /// localization class. Strings shared with module 01 (actions, statuses,
 /// win dialog) reuse the same ARB keys; only module-02-specific wording
-/// gets its own keys.
+/// gets its own keys. Tutorial chrome strings (title/next/back/skip/done/
+/// counter) are shared with module 01, while step texts are
+/// module-02-specific.
 class AppDigitRebusL10n implements DigitRebusL10n {
   final AppLocalizations _l10n;
 
@@ -67,6 +69,50 @@ class AppDigitRebusL10n implements DigitRebusL10n {
 
   @override
   String get hasErrors => _l10n.hasErrors;
+
+  @override
+  String get tutorialTitle => _l10n.tutorialTitle;
+
+  @override
+  String get tutorialNext => _l10n.tutorialNext;
+
+  @override
+  String get tutorialBack => _l10n.tutorialBack;
+
+  @override
+  String get tutorialSkip => _l10n.tutorialSkip;
+
+  @override
+  String get tutorialDone => _l10n.tutorialDone;
+
+  @override
+  String tutorialStepCounter(int current, int total) => _l10n.tutorialStepCounter(current, total);
+
+  @override
+  String tutorialStepText(int index) {
+    switch (index) {
+      case 1:
+        return _l10n.digitRebusTutorialStep1;
+      case 2:
+        return _l10n.digitRebusTutorialStep2;
+      case 3:
+        return _l10n.digitRebusTutorialStep3;
+      case 4:
+        return _l10n.digitRebusTutorialStep4;
+      case 5:
+        return _l10n.digitRebusTutorialStep5;
+      case 6:
+        return _l10n.digitRebusTutorialStep6;
+      case 7:
+        return _l10n.digitRebusTutorialStep7;
+      case 8:
+        return _l10n.digitRebusTutorialStep8;
+      case 9:
+        return _l10n.digitRebusTutorialStep9;
+      default:
+        throw ArgumentError.value(index, 'index', 'Must be 1..9');
+    }
+  }
 
   @override
   String get cellSemanticsEditable => _l10n.cellSemanticsEditable;

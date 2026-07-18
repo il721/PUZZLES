@@ -32,6 +32,42 @@ class AppLocalizationsRu extends AppLocalizations {
   String get digitRebusResetConfirmBody => 'Все введённые цифры будут удалены.';
 
   @override
+  String get digitRebusTutorialStep1 =>
+      'Перед вами квадрат 4×4: каждая строка и каждый столбец — пример, решаемый строго слева направо (сверху вниз), без порядка действий. Четвёртая клетка — результат.';
+
+  @override
+  String get digitRebusTutorialStep2 =>
+      'Цифры скрыты значками. Каждый значок допускает лишь несколько цифр — таблица под сеткой всегда подскажет: например, кружок сверху — это 0, 8 или 9.';
+
+  @override
+  String get digitRebusTutorialStep3 =>
+      'Начнём со второй строки: (a + b) × c. Результат — одна цифра, а множитель не меньше 3, значит a + b не больше 3: подходят только a = 1 и b = 2.';
+
+  @override
+  String get digitRebusTutorialStep4 =>
+      'Тогда 1 + 2 = 3 и 3 × 3 = 9 — вторая строка: 1 + 2 × 3 = 9.';
+
+  @override
+  String get digitRebusTutorialStep5 =>
+      'Первый столбец: (a − 1) × c. Множитель снова не меньше 3, значит a − 1 = 3, то есть a = 4 — и 3 × 3 = 9: столбец 4 − 1 × 3 = 9.';
+
+  @override
+  String get digitRebusTutorialStep6 =>
+      'Третья строка: 3 + b + c. Из допустимых цифр подходит только 3 + 2 + 1 = 6.';
+
+  @override
+  String get digitRebusTutorialStep7 =>
+      'Третий столбец: a − 3 − 1. Из цифр 0, 6 и 8 подходит только 6: получаем 6 − 3 − 1 = 2.';
+
+  @override
+  String get digitRebusTutorialStep8 =>
+      'Остальные клетки следуют из своих строк: 4 + 8 : 6 = 2 и 9 − 3 : 2 = 3. Все восемь примеров сходятся.';
+
+  @override
+  String get digitRebusTutorialStep9 =>
+      'Готово! В ребусах нажимайте на клетку — меню покажет только допустимые цифры. Побеждает любое заполнение, где сходятся все восемь примеров.';
+
+  @override
   String homeModuleProgress(int solved, int total) {
     return 'Решено: $solved из $total';
   }

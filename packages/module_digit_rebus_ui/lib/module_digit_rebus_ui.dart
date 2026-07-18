@@ -19,5 +19,6 @@ export 'src/digit_rebus_providers.dart';
 export 'src/digit_rebus_puzzle_list_screen.dart';
 export 'src/digit_rebus_puzzle_screen.dart';
 export 'src/digit_rebus_session_controller.dart';
+export 'src/digit_rebus_tutorial_screen.dart';
 export 'src/glyph_legend.dart';
 export 'src/glyph_painter.dart';

@@ -33,6 +33,42 @@ class AppLocalizationsEn extends AppLocalizations {
       'All entered digits will be removed.';
 
   @override
+  String get digitRebusTutorialStep1 =>
+      'This is a 4×4 square: every row and every column is an equation, solved strictly left to right (top to bottom), with no operator precedence. The fourth cell is the result.';
+
+  @override
+  String get digitRebusTutorialStep2 =>
+      'The digits are hidden behind glyphs. Each glyph admits only a few digits — the legend below the grid always shows which: a loop on top, for example, means 0, 8 or 9.';
+
+  @override
+  String get digitRebusTutorialStep3 =>
+      'Start with row 2: (a + b) × c. The result is a single digit and the multiplier is at least 3, so a + b is at most 3: only a = 1 and b = 2 fit.';
+
+  @override
+  String get digitRebusTutorialStep4 =>
+      'Then 1 + 2 = 3 and 3 × 3 = 9 — row 2 reads 1 + 2 × 3 = 9.';
+
+  @override
+  String get digitRebusTutorialStep5 =>
+      'Column 1: (a − 1) × c. The multiplier is again at least 3, so a − 1 = 3, meaning a = 4 — and 3 × 3 = 9: the column reads 4 − 1 × 3 = 9.';
+
+  @override
+  String get digitRebusTutorialStep6 =>
+      'Row 3: 3 + b + c. Of the admitted digits only 3 + 2 + 1 = 6 works.';
+
+  @override
+  String get digitRebusTutorialStep7 =>
+      'Column 3: a − 3 − 1. Of 0, 6 and 8 only 6 works: 6 − 3 − 1 = 2.';
+
+  @override
+  String get digitRebusTutorialStep8 =>
+      'The remaining cells follow from their rows: 4 + 8 : 6 = 2 and 9 − 3 : 2 = 3. All eight equations hold.';
+
+  @override
+  String get digitRebusTutorialStep9 =>
+      'Done! In the puzzles, tap a cell — the menu shows only the digits its glyph admits. Any filling where all eight equations hold wins.';
+
+  @override
   String homeModuleProgress(int solved, int total) {
     return 'Solved: $solved of $total';
   }

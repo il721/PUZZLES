@@ -33,6 +33,42 @@ class AppLocalizationsDe extends AppLocalizations {
       'Alle eingetragenen Ziffern werden gelöscht.';
 
   @override
+  String get digitRebusTutorialStep1 =>
+      'Dies ist ein 4×4-Quadrat: Jede Zeile und jede Spalte ist eine Rechenaufgabe, die streng von links nach rechts (von oben nach unten) gelöst wird, ohne Punkt-vor-Strich. Die vierte Zelle ist das Ergebnis.';
+
+  @override
+  String get digitRebusTutorialStep2 =>
+      'Die Ziffern sind hinter Symbolen verborgen. Jedes Symbol lässt nur wenige Ziffern zu — die Legende unter dem Gitter zeigt stets welche: Ein Kreis oben bedeutet zum Beispiel 0, 8 oder 9.';
+
+  @override
+  String get digitRebusTutorialStep3 =>
+      'Beginnen wir mit Zeile 2: (a + b) × c. Das Ergebnis ist einstellig und der Faktor mindestens 3, also ist a + b höchstens 3: Nur a = 1 und b = 2 passen.';
+
+  @override
+  String get digitRebusTutorialStep4 =>
+      'Dann ist 1 + 2 = 3 und 3 × 3 = 9 — Zeile 2 lautet 1 + 2 × 3 = 9.';
+
+  @override
+  String get digitRebusTutorialStep5 =>
+      'Spalte 1: (a − 1) × c. Der Faktor ist wieder mindestens 3, also a − 1 = 3, das heißt a = 4 — und 3 × 3 = 9: Die Spalte lautet 4 − 1 × 3 = 9.';
+
+  @override
+  String get digitRebusTutorialStep6 =>
+      'Zeile 3: 3 + b + c. Von den zulässigen Ziffern passt nur 3 + 2 + 1 = 6.';
+
+  @override
+  String get digitRebusTutorialStep7 =>
+      'Spalte 3: a − 3 − 1. Von 0, 6 und 8 passt nur die 6: 6 − 3 − 1 = 2.';
+
+  @override
+  String get digitRebusTutorialStep8 =>
+      'Die übrigen Zellen folgen aus ihren Zeilen: 4 + 8 : 6 = 2 und 9 − 3 : 2 = 3. Alle acht Aufgaben stimmen.';
+
+  @override
+  String get digitRebusTutorialStep9 =>
+      'Fertig! Tippen Sie in den Rätseln auf eine Zelle — das Menü zeigt nur die zulässigen Ziffern. Jede Füllung, bei der alle acht Aufgaben stimmen, gewinnt.';
+
+  @override
   String homeModuleProgress(int solved, int total) {
     return 'Gelöst: $solved von $total';
   }

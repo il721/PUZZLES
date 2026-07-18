@@ -142,6 +142,60 @@ abstract class AppLocalizations {
   /// **'Все введённые цифры будут удалены.'**
   String get digitRebusResetConfirmBody;
 
+  /// Module 02 tutorial step 1 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перед вами квадрат 4×4: каждая строка и каждый столбец — пример, решаемый строго слева направо (сверху вниз), без порядка действий. Четвёртая клетка — результат.'**
+  String get digitRebusTutorialStep1;
+
+  /// Module 02 tutorial step 2 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цифры скрыты значками. Каждый значок допускает лишь несколько цифр — таблица под сеткой всегда подскажет: например, кружок сверху — это 0, 8 или 9.'**
+  String get digitRebusTutorialStep2;
+
+  /// Module 02 tutorial step 3 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Начнём со второй строки: (a + b) × c. Результат — одна цифра, а множитель не меньше 3, значит a + b не больше 3: подходят только a = 1 и b = 2.'**
+  String get digitRebusTutorialStep3;
+
+  /// Module 02 tutorial step 4 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тогда 1 + 2 = 3 и 3 × 3 = 9 — вторая строка: 1 + 2 × 3 = 9.'**
+  String get digitRebusTutorialStep4;
+
+  /// Module 02 tutorial step 5 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Первый столбец: (a − 1) × c. Множитель снова не меньше 3, значит a − 1 = 3, то есть a = 4 — и 3 × 3 = 9: столбец 4 − 1 × 3 = 9.'**
+  String get digitRebusTutorialStep5;
+
+  /// Module 02 tutorial step 6 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Третья строка: 3 + b + c. Из допустимых цифр подходит только 3 + 2 + 1 = 6.'**
+  String get digitRebusTutorialStep6;
+
+  /// Module 02 tutorial step 7 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Третий столбец: a − 3 − 1. Из цифр 0, 6 и 8 подходит только 6: получаем 6 − 3 − 1 = 2.'**
+  String get digitRebusTutorialStep7;
+
+  /// Module 02 tutorial step 8 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Остальные клетки следуют из своих строк: 4 + 8 : 6 = 2 и 9 − 3 : 2 = 3. Все восемь примеров сходятся.'**
+  String get digitRebusTutorialStep8;
+
+  /// Module 02 tutorial step 9 of 9.
+  ///
+  /// In ru, this message translates to:
+  /// **'Готово! В ребусах нажимайте на клетку — меню покажет только допустимые цифры. Побеждает любое заполнение, где сходятся все восемь примеров.'**
+  String get digitRebusTutorialStep9;
+
   /// Progress line on a module card.
   ///
   /// In ru, this message translates to:
