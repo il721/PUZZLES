@@ -10,8 +10,12 @@ import 'glyph_painter.dart';
 ///
 /// The whole grid is always visible: content is laid out at its natural
 /// size and scaled to fit the available space via [FittedBox], never
-/// scrolled or clipped. Only [Theme]-derived colors are used, so the grid
-/// adapts to light/dark and to a module accent color.
+/// scrolled or clipped.
+///
+/// Each cell's bold border is drawn in its glyph's identifying color
+/// (same digit set = same color); selection/emphasis tint the background;
+/// violations tint the background red — the border always keeps the
+/// glyph color.
 class DigitRebusGridWidget extends StatelessWidget {
   /// The grid to render.
   final PlayerGrid grid;
@@ -36,9 +40,8 @@ class DigitRebusGridWidget extends StatelessWidget {
   final ValueChanged<CellRef>? onCellClear;
 
   /// Cells to visually emphasize (e.g. for the guided tutorial), with a
-  /// `primaryContainer` background and `primary` border. Takes precedence
-  /// over the selected styling, but never overrides the violation
-  /// highlight.
+  /// `primaryContainer` background tint; the border always keeps the
+  /// glyph color. Never overrides the violation highlight.
   final Set<CellRef> emphasized;
 
   /// Accessibility (screen reader) label for a grid cell.
@@ -140,25 +143,19 @@ class DigitRebusGridWidget extends StatelessWidget {
 
     Color background = scheme.surface;
     Color textColor = scheme.primary;
-    Color borderColor = scheme.outline;
-    Color markerColor = scheme.onSurfaceVariant;
-    var borderWidth = 1.5;
+    Color borderColor = glyphColor(glyph);
+    var borderWidth = glyphBorderWidth;
 
     if (isEmphasized) {
       background = scheme.primaryContainer;
-      borderColor = scheme.primary;
-      borderWidth = 2.0;
     }
     if (hasViolation) {
       background = scheme.errorContainer;
-      borderColor = scheme.error;
       textColor = scheme.onErrorContainer;
-      markerColor = scheme.onErrorContainer;
-      borderWidth = 2.0;
     }
     if (isSelected) {
-      borderColor = scheme.primary;
-      borderWidth = 2.5;
+      background = scheme.primaryContainer;
+      borderWidth = glyphBorderWidth + 1.5;
     }
 
     return Semantics(
@@ -183,16 +180,13 @@ class DigitRebusGridWidget extends StatelessWidget {
             border: Border.all(color: borderColor, width: borderWidth),
             borderRadius: BorderRadius.circular(4),
           ),
-          child: CustomPaint(
-            painter: GlyphMarkerPainter(glyph: glyph, color: markerColor),
-            child: Center(
-              child: Text(
-                digit?.toString() ?? '',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontSize: 30,
-                  color: textColor,
-                  fontWeight: FontWeight.w500,
-                ),
+          child: Center(
+            child: Text(
+              digit?.toString() ?? '',
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontSize: 30,
+                color: textColor,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

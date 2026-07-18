@@ -4,8 +4,8 @@ import 'package:module_digit_rebus/module_digit_rebus.dart';
 import 'glyph_painter.dart';
 
 /// The always-available glyph-to-digit-set legend: one entry per [Glyph]
-/// showing its marker and the digits it admits. Shown beneath the puzzle
-/// grid so the player never has to memorize the five sets.
+/// showing its border color and the digits it admits. Shown beneath the
+/// puzzle grid so the player never has to memorize the five sets.
 class GlyphLegend extends StatelessWidget {
   /// Creates the legend.
   const GlyphLegend({super.key});
@@ -24,20 +24,17 @@ class GlyphLegend extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 30,
-                height: 30,
+                width: 34,
+                height: 34,
                 decoration: BoxDecoration(
-                  border: Border.all(color: scheme.outline),
+                  border: Border.all(color: glyphColor(glyph), width: glyphBorderWidth),
                   borderRadius: BorderRadius.circular(4),
-                ),
-                child: CustomPaint(
-                  painter: GlyphMarkerPainter(glyph: glyph, color: scheme.onSurfaceVariant),
                 ),
               ),
               const SizedBox(width: 6),
               Text(
                 (glyph.digits.toList()..sort()).join(' '),
-                style: theme.textTheme.titleSmall?.copyWith(color: scheme.onSurfaceVariant),
+                style: theme.textTheme.titleLarge?.copyWith(color: scheme.primary, fontWeight: FontWeight.w600),
               ),
             ],
           ),
