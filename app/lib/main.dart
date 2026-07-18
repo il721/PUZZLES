@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:puzzle_core/puzzle_core.dart';
@@ -28,12 +29,15 @@ Future<void> main() async {
   final settingsService = SettingsService(saveService);
   await settingsService.init();
 
-  final moduleRegistry = ModuleRegistry()..register(RebusModule.descriptor);
+  final moduleRegistry = ModuleRegistry()
+    ..register(RebusModule.descriptor)
+    ..register(DigitRebusModule.descriptor);
 
   runApp(
     ProviderScope(
       overrides: [
         saveServiceProvider.overrideWithValue(saveService),
+        digitRebusSaveServiceProvider.overrideWithValue(saveService),
         settingsServiceProvider.overrideWithValue(settingsService),
         moduleRegistryProvider.overrideWithValue(moduleRegistry),
       ],

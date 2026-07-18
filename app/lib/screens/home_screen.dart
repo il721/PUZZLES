@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 
 import '../l10n/app_localizations.dart';
 
-/// The app's landing screen: title, one module card (progress + tap to
+/// The app's landing screen: title, module cards (progress + tap to
 /// open), and icon buttons to Settings and Help.
 class HomeScreen extends ConsumerWidget {
   /// Creates the home screen.
@@ -16,8 +17,13 @@ class HomeScreen extends ConsumerWidget {
     final puzzlesAsync = ref.watch(rebusPuzzlesProvider);
     final saveDataAsync = ref.watch(rebusSaveDataProvider);
 
+    final digitPuzzlesAsync = ref.watch(digitRebusPuzzlesProvider);
+    final digitSaveDataAsync = ref.watch(digitRebusSaveDataProvider);
+
     final total = puzzlesAsync.value?.where((p) => !p.tutorial).length ?? 15;
     final solved = _countSolved(saveDataAsync.value);
+    final digitTotal = digitPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
+    final digitSolved = _countSolved(digitSaveDataAsync.value);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,17 +41,29 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: _ModuleCard(
-          title: l10n.moduleRebusTitle,
-          description: l10n.moduleRebusDescription,
-          progressLabel: l10n.homeModuleProgress(solved, total),
-          onTap: () async {
-            await Navigator.of(context).pushNamed('/module/rebus');
-            ref.invalidate(rebusSaveDataProvider);
-          },
-        ),
+        children: [
+          _ModuleCard(
+            title: l10n.moduleRebusTitle,
+            description: l10n.moduleRebusDescription,
+            progressLabel: l10n.homeModuleProgress(solved, total),
+            onTap: () async {
+              await Navigator.of(context).pushNamed('/module/rebus');
+              ref.invalidate(rebusSaveDataProvider);
+            },
+          ),
+          const SizedBox(height: 12),
+          _ModuleCard(
+            title: l10n.moduleDigitRebusTitle,
+            description: l10n.moduleDigitRebusDescription,
+            progressLabel: l10n.homeModuleProgress(digitSolved, digitTotal),
+            onTap: () async {
+              await Navigator.of(context).pushNamed('/module/digit_rebus');
+              ref.invalidate(digitRebusSaveDataProvider);
+            },
+          ),
+        ],
       ),
     );
   }

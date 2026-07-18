@@ -19,6 +19,20 @@ class AppLocalizationsDe extends AppLocalizations {
       'Rechenrätsel: Füllen Sie die Kästchen so aus, dass jede Gleichung aufgeht.';
 
   @override
+  String get moduleDigitRebusTitle => 'Ziffernrebusse';
+
+  @override
+  String get moduleDigitRebusDescription =>
+      'Jede Zeile und jede Spalte ist eine Rechenaufgabe: Setzen Sie die Ziffern anhand der Symbolhinweise.';
+
+  @override
+  String get digitRebusListTitle => 'Ziffernrebusse';
+
+  @override
+  String get digitRebusResetConfirmBody =>
+      'Alle eingetragenen Ziffern werden gelöscht.';
+
+  @override
   String homeModuleProgress(int solved, int total) {
     return 'Gelöst: $solved von $total';
   }

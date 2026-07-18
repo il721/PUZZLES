@@ -18,6 +18,8 @@ dependencies:
     path: ../packages/module_rebus
   module_rebus_ui:
     path: ../packages/module_rebus_ui
+  module_digit_rebus_ui:
+    path: ../packages/module_digit_rebus_ui
   path_provider: ^2.1.6
   puzzle_core:
     path: ../packages/core

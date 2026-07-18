@@ -8,4 +8,5 @@ workspace:
   - packages/module_rebus
   - packages/module_digit_rebus
   - packages/module_rebus_ui
+  - packages/module_digit_rebus_ui
   - tools/solver

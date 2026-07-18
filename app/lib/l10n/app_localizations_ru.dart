@@ -19,6 +19,19 @@ class AppLocalizationsRu extends AppLocalizations {
       'Арифметические ребусы: заполните квадратики цифрами, чтобы все уравнения сошлись.';
 
   @override
+  String get moduleDigitRebusTitle => 'Цифровые ребусы';
+
+  @override
+  String get moduleDigitRebusDescription =>
+      'Каждая строка и каждый столбец — пример: расставьте цифры по значкам-подсказкам.';
+
+  @override
+  String get digitRebusListTitle => 'Цифровые ребусы';
+
+  @override
+  String get digitRebusResetConfirmBody => 'Все введённые цифры будут удалены.';
+
+  @override
   String homeModuleProgress(int solved, int total) {
     return 'Решено: $solved из $total';
   }

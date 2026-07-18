@@ -118,6 +118,30 @@ abstract class AppLocalizations {
   /// **'Арифметические ребусы: заполните квадратики цифрами, чтобы все уравнения сошлись.'**
   String get moduleRebusDescription;
 
+  /// Title of Module 02.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цифровые ребусы'**
+  String get moduleDigitRebusTitle;
+
+  /// Short description of Module 02, shown on its home-screen card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Каждая строка и каждый столбец — пример: расставьте цифры по значкам-подсказкам.'**
+  String get moduleDigitRebusDescription;
+
+  /// Title of Module 02's puzzle list screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цифровые ребусы'**
+  String get digitRebusListTitle;
+
+  /// Body text of Module 02's reset confirmation dialog (no givens in this module).
+  ///
+  /// In ru, this message translates to:
+  /// **'Все введённые цифры будут удалены.'**
+  String get digitRebusResetConfirmBody;
+
   /// Progress line on a module card.
   ///
   /// In ru, this message translates to:

@@ -1,0 +1,22 @@
+name: module_digit_rebus_ui
+description: Flutter UI for the "digit rebus" puzzle module — glyph-masked 4x4 grid rendering, digit input via glyph-restricted popup, puzzle screen/list, and session persistence.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  module_digit_rebus:
+    path: ../module_digit_rebus
+  puzzle_core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

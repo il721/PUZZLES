@@ -19,6 +19,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'Arithmetic rebuses: fill in the boxes so every equation checks out.';
 
   @override
+  String get moduleDigitRebusTitle => 'Digit Rebuses';
+
+  @override
+  String get moduleDigitRebusDescription =>
+      'Every row and every column is an equation: place digits following the glyph hints.';
+
+  @override
+  String get digitRebusListTitle => 'Digit Rebuses';
+
+  @override
+  String get digitRebusResetConfirmBody =>
+      'All entered digits will be removed.';
+
+  @override
   String homeModuleProgress(int solved, int total) {
     return 'Solved: $solved of $total';
   }

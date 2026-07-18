@@ -3,6 +3,14 @@
   "appTitle": "Puzzle Book",
   "moduleRebusTitle": "Square Rebuses",
   "moduleRebusDescription": "Arithmetic rebuses: fill in the boxes so every equation checks out.",
+  "moduleDigitRebusTitle": "Digit Rebuses",
+  "@moduleDigitRebusTitle": {"description": "Title of Module 02."},
+  "moduleDigitRebusDescription": "Every row and every column is an equation: place digits following the glyph hints.",
+  "@moduleDigitRebusDescription": {"description": "Short description of Module 02, shown on its home-screen card."},
+  "digitRebusListTitle": "Digit Rebuses",
+  "@digitRebusListTitle": {"description": "Title of Module 02's puzzle list screen."},
+  "digitRebusResetConfirmBody": "All entered digits will be removed.",
+  "@digitRebusResetConfirmBody": {"description": "Body text of Module 02's reset confirmation dialog (no givens in this module)."},
   "homeModuleProgress": "Solved: {solved} of {total}",
   "@homeModuleProgress": {
     "placeholders": {

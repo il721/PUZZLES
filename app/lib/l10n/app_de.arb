@@ -3,6 +3,14 @@
   "appTitle": "Rätselbuch",
   "moduleRebusTitle": "Zahlenrätsel-Quadrate",
   "moduleRebusDescription": "Rechenrätsel: Füllen Sie die Kästchen so aus, dass jede Gleichung aufgeht.",
+  "moduleDigitRebusTitle": "Ziffernrebusse",
+  "@moduleDigitRebusTitle": {"description": "Title of Module 02."},
+  "moduleDigitRebusDescription": "Jede Zeile und jede Spalte ist eine Rechenaufgabe: Setzen Sie die Ziffern anhand der Symbolhinweise.",
+  "@moduleDigitRebusDescription": {"description": "Short description of Module 02, shown on its home-screen card."},
+  "digitRebusListTitle": "Ziffernrebusse",
+  "@digitRebusListTitle": {"description": "Title of Module 02's puzzle list screen."},
+  "digitRebusResetConfirmBody": "Alle eingetragenen Ziffern werden gelöscht.",
+  "@digitRebusResetConfirmBody": {"description": "Body text of Module 02's reset confirmation dialog (no givens in this module)."},
   "homeModuleProgress": "Gelöst: {solved} von {total}",
   "@homeModuleProgress": {
     "placeholders": {
