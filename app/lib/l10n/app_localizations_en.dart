@@ -309,4 +309,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dominoCellSemantics => 'domino cell';
+
+  @override
+  String get dominoTutorialStep1 =>
+      'Domino solitaire: 56 cells hold digits 0 to 6. Split them into 28 dominoes so you build the full set — every value-pair from 0:0 to 6:6 exactly once. To place a domino, tap two adjacent cells; to remove one, tap the finished domino.';
+
+  @override
+  String get dominoTutorialStep2 =>
+      'Below the board: the list of pairs not yet built and a \"placed N of 28\" counter. If the same pair appears twice, both dominoes turn red — the solitaire won\'t come out until the duplicate is gone.';
+
+  @override
+  String get dominoTutorialStep3 =>
+      'Look for cells whose neighbouring partner is forced. That fixes the first three dominoes: 0:1, 2:4 and 5:6 (highlighted).';
+
+  @override
+  String get dominoTutorialStep4 =>
+      'Next, two doubles: 5:5 and 3:3. A double covers two equal cells side by side, and each double appears only once.';
+
+  @override
+  String get dominoTutorialStep5 =>
+      'Continue in the lower left: 2:3 and 0:3 are forced, freeing their neighbours.';
+
+  @override
+  String get dominoTutorialStep6 =>
+      'The next four: 0:4, 4:4, 3:4 and 4:5. The fours are almost used up — watch the list below.';
+
+  @override
+  String get dominoTutorialStep7 =>
+      'Now the pairs with a one: 1:4, 1:6 and 1:3.';
+
+  @override
+  String get dominoTutorialStep8 =>
+      'Four more: 3:5, 1:5, 1:2 and 2:5. Check the counter — over halfway now.';
+
+  @override
+  String get dominoTutorialStep9 =>
+      'The upper part of the board: 2:6, 0:5, 0:6, 0:2 and 2:2.';
+
+  @override
+  String get dominoTutorialStep10 =>
+      'The last five close the set: 0:0, 1:1, 6:6, 3:6 and 4:6. All 28 pairs are placed — the solitaire is out! In every puzzle, do the same: find the forced dominoes and watch the remaining-pairs list.';
 }

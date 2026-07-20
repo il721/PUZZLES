@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'domino_l10n.dart';
 import 'domino_providers.dart';
 import 'domino_puzzle_screen.dart';
+import 'domino_tutorial_screen.dart';
 
 enum _PuzzleStatus { untouched, inProgress, solved }
 
@@ -28,7 +29,20 @@ class DominoPuzzleListScreen extends ConsumerWidget {
     final saveDataAsync = ref.watch(dominoSaveDataProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.puzzleListTitle)),
+      appBar: AppBar(
+        title: Text(l10n.puzzleListTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: l10n.tutorialTitle,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const DominoTutorialScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: puzzlesAsync.when(
         data: (puzzles) {
           final list = puzzles.where((p) => !p.tutorial).toList()

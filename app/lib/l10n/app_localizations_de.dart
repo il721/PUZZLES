@@ -311,4 +311,44 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dominoCellSemantics => 'Domino-Feld';
+
+  @override
+  String get dominoTutorialStep1 =>
+      'Domino-Patience: 56 Felder tragen Ziffern von 0 bis 6. Teile sie in 28 Dominosteine, sodass der volle Satz entsteht — jedes Wertepaar von 0:0 bis 6:6 genau einmal. Zum Legen tippe zwei benachbarte Felder an; zum Entfernen tippe den fertigen Stein an.';
+
+  @override
+  String get dominoTutorialStep2 =>
+      'Unter dem Feld: die Liste der noch offenen Paare und ein Zähler „Gelegt N von 28\". Kommt dasselbe Paar zweimal vor, färben sich beide Steine rot — die Patience geht erst auf, wenn die Dopplung weg ist.';
+
+  @override
+  String get dominoTutorialStep3 =>
+      'Suche Felder, deren benachbarter Partner eindeutig ist. So stehen die ersten drei Steine fest: 0:1, 2:4 und 5:6 (hervorgehoben).';
+
+  @override
+  String get dominoTutorialStep4 =>
+      'Dann zwei Pasch-Steine: 5:5 und 3:3. Ein Pasch bedeckt zwei gleiche Felder nebeneinander, und jeder Pasch kommt nur einmal vor.';
+
+  @override
+  String get dominoTutorialStep5 =>
+      'Weiter unten links: 2:3 und 0:3 sind erzwungen und geben die Nachbarn frei.';
+
+  @override
+  String get dominoTutorialStep6 =>
+      'Die nächsten vier: 0:4, 4:4, 3:4 und 4:5. Die Vieren sind fast verbraucht — achte auf die Liste unten.';
+
+  @override
+  String get dominoTutorialStep7 =>
+      'Nun die Paare mit einer Eins: 1:4, 1:6 und 1:3.';
+
+  @override
+  String get dominoTutorialStep8 =>
+      'Vier weitere: 3:5, 1:5, 1:2 und 2:5. Prüfe den Zähler — schon über die Hälfte.';
+
+  @override
+  String get dominoTutorialStep9 =>
+      'Der obere Teil des Feldes: 2:6, 0:5, 0:6, 0:2 und 2:2.';
+
+  @override
+  String get dominoTutorialStep10 =>
+      'Die letzten fünf schließen den Satz: 0:0, 1:1, 6:6, 3:6 und 4:6. Alle 28 Paare liegen — die Patience ist aufgegangen! Geh in jedem Rätsel gleich vor: finde die erzwungenen Steine und behalte die Liste der offenen Paare im Blick.';
 }

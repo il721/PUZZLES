@@ -20,3 +20,4 @@ export 'src/domino_puzzle_list_screen.dart';
 export 'src/domino_puzzle_screen.dart';
 export 'src/domino_session_controller.dart';
 export 'src/domino_status_panel.dart';
+export 'src/domino_tutorial_screen.dart';

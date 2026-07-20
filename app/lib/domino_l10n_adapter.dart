@@ -69,4 +69,50 @@ class AppDominoL10n implements DominoL10n {
 
   @override
   String get cellSemantics => _l10n.dominoCellSemantics;
+
+  @override
+  String get tutorialTitle => _l10n.tutorialTitle;
+
+  @override
+  String get tutorialNext => _l10n.tutorialNext;
+
+  @override
+  String get tutorialBack => _l10n.tutorialBack;
+
+  @override
+  String get tutorialSkip => _l10n.tutorialSkip;
+
+  @override
+  String get tutorialDone => _l10n.tutorialDone;
+
+  @override
+  String tutorialStepCounter(int current, int total) => _l10n.tutorialStepCounter(current, total);
+
+  @override
+  String tutorialStepText(int index) {
+    switch (index) {
+      case 1:
+        return _l10n.dominoTutorialStep1;
+      case 2:
+        return _l10n.dominoTutorialStep2;
+      case 3:
+        return _l10n.dominoTutorialStep3;
+      case 4:
+        return _l10n.dominoTutorialStep4;
+      case 5:
+        return _l10n.dominoTutorialStep5;
+      case 6:
+        return _l10n.dominoTutorialStep6;
+      case 7:
+        return _l10n.dominoTutorialStep7;
+      case 8:
+        return _l10n.dominoTutorialStep8;
+      case 9:
+        return _l10n.dominoTutorialStep9;
+      case 10:
+        return _l10n.dominoTutorialStep10;
+      default:
+        throw ArgumentError.value(index, 'index', 'Must be 1..10');
+    }
+  }
 }

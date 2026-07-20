@@ -62,6 +62,28 @@ abstract class DominoL10n {
 
   /// Accessibility (screen reader) label for a grid cell.
   String get cellSemantics;
+
+  /// Title of the guided tutorial screen (also the list-screen entry
+  /// tooltip).
+  String get tutorialTitle;
+
+  /// Label for the tutorial's "Next" action.
+  String get tutorialNext;
+
+  /// Label for the tutorial's "Back" action.
+  String get tutorialBack;
+
+  /// Label for the tutorial's "Skip" action.
+  String get tutorialSkip;
+
+  /// Label for the tutorial's final "Done" action.
+  String get tutorialDone;
+
+  /// Step counter text, e.g. "Step 3 of 10".
+  String tutorialStepCounter(int current, int total);
+
+  /// The explanatory text of tutorial step [index] (1..10).
+  String tutorialStepText(int index);
 }
 
 /// Supplies the [DominoL10n] implementation for the current app locale.

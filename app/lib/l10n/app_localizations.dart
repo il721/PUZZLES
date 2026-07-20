@@ -609,6 +609,66 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'клетка домино'**
   String get dominoCellSemantics;
+
+  /// Module 03 tutorial step 1 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Домино-пасьянс: перед вами 56 клеток с цифрами от 0 до 6. Разбейте их на 28 косточек так, чтобы вышел полный набор — каждая пара от 0:0 до 6:6 ровно один раз. Чтобы поставить косточку, коснитесь двух соседних клеток; чтобы убрать — коснитесь готовой косточки.'**
+  String get dominoTutorialStep1;
+
+  /// Module 03 tutorial step 2 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Внизу — список ещё не собранных пар и счётчик «выставлено N из 28». Если одна и та же пара окажется дважды, обе косточки подсветятся красным: пасьянс не сойдётся, пока повтор не убран.'**
+  String get dominoTutorialStep2;
+
+  /// Module 03 tutorial step 3 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ищите клетки, у которых сосед-партнёр определён однозначно. Так ставятся первые три косточки: 0:1, 2:4 и 5:6 (они подсвечены).'**
+  String get dominoTutorialStep3;
+
+  /// Module 03 tutorial step 4 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дальше — два дубля: 5:5 и 3:3. Дубль занимает две одинаковые клетки рядом, и каждый дубль в наборе только один.'**
+  String get dominoTutorialStep4;
+
+  /// Module 03 tutorial step 5 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжаем внизу слева: 2:3 и 0:3 ложатся вынужденно, освобождая соседние цифры.'**
+  String get dominoTutorialStep5;
+
+  /// Module 03 tutorial step 6 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Следующая четвёрка: 0:4, 4:4, 3:4 и 4:5. Косточки с четвёркой почти закончились — следите за списком снизу.'**
+  String get dominoTutorialStep6;
+
+  /// Module 03 tutorial step 7 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Теперь пары с единицей: 1:4, 1:6 и 1:3.'**
+  String get dominoTutorialStep7;
+
+  /// Module 03 tutorial step 8 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ещё четыре: 3:5, 1:5, 1:2 и 2:5. Проверьте счётчик — уже больше половины.'**
+  String get dominoTutorialStep8;
+
+  /// Module 03 tutorial step 9 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Верхняя часть поля: 2:6, 0:5, 0:6, 0:2 и 2:2.'**
+  String get dominoTutorialStep9;
+
+  /// Module 03 tutorial step 10 of 10.
+  ///
+  /// In ru, this message translates to:
+  /// **'Последние пять закрывают набор: 0:0, 1:1, 6:6, 3:6 и 4:6. Все 28 пар на месте — пасьянс сошёлся! В любой головоломке действуйте так же: ищите вынужденные косточки и следите за списком оставшихся пар.'**
+  String get dominoTutorialStep10;
 }
 
 class _AppLocalizationsDelegate

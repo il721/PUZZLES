@@ -48,6 +48,20 @@ class _FakeDominoL10n implements DominoL10n {
   String get duplicateWarning => 'Duplicates!';
   @override
   String get cellSemantics => 'domino cell';
+  @override
+  String get tutorialTitle => 'How to solve';
+  @override
+  String get tutorialNext => 'Next';
+  @override
+  String get tutorialBack => 'Back';
+  @override
+  String get tutorialSkip => 'Skip';
+  @override
+  String get tutorialDone => 'Done';
+  @override
+  String tutorialStepCounter(int current, int total) => 'Step $current of $total';
+  @override
+  String tutorialStepText(int index) => 'step $index';
 }
 
 List<DominoPuzzle> _loadPuzzles() {
@@ -132,8 +146,9 @@ void main() {
     );
     await _settle(tester);
 
-    final playable = puzzles.where((p) => !p.tutorial).length;
-    expect(find.byType(InkWell), findsNWidgets(playable));
+    expect(find.byIcon(Icons.school_outlined), findsOneWidget);
     expect(find.text('Domino'), findsOneWidget);
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('18'), findsOneWidget);
   });
 }
