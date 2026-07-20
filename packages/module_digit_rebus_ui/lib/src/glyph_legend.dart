@@ -13,7 +13,6 @@ class GlyphLegend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 16,
@@ -34,7 +33,7 @@ class GlyphLegend extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 (glyph.digits.toList()..sort()).join(' '),
-                style: theme.textTheme.titleLarge?.copyWith(color: scheme.primary, fontWeight: FontWeight.w600),
+                style: theme.textTheme.titleLarge?.copyWith(color: glyphColor(glyph), fontWeight: FontWeight.w600),
               ),
             ],
           ),

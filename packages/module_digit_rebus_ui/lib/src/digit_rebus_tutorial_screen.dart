@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform, kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_digit_rebus/module_digit_rebus.dart';
 import 'package:puzzle_core/puzzle_core.dart';
@@ -29,48 +27,10 @@ class DigitRebusTutorialScreen extends ConsumerStatefulWidget {
 }
 
 class _DigitRebusTutorialScreenState extends ConsumerState<DigitRebusTutorialScreen> {
-  late final Future<void> _orientationLockFuture;
   int _stepIndex = 0;
 
-  bool get _isAndroid => !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
-
   @override
-  void initState() {
-    super.initState();
-    _orientationLockFuture = _isAndroid
-        ? SystemChrome.setPreferredOrientations(const [
-            DeviceOrientation.landscapeLeft,
-            DeviceOrientation.landscapeRight,
-          ])
-        : Future<void>.value();
-  }
-
-  @override
-  void dispose() {
-    if (_isAndroid) {
-      SystemChrome.setPreferredOrientations(const []);
-    }
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_isAndroid) {
-      return FutureBuilder<void>(
-        future: _orientationLockFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            // Gate the first paint on the orientation lock to avoid a
-            // one-frame wrong-orientation flash; a bare themed Scaffold
-            // serves as the neutral placeholder frame meanwhile.
-            return const Scaffold(body: SizedBox.shrink());
-          }
-          return _buildContent(context);
-        },
-      );
-    }
-    return _buildContent(context);
-  }
+  Widget build(BuildContext context) => _buildContent(context);
 
   Widget _buildContent(BuildContext context) {
     final puzzlesAsync = ref.watch(digitRebusPuzzlesProvider);

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,8 +16,8 @@ import 'glyph_legend.dart';
 /// glyph legend, and Check/Reset/Replay actions. Digits are entered via a
 /// compact popup menu anchored at the tapped cell — showing ONLY the
 /// digits the cell's glyph admits — or via the keyboard (restricted to the
-/// same set). Handles the Android landscape lock, desktop keyboard input,
-/// the "has errors" banner, and the win dialog.
+/// same set). Handles desktop keyboard input, the "has errors" banner,
+/// and the win dialog.
 class DigitRebusPuzzleScreen extends ConsumerStatefulWidget {
   /// The id of the puzzle to play (e.g. `p01`).
   final String puzzleId;
@@ -33,22 +32,13 @@ class DigitRebusPuzzleScreen extends ConsumerStatefulWidget {
 class _DigitRebusPuzzleScreenState extends ConsumerState<DigitRebusPuzzleScreen>
     with WidgetsBindingObserver {
   final FocusNode _focusNode = FocusNode();
-  late final Future<void> _orientationLockFuture;
   bool _sessionStarted = false;
   DigitRebusSessionNotifier? _notifier;
-
-  bool get _isAndroid => !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _orientationLockFuture = _isAndroid
-        ? SystemChrome.setPreferredOrientations(const [
-            DeviceOrientation.landscapeLeft,
-            DeviceOrientation.landscapeRight,
-          ])
-        : Future<void>.value();
   }
 
   @override
@@ -76,32 +66,13 @@ class _DigitRebusPuzzleScreenState extends ConsumerState<DigitRebusPuzzleScreen>
           ..abandonReplayIfUnfinished();
       });
     }
-    if (_isAndroid) {
-      SystemChrome.setPreferredOrientations(const []);
-    }
     WidgetsBinding.instance.removeObserver(this);
     _focusNode.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (_isAndroid) {
-      return FutureBuilder<void>(
-        future: _orientationLockFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            // Gate the first paint on the orientation lock to avoid a
-            // one-frame wrong-orientation flash; a bare themed Scaffold
-            // serves as the neutral placeholder frame meanwhile.
-            return const Scaffold(body: SizedBox.shrink());
-          }
-          return _buildContent(context);
-        },
-      );
-    }
-    return _buildContent(context);
-  }
+  Widget build(BuildContext context) => _buildContent(context);
 
   Widget _buildContent(BuildContext context) {
     final puzzlesAsync = ref.watch(digitRebusPuzzlesProvider);
