@@ -264,4 +264,48 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get tutorialStep15 =>
       'Проверим итог: 30 + 16 + 32 + 33 = 111. Ребус решён!';
+
+  @override
+  String get moduleDominoTitle => 'Домино-пасьянс';
+
+  @override
+  String get moduleDominoDescription =>
+      'Восстановите 28 косточек домино в сетке из цифр — полный набор от 0:0 до 6:6.';
+
+  @override
+  String get dominoListTitle => 'Домино-пасьянс';
+
+  @override
+  String dominoPuzzleN(int n) {
+    return 'Домино $n';
+  }
+
+  @override
+  String get dominoResetConfirmTitle => 'Сбросить домино?';
+
+  @override
+  String get dominoResetConfirmBody =>
+      'Все выставленные косточки будут убраны.';
+
+  @override
+  String get dominoWinTitle => 'Домино собрано!';
+
+  @override
+  String get dominoWinBody =>
+      'Вы восстановили полный набор домино. Все 28 косточек на месте.';
+
+  @override
+  String dominoPlacedCounter(int placed) {
+    return 'Выставлено: $placed из 28';
+  }
+
+  @override
+  String get dominoRemainingLabel => 'Осталось собрать:';
+
+  @override
+  String get dominoDuplicateWarning =>
+      'Есть повторяющиеся косточки — они выделены красным.';
+
+  @override
+  String get dominoCellSemantics => 'клетка домино';
 }

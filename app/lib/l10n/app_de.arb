@@ -112,5 +112,17 @@
   "tutorialStep12": "Angenommen, das Ergebnis der 1. Zeile wäre 35. Dann wäre (erste Zahl + 2) × dritte = 7, und in der dritten Spalte blieben 32 − 1 − 16 − 5 = 10 für die vierte, einstellige Zahl. Widerspruch — also 30.",
   "tutorialStep13": "Zeile 1: 1 + 2 × 2 × 5 = 30, von links nach rechts.",
   "tutorialStep14": "Die erste und zweite Spalte legen nun Zeile 4 fest: 3 + 2 × 9 − 12 = 33.",
-  "tutorialStep15": "Zur Probe: 30 + 16 + 32 + 33 = 111. Das Rätsel ist gelöst!"
+  "tutorialStep15": "Zur Probe: 30 + 16 + 32 + 33 = 111. Das Rätsel ist gelöst!",
+  "moduleDominoTitle": "Domino-Patience",
+  "moduleDominoDescription": "Setze die 28 Dominosteine im Zahlengitter wieder zusammen — der volle Satz von 0:0 bis 6:6.",
+  "dominoListTitle": "Domino-Patience",
+  "dominoPuzzleN": "Domino {n}",
+  "dominoResetConfirmTitle": "Domino zurücksetzen?",
+  "dominoResetConfirmBody": "Alle gelegten Dominosteine werden entfernt.",
+  "dominoWinTitle": "Domino vollständig!",
+  "dominoWinBody": "Du hast den vollen Dominosatz wiederhergestellt. Alle 28 Steine liegen richtig.",
+  "dominoPlacedCounter": "Gelegt: {placed} von 28",
+  "dominoRemainingLabel": "Noch zu legen:",
+  "dominoDuplicateWarning": "Einige Dominosteine sind doppelt — rot markiert.",
+  "dominoCellSemantics": "Domino-Feld"
 }

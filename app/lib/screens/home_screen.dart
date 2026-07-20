@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
+import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 
 import '../l10n/app_localizations.dart';
@@ -21,10 +22,15 @@ class HomeScreen extends ConsumerWidget {
     final digitPuzzlesAsync = ref.watch(digitRebusPuzzlesProvider);
     final digitSaveDataAsync = ref.watch(digitRebusSaveDataProvider);
 
+    final dominoPuzzlesAsync = ref.watch(dominoPuzzlesProvider);
+    final dominoSaveDataAsync = ref.watch(dominoSaveDataProvider);
+
     final total = puzzlesAsync.value?.where((p) => !p.tutorial).length ?? 15;
     final solved = _countSolved(saveDataAsync.value);
     final digitTotal = digitPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
     final digitSolved = _countSolved(digitSaveDataAsync.value);
+    final dominoTotal = dominoPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
+    final dominoSolved = _countSolved(dominoSaveDataAsync.value);
 
     return Scaffold(
       appBar: AppBar(
@@ -64,6 +70,17 @@ class HomeScreen extends ConsumerWidget {
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/digit_rebus');
               ref.invalidate(digitRebusSaveDataProvider);
+            },
+          ),
+          const SizedBox(height: 12),
+          _ModuleCard(
+            title: l10n.moduleDominoTitle,
+            description: l10n.moduleDominoDescription,
+            progressLabel: l10n.homeModuleProgress(dominoSolved, dominoTotal),
+            iconAsset: 'assets/icons/icon_03.svg',
+            onTap: () async {
+              await Navigator.of(context).pushNamed('/module/domino');
+              ref.invalidate(dominoSaveDataProvider);
             },
           ),
         ],

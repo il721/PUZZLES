@@ -266,4 +266,47 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tutorialStep15 =>
       'Check the total: 30 + 16 + 32 + 33 = 111. The rebus is solved!';
+
+  @override
+  String get moduleDominoTitle => 'Domino Solitaire';
+
+  @override
+  String get moduleDominoDescription =>
+      'Rebuild the 28 dominoes hidden in a grid of digits — the full 0:0 to 6:6 set.';
+
+  @override
+  String get dominoListTitle => 'Domino Solitaire';
+
+  @override
+  String dominoPuzzleN(int n) {
+    return 'Domino $n';
+  }
+
+  @override
+  String get dominoResetConfirmTitle => 'Reset domino?';
+
+  @override
+  String get dominoResetConfirmBody => 'All placed dominoes will be removed.';
+
+  @override
+  String get dominoWinTitle => 'Domino complete!';
+
+  @override
+  String get dominoWinBody =>
+      'You rebuilt the full domino set. All 28 tiles are in place.';
+
+  @override
+  String dominoPlacedCounter(int placed) {
+    return 'Placed: $placed of 28';
+  }
+
+  @override
+  String get dominoRemainingLabel => 'Still to place:';
+
+  @override
+  String get dominoDuplicateWarning =>
+      'Some dominoes are duplicated — shown in red.';
+
+  @override
+  String get dominoCellSemantics => 'domino cell';
 }

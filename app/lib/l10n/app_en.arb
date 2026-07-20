@@ -112,5 +112,17 @@
   "tutorialStep12": "Suppose the result of row 1 were 35. Then (first number + 2) × third = 7, and the third vertical column would leave 32 − 1 − 16 − 5 = 10 for the fourth, single-digit number. Contradiction — so it is 30.",
   "tutorialStep13": "Row 1: 1 + 2 × 2 × 5 = 30, left to right.",
   "tutorialStep14": "The first and second columns now pin down row 4: 3 + 2 × 9 − 12 = 33.",
-  "tutorialStep15": "Check the total: 30 + 16 + 32 + 33 = 111. The rebus is solved!"
+  "tutorialStep15": "Check the total: 30 + 16 + 32 + 33 = 111. The rebus is solved!",
+  "moduleDominoTitle": "Domino Solitaire",
+  "moduleDominoDescription": "Rebuild the 28 dominoes hidden in a grid of digits — the full 0:0 to 6:6 set.",
+  "dominoListTitle": "Domino Solitaire",
+  "dominoPuzzleN": "Domino {n}",
+  "dominoResetConfirmTitle": "Reset domino?",
+  "dominoResetConfirmBody": "All placed dominoes will be removed.",
+  "dominoWinTitle": "Domino complete!",
+  "dominoWinBody": "You rebuilt the full domino set. All 28 tiles are in place.",
+  "dominoPlacedCounter": "Placed: {placed} of 28",
+  "dominoRemainingLabel": "Still to place:",
+  "dominoDuplicateWarning": "Some dominoes are duplicated — shown in red.",
+  "dominoCellSemantics": "domino cell"
 }

@@ -172,5 +172,35 @@
   "tutorialStep14": "Первый и второй ряды подсказывают четвёртую строку: 3 + 2 × 9 − 12 = 33.",
   "@tutorialStep14": {"description": "Tutorial step 14 of 15."},
   "tutorialStep15": "Проверим итог: 30 + 16 + 32 + 33 = 111. Ребус решён!",
-  "@tutorialStep15": {"description": "Tutorial step 15 of 15."}
+  "@tutorialStep15": {"description": "Tutorial step 15 of 15."},
+  "moduleDominoTitle": "Домино-пасьянс",
+  "@moduleDominoTitle": {"description": "Title of Module 03."},
+  "moduleDominoDescription": "Восстановите 28 косточек домино в сетке из цифр — полный набор от 0:0 до 6:6.",
+  "@moduleDominoDescription": {"description": "Short description of Module 03, shown on its home-screen card."},
+  "dominoListTitle": "Домино-пасьянс",
+  "@dominoListTitle": {"description": "Title of Module 03's puzzle list screen."},
+  "dominoPuzzleN": "Домино {n}",
+  "@dominoPuzzleN": {
+    "description": "Title for domino puzzle number n.",
+    "placeholders": {"n": {"type": "int"}}
+  },
+  "dominoResetConfirmTitle": "Сбросить домино?",
+  "@dominoResetConfirmTitle": {"description": "Title of Module 03's reset confirmation dialog."},
+  "dominoResetConfirmBody": "Все выставленные косточки будут убраны.",
+  "@dominoResetConfirmBody": {"description": "Body of Module 03's reset confirmation dialog."},
+  "dominoWinTitle": "Домино собрано!",
+  "@dominoWinTitle": {"description": "Title of Module 03's win dialog."},
+  "dominoWinBody": "Вы восстановили полный набор домино. Все 28 косточек на месте.",
+  "@dominoWinBody": {"description": "Body of Module 03's win dialog."},
+  "dominoPlacedCounter": "Выставлено: {placed} из 28",
+  "@dominoPlacedCounter": {
+    "description": "Progress counter on the domino play screen.",
+    "placeholders": {"placed": {"type": "int"}}
+  },
+  "dominoRemainingLabel": "Осталось собрать:",
+  "@dominoRemainingLabel": {"description": "Header above the list of not-yet-used domino values."},
+  "dominoDuplicateWarning": "Есть повторяющиеся косточки — они выделены красным.",
+  "@dominoDuplicateWarning": {"description": "Warning shown when duplicate domino value-pairs are on the board."},
+  "dominoCellSemantics": "клетка домино",
+  "@dominoCellSemantics": {"description": "Accessibility label for a domino grid cell."}
 }

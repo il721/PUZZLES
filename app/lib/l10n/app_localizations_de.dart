@@ -267,4 +267,48 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tutorialStep15 =>
       'Zur Probe: 30 + 16 + 32 + 33 = 111. Das Rätsel ist gelöst!';
+
+  @override
+  String get moduleDominoTitle => 'Domino-Patience';
+
+  @override
+  String get moduleDominoDescription =>
+      'Setze die 28 Dominosteine im Zahlengitter wieder zusammen — der volle Satz von 0:0 bis 6:6.';
+
+  @override
+  String get dominoListTitle => 'Domino-Patience';
+
+  @override
+  String dominoPuzzleN(int n) {
+    return 'Domino $n';
+  }
+
+  @override
+  String get dominoResetConfirmTitle => 'Domino zurücksetzen?';
+
+  @override
+  String get dominoResetConfirmBody =>
+      'Alle gelegten Dominosteine werden entfernt.';
+
+  @override
+  String get dominoWinTitle => 'Domino vollständig!';
+
+  @override
+  String get dominoWinBody =>
+      'Du hast den vollen Dominosatz wiederhergestellt. Alle 28 Steine liegen richtig.';
+
+  @override
+  String dominoPlacedCounter(int placed) {
+    return 'Gelegt: $placed von 28';
+  }
+
+  @override
+  String get dominoRemainingLabel => 'Noch zu legen:';
+
+  @override
+  String get dominoDuplicateWarning =>
+      'Einige Dominosteine sind doppelt — rot markiert.';
+
+  @override
+  String get dominoCellSemantics => 'Domino-Feld';
 }

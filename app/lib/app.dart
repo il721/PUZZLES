@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
+import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
 import 'digit_rebus_l10n_adapter.dart';
+import 'domino_l10n_adapter.dart';
 import 'l10n/app_localizations.dart';
 import 'providers.dart';
 import 'rebus_l10n_adapter.dart';
@@ -109,6 +111,8 @@ class PuzzleBookApp extends ConsumerWidget {
             rebusAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
             digitRebusL10nProvider.overrideWithValue(AppDigitRebusL10n(AppLocalizations.of(context))),
             digitRebusAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
+            dominoL10nProvider.overrideWithValue(AppDominoL10n(AppLocalizations.of(context))),
+            dominoAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
           ],
           child: child!,
         );
@@ -119,6 +123,7 @@ class PuzzleBookApp extends ConsumerWidget {
         '/help': (context) => const HelpScreen(),
         '/module/rebus': (context) => const PuzzleListScreen(),
         '/module/digit_rebus': (context) => const DigitRebusPuzzleListScreen(),
+        '/module/domino': (context) => const DominoPuzzleListScreen(),
       },
     );
   }

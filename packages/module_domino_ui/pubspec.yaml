@@ -1,0 +1,22 @@
+name: module_domino_ui
+description: Flutter UI for the "domino solitaire" puzzle module — tap-to-bind grid rendering with seam-removed tiles, duplicate flagging, progress panel, puzzle screen/list, and session persistence.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  module_domino:
+    path: ../module_domino
+  puzzle_core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

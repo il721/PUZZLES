@@ -537,6 +537,78 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Проверим итог: 30 + 16 + 32 + 33 = 111. Ребус решён!'**
   String get tutorialStep15;
+
+  /// Title of Module 03.
+  ///
+  /// In ru, this message translates to:
+  /// **'Домино-пасьянс'**
+  String get moduleDominoTitle;
+
+  /// Short description of Module 03, shown on its home-screen card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Восстановите 28 косточек домино в сетке из цифр — полный набор от 0:0 до 6:6.'**
+  String get moduleDominoDescription;
+
+  /// Title of Module 03's puzzle list screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Домино-пасьянс'**
+  String get dominoListTitle;
+
+  /// Title for domino puzzle number n.
+  ///
+  /// In ru, this message translates to:
+  /// **'Домино {n}'**
+  String dominoPuzzleN(int n);
+
+  /// Title of Module 03's reset confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить домино?'**
+  String get dominoResetConfirmTitle;
+
+  /// Body of Module 03's reset confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все выставленные косточки будут убраны.'**
+  String get dominoResetConfirmBody;
+
+  /// Title of Module 03's win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Домино собрано!'**
+  String get dominoWinTitle;
+
+  /// Body of Module 03's win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы восстановили полный набор домино. Все 28 косточек на месте.'**
+  String get dominoWinBody;
+
+  /// Progress counter on the domino play screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выставлено: {placed} из 28'**
+  String dominoPlacedCounter(int placed);
+
+  /// Header above the list of not-yet-used domino values.
+  ///
+  /// In ru, this message translates to:
+  /// **'Осталось собрать:'**
+  String get dominoRemainingLabel;
+
+  /// Warning shown when duplicate domino value-pairs are on the board.
+  ///
+  /// In ru, this message translates to:
+  /// **'Есть повторяющиеся косточки — они выделены красным.'**
+  String get dominoDuplicateWarning;
+
+  /// Accessibility label for a domino grid cell.
+  ///
+  /// In ru, this message translates to:
+  /// **'клетка домино'**
+  String get dominoCellSemantics;
 }
 
 class _AppLocalizationsDelegate

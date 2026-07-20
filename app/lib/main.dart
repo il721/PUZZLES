@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
+import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:puzzle_core/puzzle_core.dart';
@@ -31,13 +32,15 @@ Future<void> main() async {
 
   final moduleRegistry = ModuleRegistry()
     ..register(RebusModule.descriptor)
-    ..register(DigitRebusModule.descriptor);
+    ..register(DigitRebusModule.descriptor)
+    ..register(DominoModule.descriptor);
 
   runApp(
     ProviderScope(
       overrides: [
         saveServiceProvider.overrideWithValue(saveService),
         digitRebusSaveServiceProvider.overrideWithValue(saveService),
+        dominoSaveServiceProvider.overrideWithValue(saveService),
         settingsServiceProvider.overrideWithValue(settingsService),
         moduleRegistryProvider.overrideWithValue(moduleRegistry),
       ],
