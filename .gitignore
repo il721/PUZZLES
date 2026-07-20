@@ -2,3 +2,6 @@
 build/
 .idea/
 *.iml
+
+# Machine-specific Android SDK path
+app/android/app/local.properties
