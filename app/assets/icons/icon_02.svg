@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222.09 222.09">
+  <defs>
+    </defs>
+  <g id="icon_02">
+    <g>
+      <rect fill="none" stroke="#9f7741" stroke-width="4.49px" stroke-miterlimit="10" x="133.57" y="51.25" width="42.07" height="44.75"/>
+      <rect fill="none" stroke="#012962" stroke-width="4.49px" stroke-miterlimit="10" x="54.59" y="51.25" width="42.07" height="44.75"/>
+      <path fill="#fff" d="M33.45,82.51v-6.61h-6.66v-4.56h6.66v-6.61h4.44v6.61h6.67v4.56h-6.67v6.61h-4.44Z"/>
+      <path fill="#fff" d="M73.4,41.69v-6.61h-6.66v-4.56h6.66v-6.61h4.44v6.61h6.67v4.56h-6.67v6.61h-4.44Z"/>
+      <path fill="#fff" d="M152.38,41.69v-6.61h-6.66v-4.56h6.66v-6.61h4.44v6.61h6.67v4.56h-6.67v6.61h-4.44Z"/>
+      <path fill="#fff" d="M67.35,114.49v-4.87h16.55v4.87h-16.55Z"/>
+      <path fill="#fff" d="M146.33,114.49v-4.87h16.55v4.87h-16.55Z"/>
+      <path fill="#fff" d="M184.3,72.01v-4.47h20.64v4.47h-20.64ZM184.3,79.71v-4.49h20.64v4.49h-20.64Z"/>
+      <rect fill="none" stroke="#9f7741" stroke-width="4.49px" stroke-miterlimit="10" x="133.57" y="128.61" width="42.07" height="44.75"/>
+      <rect fill="none" stroke="#5a915e" stroke-width="4.49px" stroke-miterlimit="10" x="54.59" y="128.61" width="42.07" height="44.75"/>
+      <path fill="#fff" d="M33.45,159.87v-6.61h-6.66v-4.56h6.66v-6.61h4.44v6.61h6.67v4.56h-6.67v6.61h-4.44Z"/>
+      <path fill="#fff" d="M106.83,153.42v-4.87h16.55v4.87h-16.55Z"/>
+      <path fill="#fff" d="M184.3,149.37v-4.47h20.64v4.47h-20.64ZM184.3,157.07v-4.49h20.64v4.49h-20.64Z"/>
+      <path fill="#fff" d="M144.29,188.72v-4.47h20.64v4.47h-20.64ZM144.29,196.41v-4.49h20.64v4.49h-20.64Z"/>
+      <path fill="#fff" d="M65.31,188.72v-4.47h20.64v4.47h-20.64ZM65.31,196.41v-4.49h20.64v4.49h-20.64Z"/>
+      <path fill="#fff" d="M112.67,69.29v-4.87h4.87v4.87h-4.87ZM112.67,82.83v-4.87h4.87v4.87h-4.87Z"/>
+      <circle fill="none" stroke="#fff" stroke-width="2px" stroke-miterlimit="10" cx="111.04" cy="111.04" r="110.04"/>
+    </g>
+  </g>
+</svg>

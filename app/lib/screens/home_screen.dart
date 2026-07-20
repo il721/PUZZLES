@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 
@@ -48,6 +49,7 @@ class HomeScreen extends ConsumerWidget {
             title: l10n.moduleRebusTitle,
             description: l10n.moduleRebusDescription,
             progressLabel: l10n.homeModuleProgress(solved, total),
+            iconAsset: 'assets/icons/icon_01.svg',
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/rebus');
               ref.invalidate(rebusSaveDataProvider);
@@ -58,6 +60,7 @@ class HomeScreen extends ConsumerWidget {
             title: l10n.moduleDigitRebusTitle,
             description: l10n.moduleDigitRebusDescription,
             progressLabel: l10n.homeModuleProgress(digitSolved, digitTotal),
+            iconAsset: 'assets/icons/icon_02.svg',
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/digit_rebus');
               ref.invalidate(digitRebusSaveDataProvider);
@@ -80,12 +83,14 @@ class _ModuleCard extends StatelessWidget {
   final String title;
   final String description;
   final String progressLabel;
+  final String iconAsset;
   final VoidCallback onTap;
 
   const _ModuleCard({
     required this.title,
     required this.description,
     required this.progressLabel,
+    required this.iconAsset,
     required this.onTap,
   });
 
@@ -100,10 +105,10 @@ class _ModuleCard extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Row(
             children: [
-              CircleAvatar(
-                radius: 36,
-                backgroundColor: theme.colorScheme.primaryContainer,
-                child: Icon(Icons.grid_4x4, color: theme.colorScheme.onPrimaryContainer, size: 36),
+              SizedBox(
+                width: 72,
+                height: 72,
+                child: SvgPicture.asset(iconAsset),
               ),
               const SizedBox(width: 16),
               Expanded(

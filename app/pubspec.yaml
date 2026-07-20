@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.3.2
+  flutter_svg: ^2.2.1
   intl: any
   module_rebus:
     path: ../packages/module_rebus
@@ -35,5 +36,6 @@ flutter:
   generate: true
   assets:
     - assets/sfx/
+    - assets/icons/
 
 resolution: workspace
