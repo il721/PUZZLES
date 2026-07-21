@@ -2,18 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:puzzle_core/puzzle_core.dart';
 
 import '../l10n/app_localizations.dart';
 import '../providers.dart';
 
 /// Language and sound preferences. Changes apply immediately and persist
 /// via [SettingsService].
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   /// Creates the settings screen.
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final language = ref.watch(languageOverrideProvider);
     final soundOn = ref.watch(soundOnProvider);
@@ -70,8 +76,99 @@ class SettingsScreen extends ConsumerWidget {
               ],
             ),
           ),
+          const Divider(),
+          ListTile(
+            title: Text(l10n.settingsSyncSection),
+            subtitle: Text(l10n.settingsSyncHint),
+          ),
+          ListTile(
+            leading: const Icon(Icons.upload_file),
+            title: Text(l10n.settingsExportProgress),
+            onTap: _handleExport,
+          ),
+          ListTile(
+            leading: const Icon(Icons.download),
+            title: Text(l10n.settingsImportProgress),
+            onTap: _handleImport,
+          ),
         ],
       ),
+    );
+  }
+
+  void _showSnack(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _handleExport() async {
+    final l10n = AppLocalizations.of(context);
+    final bundleService = ref.read(progressBundleServiceProvider);
+    final transfer = ref.read(bundleTransferProvider);
+
+    final jsonText = await bundleService.exportJson();
+    final now = DateTime.now();
+    final stamp = '${now.year.toString().padLeft(4, '0')}-'
+        '${now.month.toString().padLeft(2, '0')}-'
+        '${now.day.toString().padLeft(2, '0')}';
+    final ok = await transfer.saveBundle(jsonText, 'puzzlebook-progress-$stamp.json');
+
+    _showSnack(ok ? l10n.exportSuccess : l10n.exportFailed);
+  }
+
+  Future<void> _handleImport() async {
+    final l10n = AppLocalizations.of(context);
+    final bundleService = ref.read(progressBundleServiceProvider);
+    final transfer = ref.read(bundleTransferProvider);
+
+    final jsonText = await transfer.pickBundle();
+    // Null means the user backed out of the file dialog — say nothing.
+    if (jsonText == null) return;
+
+    // Parse once up front purely to preview the bundle's date in the
+    // confirmation dialog; the merge itself re-parses inside importJson.
+    // decode() is pure and cheap, so paying for it twice is fine.
+    final ProgressBundle preview;
+    try {
+      preview = ProgressBundle.decode(jsonText);
+    } on BundleFormatException catch (e) {
+      _showSnack(e.isVersionTooNew ? l10n.importFailedVersion : l10n.importFailedFormat);
+      return;
+    }
+
+    if (!mounted) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.importConfirmTitle),
+        content: Text(l10n.importConfirmBody(preview.exportedAt)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.importConfirmCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.importConfirmApply),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    final report = await bundleService.importJson(jsonText);
+    if (!report.ok) {
+      _showSnack(
+        report.error == ImportError.versionTooNew ? l10n.importFailedVersion : l10n.importFailedFormat,
+      );
+      return;
+    }
+
+    final changed = report.counts.added + report.counts.updated;
+    _showSnack(
+      changed == 0
+          ? l10n.importNothingNew
+          : l10n.importSuccess(report.counts.added, report.counts.updated),
     );
   }
 }
