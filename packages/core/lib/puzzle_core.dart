@@ -13,5 +13,6 @@ export 'src/logger.dart';
 export 'src/module_descriptor.dart';
 export 'src/module_registry.dart';
 export 'src/progress_bundle.dart';
+export 'src/progress_merge.dart';
 export 'src/save_service.dart';
 export 'src/settings_service.dart';
