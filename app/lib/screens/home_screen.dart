@@ -56,6 +56,7 @@ class HomeScreen extends ConsumerWidget {
             description: l10n.moduleRebusDescription,
             progressLabel: l10n.homeModuleProgress(solved, total),
             iconAsset: 'assets/icons/icon_01.svg',
+            iconAssetLight: 'assets/icons/icon_01_light.svg',
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/rebus');
               ref.invalidate(rebusSaveDataProvider);
@@ -67,6 +68,7 @@ class HomeScreen extends ConsumerWidget {
             description: l10n.moduleDigitRebusDescription,
             progressLabel: l10n.homeModuleProgress(digitSolved, digitTotal),
             iconAsset: 'assets/icons/icon_02.svg',
+            iconAssetLight: 'assets/icons/icon_02_light.svg',
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/digit_rebus');
               ref.invalidate(digitRebusSaveDataProvider);
@@ -78,6 +80,7 @@ class HomeScreen extends ConsumerWidget {
             description: l10n.moduleDominoDescription,
             progressLabel: l10n.homeModuleProgress(dominoSolved, dominoTotal),
             iconAsset: 'assets/icons/icon_03.svg',
+            iconAssetLight: 'assets/icons/icon_03_light.svg',
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/domino');
               ref.invalidate(dominoSaveDataProvider);
@@ -100,7 +103,13 @@ class _ModuleCard extends StatelessWidget {
   final String title;
   final String description;
   final String progressLabel;
+
+  /// SVG asset path used when the app is in dark theme (the default).
   final String iconAsset;
+
+  /// SVG asset path used when the app is in light theme.
+  final String iconAssetLight;
+
   final VoidCallback onTap;
 
   const _ModuleCard({
@@ -108,12 +117,14 @@ class _ModuleCard extends StatelessWidget {
     required this.description,
     required this.progressLabel,
     required this.iconAsset,
+    required this.iconAssetLight,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final resolvedIconAsset = theme.brightness == Brightness.light ? iconAssetLight : iconAsset;
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -125,7 +136,7 @@ class _ModuleCard extends StatelessWidget {
               SizedBox(
                 width: 72,
                 height: 72,
-                child: SvgPicture.asset(iconAsset),
+                child: SvgPicture.asset(resolvedIconAsset),
               ),
               const SizedBox(width: 16),
               Expanded(
