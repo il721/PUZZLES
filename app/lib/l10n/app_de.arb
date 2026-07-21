@@ -134,5 +134,25 @@
   "dominoTutorialStep7": "Nun die Paare mit einer Eins: 1:4, 1:6 und 1:3.",
   "dominoTutorialStep8": "Vier weitere: 3:5, 1:5, 1:2 und 2:5. Prüfe den Zähler — schon über die Hälfte.",
   "dominoTutorialStep9": "Der obere Teil des Feldes: 2:6, 0:5, 0:6, 0:2 und 2:2.",
-  "dominoTutorialStep10": "Die letzten fünf schließen den Satz: 0:0, 1:1, 6:6, 3:6 und 4:6. Alle 28 Paare liegen — die Patience ist aufgegangen! Geh in jedem Rätsel gleich vor: finde die erzwungenen Steine und behalte die Liste der offenen Paare im Blick."
+  "dominoTutorialStep10": "Die letzten fünf schließen den Satz: 0:0, 1:1, 6:6, 3:6 und 4:6. Alle 28 Paare liegen — die Patience ist aufgegangen! Geh in jedem Rätsel gleich vor: finde die erzwungenen Steine und behalte die Liste der offenen Paare im Blick.",
+  "settingsSyncSection": "Fortschritt übertragen",
+  "settingsSyncHint": "Fortschritt in eine Datei speichern und auf einem anderen Gerät öffnen.",
+  "settingsExportProgress": "Fortschritt in Datei speichern",
+  "settingsImportProgress": "Fortschritt aus Datei laden",
+  "exportSuccess": "Fortschritt gespeichert.",
+  "exportFailed": "Datei konnte nicht gespeichert werden.",
+  "importConfirmTitle": "Fortschritt laden?",
+  "importConfirmBody": "Datei erstellt: {date}. Dein bisheriger Fortschritt geht nicht verloren — die besten Ergebnisse bleiben erhalten.",
+  "@importConfirmBody": {
+    "placeholders": {"date": {"type": "String"}}
+  },
+  "importConfirmApply": "Laden",
+  "importConfirmCancel": "Abbrechen",
+  "importSuccess": "Rätsel hinzugefügt: {added}, aktualisiert: {updated}.",
+  "@importSuccess": {
+    "placeholders": {"added": {"type": "int"}, "updated": {"type": "int"}}
+  },
+  "importNothingNew": "Keine neuen Ergebnisse gefunden.",
+  "importFailedFormat": "Das ist keine Fortschrittsdatei.",
+  "importFailedVersion": "Diese Datei stammt aus einer neueren App-Version. Bitte aktualisiere die App."
 }

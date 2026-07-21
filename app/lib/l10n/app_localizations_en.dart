@@ -349,4 +349,52 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dominoTutorialStep10 =>
       'The last five close the set: 0:0, 1:1, 6:6, 3:6 and 4:6. All 28 pairs are placed — the solitaire is out! In every puzzle, do the same: find the forced dominoes and watch the remaining-pairs list.';
+
+  @override
+  String get settingsSyncSection => 'Transfer progress';
+
+  @override
+  String get settingsSyncHint =>
+      'Save your progress to a file and open it on another device.';
+
+  @override
+  String get settingsExportProgress => 'Save progress to a file';
+
+  @override
+  String get settingsImportProgress => 'Load progress from a file';
+
+  @override
+  String get exportSuccess => 'Progress saved.';
+
+  @override
+  String get exportFailed => 'Could not save the file.';
+
+  @override
+  String get importConfirmTitle => 'Load progress?';
+
+  @override
+  String importConfirmBody(String date) {
+    return 'File created: $date. Your current progress will not be lost — your best results are kept.';
+  }
+
+  @override
+  String get importConfirmApply => 'Load';
+
+  @override
+  String get importConfirmCancel => 'Cancel';
+
+  @override
+  String importSuccess(int added, int updated) {
+    return 'Puzzles added: $added, updated: $updated.';
+  }
+
+  @override
+  String get importNothingNew => 'No new results found.';
+
+  @override
+  String get importFailedFormat => 'That is not a progress file.';
+
+  @override
+  String get importFailedVersion =>
+      'This file was made by a newer version of the app. Please update.';
 }

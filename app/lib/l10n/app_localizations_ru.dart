@@ -347,4 +347,52 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get dominoTutorialStep10 =>
       'Последние пять закрывают набор: 0:0, 1:1, 6:6, 3:6 и 4:6. Все 28 пар на месте — пасьянс сошёлся! В любой головоломке действуйте так же: ищите вынужденные косточки и следите за списком оставшихся пар.';
+
+  @override
+  String get settingsSyncSection => 'Перенос прогресса';
+
+  @override
+  String get settingsSyncHint =>
+      'Сохраните прогресс в файл и откройте его на другом устройстве.';
+
+  @override
+  String get settingsExportProgress => 'Сохранить прогресс в файл';
+
+  @override
+  String get settingsImportProgress => 'Загрузить прогресс из файла';
+
+  @override
+  String get exportSuccess => 'Прогресс сохранён.';
+
+  @override
+  String get exportFailed => 'Не удалось сохранить файл.';
+
+  @override
+  String get importConfirmTitle => 'Загрузить прогресс?';
+
+  @override
+  String importConfirmBody(String date) {
+    return 'Файл создан: $date. Ваш текущий прогресс не будет потерян — лучшие результаты сохранятся.';
+  }
+
+  @override
+  String get importConfirmApply => 'Загрузить';
+
+  @override
+  String get importConfirmCancel => 'Отмена';
+
+  @override
+  String importSuccess(int added, int updated) {
+    return 'Добавлено головоломок: $added, обновлено: $updated.';
+  }
+
+  @override
+  String get importNothingNew => 'Новых результатов не найдено.';
+
+  @override
+  String get importFailedFormat => 'Это не файл прогресса.';
+
+  @override
+  String get importFailedVersion =>
+      'Файл создан более новой версией приложения. Обновите приложение.';
 }

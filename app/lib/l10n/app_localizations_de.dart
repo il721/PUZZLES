@@ -351,4 +351,52 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dominoTutorialStep10 =>
       'Die letzten fünf schließen den Satz: 0:0, 1:1, 6:6, 3:6 und 4:6. Alle 28 Paare liegen — die Patience ist aufgegangen! Geh in jedem Rätsel gleich vor: finde die erzwungenen Steine und behalte die Liste der offenen Paare im Blick.';
+
+  @override
+  String get settingsSyncSection => 'Fortschritt übertragen';
+
+  @override
+  String get settingsSyncHint =>
+      'Fortschritt in eine Datei speichern und auf einem anderen Gerät öffnen.';
+
+  @override
+  String get settingsExportProgress => 'Fortschritt in Datei speichern';
+
+  @override
+  String get settingsImportProgress => 'Fortschritt aus Datei laden';
+
+  @override
+  String get exportSuccess => 'Fortschritt gespeichert.';
+
+  @override
+  String get exportFailed => 'Datei konnte nicht gespeichert werden.';
+
+  @override
+  String get importConfirmTitle => 'Fortschritt laden?';
+
+  @override
+  String importConfirmBody(String date) {
+    return 'Datei erstellt: $date. Dein bisheriger Fortschritt geht nicht verloren — die besten Ergebnisse bleiben erhalten.';
+  }
+
+  @override
+  String get importConfirmApply => 'Laden';
+
+  @override
+  String get importConfirmCancel => 'Abbrechen';
+
+  @override
+  String importSuccess(int added, int updated) {
+    return 'Rätsel hinzugefügt: $added, aktualisiert: $updated.';
+  }
+
+  @override
+  String get importNothingNew => 'Keine neuen Ergebnisse gefunden.';
+
+  @override
+  String get importFailedFormat => 'Das ist keine Fortschrittsdatei.';
+
+  @override
+  String get importFailedVersion =>
+      'Diese Datei stammt aus einer neueren App-Version. Bitte aktualisiere die App.';
 }

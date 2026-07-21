@@ -669,6 +669,90 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Последние пять закрывают набор: 0:0, 1:1, 6:6, 3:6 и 4:6. Все 28 пар на месте — пасьянс сошёлся! В любой головоломке действуйте так же: ищите вынужденные косточки и следите за списком оставшихся пар.'**
   String get dominoTutorialStep10;
+
+  /// Header of the settings section for exporting/importing progress between devices.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перенос прогресса'**
+  String get settingsSyncSection;
+
+  /// Subtitle under the progress-sync section header.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохраните прогресс в файл и откройте его на другом устройстве.'**
+  String get settingsSyncHint;
+
+  /// Label of the export tile in Settings.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить прогресс в файл'**
+  String get settingsExportProgress;
+
+  /// Label of the import tile in Settings.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузить прогресс из файла'**
+  String get settingsImportProgress;
+
+  /// Snackbar shown after a successful export.
+  ///
+  /// In ru, this message translates to:
+  /// **'Прогресс сохранён.'**
+  String get exportSuccess;
+
+  /// Snackbar shown when writing the export file failed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось сохранить файл.'**
+  String get exportFailed;
+
+  /// Title of the import confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузить прогресс?'**
+  String get importConfirmTitle;
+
+  /// Body of the import confirmation dialog, reassuring that the merge is non-destructive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Файл создан: {date}. Ваш текущий прогресс не будет потерян — лучшие результаты сохранятся.'**
+  String importConfirmBody(String date);
+
+  /// Confirm button of the import dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузить'**
+  String get importConfirmApply;
+
+  /// Cancel button of the import dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отмена'**
+  String get importConfirmCancel;
+
+  /// Snackbar shown after a successful import.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавлено головоломок: {added}, обновлено: {updated}.'**
+  String importSuccess(int added, int updated);
+
+  /// Snackbar shown when an import applied cleanly but changed nothing.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новых результатов не найдено.'**
+  String get importNothingNew;
+
+  /// Snackbar shown when the picked file is not a bundle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это не файл прогресса.'**
+  String get importFailedFormat;
+
+  /// Snackbar shown when the bundle's version is newer than this build supports.
+  ///
+  /// In ru, this message translates to:
+  /// **'Файл создан более новой версией приложения. Обновите приложение.'**
+  String get importFailedVersion;
 }
 
 class _AppLocalizationsDelegate
