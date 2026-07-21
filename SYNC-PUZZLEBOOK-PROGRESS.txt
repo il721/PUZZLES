@@ -1,0 +1,186 @@
+SYNCING PUZZLEBOOK PROGRESS BETWEEN DESKTOP (WINDOWS) AND MOBILE (ANDROID)
+==========================================================================
+Assessment written 2026-07-21. NOTHING WAS CHANGED — analysis only.
+
+
+1. WHAT EXISTS TODAY
+--------------------
+There is no sync of any kind. No account, no network code, no device id,
+no export/import. Each install is an island.
+
+Persistence is plain JSON files on local disk:
+
+  Code:  app/packages/core/lib/src/save_service.dart
+  Wiring: app/app/lib/main.dart:27-28
+          getApplicationSupportDirectory() -> SaveService
+
+  Windows dir:  %APPDATA%\com.ilpin\puzzles\
+                (from windows/runner/Runner.rc: CompanyName "com.ilpin",
+                ProductName "puzzles". Directory not present on this
+                machine yet — no release build has been run here.)
+
+  Android dir:  /data/data/com.ilpin.puzzles/files/
+                (applicationId from android/app/build.gradle.kts)
+                APP-PRIVATE. Not reachable by the user without root or
+                adb. This is the single biggest constraint.
+
+Files, one per namespace:
+
+  settings.json            SettingsService  (language, sound, theme)
+  module_rebus.json        rebusSaveNamespace
+  module_digit_rebus.json  digitRebusSaveNamespace
+  module_domino.json       dominoSaveNamespace
+  *.tmp                    transient write files
+  *.<micros>.bak           quarantined corrupt files
+
+File shape:
+
+  { "schemaVersion": 1,
+    "data": { "puzzles": { "<puzzleId>": { ...entry... } } } }
+
+Per-puzzle entry (domino_session_controller.dart:276-287; the rebus and
+digit_rebus controllers mirror it):
+
+  placed / grid state
+  elapsedMs
+  solved              (bool)
+  solvedAt            (optional)
+  firstSolveElapsedMs (optional)
+
+
+2. WHY THIS SHAPE IS GOOD NEWS
+------------------------------
+Progress is a keyed map (puzzleId -> entry), not an opaque blob. That
+makes it genuinely mergeable: two devices that solved different puzzles
+can be unioned without loss. The controllers already do a load-merge-save
+against the namespace file rather than overwriting it wholesale, so the
+merge concept is already in the codebase.
+
+ONE SCHEMA GAP: entries have no `updatedAt` timestamp. Without it you
+cannot resolve "both devices touched puzzle X, which wins?" except by
+heuristics. Adding `updatedAt` (epoch ms) inside `data` is BACKWARD
+COMPATIBLE — do NOT bump schemaVersion, because SaveService.load()
+quarantines any file whose schemaVersion is greater than the running
+build understands (save_service.dart:92-100). An older build simply
+ignores an unknown key; a bumped version would nuke the save into a .bak.
+
+
+3. OPTIONS, RANKED
+------------------
+
+OPTION 1 — MANUAL EXPORT / IMPORT BUNDLE   *** RECOMMENDED FOR V1 ***
+  In-app "Export progress" writes one bundle file combining all module
+  namespaces; "Import progress" reads one and merges it in.
+
+  Transport is whatever the user already has: share sheet on Android,
+  file dialog on Windows, then Telegram / email / OneDrive / USB.
+
+  Pros: no backend, no account, no server cost, no privacy surface,
+        works both directions, works offline, defeats the Android
+        app-private-directory problem cleanly (SAF/share, not raw paths).
+  Cons: manual. User must remember to do it.
+  Cost: one new core service + two buttons + 2 deps
+        (share_plus, file_picker). Roughly one module's worth of work.
+
+  Bundle sketch:
+    { "bundleVersion": 1,
+      "exportedAt": <epoch ms>,
+      "namespaces": { "module_rebus": {...data...},
+                      "module_digit_rebus": {...},
+                      "module_domino": {...} } }
+  Settings deliberately excluded — see §4.
+
+OPTION 2 — POINT THE SAVE DIR AT A CLOUD FOLDER
+  Make the base directory user-configurable so Windows can persist into
+  OneDrive/Dropbox. SaveService already takes a Directory provider
+  (`_baseDirProvider`, invoked fresh each call), so this is a small change
+  on the desktop side.
+
+  Pros: near-zero code, automatic.
+  Cons: DESKTOP-TO-DESKTOP ONLY. Android scoped storage will not let a
+        desktop cloud client write into the app-private dir. Also:
+        cloud clients fight with the atomic temp-write-then-rename
+        pattern, there is no cross-device locking, and *.tmp / *.bak
+        would get synced as garbage. Simultaneous use on two machines
+        can lose a save entirely (whole-file overwrite, no merge).
+  Verdict: acceptable as a convenience for two PCs, useless for phone.
+
+OPTION 3 — LOCAL NETWORK / QR TRANSFER
+  Phone and PC on the same wifi; one side serves the bundle over HTTP on
+  the LAN, the other pulls it. Or encode a small bundle as a QR code.
+  Pros: no backend, feels magic, direct phone<->PC.
+  Cons: much more code than Option 1 for the same result. QR caps out at
+        a few KB — the `placed` board arrays will blow past that fast.
+  Verdict: a nicer transport bolted onto Option 1 later, not a v1.
+
+OPTION 4 — REAL CLOUD SYNC (Firebase / Supabase / own server)
+  Account, login, conflict resolution, offline write queue, hosting cost,
+  privacy policy, store-listing data-safety disclosures.
+  Verdict: overkill. Do not build this until the app has users asking.
+
+
+4. MERGE RULES (needed by Option 1 and 3)
+-----------------------------------------
+Per namespace, union the `puzzles` maps. For a puzzleId present on both
+sides, pick a winner by this ladder:
+
+  1. solved == true beats solved == false.
+  2. Both solved -> keep the SMALLER firstSolveElapsedMs (best result),
+     and the EARLIER solvedAt.
+  3. Neither solved -> keep the entry with the newer `updatedAt`;
+     if `updatedAt` is missing on both, keep the larger elapsedMs.
+
+Do NOT merge settings.json. Language, sound and theme are per-device
+preferences — the phone and the PC legitimately want different values.
+Syncing them is a bug, not a feature.
+
+Clock skew: `solvedAt` / `updatedAt` are device wall-clock. Two devices
+with wrong clocks can pick the wrong winner. Rule 1 and 2 above are
+clock-independent, which is why they come first in the ladder.
+
+Import must be non-destructive: never replace a namespace file wholesale,
+always merge. And write the merged result through the existing
+SaveService.save() so the atomic temp+rename and the per-namespace write
+queue still apply.
+
+
+5. IF YOU JUST WANT IT ONCE, RIGHT NOW, WITHOUT WRITING CODE
+------------------------------------------------------------
+Windows -> Windows: copy the whole %APPDATA%\com.ilpin\puzzles\ folder
+  while the app is CLOSED. Skip *.tmp and *.bak.
+
+Windows <-> Android: only via adb, and only on a debuggable build:
+  adb exec-out run-as com.ilpin.puzzles tar c files/ > save.tar
+  (`run-as` requires a debug-signed build; it will refuse on the release
+  APK in dist/. Untested here — verify before trusting it.)
+  A rooted phone can read the path directly.
+  There is no non-developer path. This is exactly why Option 1 exists.
+
+
+6. RECOMMENDATION
+-----------------
+Build Option 1 as its own small milestone:
+
+  a. Add `updatedAt` (epoch ms) to each per-puzzle entry payload in all
+     three session controllers. No schemaVersion bump.
+  b. New core service (e.g. ProgressBundleService) with export() and
+     import(bundle) + the §4 merge ladder. Pure Dart, no Flutter — fits
+     the existing puzzle_core boundary, and is unit-testable with the
+     same temp-dir pattern the other core tests already use.
+  c. Two buttons in the settings screen. share_plus for Android export,
+     file_picker for import and for Windows both ways.
+  d. Tests: merge ladder table-driven; round-trip export->import is a
+     no-op; import of a foreign bundle unions correctly; malformed bundle
+     is rejected without touching existing saves.
+
+Leave Option 2 as a later desktop convenience. Skip 3 and 4.
+
+
+7. UNVERIFIED — CHECK BEFORE RELYING ON IT
+------------------------------------------
+  - The Windows dir %APPDATA%\com.ilpin\puzzles\ is inferred from
+    Runner.rc, not observed — the folder does not exist on this machine.
+    Run the release build once and confirm.
+  - The adb `run-as` recipe in §5 was not executed.
+  - The rebus / digit_rebus entry payloads were assumed to mirror
+    domino's field set; only domino's _buildEntryPayload was read in full.
