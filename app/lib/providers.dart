@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
 import 'audio.dart';
+import 'bundle_transfer.dart';
 
 /// The app's [SettingsService], initialized in `main` before [runApp] and
 /// supplied here via an override.
@@ -43,4 +44,22 @@ final StateProvider<bool> soundOnProvider = StateProvider<bool>((ref) {
 /// way as [languageOverrideProvider].
 final StateProvider<String> themeOverrideProvider = StateProvider<String>((ref) {
   return ref.watch(settingsServiceProvider).theme;
+});
+
+/// The app's [ProgressBundleService], built in `main` from the registered
+/// modules' save namespaces and supplied here via an override. Exporting
+/// only registered module namespaces is what keeps the `settings` namespace
+/// (a per-device preference, not progress) out of every bundle.
+final Provider<ProgressBundleService> progressBundleServiceProvider =
+    Provider<ProgressBundleService>((ref) {
+  throw UnimplementedError(
+      'progressBundleServiceProvider must be overridden with a concrete ProgressBundleService before use.');
+});
+
+/// How bundle text reaches the file system. Overridden in `main` with
+/// [FilePickerBundleTransfer]; widget tests override it with a fake so the
+/// export/import flow can run without a native file dialog.
+final Provider<BundleTransfer> bundleTransferProvider = Provider<BundleTransfer>((ref) {
+  throw UnimplementedError(
+      'bundleTransferProvider must be overridden with a concrete BundleTransfer before use.');
 });

@@ -9,6 +9,7 @@ import 'package:puzzle_core/puzzle_core.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app.dart';
+import 'bundle_transfer.dart';
 import 'providers.dart';
 
 /// Minimum logical window size enforced on Windows so the puzzle grid
@@ -35,6 +36,11 @@ Future<void> main() async {
     ..register(DigitRebusModule.descriptor)
     ..register(DominoModule.descriptor);
 
+  final progressBundleService = ProgressBundleService(
+    saveService,
+    moduleRegistry.modules.map((m) => m.saveNamespace).toList(),
+  );
+
   runApp(
     ProviderScope(
       overrides: [
@@ -43,6 +49,8 @@ Future<void> main() async {
         dominoSaveServiceProvider.overrideWithValue(saveService),
         settingsServiceProvider.overrideWithValue(settingsService),
         moduleRegistryProvider.overrideWithValue(moduleRegistry),
+        progressBundleServiceProvider.overrideWithValue(progressBundleService),
+        bundleTransferProvider.overrideWithValue(const FilePickerBundleTransfer()),
       ],
       child: const PuzzleBookApp(),
     ),
