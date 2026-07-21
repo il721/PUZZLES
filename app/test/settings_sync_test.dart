@@ -3,11 +3,21 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 import 'package:puzzles/bundle_transfer.dart';
 import 'package:puzzles/l10n/app_localizations.dart';
 import 'package:puzzles/providers.dart';
 import 'package:puzzles/screens/settings_screen.dart';
+
+// Mirrors HomeScreen._countSolved (app/lib/screens/home_screen.dart, around
+// line 91): count entries under saveData['puzzles'] whose 'solved' is true.
+int _countSolved(Map<String, dynamic>? saveData) {
+  if (saveData == null) return 0;
+  final puzzles = saveData['puzzles'];
+  if (puzzles is! Map) return 0;
+  return puzzles.values.whereType<Map>().where((entry) => entry['solved'] == true).length;
+}
 
 class FakeBundleTransfer implements BundleTransfer {
   String? savedText;
@@ -68,6 +78,83 @@ void main() {
       ),
     );
   }
+
+  // Same ProviderScope/overrides as harness(), but also renders a small
+  // Consumer showing the solved-count read from rebusSaveDataProvider (the
+  // same provider + counting logic HomeScreen uses), stacked above
+  // SettingsScreen, so a test can assert the home-screen-visible count
+  // without navigating there.
+  Widget harnessWithCounter() {
+    return ProviderScope(
+      overrides: [
+        settingsServiceProvider.overrideWithValue(settingsService),
+        progressBundleServiceProvider.overrideWithValue(bundleService),
+        bundleTransferProvider.overrideWithValue(transfer),
+        // rebusSaveDataProvider (module_rebus_ui) reads through this; it
+        // must point at the same SaveService/tempDir the import writes to,
+        // or the counter widget's provider would error out (unimplemented)
+        // instead of ever reflecting real data.
+        saveServiceProvider.overrideWithValue(saveService),
+      ],
+      child: MaterialApp(
+        locale: const Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: Column(
+            children: [
+              Consumer(
+                builder: (context, ref, _) {
+                  final saveData = ref.watch(rebusSaveDataProvider).value;
+                  return Text('solved:${_countSolved(saveData)}');
+                },
+              ),
+              const Expanded(child: SettingsScreen()),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  testWidgets(
+      'importing progress refreshes the on-screen solved-count '
+      '(requires save-data provider invalidation)', (tester) async {
+    // No solved puzzles seeded up front (empty namespace).
+    await tester.pumpWidget(harnessWithCounter());
+    await tester.pump();
+    expect(find.text('solved:0'), findsOneWidget);
+
+    transfer.bundleToPick = '''
+{"bundleVersion":1,"exportedAt":"2026-07-21T14:03:11.482","namespaces":{
+  "module_rebus":{"puzzles":{"p05":{"solved":true,"updatedAt":9}}}}}
+''';
+
+    await tester.scrollUntilVisible(find.text('Load progress from a file'), 200);
+    await tester.tap(find.text('Load progress from a file'));
+    await tester.pump();
+
+    var dialogShown = find.text('Load progress?').evaluate().isNotEmpty;
+    for (var i = 0; i < 50 && !dialogShown; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
+      await tester.pump();
+      dialogShown = find.text('Load progress?').evaluate().isNotEmpty;
+    }
+    expect(dialogShown, isTrue, reason: 'import confirm dialog never appeared');
+
+    await tester.tap(find.text('Load'));
+    await tester.pump();
+
+    var counterUpdated = find.text('solved:1').evaluate().isNotEmpty;
+    for (var i = 0; i < 50 && !counterUpdated; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
+      await tester.pump();
+      counterUpdated = find.text('solved:1').evaluate().isNotEmpty;
+    }
+    expect(counterUpdated, isTrue,
+        reason: 'solved-count widget never refreshed to 1 after import');
+    expect(find.text('solved:1'), findsOneWidget);
+  });
 
   testWidgets('export tile writes a bundle through the transfer', (tester) async {
     await tester.runAsync(() => saveService.save('module_rebus', {

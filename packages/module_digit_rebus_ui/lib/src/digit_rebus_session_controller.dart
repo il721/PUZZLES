@@ -127,9 +127,13 @@ class DigitRebusSessionState {
 }
 
 /// Per-puzzle session provider family: one [DigitRebusSessionNotifier]
-/// instance per puzzle id.
+/// instance per puzzle id. The session is disposed once its last listener
+/// goes away (`autoDispose`), which flushes its final state via
+/// [Notifier.ref]'s `onDispose` before teardown — so no stale in-memory copy
+/// can later overwrite progress that was imported (or otherwise changed)
+/// while the session was gone.
 final digitRebusSessionProvider =
-    NotifierProvider.family<DigitRebusSessionNotifier, DigitRebusSessionState, String>(
+    NotifierProvider.autoDispose.family<DigitRebusSessionNotifier, DigitRebusSessionState, String>(
   DigitRebusSessionNotifier.new,
 );
 

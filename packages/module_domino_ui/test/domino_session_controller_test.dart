@@ -41,6 +41,14 @@ void main() {
     addTearDown(container.dispose);
     await container.read(dominoPuzzlesProvider.future);
 
+    // With the session provider now autoDispose, a bare container.read
+    // does not keep it alive across the awaited delays below — the
+    // notifier would be disposed and silently rebuilt mid-test, just like
+    // a real widget's ref.watch keeps the session alive for as long as the
+    // puzzle screen is visible.
+    final sub = container.listen(dominoSessionProvider('example'), (prev, next) {});
+    addTearDown(sub.close);
+
     final example = puzzles.firstWhere((p) => p.id == 'example');
     final notifier = container.read(dominoSessionProvider('example').notifier);
     container.read(dominoSessionProvider('example'));
@@ -72,6 +80,12 @@ void main() {
     addTearDown(container.dispose);
     await container.read(dominoPuzzlesProvider.future);
 
+    // See the comment in the first test in this file: a live subscription
+    // mirrors a widget's ref.watch and keeps the autoDispose session alive
+    // for the duration of the test.
+    final sub = container.listen(dominoSessionProvider('example'), (prev, next) {});
+    addTearDown(sub.close);
+
     final notifier = container.read(dominoSessionProvider('example').notifier);
     container.read(dominoSessionProvider('example'));
 
@@ -93,6 +107,12 @@ void main() {
     addTearDown(container.dispose);
     await container.read(dominoPuzzlesProvider.future);
 
+    // See the comment in the first test in this file: a live subscription
+    // mirrors a widget's ref.watch and keeps the autoDispose session alive
+    // for the duration of the test.
+    final sub = container.listen(dominoSessionProvider('example'), (prev, next) {});
+    addTearDown(sub.close);
+
     final notifier = container.read(dominoSessionProvider('example').notifier);
     container.read(dominoSessionProvider('example'));
     notifier.tapCell(const Cell(0, 0));
@@ -108,5 +128,40 @@ void main() {
     expect(entry, isNotNull, reason: 'entry never landed on disk');
     expect(entry!['updatedAt'], isA<int>());
     expect(entry['updatedAt'] as int, greaterThanOrEqualTo(before));
+  });
+
+  test('session is disposed (autoDispose) once its last listener goes away', () async {
+    final container = makeContainer();
+    addTearDown(container.dispose);
+    await container.read(dominoPuzzlesProvider.future);
+
+    // A live subscription is what keeps an autoDispose family provider
+    // alive — mirroring a widget's ref.watch while the puzzle screen is
+    // visible.
+    final sub = container.listen(dominoSessionProvider('example'), (prev, next) {});
+
+    final notifier = container.read(dominoSessionProvider('example').notifier);
+    notifier.tapCell(const Cell(0, 0));
+    notifier.tapCell(const Cell(0, 1));
+
+    final mutated = container.read(dominoSessionProvider('example'));
+    expect(mutated.rev, greaterThan(0));
+    expect(mutated.board.isCovered(const Cell(0, 0)), isTrue);
+
+    // Drop the last listener, then give autoDispose a chance to actually
+    // run: disposal is scheduled asynchronously after the last listener is
+    // removed, not synchronously on close().
+    sub.close();
+    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+
+    final example = puzzles.firstWhere((p) => p.id == 'example');
+    final fresh = container.read(dominoSessionProvider('example'));
+    final expectedInitial = DominoSessionState.initial(example);
+
+    expect(fresh.rev, expectedInitial.rev);
+    expect(fresh.board.isCovered(const Cell(0, 0)), isFalse);
+    expect(fresh.rev, isNot(mutated.rev));
+    expect(fresh.board.isCovered(const Cell(0, 0)), isNot(mutated.board.isCovered(const Cell(0, 0))));
   });
 }

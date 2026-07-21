@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
+import 'package:module_domino_ui/module_domino_ui.dart';
+import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
 import '../l10n/app_localizations.dart';
@@ -163,6 +166,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       );
       return;
     }
+
+    // Refresh the home screen's solved-counts so they reflect the just-
+    // imported data. Deliberately do NOT invalidate the session provider
+    // families here (rebusSessionProvider/puzzleSessionProvider/
+    // digitRebusSessionProvider/dominoSessionProvider): invalidating a live
+    // session triggers its onDispose flush, which would write that
+    // session's stale in-memory state back over the progress that was just
+    // imported. Only the read-only save-data providers are safe to touch.
+    ref.invalidate(rebusSaveDataProvider);
+    ref.invalidate(digitRebusSaveDataProvider);
+    ref.invalidate(dominoSaveDataProvider);
 
     final changed = report.counts.added + report.counts.updated;
     _showSnack(
