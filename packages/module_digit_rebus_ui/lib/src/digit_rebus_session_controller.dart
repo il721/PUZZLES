@@ -412,6 +412,8 @@ class DigitRebusSessionNotifier extends Notifier<DigitRebusSessionState> {
       'elapsedMs': state.elapsedMs,
       'checks': state.checkCount,
       'solved': state.solved,
+      // See the comment on the domino controller's copy of this field.
+      'updatedAt': DateTime.now().millisecondsSinceEpoch,
       if (state.solvedAt != null) 'solvedAt': state.solvedAt,
       if (state.firstSolveElapsedMs != null) 'firstSolveElapsedMs': state.firstSolveElapsedMs,
       if (state.firstSolveChecks != null) 'firstSolveChecks': state.firstSolveChecks,

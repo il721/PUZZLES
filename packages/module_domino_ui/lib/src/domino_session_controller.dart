@@ -281,6 +281,11 @@ class DominoSessionNotifier extends Notifier<DominoSessionState> {
       'placed': placedJson,
       'elapsedMs': state.elapsedMs,
       'solved': state.solved,
+      // Wall-clock stamp of this write. Read by ProgressBundleService's
+      // merge ladder to break ties between two devices' copies of the
+      // same puzzle. Absent on entries written before this field existed;
+      // the merge tolerates null.
+      'updatedAt': DateTime.now().millisecondsSinceEpoch,
       if (state.solvedAt != null) 'solvedAt': state.solvedAt,
       if (state.firstSolveElapsedMs != null) 'firstSolveElapsedMs': state.firstSolveElapsedMs,
     };

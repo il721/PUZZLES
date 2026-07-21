@@ -86,4 +86,27 @@ void main() {
     expect(state.board.isCovered(const Cell(0, 0)), isFalse);
     expect(state.status.placedCount, 0);
   });
+
+  test('persisted entry carries an updatedAt epoch-ms stamp', () async {
+    final before = DateTime.now().millisecondsSinceEpoch;
+    final container = makeContainer();
+    addTearDown(container.dispose);
+    await container.read(dominoPuzzlesProvider.future);
+
+    final notifier = container.read(dominoSessionProvider('example').notifier);
+    container.read(dominoSessionProvider('example'));
+    notifier.tapCell(const Cell(0, 0));
+    notifier.tapCell(const Cell(0, 1));
+
+    Map? entry;
+    for (var i = 0; i < 50 && entry == null; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      final saved = await saveService.load('module_domino');
+      final pz = saved['puzzles'];
+      if (pz is Map && pz['example'] is Map) entry = pz['example'] as Map;
+    }
+    expect(entry, isNotNull, reason: 'entry never landed on disk');
+    expect(entry!['updatedAt'], isA<int>());
+    expect(entry['updatedAt'] as int, greaterThanOrEqualTo(before));
+  });
 }
