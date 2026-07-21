@@ -36,7 +36,7 @@ class FilePickerBundleTransfer implements BundleTransfer {
   Future<bool> saveBundle(String jsonText, String suggestedFileName) async {
     try {
       final bytes = utf8.encode(jsonText);
-      final path = await FilePicker.saveFile(
+      final path = await FilePicker.platform.saveFile(
         dialogTitle: 'Puzzle Book',
         fileName: suggestedFileName,
         bytes: bytes,
@@ -59,7 +59,7 @@ class FilePickerBundleTransfer implements BundleTransfer {
   @override
   Future<String?> pickBundle() async {
     try {
-      final result = await FilePicker.pickFiles(
+      final result = await FilePicker.platform.pickFiles(
         dialogTitle: 'Puzzle Book',
         type: FileType.any,
         withData: true,

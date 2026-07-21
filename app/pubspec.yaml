@@ -27,7 +27,7 @@ dependencies:
   puzzle_core:
     path: ../packages/core
   window_manager: ^0.5.2
-  file_picker: ^11.0.2
+  file_picker: ">=10.1.0 <11.0.0"
 
 dev_dependencies:
   flutter_test:
