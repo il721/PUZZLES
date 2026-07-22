@@ -392,6 +392,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get labyrinthCellSemantics => 'клетка лабиринта';
 
   @override
+  String get labyrinthMarkedSemantics => 'отмечена как обязательная для пути';
+
+  @override
   String get settingsSyncSection => 'Перенос прогресса';
 
   @override

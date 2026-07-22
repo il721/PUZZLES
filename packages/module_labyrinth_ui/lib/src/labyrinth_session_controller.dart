@@ -171,6 +171,7 @@ class LabyrinthSessionNotifier extends Notifier<LabyrinthSessionState> {
       'chainA': entry['chainA'],
       'chainZ': entry['chainZ'],
       'crosses': entry['crosses'],
+      'marks': entry['marks'],
     });
     final elapsedMs = (entry['elapsedMs'] as num?)?.toInt() ?? 0;
     final solved = entry['solved'] == true;
@@ -203,6 +204,15 @@ class LabyrinthSessionNotifier extends Notifier<LabyrinthSessionState> {
   void longPressCell(Cell cell) {
     if (state.reviewMode) return;
     state.board.longPress(cell);
+    state = state.copyWith(rev: state.rev + 1);
+    _afterMutation();
+  }
+
+  /// Toggles the "must be on path" mark at [cell]. A no-op while the board
+  /// is locked for review.
+  void markCell(Cell cell) {
+    if (state.reviewMode) return;
+    state.board.toggleMark(cell);
     state = state.copyWith(rev: state.rev + 1);
     _afterMutation();
   }

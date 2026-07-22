@@ -395,6 +395,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labyrinthCellSemantics => 'labyrinth cell';
 
   @override
+  String get labyrinthMarkedSemantics => 'marked as required on the path';
+
+  @override
   String get settingsSyncSection => 'Transfer progress';
 
   @override

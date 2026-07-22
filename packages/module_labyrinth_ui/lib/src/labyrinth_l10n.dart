@@ -68,6 +68,12 @@ abstract class LabyrinthL10n {
 
   /// Accessibility (screen reader) label for a grid cell.
   String get cellSemantics;
+
+  /// Accessibility (screen reader) fragment appended to a cell's semantics
+  /// label when the player has marked it with [LabyrinthBoard.toggleMark]
+  /// (the book's "this letter is unique in the grid, so it must be on the
+  /// path" deduction). Appended after [cellSemantics]; keep it short.
+  String get markedSemantics;
 }
 
 /// Supplies the [LabyrinthL10n] implementation for the current app locale.

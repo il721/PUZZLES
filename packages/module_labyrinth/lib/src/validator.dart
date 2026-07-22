@@ -65,8 +65,11 @@ class LabyrinthStatus {
 
 /// Mutable player-facing state for one [LabyrinthPuzzle]: two partial
 /// chains growing inward from the fixed endpoints - [chainA] anchored at
-/// `Cell(0,0)` (`А`) and [chainZ] anchored at `Cell(7,7)` (`Я`) - plus a
-/// set of cells the player has manually marked as "non-conducting".
+/// `Cell(0,0)` (`А`) and [chainZ] anchored at `Cell(7,7)` (`Я`) - plus two
+/// kinds of off-path player annotation: cells manually marked as
+/// "non-conducting" ([manualCrosses]) and cells manually marked as "must
+/// be conducting" ([marks]). Every off-path cell is in at most one of
+/// these two sets; see [toggleMark] and [longPress].
 ///
 /// The two chains meet in the middle rather than the player drawing one
 /// continuous line from `А`, mirroring how the book's solving technique
@@ -90,14 +93,27 @@ class LabyrinthBoard {
   /// Cells the player has manually marked as crossed via [longPress].
   final Set<Cell> _manualCrosses;
 
-  LabyrinthBoard._(this.puzzle, this._chainA, this._chainZ, this._manualCrosses);
+  /// Cells the player has manually marked as "must be on path" via
+  /// [toggleMark] - the book's deduction that a letter occurring only
+  /// once in the grid is necessarily conducting. Purely a player
+  /// annotation: nothing in this board ever derives or auto-populates it.
+  final Set<Cell> _marks;
+
+  LabyrinthBoard._(
+    this.puzzle,
+    this._chainA,
+    this._chainZ,
+    this._manualCrosses,
+    this._marks,
+  );
 
   /// Builds a fresh board for [puzzle]: `chainA = [Cell(0,0)]`,
-  /// `chainZ = [Cell(7,7)]`, no manual crosses.
+  /// `chainZ = [Cell(7,7)]`, no manual crosses, no marks.
   factory LabyrinthBoard.fromPuzzle(LabyrinthPuzzle puzzle) => LabyrinthBoard._(
         puzzle,
         [const Cell(0, 0)],
         [const Cell(7, 7)],
+        <Cell>{},
         <Cell>{},
       );
 
@@ -109,6 +125,10 @@ class LabyrinthBoard {
 
   /// Cells manually marked as crossed, as an unmodifiable view.
   Set<Cell> get manualCrosses => Set.unmodifiable(_manualCrosses);
+
+  /// Cells manually marked as "must be on path", as an unmodifiable view.
+  /// See [toggleMark].
+  Set<Cell> get marks => Set.unmodifiable(_marks);
 
   /// The growing end of [chainA]: the cell a tap extends from.
   Cell get headA => _chainA.last;
@@ -176,9 +196,9 @@ class LabyrinthBoard {
   ///     appended to [chainA] when orthogonally adjacent to [headA], else
   ///     to [chainZ] when orthogonally adjacent to [headZ]. If [c] is
   ///     adjacent to *both* heads, [chainA] wins the tie-break. Appending
-  ///     also clears any manual cross on [c] (the player has just
-  ///     contradicted their own mark; retracting afterwards does not
-  ///     restore it). Neither chain may exceed
+  ///     also clears any manual cross or mark on [c] (the player has just
+  ///     settled - or contradicted - their own annotation; retracting
+  ///     afterwards does not restore it). Neither chain may exceed
   ///     [LabyrinthPuzzle.pathLength] cells, and the two together may
   ///     never exceed it either.
   ///  4. Otherwise: no-op.
@@ -209,8 +229,29 @@ class LabyrinthBoard {
     if (_manhattan(c, headA) == 1) {
       _chainA.add(c);
       _manualCrosses.remove(c);
+      _marks.remove(c);
     } else if (_manhattan(c, headZ) == 1) {
       _chainZ.add(c);
+      _manualCrosses.remove(c);
+      _marks.remove(c);
+    }
+  }
+
+  /// Toggles [c] in [marks], the player's "must be on path" annotation:
+  ///
+  ///  * If [c] is on either chain (including an anchor): no-op. A path
+  ///    cell needs no assertion that it is on the path, and anchors are
+  ///    never annotatable - this mirrors how [longPress] treats anchors.
+  ///  * If [c] is out of bounds: no-op.
+  ///  * Otherwise: toggles [c] in [marks]. Adding a mark also clears any
+  ///    manual cross on [c] - a cell cannot simultaneously assert "not on
+  ///    path" and "must be on path".
+  void toggleMark(Cell c) {
+    if (isOnPath(c) || !_inBounds(c)) {
+      return;
+    }
+    if (!_marks.remove(c)) {
+      _marks.add(c);
       _manualCrosses.remove(c);
     }
   }
@@ -222,7 +263,9 @@ class LabyrinthBoard {
   ///    for [chainZ]. The anchor (index 0) is never removed this way and
   ///    is never a legal place for a manual cross.
   ///  * If [c] is an anchor (index 0 on either chain): no-op.
-  ///  * Otherwise: toggles [c] in [manualCrosses].
+  ///  * Otherwise: toggles [c] in [manualCrosses]. Adding a cross also
+  ///    clears any mark on [c] - a cell cannot simultaneously assert
+  ///    "not on path" and "must be on path".
   void longPress(Cell c) {
     final ia = _chainA.indexOf(c);
     if (ia > 0) {
@@ -244,11 +287,12 @@ class LabyrinthBoard {
     }
     if (!_manualCrosses.remove(c)) {
       _manualCrosses.add(c);
+      _marks.remove(c);
     }
   }
 
   /// Resets the board to the initial two-anchor state, clearing manual
-  /// crosses.
+  /// crosses and marks.
   void reset() {
     _chainA
       ..clear()
@@ -257,6 +301,7 @@ class LabyrinthBoard {
       ..clear()
       ..add(const Cell(7, 7));
     _manualCrosses.clear();
+    _marks.clear();
   }
 
   /// Computes the current [LabyrinthStatus] for this board.
@@ -288,15 +333,16 @@ class LabyrinthBoard {
     );
   }
 
-  /// Serializes this board's persistent state: `chainA`, `chainZ` and
-  /// `crosses`, each a list of `[row, col]` pairs. [isJoined] and
-  /// [autoCrosses] are deliberately NOT included - both are derived from
-  /// `chainA`/`chainZ` and are recomputed by [fromJson] (and every other
-  /// accessor) rather than persisted.
+  /// Serializes this board's persistent state: `chainA`, `chainZ`,
+  /// `crosses` and `marks`, each a list of `[row, col]` pairs. [isJoined]
+  /// and [autoCrosses] are deliberately NOT included - both are derived
+  /// from `chainA`/`chainZ` and are recomputed by [fromJson] (and every
+  /// other accessor) rather than persisted.
   Map<String, dynamic> toJson() => {
         'chainA': [for (final c in _chainA) [c.row, c.col]],
         'chainZ': [for (final c in _chainZ) [c.row, c.col]],
         'crosses': [for (final c in _manualCrosses) [c.row, c.col]],
+        'marks': [for (final c in _marks) [c.row, c.col]],
       };
 
   /// Restores a board for [puzzle] from previously-persisted [json] (as
@@ -310,6 +356,12 @@ class LabyrinthBoard {
   /// entirety and this falls back to the same fresh state as
   /// [LabyrinthBoard.fromPuzzle], rather than throwing or restoring a
   /// partially-broken board. A bad save must never brick a puzzle.
+  ///
+  /// `marks` is OPTIONAL: it did not exist before marks were introduced,
+  /// so a missing or `null` value yields an empty set rather than failing
+  /// the whole payload (a save written before this feature must still
+  /// load). A *present but malformed* `marks` value still fails the whole
+  /// payload, same as every other field.
   factory LabyrinthBoard.fromJson(
     LabyrinthPuzzle puzzle,
     Map<String, dynamic> json,
@@ -327,6 +379,11 @@ class LabyrinthBoard {
     final crosses = _parseCells(json['crosses']);
     if (chainA == null || chainZ == null || crosses == null) {
       return null;
+    }
+    final rawMarks = json['marks'];
+    final marks = rawMarks == null ? <Cell>[] : _parseCells(rawMarks);
+    if (marks == null) {
+      return null; // present but malformed
     }
 
     if (chainA.isEmpty || chainA.first != const Cell(0, 0)) {
@@ -349,8 +406,19 @@ class LabyrinthBoard {
         return null;
       }
     }
+    for (final c in marks) {
+      if (!_inBounds(c)) {
+        return null;
+      }
+    }
 
-    return LabyrinthBoard._(puzzle, chainA, chainZ, crosses.toSet());
+    return LabyrinthBoard._(
+      puzzle,
+      chainA,
+      chainZ,
+      crosses.toSet(),
+      marks.toSet(),
+    );
   }
 
   /// Whether [chain] is in bounds, self-avoiding, and orthogonally

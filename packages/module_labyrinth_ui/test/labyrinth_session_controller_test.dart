@@ -164,6 +164,86 @@ void main() {
     expect((puzzlesMap['p01'] as Map)['solved'], isTrue);
   });
 
+  test('markCell toggles a mark and it survives a save/load round trip', () async {
+    final container = makeContainer();
+    addTearDown(container.dispose);
+    await container.read(labyrinthPuzzlesProvider.future);
+
+    final sub = container.listen(labyrinthSessionProvider('example'), (prev, next) {});
+    addTearDown(sub.close);
+
+    final notifier = container.read(labyrinthSessionProvider('example').notifier);
+    container.read(labyrinthSessionProvider('example'));
+
+    const markedCell = Cell(0, 7);
+    notifier.markCell(markedCell);
+
+    final afterMark = container.read(labyrinthSessionProvider('example'));
+    expect(afterMark.board.marks, contains(markedCell));
+
+    Map? entry;
+    for (var i = 0; i < 50 && entry == null; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      final saved = await saveService.load('module_labyrinth');
+      final pz = saved['puzzles'];
+      if (pz is Map && pz['example'] is Map) {
+        final candidate = pz['example'] as Map;
+        if (candidate['marks'] is List && (candidate['marks'] as List).isNotEmpty) {
+          entry = candidate;
+        }
+      }
+    }
+    expect(entry, isNotNull, reason: 'marked cell never landed on disk');
+    expect(entry!['marks'], contains(equals([markedCell.row, markedCell.col])));
+
+    // Dispose the session (flushes final state) and rebuild a fresh
+    // container to force a load from the persisted payload above, proving
+    // the mark round-trips through save/load rather than just surviving
+    // in memory.
+    container.dispose();
+
+    final container2 = makeContainer();
+    addTearDown(container2.dispose);
+    await container2.read(labyrinthPuzzlesProvider.future);
+    final sub2 = container2.listen(labyrinthSessionProvider('example'), (prev, next) {});
+    addTearDown(sub2.close);
+
+    LabyrinthSessionState loaded = container2.read(labyrinthSessionProvider('example'));
+    for (var i = 0; i < 50 && !loaded.board.marks.contains(markedCell); i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      loaded = container2.read(labyrinthSessionProvider('example'));
+    }
+    expect(loaded.board.marks, contains(markedCell), reason: 'mark did not survive reload');
+  });
+
+  test('markCell is a no-op in reviewMode', () async {
+    final container = makeContainer();
+    addTearDown(container.dispose);
+    await container.read(labyrinthPuzzlesProvider.future);
+
+    final sub = container.listen(labyrinthSessionProvider('example'), (prev, next) {});
+    addTearDown(sub.close);
+
+    final example = puzzles.firstWhere((p) => p.id == 'example');
+    final notifier = container.read(labyrinthSessionProvider('example').notifier);
+    container.read(labyrinthSessionProvider('example'));
+
+    _tapSolution(notifier, example.solution!);
+
+    final solvedState = container.read(labyrinthSessionProvider('example'));
+    expect(solvedState.reviewMode, isTrue);
+    final revBefore = solvedState.rev;
+    final marksBefore = solvedState.board.marks.length;
+
+    final untouchedCell = const Cell(0, 7);
+    notifier.markCell(untouchedCell);
+
+    final afterState = container.read(labyrinthSessionProvider('example'));
+    expect(afterState.rev, revBefore);
+    expect(afterState.board.marks.length, marksBefore);
+    expect(afterState.board.marks.contains(untouchedCell), isFalse);
+  });
+
   test('reviewMode blocks tapCell and longPressCell once solved', () async {
     final container = makeContainer();
     addTearDown(container.dispose);

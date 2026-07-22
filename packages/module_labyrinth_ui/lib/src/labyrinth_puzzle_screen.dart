@@ -107,6 +107,7 @@ class _LabyrinthPuzzleScreenState extends ConsumerState<LabyrinthPuzzleScreen>
       status: status,
       glyphFor: l10n.glyphFor,
       cellSemanticsLabel: l10n.cellSemantics,
+      markedSemanticsLabel: l10n.markedSemantics,
       maxCell: isDesktop ? null : 56,
       onCellTap: (cell) {
         ref.read(labyrinthAudioServiceProvider).play(Sfx.tap);
@@ -114,6 +115,10 @@ class _LabyrinthPuzzleScreenState extends ConsumerState<LabyrinthPuzzleScreen>
       },
       onCellLongPress: (cell) {
         ref.read(labyrinthSessionProvider(widget.puzzleId).notifier).longPressCell(cell);
+      },
+      onCellMark: (cell) {
+        ref.read(labyrinthAudioServiceProvider).play(Sfx.tap);
+        ref.read(labyrinthSessionProvider(widget.puzzleId).notifier).markCell(cell);
       },
     );
 

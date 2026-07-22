@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/gestures.dart' show kDoubleTapTimeout;
 import 'package:flutter/material.dart';
 import 'package:module_labyrinth/module_labyrinth.dart';
 
@@ -10,6 +11,8 @@ import 'package:module_labyrinth/module_labyrinth.dart';
 /// that became non-conducting because their twin is already on a chain)
 /// are drawn as a thin light grey X, and manual crosses (the player's own
 /// long-press marks) as a thicker dark X in the same slot, painted on top.
+/// Cells the player has [LabyrinthBoard.marks]-ed as "must be on the path"
+/// get a solid blue-tinted background (see [_buildCellBackground]).
 ///
 /// The three layers - cell backgrounds/taps, the path/cross painter, and
 /// the letters - are stacked so the painter draws behind the letters but
@@ -39,8 +42,16 @@ class LabyrinthGridWidget extends StatelessWidget {
   /// Called when the player long-presses a cell.
   final ValueChanged<Cell> onCellLongPress;
 
+  /// Called when the player marks a cell (right-click on desktop, double
+  /// tap on touch — see [_LabyrinthCellState]).
+  final ValueChanged<Cell> onCellMark;
+
   /// Accessibility (screen reader) label for a grid cell.
   final String cellSemanticsLabel;
+
+  /// Accessibility (screen reader) fragment appended to [cellSemanticsLabel]
+  /// for a marked cell.
+  final String markedSemanticsLabel;
 
   /// Optional override for the maximum cell size (defaults to [_maxCell]).
   final double? maxCell;
@@ -58,7 +69,9 @@ class LabyrinthGridWidget extends StatelessWidget {
     required this.glyphFor,
     required this.onCellTap,
     required this.onCellLongPress,
+    required this.onCellMark,
     required this.cellSemanticsLabel,
+    required this.markedSemanticsLabel,
     this.maxCell,
   });
 
@@ -137,33 +150,39 @@ class LabyrinthGridWidget extends StatelessWidget {
     final onPath = board.isOnPath(cell);
     final letter = board.puzzle.letterAt(cell);
     final isDuplicate = onPath && status.duplicateLetters.contains(letter);
+    // A marked cell can never be on the path (LabyrinthBoard.toggleMark is a
+    // no-op there), so this never competes with the path/duplicate cases
+    // above it.
+    final isMarked = board.marks.contains(cell);
 
     final Color background;
     if (isDuplicate) {
       background = scheme.errorContainer;
     } else if (onPath) {
       background = scheme.primaryContainer.withValues(alpha: 0.35);
+    } else if (isMarked) {
+      // Solid-ish fill (vs. the path's much lighter primaryContainer tint
+      // above) so a marked cell reads as clearly distinct from an
+      // ordinary path cell at a glance, in both light and dark themes.
+      background = scheme.primary.withValues(alpha: 0.55);
     } else {
       background = scheme.surface;
     }
 
-    return Semantics(
-      button: true,
-      label: cellSemanticsLabel,
-      value: glyphFor(letter),
-      child: GestureDetector(
-        onTap: () => onCellTap(cell),
-        onLongPress: () => onCellLongPress(cell),
-        child: Container(
-          key: ValueKey('cell_${cell.row}_${cell.col}'),
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-            color: background,
-            border: Border.all(color: scheme.outlineVariant, width: _thinEdge),
-          ),
-        ),
-      ),
+    final label =
+        isMarked ? '$cellSemanticsLabel $markedSemanticsLabel' : cellSemanticsLabel;
+
+    return _LabyrinthCell(
+      cell: cell,
+      size: size,
+      background: background,
+      borderColor: scheme.outlineVariant,
+      semanticsLabel: label,
+      semanticsValue: glyphFor(letter),
+      onTap: onCellTap,
+      onLongPress: onCellLongPress,
+      onSecondaryTap: onCellMark,
+      onDoubleTapLike: onCellMark,
     );
   }
 
@@ -195,6 +214,107 @@ class LabyrinthGridWidget extends StatelessWidget {
             ],
           ),
       ],
+    );
+  }
+}
+
+/// One grid cell's background, tap target, and semantics.
+///
+/// Wired gestures: [onTap] (extend/retract the path), [onLongPress] (toggle
+/// a manual cross), [onSecondaryTap] (right-click, desktop mouse - toggles
+/// a mark), and a hand-rolled double-tap detector (see
+/// [_LabyrinthCellState._handleTapDown]) that also toggles a mark on touch
+/// devices.
+///
+/// A [StatefulWidget] rather than a plain function is needed here purely to
+/// hold [_LabyrinthCellState._lastTapDownAt] across rebuilds - the double-tap
+/// detector below needs a timestamp that survives the parent
+/// [LabyrinthGridWidget] (a [StatelessWidget]) being rebuilt on every board
+/// mutation. Flutter preserves this State by (row, col) position in the
+/// fixed, never-reordered 8x8 grid, matching the same [key] used for the
+/// inner [Container] for extra safety.
+///
+/// Why not [GestureDetector.onDoubleTap]: Flutter's own docs note that
+/// combining `onTap` and `onDoubleTap` on one [GestureDetector] delays every
+/// single tap by [kDoubleTapTimeout] (~300ms), because the arena has to wait
+/// to see whether a second tap follows before it can resolve a lone tap as
+/// final. That would make the primary "extend the path" interaction feel
+/// laggy on every tap, everywhere, not just on cells the player intends to
+/// mark. Instead, [onTap] stays wired to a plain, immediate
+/// [GestureDetector.onTap]/[GestureDetector.onTapDown] pair, and the
+/// double-tap gesture is detected manually by comparing consecutive
+/// [GestureDetector.onTapDown] timestamps against [kDoubleTapTimeout] - no
+/// [DoubleTapGestureRecognizer] ever enters the gesture arena, so [onTap]
+/// is never delayed. The tradeoff: this reimplements a simplified slice of
+/// what [GestureDetector.onDoubleTap] already does (same cell only, no
+/// pointer-movement/slop tolerance), which is acceptable given each cell is
+/// a small, fixed-size, non-overlapping hit target.
+class _LabyrinthCell extends StatefulWidget {
+  final Cell cell;
+  final double size;
+  final Color background;
+  final Color borderColor;
+  final String semanticsLabel;
+  final String semanticsValue;
+  final ValueChanged<Cell> onTap;
+  final ValueChanged<Cell> onLongPress;
+  final ValueChanged<Cell> onSecondaryTap;
+  final ValueChanged<Cell> onDoubleTapLike;
+
+  const _LabyrinthCell({
+    required this.cell,
+    required this.size,
+    required this.background,
+    required this.borderColor,
+    required this.semanticsLabel,
+    required this.semanticsValue,
+    required this.onTap,
+    required this.onLongPress,
+    required this.onSecondaryTap,
+    required this.onDoubleTapLike,
+  });
+
+  @override
+  State<_LabyrinthCell> createState() => _LabyrinthCellState();
+}
+
+class _LabyrinthCellState extends State<_LabyrinthCell> {
+  DateTime? _lastTapDownAt;
+
+  void _handleTapDown(TapDownDetails details) {
+    final now = DateTime.now();
+    final last = _lastTapDownAt;
+    if (last != null && now.difference(last) <= kDoubleTapTimeout) {
+      // Consume the pair so a third rapid tap starts a fresh count rather
+      // than immediately re-triggering.
+      _lastTapDownAt = null;
+      widget.onDoubleTapLike(widget.cell);
+    } else {
+      _lastTapDownAt = now;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: widget.semanticsLabel,
+      value: widget.semanticsValue,
+      child: GestureDetector(
+        onTap: () => widget.onTap(widget.cell),
+        onTapDown: _handleTapDown,
+        onLongPress: () => widget.onLongPress(widget.cell),
+        onSecondaryTap: () => widget.onSecondaryTap(widget.cell),
+        child: Container(
+          key: ValueKey('cell_${widget.cell.row}_${widget.cell.col}'),
+          width: widget.size,
+          height: widget.size,
+          decoration: BoxDecoration(
+            color: widget.background,
+            border: Border.all(color: widget.borderColor, width: LabyrinthGridWidget._thinEdge),
+          ),
+        ),
+      ),
     );
   }
 }

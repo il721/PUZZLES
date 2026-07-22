@@ -147,6 +147,7 @@
   "labyrinthAlphabetLabel": "Alphabet",
   "labyrinthDuplicateWarning": "One letter appears twice on the path — it is shown in red.",
   "labyrinthCellSemantics": "labyrinth cell",
+  "labyrinthMarkedSemantics": "marked as required on the path",
   "settingsSyncSection": "Transfer progress",
   "settingsSyncHint": "Save your progress to a file and open it on another device.",
   "settingsExportProgress": "Save progress to a file",

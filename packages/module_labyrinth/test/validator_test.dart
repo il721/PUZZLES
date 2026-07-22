@@ -201,6 +201,70 @@ void main() {
     expect(board.manualCrosses, isEmpty); // not restored
   });
 
+  test('toggleMark toggles a mark on and off an empty cell', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    board.toggleMark(const Cell(4, 4));
+    expect(board.marks, {const Cell(4, 4)});
+    board.toggleMark(const Cell(4, 4));
+    expect(board.marks, isEmpty);
+  });
+
+  test('marking a manually crossed cell removes the cross', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    board.longPress(const Cell(4, 4));
+    expect(board.manualCrosses, {const Cell(4, 4)});
+
+    board.toggleMark(const Cell(4, 4));
+    expect(board.marks, {const Cell(4, 4)});
+    expect(board.manualCrosses, isEmpty);
+  });
+
+  test('long-pressing a marked cell to cross it removes the mark', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    board.toggleMark(const Cell(4, 4));
+    expect(board.marks, {const Cell(4, 4)});
+
+    board.longPress(const Cell(4, 4));
+    expect(board.manualCrosses, {const Cell(4, 4)});
+    expect(board.marks, isEmpty);
+  });
+
+  test('toggleMark is a no-op on a path cell and on either anchor', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    tapAll(board, [const Cell(1, 0)]);
+
+    board.toggleMark(const Cell(1, 0)); // on chainA, not an anchor
+    expect(board.marks, isEmpty);
+    board.toggleMark(const Cell(0, 0)); // chainA anchor
+    expect(board.marks, isEmpty);
+    board.toggleMark(const Cell(7, 7)); // chainZ anchor
+    expect(board.marks, isEmpty);
+  });
+
+  test(
+      'extending onto a marked cell clears it, and retraction does not '
+      'restore it', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    board.toggleMark(const Cell(1, 0));
+    expect(board.marks, {const Cell(1, 0)});
+
+    board.tap(const Cell(1, 0)); // extends chainA onto the marked cell
+    expect(board.chainA, [const Cell(0, 0), const Cell(1, 0)]);
+    expect(board.marks, isEmpty);
+
+    board.tap(const Cell(1, 0)); // retract
+    expect(board.chainA, [const Cell(0, 0)]);
+    expect(board.marks, isEmpty); // not restored
+  });
+
+  test('reset clears marks', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    board.toggleMark(const Cell(4, 4));
+    expect(board.marks, {const Cell(4, 4)});
+    board.reset();
+    expect(board.marks, isEmpty);
+  });
+
   test('manual crosses survive retraction and auto-cross churn elsewhere',
       () {
     final board = LabyrinthBoard.fromPuzzle(example);
@@ -292,17 +356,41 @@ void main() {
     expect(status.isSolved, isFalse);
   });
 
-  test('toJson -> fromJson round-trips chains and manual crosses', () {
+  test('toJson -> fromJson round-trips chains, manual crosses and marks',
+      () {
     final board = LabyrinthBoard.fromPuzzle(example);
     tapAll(board, [const Cell(1, 0), const Cell(2, 0)]);
     tapAll(board, [const Cell(7, 6), const Cell(7, 5)]);
     board.longPress(const Cell(4, 4));
+    board.toggleMark(const Cell(3, 3));
 
     final json = board.toJson();
     final restored = LabyrinthBoard.fromJson(example, json);
     expect(restored.chainA, board.chainA);
     expect(restored.chainZ, board.chainZ);
     expect(restored.manualCrosses, board.manualCrosses);
+    expect(restored.marks, board.marks);
+  });
+
+  test('fromJson with no marks key at all still loads and yields empty '
+      'marks (backward compatibility)', () {
+    final board = LabyrinthBoard.fromJson(example, {
+      'chainA': [
+        [0, 0],
+        [1, 0],
+      ],
+      'chainZ': [
+        [7, 7],
+      ],
+      'crosses': [
+        [4, 4],
+      ],
+      // no 'marks' key - simulates a save written before marks existed.
+    });
+    expect(board.chainA, [const Cell(0, 0), const Cell(1, 0)]);
+    expect(board.chainZ, [const Cell(7, 7)]);
+    expect(board.manualCrosses, {const Cell(4, 4)});
+    expect(board.marks, isEmpty);
   });
 
   group('fromJson falls back to the initial state for malformed saves', () {
@@ -437,6 +525,49 @@ void main() {
           [7, 7],
         ],
         'crosses': [],
+      });
+    });
+
+    test('malformed marks value: wrong-length pair', () {
+      expectFallback({
+        'chainA': [
+          [0, 0],
+        ],
+        'chainZ': [
+          [7, 7],
+        ],
+        'crosses': [],
+        'marks': [
+          [1],
+        ],
+      });
+    });
+
+    test('malformed marks value: not a list', () {
+      expectFallback({
+        'chainA': [
+          [0, 0],
+        ],
+        'chainZ': [
+          [7, 7],
+        ],
+        'crosses': [],
+        'marks': 'x',
+      });
+    });
+
+    test('out-of-bounds cell in marks', () {
+      expectFallback({
+        'chainA': [
+          [0, 0],
+        ],
+        'chainZ': [
+          [7, 7],
+        ],
+        'crosses': [],
+        'marks': [
+          [8, 8],
+        ],
       });
     });
   });

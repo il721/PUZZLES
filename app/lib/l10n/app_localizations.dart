@@ -742,6 +742,12 @@ abstract class AppLocalizations {
   /// **'клетка лабиринта'**
   String get labyrinthCellSemantics;
 
+  /// Accessibility fragment appended to a labyrinth cell's label when the player has marked it as "must be on the path".
+  ///
+  /// In ru, this message translates to:
+  /// **'отмечена как обязательная для пути'**
+  String get labyrinthMarkedSemantics;
+
   /// Header of the settings section for exporting/importing progress between devices.
   ///
   /// In ru, this message translates to:

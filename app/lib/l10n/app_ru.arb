@@ -253,6 +253,8 @@
   "@labyrinthDuplicateWarning": {"description": "Warning shown when a letter appears twice on the labyrinth path."},
   "labyrinthCellSemantics": "клетка лабиринта",
   "@labyrinthCellSemantics": {"description": "Accessibility label for a labyrinth grid cell."},
+  "labyrinthMarkedSemantics": "отмечена как обязательная для пути",
+  "@labyrinthMarkedSemantics": {"description": "Accessibility fragment appended to a labyrinth cell's label when the player has marked it as \"must be on the path\"."},
   "settingsSyncSection": "Перенос прогресса",
   "@settingsSyncSection": {"description": "Header of the settings section for exporting/importing progress between devices."},
   "settingsSyncHint": "Сохраните прогресс в файл и откройте его на другом устройстве.",

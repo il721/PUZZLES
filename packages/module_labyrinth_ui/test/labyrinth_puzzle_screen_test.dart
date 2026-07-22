@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/gestures.dart' show kSecondaryButton;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,6 +51,8 @@ class _FakeLabyrinthL10n implements LabyrinthL10n {
   String get duplicateWarning => 'Duplicates!';
   @override
   String get cellSemantics => 'labyrinth cell';
+  @override
+  String get markedSemantics => 'marked';
 }
 
 List<LabyrinthPuzzle> _loadPuzzles() {
@@ -125,6 +128,28 @@ void main() {
     await tester.tap(_cell(1, 0));
     await _settle(tester);
     expect(find.text('Letters: 2 of 33'), findsOneWidget);
+  });
+
+  testWidgets('a secondary tap on a cell toggles a mark', (tester) async {
+    await tester.pumpWidget(
+      _wrap(
+        saveService: saveService,
+        puzzles: puzzles,
+        child: const LabyrinthPuzzleScreen(puzzleId: 'example'),
+      ),
+    );
+    await _settle(tester);
+
+    // (0,7) is an interior cell untouched by either anchor/chain in the
+    // fresh 'example' session, so a mark there is unambiguous.
+    await tester.tap(_cell(0, 7), buttons: kSecondaryButton);
+    await _settle(tester);
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(LabyrinthPuzzleScreen)),
+    );
+    final board = container.read(labyrinthSessionProvider('example')).board;
+    expect(board.marks, contains(const Cell(0, 7)));
   });
 
   testWidgets('puzzle list screen renders a tile per playable puzzle, no tutorial action', (tester) async {

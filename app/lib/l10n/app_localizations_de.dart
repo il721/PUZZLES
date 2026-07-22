@@ -397,6 +397,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get labyrinthCellSemantics => 'Labyrinth-Feld';
 
   @override
+  String get labyrinthMarkedSemantics =>
+      'als erforderlich für den Pfad markiert';
+
+  @override
   String get settingsSyncSection => 'Fortschritt übertragen';
 
   @override

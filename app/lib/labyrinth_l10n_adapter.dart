@@ -74,4 +74,7 @@ class AppLabyrinthL10n implements LabyrinthL10n {
 
   @override
   String get cellSemantics => _l10n.labyrinthCellSemantics;
+
+  @override
+  String get markedSemantics => _l10n.labyrinthMarkedSemantics;
 }

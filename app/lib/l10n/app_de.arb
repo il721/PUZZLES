@@ -147,6 +147,7 @@
   "labyrinthAlphabetLabel": "Alphabet",
   "labyrinthDuplicateWarning": "Ein Buchstabe kommt zweimal im Pfad vor — er ist rot markiert.",
   "labyrinthCellSemantics": "Labyrinth-Feld",
+  "labyrinthMarkedSemantics": "als erforderlich für den Pfad markiert",
   "settingsSyncSection": "Fortschritt übertragen",
   "settingsSyncHint": "Fortschritt in eine Datei speichern und auf einem anderen Gerät öffnen.",
   "settingsExportProgress": "Fortschritt in Datei speichern",
