@@ -395,6 +395,52 @@ class AppLocalizationsRu extends AppLocalizations {
   String get labyrinthMarkedSemantics => 'отмечена как обязательная для пути';
 
   @override
+  String get labyrinthTutorialStep1 =>
+      'Путь начинается в клетке А — в левом верхнем углу. Нажмите на соседнюю клетку, чтобы продлить его.';
+
+  @override
+  String get labyrinthTutorialStep2 =>
+      'Второй конец закреплён в клетке Я — в правом нижнем углу. Он растёт навстречу первому; когда концы окажутся рядом, путь замкнётся.';
+
+  @override
+  String get labyrinthTutorialStep3 =>
+      'Долгое нажатие зачёркивает клетку: эта буква в путь не войдёт — например, одна из двух Ю. Правой кнопкой (или двойным касанием) ставится синяя метка: буква обязательно на пути — как У, которая встречается в лабиринте один раз. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.';
+
+  @override
+  String get labyrinthTutorialStep4 =>
+      'Из А путь идёт вниз, к Р, и дальше поворачивает к Ю и Й.';
+
+  @override
+  String get labyrinthTutorialStep5 =>
+      'Через И и Щ путь поднимается в верхний ряд, к Д и Т.';
+
+  @override
+  String get labyrinthTutorialStep6 =>
+      'Буква У встречается в лабиринте один раз, значит она обязательно на пути. Справа от неё — край квадрата и зачёркнутая А, поэтому звенья идут к З и К.';
+
+  @override
+  String get labyrinthTutorialStep7 =>
+      'От К путь спускается через П и Е к Ж и Ь.';
+
+  @override
+  String get labyrinthTutorialStep8 => 'Ц, Л, Б и Ш ведут путь влево и вниз.';
+
+  @override
+  String get labyrinthTutorialStep9 =>
+      'Через Г, Ъ и Ф путь выходит к правому краю, к С.';
+
+  @override
+  String get labyrinthTutorialStep10 => 'Э, Н и Ы поворачивают путь вниз.';
+
+  @override
+  String get labyrinthTutorialStep11 =>
+      'В в левом нижнем углу окружена с трёх сторон — это тупик, она непроводима. Зато вторая В упирается в низ квадрата и в зачёркнутую З, поэтому звенья идут к О и Ё.';
+
+  @override
+  String get labyrinthTutorialStep12 =>
+      'Х у левого края оказывается в тупике, значит проводима другая Х. Остаются М, Х и Я — путь замкнулся.';
+
+  @override
   String get settingsSyncSection => 'Перенос прогресса';
 
   @override

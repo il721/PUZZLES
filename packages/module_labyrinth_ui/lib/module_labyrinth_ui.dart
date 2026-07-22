@@ -10,9 +10,6 @@
 /// [labyrinthL10nProvider] (and optionally [labyrinthPuzzlesProvider] and
 /// [labyrinthAudioServiceProvider]) before building any widget from this
 /// library.
-///
-/// This phase (M-c) does not include the guided tutorial screen — that
-/// lands in a later milestone alongside its l10n strings.
 library module_labyrinth_ui;
 
 export 'src/labyrinth_grid_widget.dart';
@@ -23,3 +20,4 @@ export 'src/labyrinth_puzzle_list_screen.dart';
 export 'src/labyrinth_puzzle_screen.dart';
 export 'src/labyrinth_session_controller.dart';
 export 'src/labyrinth_status_panel.dart';
+export 'src/labyrinth_tutorial_screen.dart';

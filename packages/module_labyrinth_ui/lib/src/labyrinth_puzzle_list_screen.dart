@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'labyrinth_l10n.dart';
 import 'labyrinth_providers.dart';
 import 'labyrinth_puzzle_screen.dart';
+import 'labyrinth_tutorial_screen.dart';
 
 enum _PuzzleStatus { untouched, inProgress, solved }
 
@@ -16,9 +17,7 @@ _PuzzleStatus _statusFor(String id, Map<String, dynamic> saveData) {
 }
 
 /// Lists the 18 playable puzzles (`p01`..`p18`; the tutorial puzzle
-/// `example` is excluded), each tile showing its number and status. The
-/// tutorial screen lands in a later milestone, so there is no AppBar
-/// action for it here.
+/// `example` is excluded), each tile showing its number and status.
 class LabyrinthPuzzleListScreen extends ConsumerWidget {
   /// Creates the puzzle list screen.
   const LabyrinthPuzzleListScreen({super.key});
@@ -30,7 +29,20 @@ class LabyrinthPuzzleListScreen extends ConsumerWidget {
     final saveDataAsync = ref.watch(labyrinthSaveDataProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.puzzleListTitle)),
+      appBar: AppBar(
+        title: Text(l10n.puzzleListTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: l10n.tutorialTitle,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const LabyrinthTutorialScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: puzzlesAsync.when(
         data: (puzzles) {
           final list = puzzles.where((p) => !p.tutorial).toList()

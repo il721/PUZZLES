@@ -398,6 +398,53 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labyrinthMarkedSemantics => 'marked as required on the path';
 
   @override
+  String get labyrinthTutorialStep1 =>
+      'The path starts at A — the top-left corner. Tap a neighbouring cell to extend it.';
+
+  @override
+  String get labyrinthTutorialStep2 =>
+      'The other end is fixed at Z — the bottom-right corner. It grows towards the first one; when the two ends meet, the path closes.';
+
+  @override
+  String get labyrinthTutorialStep3 =>
+      'A long press crosses a cell out: that letter will not join the path — one of the two Y\'s, for instance. A right-click (or double tap) adds a blue mark: that letter must be on the path — like U, which occurs only once in the labyrinth. As soon as one of several identical letters joins the path, the rest are crossed out automatically.';
+
+  @override
+  String get labyrinthTutorialStep4 =>
+      'From A the path runs down to R, then turns towards Y and J.';
+
+  @override
+  String get labyrinthTutorialStep5 =>
+      'Through I and # the path climbs to the top row, to D and T.';
+
+  @override
+  String get labyrinthTutorialStep6 =>
+      'U occurs only once in the labyrinth, so it must be on the path. To its right lie the edge of the square and a crossed-out A, so the links run to 3 and K.';
+
+  @override
+  String get labyrinthTutorialStep7 =>
+      'From K the path descends through P and E to * and @.';
+
+  @override
+  String get labyrinthTutorialStep8 =>
+      'C, L, B and W carry the path left and down.';
+
+  @override
+  String get labyrinthTutorialStep9 =>
+      'Through G, & and F the path reaches the right edge, at S.';
+
+  @override
+  String get labyrinthTutorialStep10 => 'H, N and \$ turn the path downwards.';
+
+  @override
+  String get labyrinthTutorialStep11 =>
+      'The V in the bottom-left corner is enclosed on three sides — a dead end, so it cannot conduct. The other V, though, backs onto the bottom of the square and a crossed-out 3, so the links run to O and =.';
+
+  @override
+  String get labyrinthTutorialStep12 =>
+      'The X near the left edge is a dead end, so the other X must be on the path. M, X and Z remain — the path is closed.';
+
+  @override
   String get settingsSyncSection => 'Transfer progress';
 
   @override

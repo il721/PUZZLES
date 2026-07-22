@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Localized strings needed by the labyrinth module's play/list widgets.
+/// Localized strings needed by the labyrinth module's play/list/tutorial
+/// widgets.
 ///
 /// The app shell supplies a concrete implementation via an override of
-/// [labyrinthL10nProvider]. Tutorial-specific strings are added in a later
-/// milestone.
+/// [labyrinthL10nProvider].
 abstract class LabyrinthL10n {
   /// Maps a canonical (Cyrillic) letter to the glyph rendered on screen.
   /// The RU adapter returns [canonicalLetter] unchanged; EN/DE adapters
@@ -74,6 +74,27 @@ abstract class LabyrinthL10n {
   /// (the book's "this letter is unique in the grid, so it must be on the
   /// path" deduction). Appended after [cellSemantics]; keep it short.
   String get markedSemantics;
+
+  /// Title of the guided tutorial screen.
+  String get tutorialTitle;
+
+  /// Label for the tutorial's Next action.
+  String get tutorialNext;
+
+  /// Label for the tutorial's Back action.
+  String get tutorialBack;
+
+  /// Label for the tutorial's Skip action.
+  String get tutorialSkip;
+
+  /// Label for the tutorial's final Done action.
+  String get tutorialDone;
+
+  /// Step counter shown on the tutorial screen, e.g. "Step 3 of 12".
+  String tutorialStepCounter(int current, int total);
+
+  /// Instructional text for tutorial step [index] (1..12).
+  String tutorialStepText(int index);
 }
 
 /// Supplies the [LabyrinthL10n] implementation for the current app locale.

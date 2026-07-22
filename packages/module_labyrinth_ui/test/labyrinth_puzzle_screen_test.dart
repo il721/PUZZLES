@@ -53,6 +53,20 @@ class _FakeLabyrinthL10n implements LabyrinthL10n {
   String get cellSemantics => 'labyrinth cell';
   @override
   String get markedSemantics => 'marked';
+  @override
+  String get tutorialTitle => 'How to solve';
+  @override
+  String get tutorialNext => 'Next';
+  @override
+  String get tutorialBack => 'Back';
+  @override
+  String get tutorialSkip => 'Skip';
+  @override
+  String get tutorialDone => 'Done';
+  @override
+  String tutorialStepCounter(int current, int total) => 'Step $current of $total';
+  @override
+  String tutorialStepText(int index) => 'step $index';
 }
 
 List<LabyrinthPuzzle> _loadPuzzles() {
@@ -152,7 +166,7 @@ void main() {
     expect(board.marks, contains(const Cell(0, 7)));
   });
 
-  testWidgets('puzzle list screen renders a tile per playable puzzle, no tutorial action', (tester) async {
+  testWidgets('puzzle list screen renders a tile per playable puzzle, plus a tutorial action', (tester) async {
     await tester.pumpWidget(
       _wrap(
         saveService: saveService,
@@ -162,7 +176,7 @@ void main() {
     );
     await _settle(tester);
 
-    expect(find.byIcon(Icons.school_outlined), findsNothing);
+    expect(find.byIcon(Icons.school_outlined), findsOneWidget);
     expect(find.text('Labyrinth'), findsOneWidget);
     expect(find.text('1'), findsOneWidget);
     expect(find.text('18'), findsOneWidget);

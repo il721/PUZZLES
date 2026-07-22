@@ -401,6 +401,54 @@ class AppLocalizationsDe extends AppLocalizations {
       'als erforderlich für den Pfad markiert';
 
   @override
+  String get labyrinthTutorialStep1 =>
+      'Der Weg beginnt bei A — oben links. Tippe auf ein Nachbarfeld, um ihn zu verlängern.';
+
+  @override
+  String get labyrinthTutorialStep2 =>
+      'Das andere Ende liegt fest bei Z — unten rechts. Es wächst dem ersten entgegen; treffen sich beide Enden, schließt sich der Weg.';
+
+  @override
+  String get labyrinthTutorialStep3 =>
+      'Ein langer Druck streicht ein Feld durch: dieser Buchstabe kommt nicht auf den Weg — etwa eines der beiden Y. Ein Rechtsklick (oder Doppeltippen) setzt eine blaue Markierung: dieser Buchstabe muss auf dem Weg liegen — wie U, das im Labyrinth nur einmal vorkommt. Sobald einer von mehreren gleichen Buchstaben auf dem Weg liegt, werden die übrigen automatisch durchgestrichen.';
+
+  @override
+  String get labyrinthTutorialStep4 =>
+      'Von A führt der Weg hinunter zu R und wendet sich dann zu Y und J.';
+
+  @override
+  String get labyrinthTutorialStep5 =>
+      'Über I und # steigt der Weg in die obere Reihe, zu D und T.';
+
+  @override
+  String get labyrinthTutorialStep6 =>
+      'U kommt im Labyrinth nur einmal vor, muss also auf dem Weg liegen. Rechts davon liegen der Rand des Quadrats und ein durchgestrichenes A, daher führen die Verbindungen zu 3 und K.';
+
+  @override
+  String get labyrinthTutorialStep7 =>
+      'Von K führt der Weg über P und E hinab zu * und @.';
+
+  @override
+  String get labyrinthTutorialStep8 =>
+      'C, L, B und W führen den Weg nach links und nach unten.';
+
+  @override
+  String get labyrinthTutorialStep9 =>
+      'Über G, & und F erreicht der Weg den rechten Rand bei S.';
+
+  @override
+  String get labyrinthTutorialStep10 =>
+      'H, N und \$ lenken den Weg nach unten.';
+
+  @override
+  String get labyrinthTutorialStep11 =>
+      'Das V unten links ist von drei Seiten eingeschlossen — eine Sackgasse, es leitet nicht. Das andere V dagegen grenzt an den unteren Rand des Quadrats und ein durchgestrichenes 3, daher führen die Verbindungen zu O und =.';
+
+  @override
+  String get labyrinthTutorialStep12 =>
+      'Das X am linken Rand ist eine Sackgasse, also muss das andere X auf dem Weg liegen. Es bleiben M, X und Z — der Weg ist geschlossen.';
+
+  @override
   String get settingsSyncSection => 'Fortschritt übertragen';
 
   @override

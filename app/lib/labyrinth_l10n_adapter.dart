@@ -77,4 +77,54 @@ class AppLabyrinthL10n implements LabyrinthL10n {
 
   @override
   String get markedSemantics => _l10n.labyrinthMarkedSemantics;
+
+  @override
+  String get tutorialTitle => _l10n.tutorialTitle;
+
+  @override
+  String get tutorialNext => _l10n.tutorialNext;
+
+  @override
+  String get tutorialBack => _l10n.tutorialBack;
+
+  @override
+  String get tutorialSkip => _l10n.tutorialSkip;
+
+  @override
+  String get tutorialDone => _l10n.tutorialDone;
+
+  @override
+  String tutorialStepCounter(int current, int total) => _l10n.tutorialStepCounter(current, total);
+
+  @override
+  String tutorialStepText(int index) {
+    switch (index) {
+      case 1:
+        return _l10n.labyrinthTutorialStep1;
+      case 2:
+        return _l10n.labyrinthTutorialStep2;
+      case 3:
+        return _l10n.labyrinthTutorialStep3;
+      case 4:
+        return _l10n.labyrinthTutorialStep4;
+      case 5:
+        return _l10n.labyrinthTutorialStep5;
+      case 6:
+        return _l10n.labyrinthTutorialStep6;
+      case 7:
+        return _l10n.labyrinthTutorialStep7;
+      case 8:
+        return _l10n.labyrinthTutorialStep8;
+      case 9:
+        return _l10n.labyrinthTutorialStep9;
+      case 10:
+        return _l10n.labyrinthTutorialStep10;
+      case 11:
+        return _l10n.labyrinthTutorialStep11;
+      case 12:
+        return _l10n.labyrinthTutorialStep12;
+      default:
+        throw ArgumentError.value(index, 'index', 'Must be 1..12');
+    }
+  }
 }

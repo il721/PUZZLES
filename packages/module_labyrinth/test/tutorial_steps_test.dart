@@ -62,4 +62,35 @@ void main() {
       }
     }
   });
+
+  test('markCells is empty except step 3', () {
+    for (var i = 0; i < 12; i++) {
+      if (i == 2) continue;
+      expect(labyrinthTutorialSteps[i].markCells, isEmpty,
+          reason: 'step ${i + 1} should have no markCells');
+    }
+  });
+
+  test('step 3 markCells is exactly [Cell(0, 6)]', () {
+    expect(labyrinthTutorialSteps[2].markCells, [const Cell(0, 6)]);
+  });
+
+  test(
+      'every markCells letter occurs exactly once in the example puzzle '
+      'grid', () {
+    final counts = <String, int>{};
+    for (final row in example.grid) {
+      for (final letter in row) {
+        counts[letter] = (counts[letter] ?? 0) + 1;
+      }
+    }
+    for (final step in labyrinthTutorialSteps) {
+      for (final cell in step.markCells) {
+        final letter = example.letterAt(cell);
+        expect(counts[letter], 1,
+            reason: 'markCells letter "$letter" at $cell should occur '
+                'exactly once in the example grid');
+      }
+    }
+  });
 }

@@ -748,6 +748,78 @@ abstract class AppLocalizations {
   /// **'отмечена как обязательная для пути'**
   String get labyrinthMarkedSemantics;
 
+  /// Module 04 tutorial step 1 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Путь начинается в клетке А — в левом верхнем углу. Нажмите на соседнюю клетку, чтобы продлить его.'**
+  String get labyrinthTutorialStep1;
+
+  /// Module 04 tutorial step 2 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Второй конец закреплён в клетке Я — в правом нижнем углу. Он растёт навстречу первому; когда концы окажутся рядом, путь замкнётся.'**
+  String get labyrinthTutorialStep2;
+
+  /// Module 04 tutorial step 3 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Долгое нажатие зачёркивает клетку: эта буква в путь не войдёт — например, одна из двух Ю. Правой кнопкой (или двойным касанием) ставится синяя метка: буква обязательно на пути — как У, которая встречается в лабиринте один раз. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.'**
+  String get labyrinthTutorialStep3;
+
+  /// Module 04 tutorial step 4 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Из А путь идёт вниз, к Р, и дальше поворачивает к Ю и Й.'**
+  String get labyrinthTutorialStep4;
+
+  /// Module 04 tutorial step 5 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Через И и Щ путь поднимается в верхний ряд, к Д и Т.'**
+  String get labyrinthTutorialStep5;
+
+  /// Module 04 tutorial step 6 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Буква У встречается в лабиринте один раз, значит она обязательно на пути. Справа от неё — край квадрата и зачёркнутая А, поэтому звенья идут к З и К.'**
+  String get labyrinthTutorialStep6;
+
+  /// Module 04 tutorial step 7 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'От К путь спускается через П и Е к Ж и Ь.'**
+  String get labyrinthTutorialStep7;
+
+  /// Module 04 tutorial step 8 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ц, Л, Б и Ш ведут путь влево и вниз.'**
+  String get labyrinthTutorialStep8;
+
+  /// Module 04 tutorial step 9 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Через Г, Ъ и Ф путь выходит к правому краю, к С.'**
+  String get labyrinthTutorialStep9;
+
+  /// Module 04 tutorial step 10 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Э, Н и Ы поворачивают путь вниз.'**
+  String get labyrinthTutorialStep10;
+
+  /// Module 04 tutorial step 11 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'В в левом нижнем углу окружена с трёх сторон — это тупик, она непроводима. Зато вторая В упирается в низ квадрата и в зачёркнутую З, поэтому звенья идут к О и Ё.'**
+  String get labyrinthTutorialStep11;
+
+  /// Module 04 tutorial step 12 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Х у левого края оказывается в тупике, значит проводима другая Х. Остаются М, Х и Я — путь замкнулся.'**
+  String get labyrinthTutorialStep12;
+
   /// Header of the settings section for exporting/importing progress between devices.
   ///
   /// In ru, this message translates to:

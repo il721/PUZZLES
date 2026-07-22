@@ -53,6 +53,12 @@ class LabyrinthGridWidget extends StatelessWidget {
   /// for a marked cell.
   final String markedSemanticsLabel;
 
+  /// Cells to visually emphasize (e.g. for the guided tutorial, to call
+  /// out the cells a step is teaching). Empty by default, which leaves the
+  /// play screen's rendering unchanged. Takes priority over the plain
+  /// on-path tint but not over the duplicate-letter tint.
+  final Set<Cell> highlightedCells;
+
   /// Optional override for the maximum cell size (defaults to [_maxCell]).
   final double? maxCell;
 
@@ -72,6 +78,7 @@ class LabyrinthGridWidget extends StatelessWidget {
     required this.onCellMark,
     required this.cellSemanticsLabel,
     required this.markedSemanticsLabel,
+    this.highlightedCells = const {},
     this.maxCell,
   });
 
@@ -150,6 +157,7 @@ class LabyrinthGridWidget extends StatelessWidget {
     final onPath = board.isOnPath(cell);
     final letter = board.puzzle.letterAt(cell);
     final isDuplicate = onPath && status.duplicateLetters.contains(letter);
+    final isHighlighted = highlightedCells.contains(cell);
     // A marked cell can never be on the path (LabyrinthBoard.toggleMark is a
     // no-op there), so this never competes with the path/duplicate cases
     // above it.
@@ -158,6 +166,8 @@ class LabyrinthGridWidget extends StatelessWidget {
     final Color background;
     if (isDuplicate) {
       background = scheme.errorContainer;
+    } else if (isHighlighted) {
+      background = scheme.tertiaryContainer;
     } else if (onPath) {
       background = scheme.primaryContainer.withValues(alpha: 0.35);
     } else if (isMarked) {

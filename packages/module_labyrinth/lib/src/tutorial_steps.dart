@@ -11,6 +11,8 @@ import 'model.dart';
 /// across steps (see [labyrinthTutorialSteps]). [crossCells] are absolute
 /// grid cells (not solution indices) this step calls out to demonstrate
 /// the long-press-to-cross mechanic, independent of the path reveal.
+/// [markCells] are likewise absolute grid cells, calling out the "must be
+/// on path" mark mechanic instead.
 class LabyrinthTutorialStep {
   /// The l10n key for this step's instructional text.
   final String textKey;
@@ -25,12 +27,18 @@ class LabyrinthTutorialStep {
   /// Grid cells this step calls out directly (e.g. a manual-cross demo).
   final List<Cell> crossCells;
 
+  /// Grid cells this step calls out with the "must be on path" mark (the
+  /// book's dot notation), to demonstrate the marking mechanic. Absolute
+  /// grid cells, not solution indices - same convention as [crossCells].
+  final List<Cell> markCells;
+
   /// Creates a tutorial step.
   const LabyrinthTutorialStep({
     required this.textKey,
     this.revealPathIndices = const [],
     this.highlightPathIndices = const [],
     this.crossCells = const [],
+    this.markCells = const [],
   });
 }
 
@@ -40,7 +48,8 @@ class LabyrinthTutorialStep {
 ///
 /// Steps 1-3 teach the mechanic - extending from `А`, extending from `Я`
 /// as a second, independent chain, and long-pressing to mark a manual
-/// cross plus the resulting automatic crosses - and reveal no path cells
+/// cross plus the resulting automatic crosses, plus the "must be on path"
+/// mark - and reveal no path cells
 /// ([LabyrinthTutorialStep.revealPathIndices] is empty for all three).
 /// Steps 4-12 then walk the full 33-cell solution in nine contiguous,
 /// ascending, non-overlapping chunks of sizes 4, 4, 4, 4, 4, 4, 3, 3, 3
@@ -59,10 +68,13 @@ const List<LabyrinthTutorialStep> labyrinthTutorialSteps = [
     highlightPathIndices: [32],
   ),
   // 3: long-press to mark a manual cross, and the automatic-cross rule -
-  // demonstrated on the example grid's duplicate Ю pair at (1,7)/(2,0).
+  // demonstrated on the example grid's duplicate Ю pair at (1,7)/(2,0) -
+  // plus the "must be on path" mark, demonstrated on У at (0,6), which
+  // occurs exactly once in the grid.
   LabyrinthTutorialStep(
     textKey: 'labyrinthTutorialStep3',
     crossCells: [Cell(1, 7), Cell(2, 0)],
+    markCells: [Cell(0, 6)],
   ),
   // 4
   LabyrinthTutorialStep(
