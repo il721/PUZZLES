@@ -12,3 +12,5 @@ dependencies:
     path: ../../packages/module_digit_rebus
   module_domino:
     path: ../../packages/module_domino
+  module_labyrinth:
+    path: ../../packages/module_labyrinth

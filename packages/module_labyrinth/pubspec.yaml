@@ -1,0 +1,16 @@
+name: module_labyrinth
+description: The "alphabet labyrinth" puzzle module - model, path solver, and puzzle data. Flutter UI is added in a later milestone.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dev_dependencies:
+  test: ^1.25.0
+
+# Consumed by Flutter apps that depend on this package (e.g.
+# module_labyrinth_ui) so the puzzle data bundles as an asset. Pure-Dart
+# tooling (`dart test`, `dart analyze`) ignores this section.
+flutter:
+  assets:
+    - assets/puzzles/
