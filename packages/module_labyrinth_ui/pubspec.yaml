@@ -1,0 +1,22 @@
+name: module_labyrinth_ui
+description: Flutter UI for the "alphabet labyrinth" puzzle module — dual-chain tap-to-thread grid rendering with auto/manual crosses, alphabet tracker, puzzle screen/list, and session persistence.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  module_labyrinth:
+    path: ../module_labyrinth
+  puzzle_core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

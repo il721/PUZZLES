@@ -351,6 +351,50 @@ class AppLocalizationsEn extends AppLocalizations {
       'The last five close the set: 0:0, 1:1, 6:6, 3:6 and 4:6. All 28 pairs are placed — the solitaire is out! In every puzzle, do the same: find the forced dominoes and watch the remaining-pairs list.';
 
   @override
+  String get moduleLabyrinthTitle => 'Alphabet Labyrinth';
+
+  @override
+  String get moduleLabyrinthDescription =>
+      'Thread a single path across the 8×8 grid from the top-left corner to the bottom-right, using each letter of the alphabet exactly once.';
+
+  @override
+  String get labyrinthListTitle => 'Alphabet Labyrinth';
+
+  @override
+  String labyrinthPuzzleN(int n) {
+    return 'Labyrinth $n';
+  }
+
+  @override
+  String get labyrinthResetConfirmTitle => 'Reset the path?';
+
+  @override
+  String get labyrinthResetConfirmBody =>
+      'The whole drawn path will be cleared.';
+
+  @override
+  String get labyrinthWinTitle => 'Path complete!';
+
+  @override
+  String get labyrinthWinBody =>
+      'You threaded a path through all 33 letters of the alphabet.';
+
+  @override
+  String labyrinthPlacedCounter(int placed) {
+    return 'Letters: $placed of 33';
+  }
+
+  @override
+  String get labyrinthAlphabetLabel => 'Alphabet';
+
+  @override
+  String get labyrinthDuplicateWarning =>
+      'One letter appears twice on the path — it is shown in red.';
+
+  @override
+  String get labyrinthCellSemantics => 'labyrinth cell';
+
+  @override
   String get settingsSyncSection => 'Transfer progress';
 
   @override

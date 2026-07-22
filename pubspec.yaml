@@ -12,4 +12,5 @@ workspace:
   - packages/module_rebus_ui
   - packages/module_digit_rebus_ui
   - packages/module_domino_ui
+  - packages/module_labyrinth_ui
   - tools/solver

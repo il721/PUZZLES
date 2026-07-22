@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
+import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:puzzle_core/puzzle_core.dart';
@@ -16,6 +17,17 @@ import 'providers.dart';
 /// always has comfortable room, regardless of how small the player resizes
 /// the window.
 const Size _minimumWindowSize = Size(960, 540);
+
+/// Builds the app's module registry. Exposed as a named function (rather
+/// than being inlined into [main]) so tests can assert against the very
+/// registry the app ships with — the export/import namespace list is
+/// derived from it, so a module missing here is silently missing from
+/// progress sync.
+ModuleRegistry buildModuleRegistry() => ModuleRegistry()
+  ..register(RebusModule.descriptor)
+  ..register(DigitRebusModule.descriptor)
+  ..register(DominoModule.descriptor)
+  ..register(LabyrinthModule.descriptor);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,10 +43,7 @@ Future<void> main() async {
   final settingsService = SettingsService(saveService);
   await settingsService.init();
 
-  final moduleRegistry = ModuleRegistry()
-    ..register(RebusModule.descriptor)
-    ..register(DigitRebusModule.descriptor)
-    ..register(DominoModule.descriptor);
+  final moduleRegistry = buildModuleRegistry();
 
   final progressBundleService = ProgressBundleService(
     saveService,
@@ -47,6 +56,7 @@ Future<void> main() async {
         saveServiceProvider.overrideWithValue(saveService),
         digitRebusSaveServiceProvider.overrideWithValue(saveService),
         dominoSaveServiceProvider.overrideWithValue(saveService),
+        labyrinthSaveServiceProvider.overrideWithValue(saveService),
         settingsServiceProvider.overrideWithValue(settingsService),
         moduleRegistryProvider.overrideWithValue(moduleRegistry),
         progressBundleServiceProvider.overrideWithValue(progressBundleService),

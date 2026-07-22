@@ -7,6 +7,7 @@ import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 import 'package:puzzles/bundle_transfer.dart';
 import 'package:puzzles/l10n/app_localizations.dart';
+import 'package:puzzles/main.dart';
 import 'package:puzzles/providers.dart';
 import 'package:puzzles/screens/settings_screen.dart';
 
@@ -296,5 +297,15 @@ void main() {
     }
     expect(errorShown, isTrue, reason: 'version-error message never appeared');
     expect(find.text(message), findsOneWidget);
+  });
+
+  test('the synced namespace list derived from a real ModuleRegistry includes module_labyrinth', () {
+    // Calls the app's own registry builder, so forgetting a register(...)
+    // line in main.dart's buildModuleRegistry() fails this test.
+    final moduleRegistry = buildModuleRegistry();
+
+    final namespaces = moduleRegistry.modules.map((m) => m.saveNamespace).toList();
+
+    expect(namespaces, contains('module_labyrinth'));
   });
 }

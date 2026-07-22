@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
+import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 
 import '../l10n/app_localizations.dart';
@@ -25,12 +26,17 @@ class HomeScreen extends ConsumerWidget {
     final dominoPuzzlesAsync = ref.watch(dominoPuzzlesProvider);
     final dominoSaveDataAsync = ref.watch(dominoSaveDataProvider);
 
+    final labyrinthPuzzlesAsync = ref.watch(labyrinthPuzzlesProvider);
+    final labyrinthSaveDataAsync = ref.watch(labyrinthSaveDataProvider);
+
     final total = puzzlesAsync.value?.where((p) => !p.tutorial).length ?? 15;
     final solved = _countSolved(saveDataAsync.value);
     final digitTotal = digitPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
     final digitSolved = _countSolved(digitSaveDataAsync.value);
     final dominoTotal = dominoPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
     final dominoSolved = _countSolved(dominoSaveDataAsync.value);
+    final labyrinthTotal = labyrinthPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
+    final labyrinthSolved = _countSolved(labyrinthSaveDataAsync.value);
 
     return Scaffold(
       appBar: AppBar(
@@ -84,6 +90,18 @@ class HomeScreen extends ConsumerWidget {
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/domino');
               ref.invalidate(dominoSaveDataProvider);
+            },
+          ),
+          const SizedBox(height: 12),
+          _ModuleCard(
+            title: l10n.moduleLabyrinthTitle,
+            description: l10n.moduleLabyrinthDescription,
+            progressLabel: l10n.homeModuleProgress(labyrinthSolved, labyrinthTotal),
+            iconAsset: 'assets/icons/icon_04.svg',
+            iconAssetLight: 'assets/icons/icon_04_light.svg',
+            onTap: () async {
+              await Navigator.of(context).pushNamed('/module/labyrinth');
+              ref.invalidate(labyrinthSaveDataProvider);
             },
           ),
         ],

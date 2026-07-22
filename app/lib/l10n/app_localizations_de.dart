@@ -353,6 +353,50 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die letzten fünf schließen den Satz: 0:0, 1:1, 6:6, 3:6 und 4:6. Alle 28 Paare liegen — die Patience ist aufgegangen! Geh in jedem Rätsel gleich vor: finde die erzwungenen Steine und behalte die Liste der offenen Paare im Blick.';
 
   @override
+  String get moduleLabyrinthTitle => 'Buchstaben-Labyrinth';
+
+  @override
+  String get moduleLabyrinthDescription =>
+      'Ziehe einen einzigen Pfad durchs 8×8-Raster von der oberen linken bis zur unteren rechten Ecke und verwende dabei jeden Buchstaben des Alphabets genau einmal.';
+
+  @override
+  String get labyrinthListTitle => 'Buchstaben-Labyrinth';
+
+  @override
+  String labyrinthPuzzleN(int n) {
+    return 'Labyrinth $n';
+  }
+
+  @override
+  String get labyrinthResetConfirmTitle => 'Pfad zurücksetzen?';
+
+  @override
+  String get labyrinthResetConfirmBody =>
+      'Der gesamte gezeichnete Pfad wird gelöscht.';
+
+  @override
+  String get labyrinthWinTitle => 'Pfad vollständig!';
+
+  @override
+  String get labyrinthWinBody =>
+      'Du hast einen Pfad durch alle 33 Buchstaben des Alphabets gezogen.';
+
+  @override
+  String labyrinthPlacedCounter(int placed) {
+    return 'Buchstaben: $placed von 33';
+  }
+
+  @override
+  String get labyrinthAlphabetLabel => 'Alphabet';
+
+  @override
+  String get labyrinthDuplicateWarning =>
+      'Ein Buchstabe kommt zweimal im Pfad vor — er ist rot markiert.';
+
+  @override
+  String get labyrinthCellSemantics => 'Labyrinth-Feld';
+
+  @override
   String get settingsSyncSection => 'Fortschritt übertragen';
 
   @override

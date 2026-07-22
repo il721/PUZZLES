@@ -670,6 +670,78 @@ abstract class AppLocalizations {
   /// **'Последние пять закрывают набор: 0:0, 1:1, 6:6, 3:6 и 4:6. Все 28 пар на месте — пасьянс сошёлся! В любой головоломке действуйте так же: ищите вынужденные косточки и следите за списком оставшихся пар.'**
   String get dominoTutorialStep10;
 
+  /// Title of Module 04.
+  ///
+  /// In ru, this message translates to:
+  /// **'Лабиринт-алфавит'**
+  String get moduleLabyrinthTitle;
+
+  /// Short description of Module 04, shown on its home-screen card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проведите единственный путь по сетке 8×8 от А до Я, используя каждую букву алфавита ровно один раз.'**
+  String get moduleLabyrinthDescription;
+
+  /// Title of Module 04's puzzle list screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Лабиринт-алфавит'**
+  String get labyrinthListTitle;
+
+  /// Title for labyrinth puzzle number n.
+  ///
+  /// In ru, this message translates to:
+  /// **'Лабиринт {n}'**
+  String labyrinthPuzzleN(int n);
+
+  /// Title of Module 04's reset confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить путь?'**
+  String get labyrinthResetConfirmTitle;
+
+  /// Body of Module 04's reset confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Весь проведённый путь будет стёрт.'**
+  String get labyrinthResetConfirmBody;
+
+  /// Title of Module 04's win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Путь найден!'**
+  String get labyrinthWinTitle;
+
+  /// Body of Module 04's win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы провели путь через все 33 буквы алфавита от А до Я.'**
+  String get labyrinthWinBody;
+
+  /// Progress counter on the labyrinth play screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Букв: {placed} из 33'**
+  String labyrinthPlacedCounter(int placed);
+
+  /// Header label above the labyrinth's alphabet tracker strip.
+  ///
+  /// In ru, this message translates to:
+  /// **'Алфавит'**
+  String get labyrinthAlphabetLabel;
+
+  /// Warning shown when a letter appears twice on the labyrinth path.
+  ///
+  /// In ru, this message translates to:
+  /// **'Одна из букв встречается на пути дважды — она выделена красным.'**
+  String get labyrinthDuplicateWarning;
+
+  /// Accessibility label for a labyrinth grid cell.
+  ///
+  /// In ru, this message translates to:
+  /// **'клетка лабиринта'**
+  String get labyrinthCellSemantics;
+
   /// Header of the settings section for exporting/importing progress between devices.
   ///
   /// In ru, this message translates to:

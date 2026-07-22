@@ -349,6 +349,49 @@ class AppLocalizationsRu extends AppLocalizations {
       'Последние пять закрывают набор: 0:0, 1:1, 6:6, 3:6 и 4:6. Все 28 пар на месте — пасьянс сошёлся! В любой головоломке действуйте так же: ищите вынужденные косточки и следите за списком оставшихся пар.';
 
   @override
+  String get moduleLabyrinthTitle => 'Лабиринт-алфавит';
+
+  @override
+  String get moduleLabyrinthDescription =>
+      'Проведите единственный путь по сетке 8×8 от А до Я, используя каждую букву алфавита ровно один раз.';
+
+  @override
+  String get labyrinthListTitle => 'Лабиринт-алфавит';
+
+  @override
+  String labyrinthPuzzleN(int n) {
+    return 'Лабиринт $n';
+  }
+
+  @override
+  String get labyrinthResetConfirmTitle => 'Сбросить путь?';
+
+  @override
+  String get labyrinthResetConfirmBody => 'Весь проведённый путь будет стёрт.';
+
+  @override
+  String get labyrinthWinTitle => 'Путь найден!';
+
+  @override
+  String get labyrinthWinBody =>
+      'Вы провели путь через все 33 буквы алфавита от А до Я.';
+
+  @override
+  String labyrinthPlacedCounter(int placed) {
+    return 'Букв: $placed из 33';
+  }
+
+  @override
+  String get labyrinthAlphabetLabel => 'Алфавит';
+
+  @override
+  String get labyrinthDuplicateWarning =>
+      'Одна из букв встречается на пути дважды — она выделена красным.';
+
+  @override
+  String get labyrinthCellSemantics => 'клетка лабиринта';
+
+  @override
   String get settingsSyncSection => 'Перенос прогресса';
 
   @override
