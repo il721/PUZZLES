@@ -404,7 +404,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get labyrinthTutorialStep3 =>
-      'Долгое нажатие зачёркивает клетку: эта буква в путь не войдёт — например, одна из двух Ю. Правой кнопкой (или двойным касанием) ставится синяя метка: буква обязательно на пути — как У, которая встречается в лабиринте один раз. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.';
+      'Нажмите на клетку не рядом с путём, чтобы поставить синюю метку: эта буква обязательно на пути — как У, которая встречается в лабиринте один раз. Долгое нажатие (на компьютере — правая кнопка мыши) зачёркивает клетку крестом: эта буква в путь не войдёт — например, одна из двух Ю. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.';
 
   @override
   String get labyrinthTutorialStep4 =>
@@ -439,6 +439,46 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get labyrinthTutorialStep12 =>
       'Х у левого края оказывается в тупике, значит проводима другая Х. Остаются М, Х и Я — путь замкнулся.';
+
+  @override
+  String get moduleSquarewordTitle => 'Сквэрворды';
+
+  @override
+  String get moduleSquarewordDescription =>
+      'Заполните сетку так, чтобы каждая буква ключевого слова встречалась ровно один раз в каждой строке, столбце и на обеих диагоналях.';
+
+  @override
+  String get squarewordListTitle => 'Сквэрворды';
+
+  @override
+  String squarewordPuzzleN(int n) {
+    return 'Сквэрворд $n';
+  }
+
+  @override
+  String get squarewordResetConfirmTitle => 'Сбросить сетку?';
+
+  @override
+  String get squarewordResetConfirmBody => 'Все введённые буквы будут стёрты.';
+
+  @override
+  String get squarewordWinTitle => 'Сетка заполнена!';
+
+  @override
+  String get squarewordWinBody =>
+      'Вы заполнили сетку без повторов в строках, столбцах и по диагоналям.';
+
+  @override
+  String squarewordFilledCounter(int filled, int total) {
+    return 'Заполнено: $filled из $total';
+  }
+
+  @override
+  String get squarewordViolationWarning =>
+      'Буква повторяется в строке, столбце или по диагонали — она выделена красным.';
+
+  @override
+  String get squarewordCellSemantics => 'клетка сквэрворда';
 
   @override
   String get settingsSyncSection => 'Перенос прогресса';

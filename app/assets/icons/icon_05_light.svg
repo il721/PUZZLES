@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 222.09 222.09">
+  <defs>
+    <clipPath id="clippath05light">
+      <circle fill="none" stroke="#2b79c2" stroke-width="2px" stroke-miterlimit="10" cx="111.04" cy="111.04" r="110.04"/>
+    </clipPath>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g clip-path="url(#clippath05light)">
+        <line fill="none" stroke="red" stroke-width="6px" stroke-miterlimit="10" x1="89" y1="45" x2="89" y2="177"/>
+        <line fill="none" stroke="red" stroke-width="6px" stroke-miterlimit="10" x1="133" y1="45" x2="133" y2="177"/>
+        <line fill="none" stroke="red" stroke-width="6px" stroke-miterlimit="10" x1="45" y1="89" x2="177" y2="89"/>
+        <line fill="none" stroke="red" stroke-width="6px" stroke-miterlimit="10" x1="45" y1="133" x2="177" y2="133"/>
+        <g>
+          <text fill="#2b79c2" font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(54 74)"><tspan x="0" y="0">С</tspan></text>
+          <text font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(98 74)"><tspan x="0" y="0">К</tspan></text>
+          <text fill="#2b79c2" font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(142 74)"><tspan x="0" y="0">В</tspan></text>
+          <text font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(54 118)"><tspan x="0" y="0">Э</tspan></text>
+          <text fill="#2b79c2" font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(98 118)"><tspan x="0" y="0">Р</tspan></text>
+          <text font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(142 118)"><tspan x="0" y="0">В</tspan></text>
+          <text fill="#2b79c2" font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(54 162)"><tspan x="0" y="0">О</tspan></text>
+          <text font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(98 162)"><tspan x="0" y="0">Р</tspan></text>
+          <text fill="#2b79c2" font-family="Ebrima-Bold, Ebrima" font-weight="700" font-size="38.82px" transform="translate(142 162)"><tspan x="0" y="0">Д</tspan></text>
+        </g>
+      </g>
+      <circle fill="none" stroke="#2b79c2" stroke-width="2px" stroke-miterlimit="10" cx="111.04" cy="111.04" r="110.04"/>
+    </g>
+  </g>
+</svg>

@@ -5,6 +5,7 @@ import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
+import 'package:module_squareword_ui/module_squareword_ui.dart';
 
 import '../l10n/app_localizations.dart';
 
@@ -29,6 +30,9 @@ class HomeScreen extends ConsumerWidget {
     final labyrinthPuzzlesAsync = ref.watch(labyrinthPuzzlesProvider);
     final labyrinthSaveDataAsync = ref.watch(labyrinthSaveDataProvider);
 
+    final squarewordPuzzlesAsync = ref.watch(squarewordPuzzlesProvider);
+    final squarewordSaveDataAsync = ref.watch(squarewordSaveDataProvider);
+
     final total = puzzlesAsync.value?.where((p) => !p.tutorial).length ?? 15;
     final solved = _countSolved(saveDataAsync.value);
     final digitTotal = digitPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
@@ -37,6 +41,8 @@ class HomeScreen extends ConsumerWidget {
     final dominoSolved = _countSolved(dominoSaveDataAsync.value);
     final labyrinthTotal = labyrinthPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 18;
     final labyrinthSolved = _countSolved(labyrinthSaveDataAsync.value);
+    final squarewordTotal = squarewordPuzzlesAsync.value?.where((p) => !p.tutorial).length ?? 17;
+    final squarewordSolved = _countSolved(squarewordSaveDataAsync.value);
 
     return Scaffold(
       appBar: AppBar(
@@ -102,6 +108,18 @@ class HomeScreen extends ConsumerWidget {
             onTap: () async {
               await Navigator.of(context).pushNamed('/module/labyrinth');
               ref.invalidate(labyrinthSaveDataProvider);
+            },
+          ),
+          const SizedBox(height: 12),
+          _ModuleCard(
+            title: l10n.moduleSquarewordTitle,
+            description: l10n.moduleSquarewordDescription,
+            progressLabel: l10n.homeModuleProgress(squarewordSolved, squarewordTotal),
+            iconAsset: 'assets/icons/icon_05.svg',
+            iconAssetLight: 'assets/icons/icon_05_light.svg',
+            onTap: () async {
+              await Navigator.of(context).pushNamed('/module/squareword');
+              ref.invalidate(squarewordSaveDataProvider);
             },
           ),
         ],

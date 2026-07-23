@@ -410,7 +410,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get labyrinthTutorialStep3 =>
-      'Ein langer Druck streicht ein Feld durch: dieser Buchstabe kommt nicht auf den Weg — etwa eines der beiden Y. Ein Rechtsklick (oder Doppeltippen) setzt eine blaue Markierung: dieser Buchstabe muss auf dem Weg liegen — wie U, das im Labyrinth nur einmal vorkommt. Sobald einer von mehreren gleichen Buchstaben auf dem Weg liegt, werden die übrigen automatisch durchgestrichen.';
+      'Tippe auf ein Feld, das nicht neben dem Weg liegt, um eine blaue Markierung zu setzen: dieser Buchstabe muss auf dem Weg liegen — wie U, das im Labyrinth nur einmal vorkommt. Ein langer Druck (oder Rechtsklick am Computer) streicht ein Feld durch: dieser Buchstabe kommt nicht auf den Weg — etwa eines der beiden Y. Sobald einer von mehreren gleichen Buchstaben auf dem Weg liegt, werden die übrigen automatisch durchgestrichen.';
 
   @override
   String get labyrinthTutorialStep4 =>
@@ -447,6 +447,47 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get labyrinthTutorialStep12 =>
       'Das X am linken Rand ist eine Sackgasse, also muss das andere X auf dem Weg liegen. Es bleiben M, X und Z — der Weg ist geschlossen.';
+
+  @override
+  String get moduleSquarewordTitle => 'Quadratwörter';
+
+  @override
+  String get moduleSquarewordDescription =>
+      'Fülle das Raster so, dass jeder Buchstabe des Schlüsselworts in jeder Zeile, jeder Spalte und auf beiden Diagonalen genau einmal vorkommt.';
+
+  @override
+  String get squarewordListTitle => 'Quadratwörter';
+
+  @override
+  String squarewordPuzzleN(int n) {
+    return 'Quadratwort $n';
+  }
+
+  @override
+  String get squarewordResetConfirmTitle => 'Raster zurücksetzen?';
+
+  @override
+  String get squarewordResetConfirmBody =>
+      'Alle eingegebenen Buchstaben werden gelöscht.';
+
+  @override
+  String get squarewordWinTitle => 'Raster vollständig!';
+
+  @override
+  String get squarewordWinBody =>
+      'Du hast das Raster ohne Wiederholungen in Zeile, Spalte oder Diagonale gefüllt.';
+
+  @override
+  String squarewordFilledCounter(int filled, int total) {
+    return 'Ausgefüllt: $filled von $total';
+  }
+
+  @override
+  String get squarewordViolationWarning =>
+      'Ein Buchstabe wiederholt sich in einer Zeile, Spalte oder Diagonale — er ist rot markiert.';
+
+  @override
+  String get squarewordCellSemantics => 'Quadratwort-Feld';
 
   @override
   String get settingsSyncSection => 'Fortschritt übertragen';

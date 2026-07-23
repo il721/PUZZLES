@@ -27,6 +27,10 @@ dependencies:
     path: ../packages/module_labyrinth
   module_labyrinth_ui:
     path: ../packages/module_labyrinth_ui
+  module_squareword:
+    path: ../packages/module_squareword
+  module_squareword_ui:
+    path: ../packages/module_squareword_ui
   path_provider: ^2.1.6
   puzzle_core:
     path: ../packages/core

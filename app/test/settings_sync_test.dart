@@ -308,4 +308,14 @@ void main() {
 
     expect(namespaces, contains('module_labyrinth'));
   });
+
+  test('the synced namespace list derived from a real ModuleRegistry includes module_squareword', () {
+    // Calls the app's own registry builder, so forgetting a register(...)
+    // line in main.dart's buildModuleRegistry() fails this test.
+    final moduleRegistry = buildModuleRegistry();
+
+    final namespaces = moduleRegistry.modules.map((m) => m.saveNamespace).toList();
+
+    expect(namespaces, contains('module_squareword'));
+  });
 }

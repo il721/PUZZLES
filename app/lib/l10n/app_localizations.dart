@@ -763,7 +763,7 @@ abstract class AppLocalizations {
   /// Module 04 tutorial step 3 of 12.
   ///
   /// In ru, this message translates to:
-  /// **'Долгое нажатие зачёркивает клетку: эта буква в путь не войдёт — например, одна из двух Ю. Правой кнопкой (или двойным касанием) ставится синяя метка: буква обязательно на пути — как У, которая встречается в лабиринте один раз. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.'**
+  /// **'Нажмите на клетку не рядом с путём, чтобы поставить синюю метку: эта буква обязательно на пути — как У, которая встречается в лабиринте один раз. Долгое нажатие (на компьютере — правая кнопка мыши) зачёркивает клетку крестом: эта буква в путь не войдёт — например, одна из двух Ю. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.'**
   String get labyrinthTutorialStep3;
 
   /// Module 04 tutorial step 4 of 12.
@@ -819,6 +819,72 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Х у левого края оказывается в тупике, значит проводима другая Х. Остаются М, Х и Я — путь замкнулся.'**
   String get labyrinthTutorialStep12;
+
+  /// Title of Module 05.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сквэрворды'**
+  String get moduleSquarewordTitle;
+
+  /// Short description of Module 05, shown on its home-screen card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заполните сетку так, чтобы каждая буква ключевого слова встречалась ровно один раз в каждой строке, столбце и на обеих диагоналях.'**
+  String get moduleSquarewordDescription;
+
+  /// Title of Module 05's puzzle list screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сквэрворды'**
+  String get squarewordListTitle;
+
+  /// Title for squareword puzzle number n.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сквэрворд {n}'**
+  String squarewordPuzzleN(int n);
+
+  /// Title of Module 05's reset confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить сетку?'**
+  String get squarewordResetConfirmTitle;
+
+  /// Body of Module 05's reset confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все введённые буквы будут стёрты.'**
+  String get squarewordResetConfirmBody;
+
+  /// Title of Module 05's win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сетка заполнена!'**
+  String get squarewordWinTitle;
+
+  /// Body of Module 05's win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы заполнили сетку без повторов в строках, столбцах и по диагоналям.'**
+  String get squarewordWinBody;
+
+  /// Progress counter on the squareword play screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заполнено: {filled} из {total}'**
+  String squarewordFilledCounter(int filled, int total);
+
+  /// Warning shown when a letter repeats in a row, column, or diagonal of the squareword grid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Буква повторяется в строке, столбце или по диагонали — она выделена красным.'**
+  String get squarewordViolationWarning;
+
+  /// Accessibility label for a squareword grid cell.
+  ///
+  /// In ru, this message translates to:
+  /// **'клетка сквэрворда'**
+  String get squarewordCellSemantics;
 
   /// Header of the settings section for exporting/importing progress between devices.
   ///

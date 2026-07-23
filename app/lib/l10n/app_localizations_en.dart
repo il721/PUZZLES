@@ -407,7 +407,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labyrinthTutorialStep3 =>
-      'A long press crosses a cell out: that letter will not join the path — one of the two Y\'s, for instance. A right-click (or double tap) adds a blue mark: that letter must be on the path — like U, which occurs only once in the labyrinth. As soon as one of several identical letters joins the path, the rest are crossed out automatically.';
+      'Tap a cell that isn\'t next to the path to add a blue mark: that letter must be on the path — like U, which occurs only once in the labyrinth. A long press (or right-click on desktop) crosses a cell out: that letter will not join the path — one of the two Y\'s, for instance. As soon as one of several identical letters joins the path, the rest are crossed out automatically.';
 
   @override
   String get labyrinthTutorialStep4 =>
@@ -443,6 +443,47 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get labyrinthTutorialStep12 =>
       'The X near the left edge is a dead end, so the other X must be on the path. M, X and Z remain — the path is closed.';
+
+  @override
+  String get moduleSquarewordTitle => 'Squarewords';
+
+  @override
+  String get moduleSquarewordDescription =>
+      'Fill the grid so each keyword letter appears exactly once in every row, column, and both diagonals.';
+
+  @override
+  String get squarewordListTitle => 'Squarewords';
+
+  @override
+  String squarewordPuzzleN(int n) {
+    return 'Squareword $n';
+  }
+
+  @override
+  String get squarewordResetConfirmTitle => 'Reset the grid?';
+
+  @override
+  String get squarewordResetConfirmBody =>
+      'All entered letters will be cleared.';
+
+  @override
+  String get squarewordWinTitle => 'Grid complete!';
+
+  @override
+  String get squarewordWinBody =>
+      'You filled the grid with no repeats in any row, column, or diagonal.';
+
+  @override
+  String squarewordFilledCounter(int filled, int total) {
+    return 'Filled: $filled of $total';
+  }
+
+  @override
+  String get squarewordViolationWarning =>
+      'A letter repeats in a row, column, or diagonal — it is shown in red.';
+
+  @override
+  String get squarewordCellSemantics => 'squareword cell';
 
   @override
   String get settingsSyncSection => 'Transfer progress';

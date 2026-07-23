@@ -5,6 +5,7 @@ import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
+import 'package:module_squareword_ui/module_squareword_ui.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
 import 'digit_rebus_l10n_adapter.dart';
@@ -16,6 +17,7 @@ import 'rebus_l10n_adapter.dart';
 import 'screens/help_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/settings_screen.dart';
+import 'squareword_l10n_adapter.dart';
 
 /// Material 3 seed color shared by the light and dark themes, per
 /// DESIGN.md's "Modern Dark" palette — the primary accent blue.
@@ -117,6 +119,8 @@ class PuzzleBookApp extends ConsumerWidget {
             dominoAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
             labyrinthL10nProvider.overrideWithValue(AppLabyrinthL10n(AppLocalizations.of(context))),
             labyrinthAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
+            squarewordL10nProvider.overrideWithValue(AppSquarewordL10n(AppLocalizations.of(context))),
+            squarewordAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
           ],
           child: child!,
         );
@@ -129,6 +133,7 @@ class PuzzleBookApp extends ConsumerWidget {
         '/module/digit_rebus': (context) => const DigitRebusPuzzleListScreen(),
         '/module/domino': (context) => const DominoPuzzleListScreen(),
         '/module/labyrinth': (context) => const LabyrinthPuzzleListScreen(),
+        '/module/squareword': (context) => const SquarewordPuzzleListScreen(),
       },
     );
   }
