@@ -46,6 +46,22 @@ class _FakeSquarewordL10n implements SquarewordL10n {
   String get violationWarning => 'Duplicates!';
   @override
   String get cellSemantics => 'squareword cell';
+  @override
+  String get tutorialTitle => 'How to solve';
+  @override
+  String get tutorialNext => 'Next';
+  @override
+  String get tutorialBack => 'Back';
+  @override
+  String get tutorialSkip => 'Skip';
+  @override
+  String get tutorialDone => 'Done';
+  @override
+  String tutorialStepCounter(int current, int total) => 'Step $current of $total';
+  @override
+  String tutorialStepText(int index) => 'step $index';
+  @override
+  String get cyrillicNote => '';
 }
 
 List<SquarewordPuzzle> _loadPuzzles() {

@@ -481,6 +481,55 @@ class AppLocalizationsRu extends AppLocalizations {
   String get squarewordCellSemantics => 'клетка сквэрворда';
 
   @override
+  String get squarewordTutorialStep1 =>
+      'Верхняя строка — слово-ключ: С Л Е З А. В центре сетки уже вписано слово ЛЕС. Правило то же: в каждой строке, каждом столбце и на обеих главных диагоналях все пять букв встречаются ровно по одному разу.';
+
+  @override
+  String get squarewordTutorialStep2 =>
+      'Дальше каждая пустая клетка вычисляется однозначно — методом исключения, без угадывания.';
+
+  @override
+  String get squarewordTutorialStep3 =>
+      'Буква Л уже есть в столбцах b и c — значит её не может быть в b1 и c1. Клетка c3 стоит сразу на двух диагоналях (центр квадрата 5×5), и там уже стоит Л — поэтому Л нет ни в a1, ни в e1. Для неё остаётся только d1.';
+
+  @override
+  String get squarewordTutorialStep4 =>
+      'В столбце d уже есть З и Л. Клетка d4 лежит на побочной диагонали, где А уже занята (в e5) — значит в d2 может быть только А, а в d4 остаётся единственная буква С.';
+
+  @override
+  String get squarewordTutorialStep5 =>
+      'В столбце b букве С нет места ни на главной диагонали (С уже в a5), ни на побочной (С уже в d4), ни в третьей строке (С уже в e3). Остаётся только b1.';
+
+  @override
+  String get squarewordTutorialStep6 => 'Пятая, последняя С встаёт в c2.';
+
+  @override
+  String get squarewordTutorialStep7 =>
+      'В нижней строке для А остаётся только клетка c1.';
+
+  @override
+  String get squarewordTutorialStep8 =>
+      'После этого в столбце c для буквы З остаётся только клетка c4.';
+
+  @override
+  String get squarewordTutorialStep9 => 'Две оставшиеся А занимают a4 и b3.';
+
+  @override
+  String get squarewordTutorialStep10 =>
+      'В третьей строке для З остаётся только a3.';
+
+  @override
+  String get squarewordTutorialStep11 =>
+      'Всё остальное теперь однозначно: Е — в b4, Л — в e4, З — в e1, Е — в a1, Е — в e2, Л — в a2, З — в b2.';
+
+  @override
+  String get squarewordTutorialStep12 =>
+      'Сетка заполнена полностью, нарушений нет — головоломка решена. В каждой головоломке действуйте так же: ищите клетки, где буква вынуждена, и двигайтесь дальше по цепочке исключений.';
+
+  @override
+  String get squarewordCyrillicNote => '';
+
+  @override
   String get settingsSyncSection => 'Перенос прогресса';
 
   @override

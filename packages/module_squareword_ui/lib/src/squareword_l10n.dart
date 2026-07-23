@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Localized strings needed by the squareword module's play/list widgets.
+/// Localized strings needed by the squareword module's play/list/tutorial
+/// widgets.
 ///
 /// Unlike `module_labyrinth`'s `LabyrinthL10n`, there is no `glyphFor()`:
 /// every squareword puzzle's letters are its own Cyrillic keyword, and (per
 /// the module's locked M-c scope) that keyword is shown as-is in every
 /// locale — no EN/DE glyph substitution table exists for this module.
-/// Tutorial-specific strings are added in a later milestone.
 abstract class SquarewordL10n {
   /// Title for the puzzle list screen.
   String get puzzleListTitle;
@@ -62,6 +62,33 @@ abstract class SquarewordL10n {
 
   /// Accessibility (screen reader) label for a grid cell.
   String get cellSemantics;
+
+  /// Title of the guided tutorial screen.
+  String get tutorialTitle;
+
+  /// Label for the tutorial's Next action.
+  String get tutorialNext;
+
+  /// Label for the tutorial's Back action.
+  String get tutorialBack;
+
+  /// Label for the tutorial's Skip action.
+  String get tutorialSkip;
+
+  /// Label for the tutorial's final Done action.
+  String get tutorialDone;
+
+  /// Step counter shown on the tutorial screen, e.g. "Step 3 of 12".
+  String tutorialStepCounter(int current, int total);
+
+  /// Instructional text for tutorial step [index] (1..12).
+  String tutorialStepText(int index);
+
+  /// Short note explaining that puzzle letters stay Cyrillic in every
+  /// locale (no EN/DE substitution alphabet exists for this module). Empty
+  /// in the RU adapter (nothing to explain to a Russian reader); shown as a
+  /// small caption on the puzzle list screen only when non-empty.
+  String get cyrillicNote;
 }
 
 /// Supplies the [SquarewordL10n] implementation for the current app locale.

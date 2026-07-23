@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'squareword_l10n.dart';
 import 'squareword_providers.dart';
 import 'squareword_puzzle_screen.dart';
+import 'squareword_tutorial_screen.dart';
 
 enum _PuzzleStatus { untouched, inProgress, solved }
 
@@ -16,8 +17,7 @@ _PuzzleStatus _statusFor(String id, Map<String, dynamic> saveData) {
 }
 
 /// Lists the 17 playable puzzles (`p01`..`p17`; the `tutorial` puzzle is
-/// excluded), each tile showing its number and status. The tutorial screen
-/// lands in a later milestone, so there is no AppBar action for it here.
+/// excluded), each tile showing its number and status.
 class SquarewordPuzzleListScreen extends ConsumerWidget {
   /// Creates the puzzle list screen.
   const SquarewordPuzzleListScreen({super.key});
@@ -29,43 +29,74 @@ class SquarewordPuzzleListScreen extends ConsumerWidget {
     final saveDataAsync = ref.watch(squarewordSaveDataProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.puzzleListTitle)),
-      body: puzzlesAsync.when(
-        data: (puzzles) {
-          final list = puzzles.where((p) => !p.tutorial).toList()
-            ..sort((a, b) => a.id.compareTo(b.id));
-          final saveData = saveDataAsync.value ?? const <String, dynamic>{};
-
-          return GridView.builder(
-            padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 140,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 1,
-            ),
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              final puzzle = list[index];
-              final number = int.parse(puzzle.id.substring(1));
-              final status = _statusFor(puzzle.id, saveData);
-              return _PuzzleTile(
-                number: number,
-                status: status,
-                l10n: l10n,
-                onTap: () async {
-                  await Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                        builder: (_) => SquarewordPuzzleScreen(puzzleId: puzzle.id)),
-                  );
-                  ref.invalidate(squarewordSaveDataProvider);
-                },
+      appBar: AppBar(
+        title: Text(l10n.puzzleListTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: l10n.tutorialTitle,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const SquarewordTutorialScreen()),
               );
             },
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text('$error')),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          if (l10n.cyrillicNote.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                l10n.cyrillicNote,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+              ),
+            ),
+          Expanded(
+            child: puzzlesAsync.when(
+              data: (puzzles) {
+                final list = puzzles.where((p) => !p.tutorial).toList()
+                  ..sort((a, b) => a.id.compareTo(b.id));
+                final saveData = saveDataAsync.value ?? const <String, dynamic>{};
+
+                return GridView.builder(
+                  padding: const EdgeInsets.all(16),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 140,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    final puzzle = list[index];
+                    final number = int.parse(puzzle.id.substring(1));
+                    final status = _statusFor(puzzle.id, saveData);
+                    return _PuzzleTile(
+                      number: number,
+                      status: status,
+                      l10n: l10n,
+                      onTap: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                              builder: (_) => SquarewordPuzzleScreen(puzzleId: puzzle.id)),
+                        );
+                        ref.invalidate(squarewordSaveDataProvider);
+                      },
+                    );
+                  },
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stackTrace) => Center(child: Text('$error')),
+            ),
+          ),
+        ],
       ),
     );
   }

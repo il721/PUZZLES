@@ -10,9 +10,6 @@
 /// [squarewordL10nProvider] (and optionally [squarewordPuzzlesProvider] and
 /// [squarewordAudioServiceProvider]) before building any widget from this
 /// library.
-///
-/// This phase (M-c) does not include the guided tutorial screen — that
-/// lands in a later milestone alongside its l10n strings.
 library module_squareword_ui;
 
 export 'src/squareword_grid_widget.dart';
@@ -22,3 +19,4 @@ export 'src/squareword_providers.dart';
 export 'src/squareword_puzzle_list_screen.dart';
 export 'src/squareword_puzzle_screen.dart';
 export 'src/squareword_session_controller.dart';
+export 'src/squareword_tutorial_screen.dart';

@@ -65,4 +65,57 @@ class AppSquarewordL10n implements SquarewordL10n {
 
   @override
   String get cellSemantics => _l10n.squarewordCellSemantics;
+
+  @override
+  String get tutorialTitle => _l10n.tutorialTitle;
+
+  @override
+  String get tutorialNext => _l10n.tutorialNext;
+
+  @override
+  String get tutorialBack => _l10n.tutorialBack;
+
+  @override
+  String get tutorialSkip => _l10n.tutorialSkip;
+
+  @override
+  String get tutorialDone => _l10n.tutorialDone;
+
+  @override
+  String tutorialStepCounter(int current, int total) => _l10n.tutorialStepCounter(current, total);
+
+  @override
+  String tutorialStepText(int index) {
+    switch (index) {
+      case 1:
+        return _l10n.squarewordTutorialStep1;
+      case 2:
+        return _l10n.squarewordTutorialStep2;
+      case 3:
+        return _l10n.squarewordTutorialStep3;
+      case 4:
+        return _l10n.squarewordTutorialStep4;
+      case 5:
+        return _l10n.squarewordTutorialStep5;
+      case 6:
+        return _l10n.squarewordTutorialStep6;
+      case 7:
+        return _l10n.squarewordTutorialStep7;
+      case 8:
+        return _l10n.squarewordTutorialStep8;
+      case 9:
+        return _l10n.squarewordTutorialStep9;
+      case 10:
+        return _l10n.squarewordTutorialStep10;
+      case 11:
+        return _l10n.squarewordTutorialStep11;
+      case 12:
+        return _l10n.squarewordTutorialStep12;
+      default:
+        throw ArgumentError.value(index, 'index', 'Must be 1..12');
+    }
+  }
+
+  @override
+  String get cyrillicNote => _l10n.squarewordCyrillicNote;
 }

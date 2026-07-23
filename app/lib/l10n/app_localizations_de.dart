@@ -490,6 +490,57 @@ class AppLocalizationsDe extends AppLocalizations {
   String get squarewordCellSemantics => 'Quadratwort-Feld';
 
   @override
+  String get squarewordTutorialStep1 =>
+      'Die oberste Zeile ist das Schlüsselwort: С Л Е З А. In der Mitte steht bereits das Wort ЛЕС. Es gilt dieselbe Regel: In jeder Zeile, jeder Spalte und auf beiden Hauptdiagonalen kommt jeder der fünf Buchstaben genau einmal vor.';
+
+  @override
+  String get squarewordTutorialStep2 =>
+      'Ab jetzt ergibt sich jede leere Zelle zwingend durch Ausschluss — Raten ist nicht nötig.';
+
+  @override
+  String get squarewordTutorialStep3 =>
+      'Л steht bereits in den Spalten b und c, also kann es nicht in b1 oder c1 stehen. Zelle c3 liegt auf beiden Diagonalen zugleich (Mittelpunkt des 5×5-Feldes) und enthält bereits Л — also auch nicht in a1 oder e1. Es bleibt nur d1.';
+
+  @override
+  String get squarewordTutorialStep4 =>
+      'Spalte d hat bereits З und Л. Zelle d4 liegt auf der Nebendiagonale, auf der schon ein А steht (bei e5) — also muss d2 ein А sein, und für d4 bleibt nur noch С übrig.';
+
+  @override
+  String get squarewordTutorialStep5 =>
+      'In Spalte b hat С keinen Platz auf der Hauptdiagonale (С steht schon bei a5), der Nebendiagonale (С steht schon bei d4) oder in Zeile 3 (С steht schon bei e3). Es bleibt nur b1.';
+
+  @override
+  String get squarewordTutorialStep6 =>
+      'Das fünfte und letzte С kommt nach c2.';
+
+  @override
+  String get squarewordTutorialStep7 =>
+      'In der untersten Zeile bleibt nur c1 für А übrig.';
+
+  @override
+  String get squarewordTutorialStep8 =>
+      'Damit bleibt in Spalte c nur noch c4 für З.';
+
+  @override
+  String get squarewordTutorialStep9 =>
+      'Die zwei verbleibenden А landen auf a4 und b3.';
+
+  @override
+  String get squarewordTutorialStep10 => 'In Zeile 3 bleibt nur a3 für З.';
+
+  @override
+  String get squarewordTutorialStep11 =>
+      'Der Rest ergibt sich jetzt von selbst: Е bei b4, Л bei e4, З bei e1, Е bei a1, Е bei e2, Л bei a2, З bei b2.';
+
+  @override
+  String get squarewordTutorialStep12 =>
+      'Das Gitter ist vollständig und ohne Verstöße ausgefüllt — gelöst. Geh in jedem Rätsel genauso vor: Suche Zellen, in denen ein Buchstabe erzwungen ist, und folge der Kette der Ausschlüsse.';
+
+  @override
+  String get squarewordCyrillicNote =>
+      'Die Buchstaben werden immer kyrillisch angezeigt — jedes Schlüsselwort ist ein russisches Wort, es gibt keine deutsche Entsprechung zum Einsetzen.';
+
+  @override
   String get settingsSyncSection => 'Fortschritt übertragen';
 
   @override

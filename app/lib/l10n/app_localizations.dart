@@ -886,6 +886,84 @@ abstract class AppLocalizations {
   /// **'клетка сквэрворда'**
   String get squarewordCellSemantics;
 
+  /// Module 05 tutorial step 1 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Верхняя строка — слово-ключ: С Л Е З А. В центре сетки уже вписано слово ЛЕС. Правило то же: в каждой строке, каждом столбце и на обеих главных диагоналях все пять букв встречаются ровно по одному разу.'**
+  String get squarewordTutorialStep1;
+
+  /// Module 05 tutorial step 2 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дальше каждая пустая клетка вычисляется однозначно — методом исключения, без угадывания.'**
+  String get squarewordTutorialStep2;
+
+  /// Module 05 tutorial step 3 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Буква Л уже есть в столбцах b и c — значит её не может быть в b1 и c1. Клетка c3 стоит сразу на двух диагоналях (центр квадрата 5×5), и там уже стоит Л — поэтому Л нет ни в a1, ни в e1. Для неё остаётся только d1.'**
+  String get squarewordTutorialStep3;
+
+  /// Module 05 tutorial step 4 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'В столбце d уже есть З и Л. Клетка d4 лежит на побочной диагонали, где А уже занята (в e5) — значит в d2 может быть только А, а в d4 остаётся единственная буква С.'**
+  String get squarewordTutorialStep4;
+
+  /// Module 05 tutorial step 5 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'В столбце b букве С нет места ни на главной диагонали (С уже в a5), ни на побочной (С уже в d4), ни в третьей строке (С уже в e3). Остаётся только b1.'**
+  String get squarewordTutorialStep5;
+
+  /// Module 05 tutorial step 6 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пятая, последняя С встаёт в c2.'**
+  String get squarewordTutorialStep6;
+
+  /// Module 05 tutorial step 7 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'В нижней строке для А остаётся только клетка c1.'**
+  String get squarewordTutorialStep7;
+
+  /// Module 05 tutorial step 8 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'После этого в столбце c для буквы З остаётся только клетка c4.'**
+  String get squarewordTutorialStep8;
+
+  /// Module 05 tutorial step 9 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Две оставшиеся А занимают a4 и b3.'**
+  String get squarewordTutorialStep9;
+
+  /// Module 05 tutorial step 10 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'В третьей строке для З остаётся только a3.'**
+  String get squarewordTutorialStep10;
+
+  /// Module 05 tutorial step 11 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Всё остальное теперь однозначно: Е — в b4, Л — в e4, З — в e1, Е — в a1, Е — в e2, Л — в a2, З — в b2.'**
+  String get squarewordTutorialStep11;
+
+  /// Module 05 tutorial step 12 of 12.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сетка заполнена полностью, нарушений нет — головоломка решена. В каждой головоломке действуйте так же: ищите клетки, где буква вынуждена, и двигайтесь дальше по цепочке исключений.'**
+  String get squarewordTutorialStep12;
+
+  /// Note explaining that squareword letters stay Cyrillic in every locale. Empty for RU.
+  ///
+  /// In ru, this message translates to:
+  /// **''**
+  String get squarewordCyrillicNote;
+
   /// Header of the settings section for exporting/importing progress between devices.
   ///
   /// In ru, this message translates to:

@@ -486,6 +486,56 @@ class AppLocalizationsEn extends AppLocalizations {
   String get squarewordCellSemantics => 'squareword cell';
 
   @override
+  String get squarewordTutorialStep1 =>
+      'The top row is the keyword: С Л Е З А. The word ЛЕС is already filled in at the center. Same rule as always: every row, every column, and both main diagonals hold each of the five letters exactly once.';
+
+  @override
+  String get squarewordTutorialStep2 =>
+      'From here on, every empty cell is forced by elimination — no guessing needed.';
+
+  @override
+  String get squarewordTutorialStep3 =>
+      'Л already appears in columns b and c, so it can\'t go in b1 or c1. Cell c3 sits on both diagonals at once (the center of a 5x5 grid) and already holds Л, so Л can\'t go in a1 or e1 either. That leaves only d1.';
+
+  @override
+  String get squarewordTutorialStep4 =>
+      'Column d already has З and Л. Cell d4 sits on the anti-diagonal, which already has А (at e5) — so d2 must be А, leaving С as the only letter left for d4.';
+
+  @override
+  String get squarewordTutorialStep5 =>
+      'In column b, С has nowhere to go on the main diagonal (С is already at a5), the anti-diagonal (С is already at d4), or row 3 (С is already at e3). Only b1 is left.';
+
+  @override
+  String get squarewordTutorialStep6 => 'The fifth and last С goes in c2.';
+
+  @override
+  String get squarewordTutorialStep7 =>
+      'In the bottom row, only c1 is left for А.';
+
+  @override
+  String get squarewordTutorialStep8 =>
+      'That leaves only c4 in column c for З.';
+
+  @override
+  String get squarewordTutorialStep9 =>
+      'The two remaining А\'s land in a4 and b3.';
+
+  @override
+  String get squarewordTutorialStep10 => 'In row 3, only a3 is left for З.';
+
+  @override
+  String get squarewordTutorialStep11 =>
+      'Everything else is now forced: Е at b4, Л at e4, З at e1, Е at a1, Е at e2, Л at a2, З at b2.';
+
+  @override
+  String get squarewordTutorialStep12 =>
+      'The grid is complete with zero violations — solved. Do the same in every puzzle: find the cells a letter is forced into, and follow the chain of eliminations.';
+
+  @override
+  String get squarewordCyrillicNote =>
+      'Puzzle letters are always shown in Cyrillic — each keyword is its own Russian word, so there\'s no English alphabet to substitute.';
+
+  @override
   String get settingsSyncSection => 'Transfer progress';
 
   @override

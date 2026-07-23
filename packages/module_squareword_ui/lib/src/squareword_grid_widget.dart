@@ -31,6 +31,13 @@ class SquarewordGridWidget extends StatelessWidget {
   /// Accessibility (screen reader) label for a grid cell.
   final String cellSemanticsLabel;
 
+  /// Cells to visually emphasize (e.g. for the guided tutorial, to call out
+  /// the cells a step is teaching). Empty by default, which leaves the play
+  /// screen's rendering unchanged. Distinct from the violation-red look;
+  /// takes priority over the given-cell background but not over a
+  /// violation.
+  final Set<Cell> highlightedCells;
+
   /// Optional override for the maximum cell size (defaults to [_maxCell]).
   final double? maxCell;
 
@@ -47,6 +54,7 @@ class SquarewordGridWidget extends StatelessWidget {
     required this.onCellTap,
     required this.onCellLongPress,
     required this.cellSemanticsLabel,
+    this.highlightedCells = const {},
     this.maxCell,
   });
 
@@ -91,11 +99,18 @@ class SquarewordGridWidget extends StatelessWidget {
     final given = board.isGiven(cell);
     final letter = board.letterAt(cell);
     final violating = status.violatingCells.contains(cell);
+    final highlighted = highlightedCells.contains(cell);
 
     Color background = given ? scheme.surfaceContainerHighest : scheme.surface;
     Color textColor = given ? (isDark ? Colors.white : Colors.black) : scheme.primary;
     Color borderColor = scheme.outlineVariant;
     var borderWidth = _borderWidth;
+
+    if (highlighted) {
+      background = scheme.tertiaryContainer;
+      borderColor = scheme.tertiary;
+      borderWidth = 2;
+    }
 
     if (violating) {
       background = scheme.errorContainer;
