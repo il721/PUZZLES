@@ -8,9 +8,9 @@ import 'package:module_labyrinth/module_labyrinth.dart';
 /// grid); the two growing chains are drawn as polylines through cell
 /// centres, with a ring around each chain's head; auto-crosses (letters
 /// that became non-conducting because their twin is already on a chain)
-/// are drawn as a thin light grey X, and manual crosses (the player's own
-/// long-press/right-click marks) as a thicker, 75%-opacity dark X in the
-/// same slot, painted on top.
+/// are drawn as a faint translucent red cell fill, and manual crosses (the
+/// player's own long-press/right-click marks) as a stronger translucent red
+/// fill in the same slot, painted on top.
 /// Cells the player has [LabyrinthBoard.marks]-ed as "must be on the path"
 /// get a solid blue-tinted background (see [_buildCellBackground]).
 ///
@@ -116,8 +116,8 @@ class LabyrinthGridWidget extends StatelessWidget {
                           board: board,
                           cellSize: cell,
                           pathColor: scheme.primary,
-                          autoCrossColor: scheme.outlineVariant,
-                          manualCrossColor: scheme.onSurface.withValues(alpha: 0.75),
+                          autoCrossColor: scheme.error.withValues(alpha: 0.14),
+                          manualCrossColor: scheme.error.withValues(alpha: 0.34),
                         ),
                       ),
                     ),
@@ -278,8 +278,9 @@ class _LabyrinthCell extends StatelessWidget {
 }
 
 /// Paints the two chains as polylines through cell centres, rings each
-/// chain's head, and paints auto-crosses (thin, light grey) then manual
-/// crosses (thicker, dark) on top in the same cell slot.
+/// chain's head, and paints auto-crosses (faint translucent red fill) then
+/// manual crosses (stronger translucent red fill) on top in the same cell
+/// slot.
 class _LabyrinthPathPainter extends CustomPainter {
   final LabyrinthBoard board;
   final double cellSize;
@@ -336,23 +337,26 @@ class _LabyrinthPathPainter extends CustomPainter {
     ringHead(board.headA);
     ringHead(board.headZ);
 
-    void drawX(Cell cell, Color color, double thickness) {
-      final o = _center(cell);
-      final half = cellSize * 0.22;
-      final paint = Paint()
-        ..color = color
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = thickness
-        ..strokeCap = StrokeCap.round;
-      canvas.drawLine(o.translate(-half, -half), o.translate(half, half), paint);
-      canvas.drawLine(o.translate(-half, half), o.translate(half, -half), paint);
+    void fillCell(Cell cell, Color color) {
+      final rect = Rect.fromLTWH(
+        cell.col * cellSize,
+        cell.row * cellSize,
+        cellSize,
+        cellSize,
+      );
+      canvas.drawRect(
+        rect,
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill,
+      );
     }
 
     for (final cell in board.autoCrosses) {
-      drawX(cell, autoCrossColor, cellSize * 0.05);
+      fillCell(cell, autoCrossColor);
     }
     for (final cell in board.manualCrosses) {
-      drawX(cell, manualCrossColor, cellSize * 0.09);
+      fillCell(cell, manualCrossColor);
     }
   }
 
