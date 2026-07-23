@@ -201,7 +201,10 @@ class LabyrinthBoard {
   ///     afterwards does not restore it). Neither chain may exceed
   ///     [LabyrinthPuzzle.pathLength] cells, and the two together may
   ///     never exceed it either.
-  ///  4. Otherwise: no-op.
+  ///  4. Otherwise: toggles [c] in [marks], same as [toggleMark] (this
+  ///     covers a cell that is in bounds, off both chains, but not
+  ///     adjacent to either head - or the chains are already at
+  ///     [LabyrinthPuzzle.pathLength]).
   void tap(Cell c) {
     if (c == headA) {
       if (_chainA.length > 1) {
@@ -222,18 +225,21 @@ class LabyrinthBoard {
     if (!_inBounds(c) || isOnPath(c)) {
       return;
     }
-    if (_chainA.length + _chainZ.length >= LabyrinthPuzzle.pathLength) {
-      return;
-    }
+    final canExtend = _chainA.length + _chainZ.length < LabyrinthPuzzle.pathLength;
 
-    if (_manhattan(c, headA) == 1) {
+    if (canExtend && _manhattan(c, headA) == 1) {
       _chainA.add(c);
       _manualCrosses.remove(c);
       _marks.remove(c);
-    } else if (_manhattan(c, headZ) == 1) {
+    } else if (canExtend && _manhattan(c, headZ) == 1) {
       _chainZ.add(c);
       _manualCrosses.remove(c);
       _marks.remove(c);
+    } else {
+      if (!_marks.remove(c)) {
+        _marks.add(c);
+        _manualCrosses.remove(c);
+      }
     }
   }
 

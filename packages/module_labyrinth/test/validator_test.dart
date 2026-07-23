@@ -90,6 +90,14 @@ void main() {
     expect(board.chainZ, [const Cell(7, 7)]);
   });
 
+  test('tapping a non-adjacent cell toggles a mark instead of no-op', () {
+    final board = LabyrinthBoard.fromPuzzle(example);
+    board.tap(const Cell(4, 4)); // not adjacent to either head
+    expect(board.marks, {const Cell(4, 4)});
+    board.tap(const Cell(4, 4)); // toggles back off
+    expect(board.marks, isEmpty);
+  });
+
   test('extension rejected onto an out-of-bounds cell', () {
     final board = LabyrinthBoard.fromPuzzle(example);
     board.tap(const Cell(-1, 0));
@@ -151,6 +159,12 @@ void main() {
     board.tap(const Cell(6, 6)); // adjacent to headA, but join is terminal
     expect(board.chainA, hasLength(chainALengthAtJoin));
     expect(board.isJoined, isTrue);
+
+    // A non-adjacent cell also stays a true no-op while joined: the
+    // isJoined early-return fires before the mark-toggle fallback is ever
+    // reached, so it must not toggle a mark either.
+    board.tap(const Cell(0, 7));
+    expect(board.marks, isEmpty);
 
     board.tap(board.headA); // retract; un-joins
     expect(board.isJoined, isFalse);

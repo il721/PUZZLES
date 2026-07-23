@@ -116,10 +116,6 @@ class _LabyrinthPuzzleScreenState extends ConsumerState<LabyrinthPuzzleScreen>
       onCellLongPress: (cell) {
         ref.read(labyrinthSessionProvider(widget.puzzleId).notifier).longPressCell(cell);
       },
-      onCellMark: (cell) {
-        ref.read(labyrinthAudioServiceProvider).play(Sfx.tap);
-        ref.read(labyrinthSessionProvider(widget.puzzleId).notifier).markCell(cell);
-      },
     );
 
     final actions = _buildActions(context, l10n, state, isDesktop);

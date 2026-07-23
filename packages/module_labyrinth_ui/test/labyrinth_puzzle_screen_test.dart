@@ -144,7 +144,7 @@ void main() {
     expect(find.text('Letters: 2 of 33'), findsOneWidget);
   });
 
-  testWidgets('a secondary tap on a cell toggles a mark', (tester) async {
+  testWidgets('a secondary tap on a cell toggles a manual cross', (tester) async {
     await tester.pumpWidget(
       _wrap(
         saveService: saveService,
@@ -155,7 +155,7 @@ void main() {
     await _settle(tester);
 
     // (0,7) is an interior cell untouched by either anchor/chain in the
-    // fresh 'example' session, so a mark there is unambiguous.
+    // fresh 'example' session, so a cross there is unambiguous.
     await tester.tap(_cell(0, 7), buttons: kSecondaryButton);
     await _settle(tester);
 
@@ -163,7 +163,7 @@ void main() {
       tester.element(find.byType(LabyrinthPuzzleScreen)),
     );
     final board = container.read(labyrinthSessionProvider('example')).board;
-    expect(board.marks, contains(const Cell(0, 7)));
+    expect(board.manualCrosses, contains(const Cell(0, 7)));
   });
 
   testWidgets('puzzle list screen renders a tile per playable puzzle, plus a tutorial action', (tester) async {

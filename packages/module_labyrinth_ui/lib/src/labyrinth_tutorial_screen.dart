@@ -132,7 +132,6 @@ class _LabyrinthTutorialScreenState extends ConsumerState<LabyrinthTutorialScree
                 glyphFor: l10n.glyphFor,
                 onCellTap: (_) {},
                 onCellLongPress: (_) {},
-                onCellMark: (_) {},
                 cellSemanticsLabel: l10n.cellSemantics,
                 markedSemanticsLabel: l10n.markedSemantics,
                 highlightedCells: highlighted,

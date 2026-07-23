@@ -113,8 +113,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get helpTitle => 'Hilfe';
 
   @override
-  String get helpBody =>
+  String get helpRulesRebus =>
       'Jedes Rätsel besteht aus vier Zeilen der Form „a op b op c op d = Ergebnis“, die strikt von links nach rechts ausgewertet werden, ohne Punkt-vor-Strich-Regel. Die Summe der Zahlen jeder Spalte ergibt das Ergebnis der zugehörigen Zeile, und die untere Zeile zeigt diese vier Summen sowie deren Gesamtsumme. Einige Ziffern sind bereits vorgegeben und lassen sich nicht ändern. Ein Rätsel gilt als gelöst, sobald alle Felder ausgefüllt sind und keine Regel verletzt wird — auch wenn Ihre Lösung von der des Buches abweicht.';
+
+  @override
+  String get helpRulesDigitRebus =>
+      'Ein 4×4-Quadrat, in dem jede Zeile und jede Spalte eine Rechenaufgabe ist: streng von links nach rechts ausgewertet, ohne Punkt-vor-Strich-Regel, das vierte Feld ist das Ergebnis. Die Ziffern sind hinter Symbolen verborgen, und jedes Symbol lässt nur wenige Ziffern zu — die Legende unter dem Raster zeigt welche. Tippen Sie ein Feld an, bietet das Menü nur die für sein Symbol zulässigen Ziffern an. Das Rätsel ist gelöst, sobald alle acht Gleichungen aufgehen.';
+
+  @override
+  String get helpRulesDomino =>
+      'Das Brett enthält 56 Felder mit den Ziffern 0 bis 6. Teilen Sie sie in 28 Dominosteine, sodass jedes Wertepaar von 0:0 bis 6:6 genau einmal vorkommt — der volle Satz. Zum Setzen tippen Sie zwei benachbarte Felder an, zum Entfernen den fertigen Stein. Unter dem Brett stehen die Liste der noch fehlenden Paare und ein Zähler „N von 28 gesetzt“; kommt ein Paar doppelt vor, färben sich beide Steine rot.';
+
+  @override
+  String get helpRulesLabyrinth =>
+      'Ein 8×8-Raster aus Buchstaben. Ziehen Sie einen einzigen Pfad von der oberen linken zur unteren rechten Ecke, der jeden Buchstaben des Alphabets genau einmal berührt. Tippen Sie ein Feld neben einem Pfadende an, um den Pfad zu verlängern; beide Enden wachsen aufeinander zu, und der Pfad schließt sich, wenn sie sich treffen. Ein Tipp auf ein Feld, das nicht am Pfad liegt, setzt eine blaue Markierung — dieser Buchstabe muss auf dem Pfad liegen; ein langer Druck (Rechtsklick am Desktop) streicht ein Feld durch. Sobald einer von mehreren gleichen Buchstaben auf dem Pfad landet, werden die übrigen automatisch durchgestrichen.';
+
+  @override
+  String get helpRulesSquareword =>
+      'Die oberste Zeile des Rasters ist das Schlüsselwort, einige Buchstaben sind bereits eingetragen. Füllen Sie das Raster so aus, dass jeder Buchstabe des Schlüsselworts in jeder Zeile, jeder Spalte und auf beiden Hauptdiagonalen genau einmal vorkommt. Ein Buchstabe, der sich in einer Zeile, Spalte oder Diagonale wiederholt, wird rot dargestellt. Die Buchstaben werden immer kyrillisch angezeigt — jedes Schlüsselwort ist ein russisches Wort, es gibt keine deutsche Entsprechung zum Einsetzen.';
 
   @override
   String get puzzleListTitle => 'Zahlenrätsel';
