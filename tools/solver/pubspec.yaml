@@ -14,3 +14,5 @@ dependencies:
     path: ../../packages/module_domino
   module_labyrinth:
     path: ../../packages/module_labyrinth
+  module_squareword:
+    path: ../../packages/module_squareword

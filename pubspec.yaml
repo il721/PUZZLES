@@ -9,6 +9,7 @@ workspace:
   - packages/module_digit_rebus
   - packages/module_domino
   - packages/module_labyrinth
+  - packages/module_squareword
   - packages/module_rebus_ui
   - packages/module_digit_rebus_ui
   - packages/module_domino_ui
