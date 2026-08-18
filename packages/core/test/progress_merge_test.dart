@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 Map<String, dynamic> entry({
   bool solved = false,
+  int? bestMoves,
   int? firstSolveElapsedMs,
   String? solvedAt,
   int? updatedAt,
@@ -13,6 +14,7 @@ Map<String, dynamic> entry({
     'solved': solved,
     'elapsedMs': elapsedMs,
     'tag': tag,
+    if (bestMoves != null) 'bestMoves': bestMoves,
     if (firstSolveElapsedMs != null) 'firstSolveElapsedMs': firstSolveElapsedMs,
     if (solvedAt != null) 'solvedAt': solvedAt,
     if (updatedAt != null) 'updatedAt': updatedAt,
@@ -28,19 +30,43 @@ void main() {
       expect(mergePuzzleEntry(incoming, local)['tag'], 'incoming');
     });
 
-    test('rung 2: both solved, smaller firstSolveElapsedMs wins', () {
+    test('rung 2: both solved, fewer bestMoves wins', () {
+      final local = entry(solved: true, bestMoves: 30, tag: 'local');
+      final incoming = entry(solved: true, bestMoves: 28, tag: 'incoming');
+      expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
+    });
+
+    test('rung 2: a present bestMoves beats a missing one', () {
+      final local = entry(solved: true, tag: 'local');
+      final incoming = entry(solved: true, bestMoves: 99, tag: 'incoming');
+      expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
+    });
+
+    test('rung 2: fewer bestMoves outranks a faster firstSolveElapsedMs', () {
+      final local = entry(solved: true, bestMoves: 28, firstSolveElapsedMs: 9000, tag: 'local');
+      final incoming = entry(solved: true, bestMoves: 30, firstSolveElapsedMs: 1000, tag: 'incoming');
+      expect(mergePuzzleEntry(local, incoming)['tag'], 'local');
+    });
+
+    test('rung 2 abstains when neither side records bestMoves', () {
       final local = entry(solved: true, firstSolveElapsedMs: 5000, tag: 'local');
       final incoming = entry(solved: true, firstSolveElapsedMs: 3000, tag: 'incoming');
       expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
     });
 
-    test('rung 2: a present firstSolveElapsedMs beats a missing one', () {
+    test('rung 3: both solved, smaller firstSolveElapsedMs wins', () {
+      final local = entry(solved: true, firstSolveElapsedMs: 5000, tag: 'local');
+      final incoming = entry(solved: true, firstSolveElapsedMs: 3000, tag: 'incoming');
+      expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
+    });
+
+    test('rung 3: a present firstSolveElapsedMs beats a missing one', () {
       final local = entry(solved: true, tag: 'local');
       final incoming = entry(solved: true, firstSolveElapsedMs: 9999999, tag: 'incoming');
       expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
     });
 
-    test('rung 3: equal solve times, earlier solvedAt wins', () {
+    test('rung 4: equal solve times, earlier solvedAt wins', () {
       final local = entry(
           solved: true, firstSolveElapsedMs: 1000, solvedAt: '2026-07-20T10:00:00.000', tag: 'local');
       final incoming = entry(
@@ -48,25 +74,25 @@ void main() {
       expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
     });
 
-    test('rung 4: neither solved, larger updatedAt wins', () {
+    test('rung 5: neither solved, larger updatedAt wins', () {
       final local = entry(updatedAt: 100, tag: 'local');
       final incoming = entry(updatedAt: 200, tag: 'incoming');
       expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
     });
 
-    test('rung 4: a present updatedAt beats a legacy entry without one', () {
+    test('rung 5: a present updatedAt beats a legacy entry without one', () {
       final local = entry(tag: 'local');
       final incoming = entry(updatedAt: 1, tag: 'incoming');
       expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
     });
 
-    test('rung 5: no updatedAt on either side, larger elapsedMs wins', () {
+    test('rung 6: no updatedAt on either side, larger elapsedMs wins', () {
       final local = entry(elapsedMs: 10, tag: 'local');
       final incoming = entry(elapsedMs: 20, tag: 'incoming');
       expect(mergePuzzleEntry(local, incoming)['tag'], 'incoming');
     });
 
-    test('rung 6: a dead tie keeps local', () {
+    test('rung 7: a dead tie keeps local', () {
       final local = entry(updatedAt: 5, elapsedMs: 7, tag: 'local');
       final incoming = entry(updatedAt: 5, elapsedMs: 7, tag: 'incoming');
       expect(mergePuzzleEntry(local, incoming)['tag'], 'local');

@@ -1071,6 +1071,174 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Файл создан более новой версией приложения. Обновите приложение.'**
   String get importFailedVersion;
+
+  /// Title of Module 06.
+  ///
+  /// In ru, this message translates to:
+  /// **'Головоломки-игры'**
+  String get modulePlaygroundTitle;
+
+  /// Short description of Module 06, shown on its home-screen card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Семь маленьких головоломок-игр: фишки, плитки, блоки.'**
+  String get modulePlaygroundDescription;
+
+  /// No description provided for @helpRulesPlayground.
+  ///
+  /// In ru, this message translates to:
+  /// **'Этот раздел — не варианты одной головоломки, а семь отдельных маленьких игр: у каждой своё поле и свои правила, которые показывает кнопка ℹ на её экране. Головоломка считается решённой, когда достигнуто целевое положение. Для игр, где важна экономность ходов, приложение также запоминает ваш лучший результат и отмечает его, когда он совпадает с доказанным минимумом. Игры, которые ещё не доступны, показаны серым. Пока открыта только первая — «Восемь фишек»: фишки 1–8 стоят на концах восьмиконечной звезды, передвигать их можно только по прямым линиям (через свободный центр фишка может проскочить дальше), а цель — расставить их в обратном порядке; доказанный минимум — 28 ходов.'**
+  String get helpRulesPlayground;
+
+  /// Title of Module 06's game list screen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Головоломки-игры'**
+  String get playgroundListTitle;
+
+  /// Title of the eight_chips game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Восемь фишек'**
+  String get playgroundTitleEightChips;
+
+  /// Title of the (not yet shipped) cats_dogs game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кошки и собаки'**
+  String get playgroundTitleCatsDogs;
+
+  /// Title of the (not yet shipped) hourglass game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Песочные часы'**
+  String get playgroundTitleHourglass;
+
+  /// Title of the (not yet shipped) three_each game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Всюду по три'**
+  String get playgroundTitleThreeEach;
+
+  /// Title of the (not yet shipped) patterns5 game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Узоры 5×5'**
+  String get playgroundTitlePatterns5;
+
+  /// Title of the (not yet shipped) patterns4 game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Узоры 4×4'**
+  String get playgroundTitlePatterns4;
+
+  /// Title of the (not yet shipped) swap_blocks game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поменяйте местами'**
+  String get playgroundTitleSwapBlocks;
+
+  /// Rules sheet body for the eight_chips game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фишки 1–8 стоят на концах восьмиконечной звезды. Передвигайте фишку только по прямой линии до свободного места; через свободный центр она может проскочить дальше по той же линии. Цель — расставить фишки в обратном порядке. Доказанный минимум — 28 ходов.'**
+  String get playgroundRulesEightChips;
+
+  /// Trailing label on a not-yet-shipped playground game row.
+  ///
+  /// In ru, this message translates to:
+  /// **'В разработке'**
+  String get playgroundComingSoon;
+
+  /// Move counter shown in the playground game footer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ходов: {moves}'**
+  String playgroundMoveCounter(int moves);
+
+  /// Best-recorded-moves line for a solved playground game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваш рекорд: {best} ходов'**
+  String playgroundRecordLine(int best);
+
+  /// Solver-proven par line in the playground rules sheet.
+  ///
+  /// In ru, this message translates to:
+  /// **'Минимум: {par} ходов'**
+  String playgroundParProvenLine(int par);
+
+  /// Book-claimed (unverified) par line in the playground rules sheet.
+  ///
+  /// In ru, this message translates to:
+  /// **'Лучшее известное: {par} ходов'**
+  String playgroundParBookLine(int par);
+
+  /// Badge shown when the player's best matches a solver-proven par.
+  ///
+  /// In ru, this message translates to:
+  /// **'★ оптимально'**
+  String get playgroundOptimalBadge;
+
+  /// Badge shown when the player's best matches a book-claimed par.
+  ///
+  /// In ru, this message translates to:
+  /// **'повторён книжный результат'**
+  String get playgroundBookMatchedBadge;
+
+  /// Label/tooltip for the playground game screen's Undo action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменить ход'**
+  String get playgroundUndo;
+
+  /// Label/tooltip for the playground game screen's Rules (info) action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Правила'**
+  String get playgroundRules;
+
+  /// Label for the Close action in the playground rules sheet and win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Закрыть'**
+  String get playgroundClose;
+
+  /// Title of the playground restart confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Начать заново?'**
+  String get playgroundRestartConfirmTitle;
+
+  /// Body text of the playground restart confirmation dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Весь прогресс в этой игре будет сброшен.'**
+  String get playgroundRestartConfirmBody;
+
+  /// Title of the playground win dialog.
+  ///
+  /// In ru, this message translates to:
+  /// **'Решено!'**
+  String get playgroundWinTitle;
+
+  /// Body of the playground win dialog for a non-optimal solve.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы справились за {moves} ходов.'**
+  String playgroundWinBody(int moves);
+
+  /// Body of the playground win dialog when the solve matched or beat par.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы справились за минимальное число ходов!'**
+  String get playgroundWinBodyOptimal;
+
+  /// Label for the playground rules sheet's Show solution action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Показать решение'**
+  String get playgroundShowSolution;
 }
 
 class _AppLocalizationsDelegate

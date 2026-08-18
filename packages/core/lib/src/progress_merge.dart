@@ -89,7 +89,17 @@ Map<String, dynamic> mergePuzzleEntry(
   }
 
   if (localSolved) {
-    // Rung 2: the better first-solve time.
+    // Rung 2: the better move economy. Present beats absent, so a build that
+    // records moves wins over one that does not; games without move economy
+    // leave the field off on both sides and the rung abstains.
+    final byBestMoves = _rungInt(
+      _asInt(local['bestMoves']),
+      _asInt(incoming['bestMoves']),
+      lower: true,
+    );
+    if (byBestMoves != 0) return byBestMoves < 0 ? local : incoming;
+
+    // Rung 3: the better first-solve time.
     final byFirstSolve = _rungInt(
       _asInt(local['firstSolveElapsedMs']),
       _asInt(incoming['firstSolveElapsedMs']),
@@ -97,7 +107,7 @@ Map<String, dynamic> mergePuzzleEntry(
     );
     if (byFirstSolve != 0) return byFirstSolve < 0 ? local : incoming;
 
-    // Rung 3: whoever solved it first.
+    // Rung 4: whoever solved it first.
     final bySolvedAt = _rungEarlierString(
       _asString(local['solvedAt']),
       _asString(incoming['solvedAt']),
@@ -105,7 +115,7 @@ Map<String, dynamic> mergePuzzleEntry(
     if (bySolvedAt != 0) return bySolvedAt < 0 ? local : incoming;
   }
 
-  // Rung 4: the more recent write. Entries saved by builds older than the
+  // Rung 5: the more recent write. Entries saved by builds older than the
   // updatedAt field have none, and lose to any entry that does.
   final byUpdatedAt = _rungInt(
     _asInt(local['updatedAt']),
@@ -114,7 +124,7 @@ Map<String, dynamic> mergePuzzleEntry(
   );
   if (byUpdatedAt != 0) return byUpdatedAt < 0 ? local : incoming;
 
-  // Rung 5: the copy with more time invested.
+  // Rung 6: the copy with more time invested.
   final byElapsed = _rungInt(
     _asInt(local['elapsedMs']),
     _asInt(incoming['elapsedMs']),
@@ -122,7 +132,7 @@ Map<String, dynamic> mergePuzzleEntry(
   );
   if (byElapsed != 0) return byElapsed < 0 ? local : incoming;
 
-  // Rung 6: dead tie — keep local.
+  // Rung 7: dead tie — keep local.
   return local;
 }
 

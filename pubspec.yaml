@@ -10,9 +10,11 @@ workspace:
   - packages/module_domino
   - packages/module_labyrinth
   - packages/module_squareword
+  - packages/module_playground
   - packages/module_rebus_ui
   - packages/module_digit_rebus_ui
   - packages/module_domino_ui
   - packages/module_labyrinth_ui
   - packages/module_squareword_ui
+  - packages/module_playground_ui
   - tools/solver

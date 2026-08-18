@@ -1,0 +1,25 @@
+name: module_playground_ui
+description: Flutter UI for the "Головоломки-игры" playground module — shared game list and game chrome for seven small play-puzzles, plus the eight-chips star board.
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  flutter_svg: ^2.2.1
+  module_playground:
+    path: ../module_playground
+  puzzle_core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/eight_chips_goal.svg

@@ -93,6 +93,15 @@ const List<ModuleCatalogEntry> moduleCatalog = [
     description: _squarewordDescription,
     rules: _squarewordRules,
   ),
+  ModuleCatalogEntry(
+    id: 'playground',
+    route: '/module/playground',
+    iconAsset: 'assets/icons/icon_06.svg',
+    iconAssetLight: 'assets/icons/icon_06_light.svg',
+    title: _playgroundTitle,
+    description: _playgroundDescription,
+    rules: _playgroundRules,
+  ),
 ];
 
 // Top-level tear-offs: const entries cannot hold closures.
@@ -115,3 +124,7 @@ String _labyrinthRules(AppLocalizations l10n) => l10n.helpRulesLabyrinth;
 String _squarewordTitle(AppLocalizations l10n) => l10n.moduleSquarewordTitle;
 String _squarewordDescription(AppLocalizations l10n) => l10n.moduleSquarewordDescription;
 String _squarewordRules(AppLocalizations l10n) => l10n.helpRulesSquareword;
+
+String _playgroundTitle(AppLocalizations l10n) => l10n.modulePlaygroundTitle;
+String _playgroundDescription(AppLocalizations l10n) => l10n.modulePlaygroundDescription;
+String _playgroundRules(AppLocalizations l10n) => l10n.helpRulesPlayground;

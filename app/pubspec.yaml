@@ -31,6 +31,10 @@ dependencies:
     path: ../packages/module_squareword
   module_squareword_ui:
     path: ../packages/module_squareword_ui
+  module_playground:
+    path: ../packages/module_playground
+  module_playground_ui:
+    path: ../packages/module_playground_ui
   path_provider: ^2.1.6
   puzzle_core:
     path: ../packages/core

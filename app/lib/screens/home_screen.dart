@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
+import 'package:module_playground_ui/module_playground_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:module_squareword_ui/module_squareword_ui.dart';
 
@@ -108,6 +109,11 @@ class HomeScreen extends ConsumerWidget {
         solved: _countSolved(ref.watch(squarewordSaveDataProvider).value),
         total: _countPuzzles(ref.watch(squarewordPuzzlesProvider).value, 17),
         refresh: () => ref.invalidate(squarewordSaveDataProvider),
+      ),
+      'playground': (
+        solved: _countSolved(ref.watch(playgroundSaveDataProvider).value),
+        total: _countPuzzles(ref.watch(playgroundPuzzlesProvider).value, 7),
+        refresh: () => ref.invalidate(playgroundSaveDataProvider),
       ),
     };
   }

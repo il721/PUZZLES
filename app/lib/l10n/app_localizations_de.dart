@@ -603,4 +603,103 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get importFailedVersion =>
       'Diese Datei stammt aus einer neueren App-Version. Bitte aktualisiere die App.';
+
+  @override
+  String get modulePlaygroundTitle => 'Denkspiele';
+
+  @override
+  String get modulePlaygroundDescription =>
+      'Sieben kleine Spielrätsel: Chips, Plättchen, Blöcke.';
+
+  @override
+  String get helpRulesPlayground =>
+      'Dieser Abschnitt ist keine Variante eines einzigen Rätsels, sondern sieben eigenständige kleine Spiele: Jedes hat sein eigenes Spielfeld und eigene Regeln, die über die Schaltfläche ℹ auf seinem Bildschirm angezeigt werden. Ein Rätsel gilt als gelöst, sobald die Zielstellung erreicht ist. Bei den Rätseln, bei denen es auf Zugökonomie ankommt, merkt sich die App außerdem Ihre beste Zugzahl und kennzeichnet sie, wenn sie dem bewiesenen Minimum entspricht. Noch nicht verfügbare Spiele werden ausgegraut dargestellt. Bisher ist nur das erste freigeschaltet – „Acht Chips“: Die Chips 1–8 stehen an den Spitzen eines achtzackigen Sterns, sie dürfen nur entlang gerader Linien bewegt werden (durch die freie Mitte kann ein Chip weiterrutschen), und das Ziel ist, sie in umgekehrter Reihenfolge aufzustellen; das bewiesene Minimum sind 28 Züge.';
+
+  @override
+  String get playgroundListTitle => 'Denkspiele';
+
+  @override
+  String get playgroundTitleEightChips => 'Acht Chips';
+
+  @override
+  String get playgroundTitleCatsDogs => 'Katzen und Hunde';
+
+  @override
+  String get playgroundTitleHourglass => 'Sanduhr';
+
+  @override
+  String get playgroundTitleThreeEach => 'Überall drei';
+
+  @override
+  String get playgroundTitlePatterns5 => 'Muster 5×5';
+
+  @override
+  String get playgroundTitlePatterns4 => 'Muster 4×4';
+
+  @override
+  String get playgroundTitleSwapBlocks => 'Tausche die Quadrate';
+
+  @override
+  String get playgroundRulesEightChips =>
+      'Die Chips 1–8 stehen an den Spitzen eines achtzackigen Sterns. Bewege einen Chip nur entlang einer geraden Linie zu einem freien Platz; durch die freie Mitte kann er auf derselben Linie weiterrutschen. Ziel ist es, die Chips in umgekehrter Reihenfolge aufzustellen. Das bewiesene Minimum sind 28 Züge.';
+
+  @override
+  String get playgroundComingSoon => 'In Arbeit';
+
+  @override
+  String playgroundMoveCounter(int moves) {
+    return 'Züge: $moves';
+  }
+
+  @override
+  String playgroundRecordLine(int best) {
+    return 'Deine Bestleistung: $best Züge';
+  }
+
+  @override
+  String playgroundParProvenLine(int par) {
+    return 'Minimum: $par Züge';
+  }
+
+  @override
+  String playgroundParBookLine(int par) {
+    return 'Bestbekannt: $par Züge';
+  }
+
+  @override
+  String get playgroundOptimalBadge => '★ optimal';
+
+  @override
+  String get playgroundBookMatchedBadge => 'Buchergebnis erreicht';
+
+  @override
+  String get playgroundUndo => 'Rückgängig';
+
+  @override
+  String get playgroundRules => 'Regeln';
+
+  @override
+  String get playgroundClose => 'Schließen';
+
+  @override
+  String get playgroundRestartConfirmTitle => 'Neu starten?';
+
+  @override
+  String get playgroundRestartConfirmBody =>
+      'Der gesamte Fortschritt in diesem Spiel wird zurückgesetzt.';
+
+  @override
+  String get playgroundWinTitle => 'Gelöst!';
+
+  @override
+  String playgroundWinBody(int moves) {
+    return 'Du hast es in $moves Zügen gelöst.';
+  }
+
+  @override
+  String get playgroundWinBodyOptimal =>
+      'Du hast es mit der minimalen Zugzahl gelöst!';
+
+  @override
+  String get playgroundShowSolution => 'Lösung zeigen';
 }

@@ -598,4 +598,103 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get importFailedVersion =>
       'This file was made by a newer version of the app. Please update.';
+
+  @override
+  String get modulePlaygroundTitle => 'Puzzle games';
+
+  @override
+  String get modulePlaygroundDescription =>
+      'Seven small play-puzzles: chips, tiles, blocks.';
+
+  @override
+  String get helpRulesPlayground =>
+      'This section isn\'t variants of one puzzle, but seven separate small games: each has its own board and its own rules, shown by the ℹ button on its screen. A puzzle counts as solved once its goal position is reached. For the move-economy puzzles, the app also records your best move count and marks it when it matches the proven minimum. Games not yet available are shown greyed out. Only the first is open so far — \"Eight chips\": pieces 1–8 stand at the tips of an eight-pointed star; they can only move along straight lines (a piece may slide further through the free centre), and the goal is to arrange them in reverse order; the proven minimum is 28 moves.';
+
+  @override
+  String get playgroundListTitle => 'Puzzle games';
+
+  @override
+  String get playgroundTitleEightChips => 'Eight chips';
+
+  @override
+  String get playgroundTitleCatsDogs => 'Cats and dogs';
+
+  @override
+  String get playgroundTitleHourglass => 'Hourglass';
+
+  @override
+  String get playgroundTitleThreeEach => 'Three of each';
+
+  @override
+  String get playgroundTitlePatterns5 => 'Patterns 5×5';
+
+  @override
+  String get playgroundTitlePatterns4 => 'Patterns 4×4';
+
+  @override
+  String get playgroundTitleSwapBlocks => 'Swap the squares';
+
+  @override
+  String get playgroundRulesEightChips =>
+      'Pieces 1–8 stand at the tips of an eight-pointed star. Move a piece only along a straight line to a free spot; through the free centre it may slide further along the same line. The goal is to arrange the pieces in reverse order. The proven minimum is 28 moves.';
+
+  @override
+  String get playgroundComingSoon => 'Coming soon';
+
+  @override
+  String playgroundMoveCounter(int moves) {
+    return 'Moves: $moves';
+  }
+
+  @override
+  String playgroundRecordLine(int best) {
+    return 'Your best: $best moves';
+  }
+
+  @override
+  String playgroundParProvenLine(int par) {
+    return 'Minimum: $par moves';
+  }
+
+  @override
+  String playgroundParBookLine(int par) {
+    return 'Best known: $par moves';
+  }
+
+  @override
+  String get playgroundOptimalBadge => '★ optimal';
+
+  @override
+  String get playgroundBookMatchedBadge => 'matches the book result';
+
+  @override
+  String get playgroundUndo => 'Undo';
+
+  @override
+  String get playgroundRules => 'Rules';
+
+  @override
+  String get playgroundClose => 'Close';
+
+  @override
+  String get playgroundRestartConfirmTitle => 'Start over?';
+
+  @override
+  String get playgroundRestartConfirmBody =>
+      'All progress in this game will be reset.';
+
+  @override
+  String get playgroundWinTitle => 'Solved!';
+
+  @override
+  String playgroundWinBody(int moves) {
+    return 'You solved it in $moves moves.';
+  }
+
+  @override
+  String get playgroundWinBodyOptimal =>
+      'You solved it in the minimum number of moves!';
+
+  @override
+  String get playgroundShowSolution => 'Show solution';
 }

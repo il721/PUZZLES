@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
+import 'package:module_playground_ui/module_playground_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:module_squareword_ui/module_squareword_ui.dart';
 import 'package:puzzle_core/puzzle_core.dart';
@@ -12,6 +13,7 @@ import 'digit_rebus_l10n_adapter.dart';
 import 'domino_l10n_adapter.dart';
 import 'l10n/app_localizations.dart';
 import 'labyrinth_l10n_adapter.dart';
+import 'playground_l10n_adapter.dart';
 import 'providers.dart';
 import 'rebus_l10n_adapter.dart';
 import 'screens/help_screen.dart';
@@ -121,6 +123,8 @@ class PuzzleBookApp extends ConsumerWidget {
             labyrinthAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
             squarewordL10nProvider.overrideWithValue(AppSquarewordL10n(AppLocalizations.of(context))),
             squarewordAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
+            playgroundL10nProvider.overrideWithValue(AppPlaygroundL10n(AppLocalizations.of(context))),
+            playgroundAudioServiceProvider.overrideWithValue(ref.watch(audioServiceProvider)),
           ],
           child: child!,
         );
@@ -134,6 +138,7 @@ class PuzzleBookApp extends ConsumerWidget {
         '/module/domino': (context) => const DominoPuzzleListScreen(),
         '/module/labyrinth': (context) => const LabyrinthPuzzleListScreen(),
         '/module/squareword': (context) => const SquarewordPuzzleListScreen(),
+        '/module/playground': (context) => const PlaygroundListScreen(),
       },
     );
   }

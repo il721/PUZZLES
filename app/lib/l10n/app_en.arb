@@ -207,5 +207,48 @@
   },
   "importNothingNew": "No new results found.",
   "importFailedFormat": "That is not a progress file.",
-  "importFailedVersion": "This file was made by a newer version of the app. Please update."
+  "importFailedVersion": "This file was made by a newer version of the app. Please update.",
+  "modulePlaygroundTitle": "Puzzle games",
+  "modulePlaygroundDescription": "Seven small play-puzzles: chips, tiles, blocks.",
+  "helpRulesPlayground": "This section isn't variants of one puzzle, but seven separate small games: each has its own board and its own rules, shown by the ℹ button on its screen. A puzzle counts as solved once its goal position is reached. For the move-economy puzzles, the app also records your best move count and marks it when it matches the proven minimum. Games not yet available are shown greyed out. Only the first is open so far — \"Eight chips\": pieces 1–8 stand at the tips of an eight-pointed star; they can only move along straight lines (a piece may slide further through the free centre), and the goal is to arrange them in reverse order; the proven minimum is 28 moves.",
+  "playgroundListTitle": "Puzzle games",
+  "playgroundTitleEightChips": "Eight chips",
+  "playgroundTitleCatsDogs": "Cats and dogs",
+  "playgroundTitleHourglass": "Hourglass",
+  "playgroundTitleThreeEach": "Three of each",
+  "playgroundTitlePatterns5": "Patterns 5×5",
+  "playgroundTitlePatterns4": "Patterns 4×4",
+  "playgroundTitleSwapBlocks": "Swap the squares",
+  "playgroundRulesEightChips": "Pieces 1–8 stand at the tips of an eight-pointed star. Move a piece only along a straight line to a free spot; through the free centre it may slide further along the same line. The goal is to arrange the pieces in reverse order. The proven minimum is 28 moves.",
+  "playgroundComingSoon": "Coming soon",
+  "playgroundMoveCounter": "Moves: {moves}",
+  "@playgroundMoveCounter": {
+    "placeholders": {"moves": {"type": "int"}}
+  },
+  "playgroundRecordLine": "Your best: {best} moves",
+  "@playgroundRecordLine": {
+    "placeholders": {"best": {"type": "int"}}
+  },
+  "playgroundParProvenLine": "Minimum: {par} moves",
+  "@playgroundParProvenLine": {
+    "placeholders": {"par": {"type": "int"}}
+  },
+  "playgroundParBookLine": "Best known: {par} moves",
+  "@playgroundParBookLine": {
+    "placeholders": {"par": {"type": "int"}}
+  },
+  "playgroundOptimalBadge": "★ optimal",
+  "playgroundBookMatchedBadge": "matches the book result",
+  "playgroundUndo": "Undo",
+  "playgroundRules": "Rules",
+  "playgroundClose": "Close",
+  "playgroundRestartConfirmTitle": "Start over?",
+  "playgroundRestartConfirmBody": "All progress in this game will be reset.",
+  "playgroundWinTitle": "Solved!",
+  "playgroundWinBody": "You solved it in {moves} moves.",
+  "@playgroundWinBody": {
+    "placeholders": {"moves": {"type": "int"}}
+  },
+  "playgroundWinBodyOptimal": "You solved it in the minimum number of moves!",
+  "playgroundShowSolution": "Show solution"
 }

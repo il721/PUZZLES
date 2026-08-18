@@ -16,3 +16,5 @@ dependencies:
     path: ../../packages/module_labyrinth
   module_squareword:
     path: ../../packages/module_squareword
+  module_playground:
+    path: ../../packages/module_playground

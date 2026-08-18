@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_digit_rebus_ui/module_digit_rebus_ui.dart';
 import 'package:module_domino_ui/module_domino_ui.dart';
 import 'package:module_labyrinth_ui/module_labyrinth_ui.dart';
+import 'package:module_playground_ui/module_playground_ui.dart';
 import 'package:module_rebus_ui/module_rebus_ui.dart';
 import 'package:module_squareword_ui/module_squareword_ui.dart';
 import 'package:path_provider/path_provider.dart';
@@ -29,7 +30,8 @@ ModuleRegistry buildModuleRegistry() => ModuleRegistry()
   ..register(DigitRebusModule.descriptor)
   ..register(DominoModule.descriptor)
   ..register(LabyrinthModule.descriptor)
-  ..register(SquarewordModule.descriptor);
+  ..register(SquarewordModule.descriptor)
+  ..register(PlaygroundModule.descriptor);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +62,7 @@ Future<void> main() async {
         dominoSaveServiceProvider.overrideWithValue(saveService),
         labyrinthSaveServiceProvider.overrideWithValue(saveService),
         squarewordSaveServiceProvider.overrideWithValue(saveService),
+        playgroundSaveServiceProvider.overrideWithValue(saveService),
         settingsServiceProvider.overrideWithValue(settingsService),
         moduleRegistryProvider.overrideWithValue(moduleRegistry),
         progressBundleServiceProvider.overrideWithValue(progressBundleService),

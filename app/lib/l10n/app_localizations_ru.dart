@@ -592,4 +592,103 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get importFailedVersion =>
       'Файл создан более новой версией приложения. Обновите приложение.';
+
+  @override
+  String get modulePlaygroundTitle => 'Головоломки-игры';
+
+  @override
+  String get modulePlaygroundDescription =>
+      'Семь маленьких головоломок-игр: фишки, плитки, блоки.';
+
+  @override
+  String get helpRulesPlayground =>
+      'Этот раздел — не варианты одной головоломки, а семь отдельных маленьких игр: у каждой своё поле и свои правила, которые показывает кнопка ℹ на её экране. Головоломка считается решённой, когда достигнуто целевое положение. Для игр, где важна экономность ходов, приложение также запоминает ваш лучший результат и отмечает его, когда он совпадает с доказанным минимумом. Игры, которые ещё не доступны, показаны серым. Пока открыта только первая — «Восемь фишек»: фишки 1–8 стоят на концах восьмиконечной звезды, передвигать их можно только по прямым линиям (через свободный центр фишка может проскочить дальше), а цель — расставить их в обратном порядке; доказанный минимум — 28 ходов.';
+
+  @override
+  String get playgroundListTitle => 'Головоломки-игры';
+
+  @override
+  String get playgroundTitleEightChips => 'Восемь фишек';
+
+  @override
+  String get playgroundTitleCatsDogs => 'Кошки и собаки';
+
+  @override
+  String get playgroundTitleHourglass => 'Песочные часы';
+
+  @override
+  String get playgroundTitleThreeEach => 'Всюду по три';
+
+  @override
+  String get playgroundTitlePatterns5 => 'Узоры 5×5';
+
+  @override
+  String get playgroundTitlePatterns4 => 'Узоры 4×4';
+
+  @override
+  String get playgroundTitleSwapBlocks => 'Поменяйте местами';
+
+  @override
+  String get playgroundRulesEightChips =>
+      'Фишки 1–8 стоят на концах восьмиконечной звезды. Передвигайте фишку только по прямой линии до свободного места; через свободный центр она может проскочить дальше по той же линии. Цель — расставить фишки в обратном порядке. Доказанный минимум — 28 ходов.';
+
+  @override
+  String get playgroundComingSoon => 'В разработке';
+
+  @override
+  String playgroundMoveCounter(int moves) {
+    return 'Ходов: $moves';
+  }
+
+  @override
+  String playgroundRecordLine(int best) {
+    return 'Ваш рекорд: $best ходов';
+  }
+
+  @override
+  String playgroundParProvenLine(int par) {
+    return 'Минимум: $par ходов';
+  }
+
+  @override
+  String playgroundParBookLine(int par) {
+    return 'Лучшее известное: $par ходов';
+  }
+
+  @override
+  String get playgroundOptimalBadge => '★ оптимально';
+
+  @override
+  String get playgroundBookMatchedBadge => 'повторён книжный результат';
+
+  @override
+  String get playgroundUndo => 'Отменить ход';
+
+  @override
+  String get playgroundRules => 'Правила';
+
+  @override
+  String get playgroundClose => 'Закрыть';
+
+  @override
+  String get playgroundRestartConfirmTitle => 'Начать заново?';
+
+  @override
+  String get playgroundRestartConfirmBody =>
+      'Весь прогресс в этой игре будет сброшен.';
+
+  @override
+  String get playgroundWinTitle => 'Решено!';
+
+  @override
+  String playgroundWinBody(int moves) {
+    return 'Вы справились за $moves ходов.';
+  }
+
+  @override
+  String get playgroundWinBodyOptimal =>
+      'Вы справились за минимальное число ходов!';
+
+  @override
+  String get playgroundShowSolution => 'Показать решение';
 }
