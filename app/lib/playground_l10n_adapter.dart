@@ -43,8 +43,10 @@ class AppPlaygroundL10n implements PlaygroundL10n {
     switch (gameId) {
       case 'eight_chips':
         return _l10n.playgroundRulesEightChips;
+      case 'cats_dogs':
+        return _l10n.playgroundRulesCatsDogs;
       default:
-        // The other six games are greyed out and unreachable; their rules
+        // The other five games are greyed out and unreachable; their rules
         // keys arrive in their own milestones.
         return '';
     }

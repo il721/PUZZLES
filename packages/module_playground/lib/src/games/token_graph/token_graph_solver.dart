@@ -31,14 +31,23 @@ class TokenGraphSearchResult {
 /// Breadth-first search for the shortest path from [start] to any state
 /// satisfying [isGoal], generating moves via [slideMoves]/[applySlide].
 ///
+/// Some games forbid certain POSITIONS outright, rather than certain moves -
+/// e.g. `cats_dogs`, where a cat may never stand adjacent to a dog. Such a
+/// game passes its position predicate as [isLegal]; a successor state for
+/// which [isLegal] returns false is skipped entirely (never visited, never
+/// queued, never tested against [isGoal]), so the search only explores
+/// reachable legal play. Leaving [isLegal] `null` preserves today's
+/// behaviour exactly (used by `eight_chips`, which has no such rule).
+///
 /// Returns the optimal move count and one optimal move sequence, or an
 /// [TokenGraphSearchResult] with `optimalMoves == null` if no reachable
 /// state satisfies [isGoal].
 TokenGraphSearchResult solveBfs(
   TokenGraphBoard board,
   TokenGraphState start,
-  bool Function(TokenGraphState state) isGoal,
-) {
+  bool Function(TokenGraphState state) isGoal, {
+  bool Function(TokenGraphState state)? isLegal,
+}) {
   final startKey = start.key();
   if (isGoal(start)) {
     return const TokenGraphSearchResult(
@@ -59,6 +68,7 @@ TokenGraphSearchResult solveBfs(
 
     for (final move in slideMoves(board, current)) {
       final next = applySlide(board, current, move);
+      if (isLegal != null && !isLegal(next)) continue;
       final nextKey = next.key();
       if (visited.contains(nextKey)) continue;
       visited.add(nextKey);
@@ -93,7 +103,19 @@ TokenGraphSearchResult solveBfs(
 /// The full breadth-first-search closure size from [start]: the number of
 /// distinct reachable states (including [start] itself), running the
 /// search to exhaustion rather than stopping at any particular state.
-int reachableStateCount(TokenGraphBoard board, TokenGraphState start) {
+///
+/// Some games forbid certain POSITIONS outright, rather than certain moves -
+/// e.g. `cats_dogs`, where a cat may never stand adjacent to a dog. Such a
+/// game passes its position predicate as [isLegal]; a successor state for
+/// which [isLegal] returns false is skipped entirely (never visited, never
+/// queued), so only reachable legal play is counted. Leaving [isLegal]
+/// `null` preserves today's behaviour exactly (used by `eight_chips`, which
+/// has no such rule).
+int reachableStateCount(
+  TokenGraphBoard board,
+  TokenGraphState start, {
+  bool Function(TokenGraphState state)? isLegal,
+}) {
   final visited = <String>{start.key()};
   final queue = Queue<TokenGraphState>()..add(start);
 
@@ -101,6 +123,7 @@ int reachableStateCount(TokenGraphBoard board, TokenGraphState start) {
     final current = queue.removeFirst();
     for (final move in slideMoves(board, current)) {
       final next = applySlide(board, current, move);
+      if (isLegal != null && !isLegal(next)) continue;
       if (visited.add(next.key())) {
         queue.add(next);
       }

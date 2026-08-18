@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:module_playground/module_playground.dart';
 
 import '../../playground_session_controller.dart';
+import '../token_graph/token_graph_widgets.dart';
 
 /// The 8 tip node ids in CLOCKWISE order starting from `P1` (straight up).
 /// Verified against the book scan (Мочалов, 1980, p. 68), matching the
@@ -121,14 +122,14 @@ class _EightChipsBoardState extends ConsumerState<EightChipsBoard> {
               children: [
                 CustomPaint(
                   size: Size(size, size),
-                  painter: _LinesPainter(
+                  painter: TokenGraphLinesPainter(
                     board: _board,
                     positionFor: (id) => _positionFor(id, size),
                     color: scheme.outlineVariant,
                   ),
                 ),
                 for (final nodeId in _board.nodeIds)
-                  _NodeWidget(
+                  TokenGraphNodeWidget(
                     key: ValueKey('pg-node-$nodeId'),
                     nodeId: nodeId,
                     center: _positionFor(nodeId, size),
@@ -145,108 +146,6 @@ class _EightChipsBoardState extends ConsumerState<EightChipsBoard> {
           ),
         );
       },
-    );
-  }
-}
-
-class _LinesPainter extends CustomPainter {
-  final TokenGraphBoard board;
-  final Offset Function(String nodeId) positionFor;
-  final Color color;
-
-  _LinesPainter({required this.board, required this.positionFor, required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2;
-    for (final line in board.lines) {
-      for (var i = 0; i < line.length - 1; i++) {
-        canvas.drawLine(positionFor(line[i]), positionFor(line[i + 1]), paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _LinesPainter oldDelegate) => oldDelegate.color != color;
-}
-
-class _NodeWidget extends StatelessWidget {
-  final String nodeId;
-  final Offset center;
-  final double nodeSize;
-  final String? token;
-
-  /// Rotation angle (radians) applied to the digit label, matching the
-  /// goal artwork's per-tip rotation. `0` for the centre node.
-  final double rotation;
-  final bool selected;
-  final bool isDestination;
-  final ColorScheme scheme;
-  final VoidCallback onTap;
-
-  const _NodeWidget({
-    required Key key,
-    required this.nodeId,
-    required this.center,
-    required this.nodeSize,
-    required this.token,
-    required this.rotation,
-    required this.selected,
-    required this.isDestination,
-    required this.scheme,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Color background;
-    Color foreground;
-    if (selected) {
-      background = scheme.primary;
-      foreground = scheme.onPrimary;
-    } else if (isDestination) {
-      background = scheme.secondaryContainer;
-      foreground = scheme.onSecondaryContainer;
-    } else if (token != null) {
-      background = scheme.surfaceContainerHighest;
-      foreground = scheme.onSurfaceVariant;
-    } else {
-      background = scheme.surface;
-      foreground = scheme.onSurface;
-    }
-
-    return Positioned(
-      left: center.dx - nodeSize / 2,
-      top: center.dy - nodeSize / 2,
-      width: nodeSize,
-      height: nodeSize,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: background,
-            border: Border.all(color: scheme.outline),
-          ),
-          alignment: Alignment.center,
-          child: token == null
-              ? null
-              : Transform.rotate(
-                  angle: rotation,
-                  child: Text(
-                    token!,
-                    style: TextStyle(
-                      color: foreground,
-                      fontWeight: FontWeight.bold,
-                      fontSize: nodeSize * 0.55,
-                      height: 1.0,
-                    ),
-                  ),
-                ),
-        ),
-      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:module_playground/module_playground.dart';
 import 'package:puzzle_core/puzzle_core.dart';
 
+import 'games/cats_dogs/cats_dogs_board.dart';
 import 'games/eight_chips/eight_chips_board.dart';
 import 'playground_l10n.dart';
 import 'playground_providers.dart';
@@ -185,6 +186,8 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
     switch (game.id) {
       case 'eight_chips':
         return EightChipsBoard(gameId: widget.gameId, previewState: _previewState);
+      case 'cats_dogs':
+        return CatsDogsBoard(gameId: widget.gameId, previewState: _previewState);
       default:
         return Center(child: Text(ref.read(playgroundL10nProvider).comingSoon));
     }

@@ -46,7 +46,8 @@ void main() {
     if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
   });
 
-  testWidgets('renders seven rows; exactly one is tappable; six show comingSoon',
+  testWidgets(
+      'renders seven rows; exactly two are tappable; five show comingSoon',
       (tester) async {
     await tester.pumpWidget(
       _wrap(saveService: saveService, child: const PlaygroundListScreen()),
@@ -56,10 +57,10 @@ void main() {
     expect(find.byType(ListTile), findsNWidgets(7));
 
     final tiles = tester.widgetList<ListTile>(find.byType(ListTile)).toList();
-    expect(tiles.where((t) => t.enabled).length, 1);
-    expect(tiles.where((t) => t.onTap != null).length, 1);
+    expect(tiles.where((t) => t.enabled).length, 2);
+    expect(tiles.where((t) => t.onTap != null).length, 2);
 
-    expect(find.text('Coming soon'), findsNWidgets(6));
+    expect(find.text('Coming soon'), findsNWidgets(5));
   });
 
   testWidgets('tapping a disabled row does not navigate', (tester) async {
@@ -68,8 +69,8 @@ void main() {
     );
     await _settle(tester);
 
-    // 'cats_dogs' is the first disabled game in the fixed registry order.
-    await tester.tap(find.byKey(const ValueKey('pg-row-cats_dogs')));
+    // 'hourglass' is a disabled game in the fixed registry order.
+    await tester.tap(find.byKey(const ValueKey('pg-row-hourglass')));
     await _settle(tester);
     await tester.pump(const Duration(milliseconds: 400));
 

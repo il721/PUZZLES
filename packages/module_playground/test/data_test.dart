@@ -29,4 +29,17 @@ void main() {
       expect(entry.solution, hasLength(28));
     },
   );
+
+  test(
+    'cats_dogs entry has par 32, parProven true, parSource solver, '
+    'solution length 32',
+    () {
+      final entry = data.forId('cats_dogs');
+      expect(entry, isNotNull);
+      expect(entry!.par, 32);
+      expect(entry.parProven, isTrue);
+      expect(entry.parSource, ParSource.solver);
+      expect(entry.solution, hasLength(32));
+    },
+  );
 }

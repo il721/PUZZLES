@@ -613,7 +613,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get helpRulesPlayground =>
-      'Dieser Abschnitt ist keine Variante eines einzigen Rätsels, sondern sieben eigenständige kleine Spiele: Jedes hat sein eigenes Spielfeld und eigene Regeln, die über die Schaltfläche ℹ auf seinem Bildschirm angezeigt werden. Ein Rätsel gilt als gelöst, sobald die Zielstellung erreicht ist. Bei den Rätseln, bei denen es auf Zugökonomie ankommt, merkt sich die App außerdem Ihre beste Zugzahl und kennzeichnet sie, wenn sie dem bewiesenen Minimum entspricht. Noch nicht verfügbare Spiele werden ausgegraut dargestellt. Bisher ist nur das erste freigeschaltet – „Acht Chips“: Die Chips 1–8 stehen an den Spitzen eines achtzackigen Sterns, sie dürfen nur entlang gerader Linien bewegt werden (durch die freie Mitte kann ein Chip weiterrutschen), und das Ziel ist, sie in umgekehrter Reihenfolge aufzustellen; das bewiesene Minimum sind 28 Züge.';
+      'Dieser Abschnitt ist keine Variante eines einzigen Rätsels, sondern sieben eigenständige kleine Spiele: Jedes hat sein eigenes Spielfeld und eigene Regeln, die über die Schaltfläche ℹ auf seinem Bildschirm angezeigt werden. Ein Rätsel gilt als gelöst, sobald die Zielstellung erreicht ist. Bei den Rätseln, bei denen es auf Zugökonomie ankommt, merkt sich die App außerdem Ihre beste Zugzahl und kennzeichnet sie, wenn sie dem bewiesenen Minimum entspricht. Noch nicht verfügbare Spiele werden ausgegraut dargestellt. Bisher sind nur die ersten beiden freigeschaltet – „Acht Chips“ und „Katzen und Hunde“: Bei „Acht Chips“ stehen die Chips 1–8 an den Spitzen eines achtzackigen Sterns, sie dürfen nur entlang gerader Linien bewegt werden (durch die freie Mitte kann ein Chip weiterrutschen), und das Ziel ist, sie in umgekehrter Reihenfolge aufzustellen; das bewiesene Minimum sind 28 Züge. Bei „Katzen und Hunde“ tauschen drei Katzen und drei Hunde die Seiten eines Parks: Pro Zug läuft ein Tier auf einen benachbarten freien Platz, und Katze und Hund dürfen nie nebeneinander stehen; das bewiesene Minimum sind 32 Züge.';
 
   @override
   String get playgroundListTitle => 'Denkspiele';
@@ -642,6 +642,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get playgroundRulesEightChips =>
       'Die Chips 1–8 stehen an den Spitzen eines achtzackigen Sterns. Bewege einen Chip nur entlang einer geraden Linie zu einem freien Platz; durch die freie Mitte kann er auf derselben Linie weiterrutschen. Ziel ist es, die Chips in umgekehrter Reihenfolge aufzustellen. Das bewiesene Minimum sind 28 Züge.';
+
+  @override
+  String get playgroundRulesCatsDogs =>
+      'Drei Katzen (C) sitzen auf den linken Plätzen des Parks, drei Hunde (D) auf den rechten. Pro Zug läuft ein Tier über eine Allee auf einen benachbarten freien Platz. Katze und Hund dürfen nie auf benachbarten Plätzen stehen — solche Züge werden gar nicht erst angeboten. Ziel ist, dass Katzen und Hunde die Seiten tauschen. Das bewiesene Minimum sind 32 Züge: genau so viele, wie die Katzen im Buch versprochen haben — sie hatten also recht.';
 
   @override
   String get playgroundComingSoon => 'In Arbeit';

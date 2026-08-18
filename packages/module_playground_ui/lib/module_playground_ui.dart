@@ -5,6 +5,7 @@
 /// chips). Builds on the pure-Dart contract in `package:module_playground`.
 library;
 
+export 'src/games/cats_dogs/cats_dogs_board.dart';
 export 'src/games/eight_chips/eight_chips_board.dart';
 export 'src/playground_game_screen.dart';
 export 'src/playground_l10n.dart';
