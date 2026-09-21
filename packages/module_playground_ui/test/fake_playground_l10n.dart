@@ -57,4 +57,8 @@ class FakePlaygroundL10n implements PlaygroundL10n {
   String get backToList => 'Back to list';
   @override
   String get showSolution => 'Show solution';
+  @override
+  String get rotateTile => 'Rotate';
+  @override
+  String get returnTileToTray => 'Return to tray';
 }

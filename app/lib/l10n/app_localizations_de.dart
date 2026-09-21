@@ -710,4 +710,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get playgroundShowSolution => 'Lösung zeigen';
+
+  @override
+  String get playgroundRotateTile => 'Drehen';
+
+  @override
+  String get playgroundReturnTileToTray => 'Zurück in den Vorrat';
 }

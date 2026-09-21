@@ -699,4 +699,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get playgroundShowSolution => 'Показать решение';
+
+  @override
+  String get playgroundRotateTile => 'Повернуть';
+
+  @override
+  String get playgroundReturnTileToTray => 'Вернуть в набор';
 }

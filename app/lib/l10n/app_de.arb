@@ -252,5 +252,7 @@
     "placeholders": {"moves": {"type": "int"}}
   },
   "playgroundWinBodyOptimal": "Du hast es mit der minimalen Zugzahl gelöst!",
-  "playgroundShowSolution": "Lösung zeigen"
+  "playgroundShowSolution": "Lösung zeigen",
+  "playgroundRotateTile": "Drehen",
+  "playgroundReturnTileToTray": "Zurück in den Vorrat"
 }

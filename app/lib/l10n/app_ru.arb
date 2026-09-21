@@ -443,5 +443,9 @@
   "playgroundWinBodyOptimal": "Вы справились за минимальное число ходов!",
   "@playgroundWinBodyOptimal": {"description": "Body of the playground win dialog when the solve matched or beat par."},
   "playgroundShowSolution": "Показать решение",
-  "@playgroundShowSolution": {"description": "Label for the playground rules sheet's Show solution action."}
+  "@playgroundShowSolution": {"description": "Label for the playground rules sheet's Show solution action."},
+  "playgroundRotateTile": "Повернуть",
+  "@playgroundRotateTile": {"description": "Tooltip for the rotate-tile action button in tile-placement playground games."},
+  "playgroundReturnTileToTray": "Вернуть в набор",
+  "@playgroundReturnTileToTray": {"description": "Tooltip for the return-tile-to-tray action button in tile-placement playground games."}
 }

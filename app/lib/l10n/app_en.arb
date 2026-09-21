@@ -252,5 +252,7 @@
     "placeholders": {"moves": {"type": "int"}}
   },
   "playgroundWinBodyOptimal": "You solved it in the minimum number of moves!",
-  "playgroundShowSolution": "Show solution"
+  "playgroundShowSolution": "Show solution",
+  "playgroundRotateTile": "Rotate",
+  "playgroundReturnTileToTray": "Return to tray"
 }

@@ -9,6 +9,7 @@ import 'package:puzzle_core/puzzle_core.dart';
 import 'games/cats_dogs/cats_dogs_board.dart';
 import 'games/eight_chips/eight_chips_board.dart';
 import 'games/hourglass/hourglass_board.dart';
+import 'games/three_each/three_each_board.dart';
 import 'playground_l10n.dart';
 import 'playground_providers.dart';
 import 'playground_session_controller.dart';
@@ -204,6 +205,9 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
             gameId: widget.gameId, previewState: _previewState);
       case 'hourglass':
         return HourglassBoard(
+            gameId: widget.gameId, previewState: _previewState);
+      case 'three_each':
+        return ThreeEachBoard(
             gameId: widget.gameId, previewState: _previewState);
       default:
         return Center(child: Text(ref.read(playgroundL10nProvider).comingSoon));

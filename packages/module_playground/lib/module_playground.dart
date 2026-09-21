@@ -1,10 +1,11 @@
 /// Pure-Dart logic for the "playground" (Головоломки-игры) puzzle module: a
 /// shared game contract for seven small, unrelated play-puzzles; the
 /// token-graph engine (board, state, rules, BFS solver) shared by the
-/// slide-a-token-along-a-line family; the three shipped games
-/// ("Восемь фишек" / eight chips, "Кошки и собаки" / cats and dogs and
-/// "Песочные часы" / hourglass); puzzle-data parsing; and the module's game
-/// registry. Flutter UI is added in a later milestone.
+/// slide-a-token-along-a-line family; the four shipped games
+/// ("Восемь фишек" / eight chips, "Кошки и собаки" / cats and dogs,
+/// "Песочные часы" / hourglass and "Всюду по три" / three each); puzzle-data
+/// parsing; and the module's game registry. Flutter UI is added in a later
+/// milestone.
 library;
 
 export 'src/playground_game.dart';

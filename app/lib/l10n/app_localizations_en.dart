@@ -705,4 +705,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get playgroundShowSolution => 'Show solution';
+
+  @override
+  String get playgroundRotateTile => 'Rotate';
+
+  @override
+  String get playgroundReturnTileToTray => 'Return to tray';
 }

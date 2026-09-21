@@ -122,4 +122,10 @@ class AppPlaygroundL10n implements PlaygroundL10n {
 
   @override
   String get showSolution => _l10n.playgroundShowSolution;
+
+  @override
+  String get rotateTile => _l10n.playgroundRotateTile;
+
+  @override
+  String get returnTileToTray => _l10n.playgroundReturnTileToTray;
 }

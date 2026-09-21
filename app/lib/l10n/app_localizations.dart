@@ -1251,6 +1251,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Показать решение'**
   String get playgroundShowSolution;
+
+  /// Tooltip for the rotate-tile action button in tile-placement playground games.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повернуть'**
+  String get playgroundRotateTile;
+
+  /// Tooltip for the return-tile-to-tray action button in tile-placement playground games.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вернуть в набор'**
+  String get playgroundReturnTileToTray;
 }
 
 class _AppLocalizationsDelegate

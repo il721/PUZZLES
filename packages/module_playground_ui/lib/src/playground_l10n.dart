@@ -91,6 +91,13 @@ abstract class PlaygroundL10n {
   /// Label for the "Show solution" action, unlocked only after the game has
   /// been solved at least once.
   String get showSolution;
+
+  /// Tooltip for the rotate-tile action button in tile-placement games.
+  String get rotateTile;
+
+  /// Tooltip for the return-tile-to-tray action button in tile-placement
+  /// games.
+  String get returnTileToTray;
 }
 
 /// Supplies the [PlaygroundL10n] implementation for the current app locale.

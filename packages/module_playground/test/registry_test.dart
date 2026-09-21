@@ -23,10 +23,10 @@ void main() {
     expect(ids.toSet(), hasLength(ids.length));
   });
 
-  test('exactly three enabled games: eight_chips, cats_dogs, hourglass', () {
+  test('exactly four enabled games: eight_chips, cats_dogs, hourglass, three_each', () {
     final enabledIds =
         registry.where((g) => g.enabled).map((g) => g.id).toList();
-    expect(enabledIds, ['eight_chips', 'cats_dogs', 'hourglass']);
+    expect(enabledIds, ['eight_chips', 'cats_dogs', 'hourglass', 'three_each']);
   });
 
   test('every game reports tutorial == false', () {
