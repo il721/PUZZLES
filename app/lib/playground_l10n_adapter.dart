@@ -45,8 +45,10 @@ class AppPlaygroundL10n implements PlaygroundL10n {
         return _l10n.playgroundRulesEightChips;
       case 'cats_dogs':
         return _l10n.playgroundRulesCatsDogs;
+      case 'hourglass':
+        return _l10n.playgroundRulesHourglass;
       default:
-        // The other five games are greyed out and unreachable; their rules
+        // The other four games are greyed out and unreachable; their rules
         // keys arrive in their own milestones.
         return '';
     }

@@ -608,7 +608,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpRulesPlayground =>
-      'This section isn\'t variants of one puzzle, but seven separate small games: each has its own board and its own rules, shown by the ℹ button on its screen. A puzzle counts as solved once its goal position is reached. For the move-economy puzzles, the app also records your best move count and marks it when it matches the proven minimum. Games not yet available are shown greyed out. Only the first two are open so far — \"Eight chips\" and \"Cats and dogs\": in Eight chips, pieces 1–8 stand at the tips of an eight-pointed star; they can only move along straight lines (a piece may slide further through the free centre), and the goal is to arrange them in reverse order; the proven minimum is 28 moves. In Cats and dogs, three cats and three dogs swap sides of a park: each move sends one animal to an adjacent free square, and a cat and a dog must never end up next to each other; the proven minimum is 32 moves.';
+      'This section isn\'t variants of one puzzle, but seven separate small games: each has its own board and its own rules, shown by the ℹ button on its screen. A puzzle counts as solved once its goal position is reached. For the move-economy puzzles, the app also records your best move count and marks it when it matches the proven minimum. Games not yet available are shown greyed out. Only the first three are open so far — \"Eight chips\", \"Cats and dogs\" and \"Hourglass\": in Eight chips, pieces 1–8 stand at the tips of an eight-pointed star; they can only move along straight lines (a piece may slide further through the free centre), and the goal is to arrange them in reverse order; the proven minimum is 28 moves. In Cats and dogs, three cats and three dogs swap sides of a park: each move sends one animal to an adjacent free square, and a cat and a dog must never end up next to each other; the proven minimum is 32 moves. In Hourglass, fifteen pieces must be brought from the upper triangle into the lower one: a move either steps a piece onto an adjacent free circle or jumps it over an adjacent piece, checkers-style, and several jumps in a row by one piece count as a single move; the proven minimum is 26 moves.';
 
   @override
   String get playgroundListTitle => 'Puzzle games';
@@ -641,6 +641,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get playgroundRulesCatsDogs =>
       'Three cats (C) sit on the left-hand squares of the park, three dogs (D) on the right. Each move sends one animal along an alley to an adjacent free square. A cat and a dog must never end up on adjacent squares — such moves are simply not offered. The goal is for the cats and the dogs to swap sides. The proven minimum is 32 moves: exactly what the cats promised in the book, so they were right.';
+
+  @override
+  String get playgroundRulesHourglass =>
+      'Fifteen pieces fill the upper triangle of an hourglass; all of them must be brought into the lower one. A move either steps a piece along a line onto an adjacent free circle, or jumps it, checkers-style, over an adjacent piece onto the free circle straight beyond. Several jumps in a row by one piece count as a single move, and you may stop after any of them; a step and jumps may never be mixed in one move. Movement follows the drawn lines only. The book prints no answer — the minimum proven by exhaustive search is 26 moves.';
 
   @override
   String get playgroundComingSoon => 'Coming soon';

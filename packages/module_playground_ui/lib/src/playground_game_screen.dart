@@ -8,6 +8,7 @@ import 'package:puzzle_core/puzzle_core.dart';
 
 import 'games/cats_dogs/cats_dogs_board.dart';
 import 'games/eight_chips/eight_chips_board.dart';
+import 'games/hourglass/hourglass_board.dart';
 import 'playground_l10n.dart';
 import 'playground_providers.dart';
 import 'playground_session_controller.dart';
@@ -18,7 +19,8 @@ const double _wideLayoutBreakpoint = 720;
 
 /// The goal-artwork asset for [gameId], or `null` for games with no such
 /// illustration (everything but `eight_chips`, for now).
-String? _goalArtAsset(String gameId) => gameId == 'eight_chips' ? 'assets/eight_chips_goal.svg' : null;
+String? _goalArtAsset(String gameId) =>
+    gameId == 'eight_chips' ? 'assets/eight_chips_goal.svg' : null;
 
 /// Whether [bestMoves] matches or beats [game]'s recorded par at all (proven
 /// or book-claimed). Duplicated (rather than shared) from
@@ -41,7 +43,8 @@ class PlaygroundGameScreen extends ConsumerStatefulWidget {
   const PlaygroundGameScreen({super.key, required this.gameId});
 
   @override
-  ConsumerState<PlaygroundGameScreen> createState() => _PlaygroundGameScreenState();
+  ConsumerState<PlaygroundGameScreen> createState() =>
+      _PlaygroundGameScreenState();
 }
 
 class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
@@ -85,8 +88,10 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
     final gamesAsync = ref.watch(playgroundPuzzlesProvider);
     return gamesAsync.when(
       data: (games) => _buildLoaded(context, games),
-      loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (error, stackTrace) => Scaffold(body: Center(child: Text('$error'))),
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
+      error: (error, stackTrace) =>
+          Scaffold(body: Center(child: Text('$error'))),
     );
   }
 
@@ -140,7 +145,9 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
             tooltip: l10n.undo,
             onPressed: state.moveCount == 0 || _previewState != null
                 ? null
-                : () => ref.read(playgroundSessionProvider(widget.gameId).notifier).undo(),
+                : () => ref
+                    .read(playgroundSessionProvider(widget.gameId).notifier)
+                    .undo(),
           ),
           IconButton(
             key: const ValueKey('pg-restart'),
@@ -164,13 +171,18 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Column(
                 children: [
-                  Text(l10n.moveCounter(state.moveCount), style: theme.textTheme.bodyMedium),
+                  Text(l10n.moveCounter(state.moveCount),
+                      style: theme.textTheme.bodyMedium),
                   if (state.solved && state.bestMoves != null) ...[
-                    Text(l10n.recordLine(state.bestMoves!), style: theme.textTheme.bodyMedium),
+                    Text(l10n.recordLine(state.bestMoves!),
+                        style: theme.textTheme.bodyMedium),
                     if (matchedPar)
                       Text(
-                        activeGame.parProven ? l10n.optimalBadge : l10n.bookMatchedBadge,
-                        style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary),
+                        activeGame.parProven
+                            ? l10n.optimalBadge
+                            : l10n.bookMatchedBadge,
+                        style: theme.textTheme.bodySmall
+                            ?.copyWith(color: theme.colorScheme.primary),
                       ),
                   ],
                 ],
@@ -185,9 +197,14 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
   Widget _buildBoard(PlaygroundGame game) {
     switch (game.id) {
       case 'eight_chips':
-        return EightChipsBoard(gameId: widget.gameId, previewState: _previewState);
+        return EightChipsBoard(
+            gameId: widget.gameId, previewState: _previewState);
       case 'cats_dogs':
-        return CatsDogsBoard(gameId: widget.gameId, previewState: _previewState);
+        return CatsDogsBoard(
+            gameId: widget.gameId, previewState: _previewState);
+      case 'hourglass':
+        return HourglassBoard(
+            gameId: widget.gameId, previewState: _previewState);
       default:
         return Center(child: Text(ref.read(playgroundL10nProvider).comingSoon));
     }
@@ -250,7 +267,8 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
     );
   }
 
-  Future<void> _confirmRestart(BuildContext context, PlaygroundL10n l10n) async {
+  Future<void> _confirmRestart(
+      BuildContext context, PlaygroundL10n l10n) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
@@ -291,7 +309,9 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
               Text(l10n.gameRules(widget.gameId)),
               if (game.par != null) ...[
                 const SizedBox(height: 8),
-                Text(game.parProven ? l10n.parProvenLine(game.par!) : l10n.parBookLine(game.par!)),
+                Text(game.parProven
+                    ? l10n.parProvenLine(game.par!)
+                    : l10n.parBookLine(game.par!)),
               ],
               if (state.solved && game.optimalSolution != null) ...[
                 const SizedBox(height: 12),
@@ -354,7 +374,8 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
       barrierDismissible: false,
       builder: (dialogContext) => AlertDialog(
         title: Text(l10n.winTitle),
-        content: Text(matchedPar ? l10n.winBodyOptimal : l10n.winBody(state.moveCount)),
+        content: Text(
+            matchedPar ? l10n.winBodyOptimal : l10n.winBody(state.moveCount)),
         actions: [
           TextButton(
             onPressed: () {

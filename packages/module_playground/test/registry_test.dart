@@ -23,10 +23,10 @@ void main() {
     expect(ids.toSet(), hasLength(ids.length));
   });
 
-  test('exactly two enabled games: eight_chips, cats_dogs', () {
+  test('exactly three enabled games: eight_chips, cats_dogs, hourglass', () {
     final enabledIds =
         registry.where((g) => g.enabled).map((g) => g.id).toList();
-    expect(enabledIds, ['eight_chips', 'cats_dogs']);
+    expect(enabledIds, ['eight_chips', 'cats_dogs', 'hourglass']);
   });
 
   test('every game reports tutorial == false', () {
@@ -35,8 +35,7 @@ void main() {
     }
   });
 
-  test('every disabled game throws UnimplementedError from initialState()',
-      () {
+  test('every disabled game throws UnimplementedError from initialState()', () {
     for (final game in registry.where((g) => !g.enabled)) {
       expect(
         () => game.initialState(),

@@ -1,6 +1,7 @@
 import 'data.dart';
 import 'games/cats_dogs/cats_dogs.dart';
 import 'games/eight_chips/eight_chips.dart';
+import 'games/hourglass/hourglass.dart';
 import 'playground_game.dart';
 
 /// A game that is on the playground module's roadmap but not yet shipped.
@@ -61,16 +62,16 @@ class UnshippedPlaygroundGame extends PlaygroundGame {
 }
 
 /// Builds the playground module's full game registry, in the fixed order
-/// the list screen displays: `eight_chips` and `cats_dogs` (shipped), then
-/// the five remaining planned games as [UnshippedPlaygroundGame]
-/// placeholders.
+/// the list screen displays: `eight_chips`, `cats_dogs` and `hourglass`
+/// (shipped), then the four remaining planned games as
+/// [UnshippedPlaygroundGame] placeholders.
 ///
 /// [data] supplies both shipped games' parsed par/solution metadata (see
 /// `assets/puzzles/module06.json`).
 List<PlaygroundGame> buildPlaygroundRegistry(PlaygroundData data) => [
       EightChipsGame(data.forId('eight_chips')),
       CatsDogsGame(data.forId('cats_dogs')),
-      const UnshippedPlaygroundGame('hourglass', PlaygroundFamily.tokenGraph),
+      HourglassGame(data.forId('hourglass')),
       const UnshippedPlaygroundGame(
         'three_each',
         PlaygroundFamily.tilePlacement,

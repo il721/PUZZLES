@@ -3,17 +3,36 @@ import 'dart:io';
 
 import 'package:module_playground/module_playground.dart';
 
+import 'hourglass_search.dart';
+
 /// One shipped playground game's identity plus everything BFS needs to
 /// derive its `module06.json` entry from scratch: its board, a factory
 /// building the [PlaygroundGame] from optional parsed [PlaygroundGameData],
 /// and its position-legality predicate ([isLegal]), `null` for games with no
-/// such rule (see [solveBfs]/[reachableStateCount]).
+/// such rule (see [solveBfs]/[reachableStateCount]). A game whose state
+/// space is too large for the generic string-keyed [solveBfs] supplies
+/// [fastSolve] instead, a bitmask search of its own. [countClosure] is
+/// `false` for such a game too - its full reachable closure is far too large
+/// to enumerate, so the verification table prints `n/a` for it.
 typedef _GameDescriptor = ({
   String id,
   TokenGraphBoard board,
   PlaygroundGame Function(PlaygroundGameData? data) build,
   bool Function(TokenGraphState state)? isLegal,
+  IdenticalTokenSearchResult Function(PlaygroundGame game)? fastSolve,
+  bool countClosure,
 });
+
+/// «Песочные часы»'s own search. Fifteen interchangeable tokens on 29 nodes
+/// give C(29,15) = 77558760 positions, so the generic forward [solveBfs]
+/// cannot be used; [solveIdenticalTokens] runs a bidirectional bitmask
+/// search from the start position to [HourglassGame.goalState] instead.
+IdenticalTokenSearchResult _solveHourglass(PlaygroundGame game) =>
+    solveIdenticalTokens(
+      HourglassGame.board,
+      game.initialState() as TokenGraphState,
+      HourglassGame.goalState(),
+    );
 
 /// Every shipped playground game, in the order they should appear in
 /// `module06.json`. Adding a game here is the only change needed to bring it
@@ -24,12 +43,24 @@ const List<_GameDescriptor> _shippedGames = [
     board: EightChipsGame.board,
     build: EightChipsGame.new,
     isLegal: null,
+    fastSolve: null,
+    countClosure: true,
   ),
   (
     id: 'cats_dogs',
     board: CatsDogsGame.board,
     build: CatsDogsGame.new,
     isLegal: isPeacefulPosition,
+    fastSolve: null,
+    countClosure: true,
+  ),
+  (
+    id: 'hourglass',
+    board: HourglassGame.board,
+    build: HourglassGame.new,
+    isLegal: null,
+    fastSolve: _solveHourglass,
+    countClosure: false,
   ),
 ];
 
@@ -51,21 +82,43 @@ String _resolveDataPath(List<String> args) {
       'module06.json';
 }
 
+/// One descriptor's shortest-solution search: its own [fastSolve] when it
+/// has one, otherwise the generic [solveBfs].
+({int? par, List<PlaygroundMove> moves, int explored}) _search(
+  _GameDescriptor descriptor,
+  PlaygroundGame game,
+) {
+  final fastSolve = descriptor.fastSolve;
+  if (fastSolve != null) {
+    final result = fastSolve(game);
+    return (
+      par: result.optimalMoves,
+      moves: result.moves,
+      explored: result.statesExplored,
+    );
+  }
+  final result = solveBfs(
+    descriptor.board,
+    game.initialState() as TokenGraphState,
+    game.isSolved,
+    isLegal: descriptor.isLegal,
+  );
+  return (
+    par: result.optimalMoves,
+    moves: result.moves,
+    explored: result.statesExplored,
+  );
+}
+
 /// Computes one [descriptor]'s data from scratch (BFS par + one optimal move
 /// list) as a `module06.json` `games` entry.
 Map<String, dynamic> _emitGame(_GameDescriptor descriptor) {
   final game = descriptor.build(null);
-  final start = game.initialState() as TokenGraphState;
-  final result = solveBfs(
-    descriptor.board,
-    start,
-    game.isSolved,
-    isLegal: descriptor.isLegal,
-  );
+  final result = _search(descriptor, game);
 
   return {
     'id': descriptor.id,
-    'par': result.optimalMoves,
+    'par': result.par,
     'parProven': true,
     'parSource': 'solver',
     'solution': result.moves.map((m) => m.toJson()).toList(),
@@ -118,17 +171,14 @@ void _verify(String dataPath) {
     final game = descriptor.build(data.forId(descriptor.id));
     final start = game.initialState() as TokenGraphState;
 
-    final bfsResult = solveBfs(
-      descriptor.board,
-      start,
-      game.isSolved,
-      isLegal: descriptor.isLegal,
-    );
-    final closureSize = reachableStateCount(
-      descriptor.board,
-      start,
-      isLegal: descriptor.isLegal,
-    );
+    final searchResult = _search(descriptor, game);
+    final closureSize = descriptor.countClosure
+        ? reachableStateCount(
+            descriptor.board,
+            start,
+            isLegal: descriptor.isLegal,
+          )
+        : null;
 
     final storedPar = game.par;
     final storedSolution = game.optimalSolution;
@@ -139,19 +189,19 @@ void _verify(String dataPath) {
       hardFailures++;
       notes.add('HARD FAIL: module06.json has no par for ${descriptor.id}');
     }
-    if (bfsResult.optimalMoves == null) {
+    if (searchResult.par == null) {
       hardFailures++;
       notes.add(
         'HARD FAIL: goal state is unreachable by BFS (${descriptor.id})',
       );
     }
     if (storedPar != null &&
-        bfsResult.optimalMoves != null &&
-        storedPar != bfsResult.optimalMoves) {
+        searchResult.par != null &&
+        storedPar != searchResult.par) {
       hardFailures++;
       notes.add(
         'HARD FAIL: stored par $storedPar != BFS-computed par '
-        '${bfsResult.optimalMoves} (${descriptor.id})',
+        '${searchResult.par} (${descriptor.id})',
       );
     }
 
@@ -197,8 +247,9 @@ void _verify(String dataPath) {
 
     print(
       '${descriptor.id.padRight(12)} | ${'$storedPar'.padRight(11)} | '
-      '${'${bfsResult.optimalMoves}'.padRight(8)} | '
-      '${'$replayedLength'.padRight(16)} | ${'$closureSize'.padRight(17)} | '
+      '${'${searchResult.par}'.padRight(8)} | '
+      '${'$replayedLength'.padRight(16)} | '
+      '${'${closureSize ?? 'n/a'}'.padRight(17)} | '
       '${notes.isEmpty ? 'OK' : 'FAIL'}',
     );
     allNotes.addAll(notes);

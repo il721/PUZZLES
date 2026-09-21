@@ -15,7 +15,8 @@ Widget _wrap({required SaveService saveService, required Widget child}) {
     overrides: [
       playgroundPuzzlesProvider.overrideWith(
         (ref) async => buildPlaygroundRegistry(
-          const PlaygroundData(schemaVersion: 1, module: 'playground', games: []),
+          const PlaygroundData(
+              schemaVersion: 1, module: 'playground', games: []),
         ),
       ),
       playgroundSaveServiceProvider.overrideWithValue(saveService),
@@ -37,8 +38,10 @@ void main() {
   setUp(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(SystemChannels.platform, (call) async => null);
-    tempDir = Directory.systemTemp.createTempSync('module_playground_ui_list_test_');
+        .setMockMethodCallHandler(
+            SystemChannels.platform, (call) async => null);
+    tempDir =
+        Directory.systemTemp.createTempSync('module_playground_ui_list_test_');
     saveService = SaveService(() => tempDir);
   });
 
@@ -47,7 +50,7 @@ void main() {
   });
 
   testWidgets(
-      'renders seven rows; exactly two are tappable; five show comingSoon',
+      'renders seven rows; exactly three are tappable; four show comingSoon',
       (tester) async {
     await tester.pumpWidget(
       _wrap(saveService: saveService, child: const PlaygroundListScreen()),
@@ -57,10 +60,10 @@ void main() {
     expect(find.byType(ListTile), findsNWidgets(7));
 
     final tiles = tester.widgetList<ListTile>(find.byType(ListTile)).toList();
-    expect(tiles.where((t) => t.enabled).length, 2);
-    expect(tiles.where((t) => t.onTap != null).length, 2);
+    expect(tiles.where((t) => t.enabled).length, 3);
+    expect(tiles.where((t) => t.onTap != null).length, 3);
 
-    expect(find.text('Coming soon'), findsNWidgets(5));
+    expect(find.text('Coming soon'), findsNWidgets(4));
   });
 
   testWidgets('tapping a disabled row does not navigate', (tester) async {
@@ -69,8 +72,8 @@ void main() {
     );
     await _settle(tester);
 
-    // 'hourglass' is a disabled game in the fixed registry order.
-    await tester.tap(find.byKey(const ValueKey('pg-row-hourglass')));
+    // 'three_each' is a disabled game in the fixed registry order.
+    await tester.tap(find.byKey(const ValueKey('pg-row-three_each')));
     await _settle(tester);
     await tester.pump(const Duration(milliseconds: 400));
 

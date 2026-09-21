@@ -7,8 +7,7 @@ void main() {
   late PlaygroundData data;
 
   setUpAll(() {
-    final jsonString =
-        File('assets/puzzles/module06.json').readAsStringSync();
+    final jsonString = File('assets/puzzles/module06.json').readAsStringSync();
     data = PlaygroundData.fromJsonString(jsonString);
   });
 
@@ -40,6 +39,19 @@ void main() {
       expect(entry.parProven, isTrue);
       expect(entry.parSource, ParSource.solver);
       expect(entry.solution, hasLength(32));
+    },
+  );
+
+  test(
+    'hourglass entry has par 26, parProven true, parSource solver, '
+    'solution length 26',
+    () {
+      final entry = data.forId('hourglass');
+      expect(entry, isNotNull);
+      expect(entry!.par, 26);
+      expect(entry.parProven, isTrue);
+      expect(entry.parSource, ParSource.solver);
+      expect(entry.solution, hasLength(26));
     },
   );
 }
