@@ -16,5 +16,6 @@ export 'src/games/token_graph/token_graph_solver.dart';
 export 'src/games/eight_chips/eight_chips.dart';
 export 'src/games/cats_dogs/cats_dogs.dart';
 export 'src/games/hourglass/hourglass.dart';
+export 'src/games/three_each/three_each.dart';
 export 'src/data.dart';
 export 'src/registry.dart';

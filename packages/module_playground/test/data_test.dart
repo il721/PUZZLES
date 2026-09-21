@@ -54,4 +54,17 @@ void main() {
       expect(entry.solution, hasLength(26));
     },
   );
+
+  test(
+    'three_each entry has par null, parProven false, parSource null, '
+    'solution length 9',
+    () {
+      final entry = data.forId('three_each');
+      expect(entry, isNotNull);
+      expect(entry!.par, isNull);
+      expect(entry.parProven, isFalse);
+      expect(entry.parSource, isNull);
+      expect(entry.solution, hasLength(9));
+    },
+  );
 }

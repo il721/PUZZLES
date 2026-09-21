@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:module_playground/module_playground.dart';
 
 import 'hourglass_search.dart';
+import 'three_each_search.dart';
 
 /// One shipped playground game's identity plus everything BFS needs to
 /// derive its `module06.json` entry from scratch: its board, a factory
@@ -63,6 +64,84 @@ const List<_GameDescriptor> _shippedGames = [
     countClosure: false,
   ),
 ];
+
+/// The number of valid 9x9 squares «Всюду по три» admits under the shipped
+/// ruling (tiles rotate, never flip). Four essentially different squares,
+/// each of which can be turned as a whole into four orientations. Pinned
+/// here as a regression check on the tile transcription: change one circle
+/// and this number moves.
+const int _threeEachSolutionCount = 16;
+
+/// Computes «Всюду по три»'s data from scratch (one valid square, as nine
+/// placements). It has no move economy, so its par fields are null - the
+/// square is the answer, not the number of tiles it took to lay.
+Map<String, dynamic> _emitThreeEach() => {
+      'id': 'three_each',
+      'par': null,
+      'parProven': false,
+      'parSource': null,
+      'solution': searchThreeEach().moves.map((m) => m.toJson()).toList(),
+    };
+
+/// Verifies `module06.json`'s «Всюду по три» entry: re-runs the exhaustive
+/// placement search, asserts it still finds exactly
+/// [_threeEachSolutionCount] valid squares, and replays the stored solution
+/// move by move, asserting each placement is legal at its point in the
+/// replay and that the finished square satisfies the win predicate.
+///
+/// Prints its own row of the verification table and returns the number of
+/// hard failures, appending an explanatory note per failure to [notes].
+int _verifyThreeEach(PlaygroundData data, List<String> notes) {
+  final game = ThreeEachGame(data.forId('three_each'));
+  final search = searchThreeEach();
+  var failures = 0;
+
+  if (search.solutions != _threeEachSolutionCount) {
+    failures++;
+    notes.add(
+      'HARD FAIL: the placement search found ${search.solutions} valid '
+      'squares, expected $_threeEachSolutionCount (three_each)',
+    );
+  }
+
+  final stored = game.optimalSolution;
+  int? replayedLength;
+  if (stored == null) {
+    failures++;
+    notes.add('HARD FAIL: module06.json has no solution for three_each');
+  } else {
+    replayedLength = stored.length;
+    var state = game.initialState();
+    var replayOk = true;
+    for (var i = 0; i < stored.length; i++) {
+      final move = stored[i];
+      if (!game.legalMoves(state, from: move.from).contains(move)) {
+        failures++;
+        notes.add(
+          'HARD FAIL: stored solution move #$i ($move) is not legal at that '
+          'point in the replay (three_each)',
+        );
+        replayOk = false;
+        break;
+      }
+      state = game.applyMove(state, move);
+    }
+    if (replayOk && !game.isSolved(state)) {
+      failures++;
+      notes.add(
+        'HARD FAIL: replaying the stored solution ends unsolved (three_each)',
+      );
+    }
+  }
+
+  print(
+    '${'three_each'.padRight(12)} | ${'n/a'.padRight(11)} | '
+    '${'n/a'.padRight(8)} | ${'$replayedLength'.padRight(16)} | '
+    '${'n/a'.padRight(17)} | ${failures == 0 ? 'OK' : 'FAIL'}',
+  );
+
+  return failures;
+}
 
 /// Resolves the path to `module06.json`.
 ///
@@ -133,7 +212,10 @@ void _emit() {
   final doc = {
     'schemaVersion': 1,
     'module': 'playground',
-    'games': [for (final descriptor in _shippedGames) _emitGame(descriptor)],
+    'games': [
+      for (final descriptor in _shippedGames) _emitGame(descriptor),
+      _emitThreeEach(),
+    ],
   };
 
   print(const JsonEncoder.withIndent(' ').convert(doc));
@@ -254,6 +336,8 @@ void _verify(String dataPath) {
     );
     allNotes.addAll(notes);
   }
+
+  hardFailures += _verifyThreeEach(data, allNotes);
 
   print('-' * 100);
   for (final note in allNotes) {
