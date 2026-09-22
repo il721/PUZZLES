@@ -7,30 +7,34 @@ import 'package:module_playground/module_playground.dart';
 import '../../playground_l10n.dart';
 import '../../playground_session_controller.dart';
 
-/// Cardboard-tile colours for «Узоры», matching «Всюду по три»: the tint
-/// follows the theme ([_pCardboard] in light, [_pCardboardDark] in dark)
-/// while the drawn line stays red in both, because the red line IS the
-/// puzzle and a dark theme must not recolour it. Selection highlights and
-/// legal-target hints borrow the theme's [ColorScheme.primary].
+/// Cardboard-tile colours for «Узоры», matching «Всюду по три»: the face
+/// is parchment with a red line in light theme and dark grey with a blue
+/// line in dark theme. The line-colour pairing is chosen for contrast;
+/// what must never change is the line's SHAPE, since the shape is the
+/// puzzle. Selection highlights and legal-target hints borrow the theme's
+/// [ColorScheme.primary].
 const Color _pCardboard = Color(0xFFFAF8F2);
-const Color _pCardboardDark = Color(0xFFCFD3D6);
+const Color _pCardboardDark = Color(0xFF33373C);
 const Color _pBorder = Color(0xFF1A1A1A);
 const Color _pRed = Color(0xFFD32F2F);
+const Color _pLineDark = Color(0xFF4FA3FF);
 
 /// Paints one tile - a board slot or a tray tile - as cardboard with a dark
-/// border and the red line its four cells carry. [masks] is the tile's cells
+/// border and the line its four cells carry. [masks] is the tile's cells
 /// as direction-bit masks in the order top-left, top-right, bottom-left,
 /// bottom-right, or null for an empty slot. [highlight], when non-null,
 /// draws an extra inset border in that colour, used for the selected tile
-/// and for legal-target hints.
+/// and for legal-target hints. [line] is the colour of the drawn line.
 class _PatternsTilePainter extends CustomPainter {
   final List<int>? masks;
   final Color background;
+  final Color line;
   final Color? highlight;
 
   const _PatternsTilePainter({
     required this.masks,
     required this.background,
+    required this.line,
     this.highlight,
   });
 
@@ -50,8 +54,8 @@ class _PatternsTilePainter extends CustomPainter {
     final cells = masks;
     if (cells != null) {
       final half = size.width / 2;
-      final line = Paint()
-        ..color = _pRed
+      final linePaint = Paint()
+        ..color = line
         ..strokeWidth = math.max(2, size.width * 0.045)
         ..strokeCap = StrokeCap.round
         ..style = PaintingStyle.stroke;
@@ -63,16 +67,16 @@ class _PatternsTilePainter extends CustomPainter {
         );
         final mask = cells[k];
         if (mask & patternsNorth != 0) {
-          canvas.drawLine(centre, centre.translate(0, -half / 2), line);
+          canvas.drawLine(centre, centre.translate(0, -half / 2), linePaint);
         }
         if (mask & patternsSouth != 0) {
-          canvas.drawLine(centre, centre.translate(0, half / 2), line);
+          canvas.drawLine(centre, centre.translate(0, half / 2), linePaint);
         }
         if (mask & patternsWest != 0) {
-          canvas.drawLine(centre, centre.translate(-half / 2, 0), line);
+          canvas.drawLine(centre, centre.translate(-half / 2, 0), linePaint);
         }
         if (mask & patternsEast != 0) {
-          canvas.drawLine(centre, centre.translate(half / 2, 0), line);
+          canvas.drawLine(centre, centre.translate(half / 2, 0), linePaint);
         }
       }
     }
@@ -225,7 +229,7 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
   }
 
   Widget _slot(int index, PatternsState state, ColorScheme scheme,
-      Color background, int? selectedSlot, int? selectedTrayTile) {
+      Color background, Color line, int? selectedSlot, int? selectedTrayTile) {
     final placement = state.slots[index];
 
     Color? highlight;
@@ -248,6 +252,7 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
                     placement.rotation,
                   ),
             background: background,
+            line: line,
             highlight: highlight,
           ),
         ),
@@ -255,8 +260,8 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
     );
   }
 
-  Widget _trayTile(
-      int tile, ColorScheme scheme, Color background, int? selectedTrayTile) {
+  Widget _trayTile(int tile, ColorScheme scheme, Color background, Color line,
+      int? selectedTrayTile) {
     final rotation = tile == selectedTrayTile ? _pendingRotation : 0;
     return GestureDetector(
       key: ValueKey('pg-p5-tray-$tile'),
@@ -268,6 +273,7 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
           painter: _PatternsTilePainter(
             masks: patternsTileMasks(_game.tiles[tile], rotation),
             background: background,
+            line: line,
             highlight: tile == selectedTrayTile ? scheme.primary : null,
           ),
         ),
@@ -285,6 +291,8 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
     final scheme = theme.colorScheme;
     final background =
         theme.brightness == Brightness.dark ? _pCardboardDark : _pCardboard;
+    final line =
+        theme.brightness == Brightness.dark ? _pLineDark : _pRed;
 
     // During "show solution" playback the selection left over from live play
     // has nothing to do with what the preview shows, so blank both
@@ -322,6 +330,7 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
                                     displayState,
                                     scheme,
                                     background,
+                                    line,
                                     selectedSlot,
                                     selectedTrayTile,
                                   ),
@@ -349,7 +358,7 @@ class _PatternsBoardState extends ConsumerState<PatternsBoard> {
               alignment: WrapAlignment.center,
               children: [
                 for (final tile in tray)
-                  _trayTile(tile, scheme, background, selectedTrayTile),
+                  _trayTile(tile, scheme, background, line, selectedTrayTile),
               ],
             ),
           ),
