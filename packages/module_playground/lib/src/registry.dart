@@ -2,6 +2,7 @@ import 'data.dart';
 import 'games/cats_dogs/cats_dogs.dart';
 import 'games/eight_chips/eight_chips.dart';
 import 'games/hourglass/hourglass.dart';
+import 'games/patterns/patterns.dart';
 import 'games/three_each/three_each.dart';
 import 'playground_game.dart';
 
@@ -63,21 +64,18 @@ class UnshippedPlaygroundGame extends PlaygroundGame {
 }
 
 /// Builds the playground module's full game registry, in the fixed order
-/// the list screen displays: `eight_chips`, `cats_dogs`, `hourglass` and
-/// `three_each` (shipped), then the three remaining planned games as
-/// [UnshippedPlaygroundGame] placeholders.
+/// the list screen displays: `eight_chips`, `cats_dogs`, `hourglass`,
+/// `three_each` and `patterns5` (shipped), then the two remaining planned
+/// games as [UnshippedPlaygroundGame] placeholders.
 ///
-/// [data] supplies both shipped games' parsed par/solution metadata (see
+/// [data] supplies every shipped game's parsed par/solution metadata (see
 /// `assets/puzzles/module06.json`).
 List<PlaygroundGame> buildPlaygroundRegistry(PlaygroundData data) => [
       EightChipsGame(data.forId('eight_chips')),
       CatsDogsGame(data.forId('cats_dogs')),
       HourglassGame(data.forId('hourglass')),
       ThreeEachGame(data.forId('three_each')),
-      const UnshippedPlaygroundGame(
-        'patterns5',
-        PlaygroundFamily.tilePlacement,
-      ),
+      PatternsGame.patterns5(data.forId('patterns5')),
       const UnshippedPlaygroundGame(
         'patterns4',
         PlaygroundFamily.tilePlacement,
