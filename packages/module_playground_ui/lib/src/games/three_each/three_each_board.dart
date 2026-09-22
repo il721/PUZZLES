@@ -14,7 +14,7 @@ import '../../playground_session_controller.dart';
 /// highlights and legal-target hints borrow the theme's
 /// [ColorScheme.primary].
 const Color _teParchment = Color(0xFFFAF8F2);
-const Color _teParchmentDark = Color(0xFFCFD3D6);
+const Color _teParchmentDark = Color(0xFF9AA0A6);
 const Color _teGridLine = Color(0xFFBDBDBD);
 const Color _teBorder = Color(0xFF1A1A1A);
 const Color _teRed = Color(0xFFD32F2F);
