@@ -67,4 +67,17 @@ void main() {
       expect(entry.solution, hasLength(9));
     },
   );
+
+  test(
+    'patterns5 entry has par null, parProven false, parSource null, '
+    'solution length 25',
+    () {
+      final entry = data.forId('patterns5');
+      expect(entry, isNotNull);
+      expect(entry!.par, isNull);
+      expect(entry.parProven, isFalse);
+      expect(entry.parSource, isNull);
+      expect(entry.solution, hasLength(25));
+    },
+  );
 }

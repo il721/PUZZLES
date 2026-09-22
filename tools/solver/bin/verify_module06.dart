@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:module_playground/module_playground.dart';
 
 import 'hourglass_search.dart';
+import 'patterns5_search.dart';
 import 'three_each_search.dart';
 
 /// One shipped playground game's identity plus everything BFS needs to
@@ -72,6 +73,12 @@ const List<_GameDescriptor> _shippedGames = [
 /// and this number moves.
 const int _threeEachSolutionCount = 16;
 
+/// The number of valid patterns «Узоры 5x5» admits under the same ruling.
+/// Pinned as a regression check on the tile transcription exactly like
+/// [_threeEachSolutionCount]. Note that the full count takes minutes to
+/// re-derive - it is the one slow check in this CLI besides «Песочные часы».
+const int _patterns5SolutionCount = 2048;
+
 /// Computes «Всюду по три»'s data from scratch (one valid square, as nine
 /// placements). It has no move economy, so its par fields are null - the
 /// square is the answer, not the number of tiles it took to lay.
@@ -83,24 +90,42 @@ Map<String, dynamic> _emitThreeEach() => {
       'solution': searchThreeEach().moves.map((m) => m.toJson()).toList(),
     };
 
-/// Verifies `module06.json`'s «Всюду по три» entry: re-runs the exhaustive
-/// placement search, asserts it still finds exactly
-/// [_threeEachSolutionCount] valid squares, and replays the stored solution
-/// move by move, asserting each placement is legal at its point in the
-/// replay and that the finished square satisfies the win predicate.
+/// Computes «Узоры 5x5»'s data from scratch (one valid pattern, as
+/// twenty-five placements). Like «Всюду по три» it has no move economy, so
+/// its par fields are null. The search stops at the first pattern it finds -
+/// counting all of them is the verification step's job, not the emitter's.
+Map<String, dynamic> _emitPatterns5() => {
+      'id': 'patterns5',
+      'par': null,
+      'parProven': false,
+      'parSource': null,
+      'solution': searchPatterns(PatternsGame.patterns5(), stopAfter: 1)
+          .moves
+          .map((m) => m.toJson())
+          .toList(),
+    };
+
+/// Verifies one tile-placement game's `module06.json` entry: asserts the
+/// exhaustive placement [search] still finds exactly [expectedSolutions]
+/// arrangements, and replays the stored solution move by move, asserting
+/// each placement is legal at its point in the replay and that the finished
+/// board satisfies the win predicate.
 ///
 /// Prints its own row of the verification table and returns the number of
 /// hard failures, appending an explanatory note per failure to [notes].
-int _verifyThreeEach(PlaygroundData data, List<String> notes) {
-  final game = ThreeEachGame(data.forId('three_each'));
-  final search = searchThreeEach();
+int _verifyPlacementGame(
+  PlaygroundGame game,
+  ({int solutions, List<PlaygroundMove> moves, int nodes}) search,
+  int expectedSolutions,
+  List<String> notes,
+) {
   var failures = 0;
 
-  if (search.solutions != _threeEachSolutionCount) {
+  if (search.solutions != expectedSolutions) {
     failures++;
     notes.add(
       'HARD FAIL: the placement search found ${search.solutions} valid '
-      'squares, expected $_threeEachSolutionCount (three_each)',
+      'arrangements, expected $expectedSolutions (${game.id})',
     );
   }
 
@@ -108,7 +133,7 @@ int _verifyThreeEach(PlaygroundData data, List<String> notes) {
   int? replayedLength;
   if (stored == null) {
     failures++;
-    notes.add('HARD FAIL: module06.json has no solution for three_each');
+    notes.add('HARD FAIL: module06.json has no solution for ${game.id}');
   } else {
     replayedLength = stored.length;
     var state = game.initialState();
@@ -119,7 +144,7 @@ int _verifyThreeEach(PlaygroundData data, List<String> notes) {
         failures++;
         notes.add(
           'HARD FAIL: stored solution move #$i ($move) is not legal at that '
-          'point in the replay (three_each)',
+          'point in the replay (${game.id})',
         );
         replayOk = false;
         break;
@@ -129,13 +154,13 @@ int _verifyThreeEach(PlaygroundData data, List<String> notes) {
     if (replayOk && !game.isSolved(state)) {
       failures++;
       notes.add(
-        'HARD FAIL: replaying the stored solution ends unsolved (three_each)',
+        'HARD FAIL: replaying the stored solution ends unsolved (${game.id})',
       );
     }
   }
 
   print(
-    '${'three_each'.padRight(12)} | ${'n/a'.padRight(11)} | '
+    '${game.id.padRight(12)} | ${'n/a'.padRight(11)} | '
     '${'n/a'.padRight(8)} | ${'$replayedLength'.padRight(16)} | '
     '${'n/a'.padRight(17)} | ${failures == 0 ? 'OK' : 'FAIL'}',
   );
@@ -215,6 +240,7 @@ void _emit() {
     'games': [
       for (final descriptor in _shippedGames) _emitGame(descriptor),
       _emitThreeEach(),
+      _emitPatterns5(),
     ],
   };
 
@@ -337,7 +363,18 @@ void _verify(String dataPath) {
     allNotes.addAll(notes);
   }
 
-  hardFailures += _verifyThreeEach(data, allNotes);
+  hardFailures += _verifyPlacementGame(
+    ThreeEachGame(data.forId('three_each')),
+    searchThreeEach(),
+    _threeEachSolutionCount,
+    allNotes,
+  );
+  hardFailures += _verifyPlacementGame(
+    PatternsGame.patterns5(data.forId('patterns5')),
+    searchPatterns(PatternsGame.patterns5()),
+    _patterns5SolutionCount,
+    allNotes,
+  );
 
   print('-' * 100);
   for (final note in allNotes) {
