@@ -110,3 +110,38 @@ List<int> patternsTileMasks(List<String> tile, int rotation) {
   }
   return masks;
 }
+
+/// The sixteen tiles of «Узоры 4x4» (Мочалов, 1980, p. 63, the second task
+/// on the «Узоры» page), in tray order.
+///
+/// The book asks for the same closed line over only sixteen of the twenty-
+/// five squares, and its printed answer on p. 116 uses a specific sixteen:
+/// this list is exactly those, so the tray is fixed rather than a choice of
+/// sixteen out of twenty-five. They are, in [patterns5Tiles] numbering,
+/// T2, T5, T6, T8, T10, T11, T12, T13, T14, T15, T18, T19, T20, T22, T24
+/// and T25 - sixteen distinct tiles, each used once.
+///
+/// Derived by sampling the red colour mask of the printed 4x4 answer at the
+/// centres of its 8x8 cells and along each cell's four edges, the same
+/// method that produced [patterns5Tiles]. Four checks back it: all 64 cells
+/// came out with exactly two directions, no red end points off the square,
+/// every cell-to-cell seam agrees, and the sixteen tiles are an exact
+/// sub-multiset of [patterns5Tiles] under rotation alone.
+const List<List<String>> patterns4Tiles = [
+  ['NE', 'NW', 'SW', 'SE'],
+  ['EW', 'EW', 'SW', 'SE'],
+  ['EW', 'SW', 'SW', 'NS'],
+  ['EW', 'SW', 'SW', 'NE'],
+  ['SE', 'SW', 'NW', 'NE'],
+  ['SE', 'SW', 'NW', 'NS'],
+  ['SE', 'SW', 'NS', 'NE'],
+  ['SE', 'SW', 'NS', 'NS'],
+  ['NE', 'NW', 'SE', 'SW'],
+  ['NE', 'NW', 'SE', 'EW'],
+  ['EW', 'EW', 'EW', 'EW'],
+  ['EW', 'EW', 'SE', 'EW'],
+  ['EW', 'EW', 'EW', 'SW'],
+  ['NE', 'EW', 'EW', 'SW'],
+  ['NS', 'SE', 'NE', 'NW'],
+  ['SW', 'NS', 'NE', 'NW'],
+];

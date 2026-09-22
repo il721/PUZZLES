@@ -80,4 +80,17 @@ void main() {
       expect(entry.solution, hasLength(25));
     },
   );
+
+  test(
+    'patterns4 entry has par null, parProven false, parSource null, '
+    'solution length 16',
+    () {
+      final entry = data.forId('patterns4');
+      expect(entry, isNotNull);
+      expect(entry!.par, isNull);
+      expect(entry.parProven, isFalse);
+      expect(entry.parSource, isNull);
+      expect(entry.solution, hasLength(16));
+    },
+  );
 }

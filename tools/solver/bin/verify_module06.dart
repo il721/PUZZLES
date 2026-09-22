@@ -79,6 +79,12 @@ const int _threeEachSolutionCount = 16;
 /// re-derive - it is the one slow check in this CLI besides «Песочные часы».
 const int _patterns5SolutionCount = 2048;
 
+/// The number of valid patterns «Узоры 4x4» admits over its sixteen-tile
+/// tray, pinned exactly like [_patterns5SolutionCount]. The tray is fixed at
+/// sixteen tiles rather than chosen out of twenty-five, so this search is
+/// the quick one of the two: it closes in seconds.
+const int _patterns4SolutionCount = 512;
+
 /// Computes «Всюду по три»'s data from scratch (one valid square, as nine
 /// placements). It has no move economy, so its par fields are null - the
 /// square is the answer, not the number of tiles it took to lay.
@@ -100,6 +106,19 @@ Map<String, dynamic> _emitPatterns5() => {
       'parProven': false,
       'parSource': null,
       'solution': searchPatterns(PatternsGame.patterns5(), stopAfter: 1)
+          .moves
+          .map((m) => m.toJson())
+          .toList(),
+    };
+
+/// Computes «Узоры 4x4»'s data from scratch (one valid pattern, as sixteen
+/// placements), exactly the way [_emitPatterns5] does for the larger board.
+Map<String, dynamic> _emitPatterns4() => {
+      'id': 'patterns4',
+      'par': null,
+      'parProven': false,
+      'parSource': null,
+      'solution': searchPatterns(PatternsGame.patterns4(), stopAfter: 1)
           .moves
           .map((m) => m.toJson())
           .toList(),
@@ -241,6 +260,7 @@ void _emit() {
       for (final descriptor in _shippedGames) _emitGame(descriptor),
       _emitThreeEach(),
       _emitPatterns5(),
+      _emitPatterns4(),
     ],
   };
 
@@ -373,6 +393,12 @@ void _verify(String dataPath) {
     PatternsGame.patterns5(data.forId('patterns5')),
     searchPatterns(PatternsGame.patterns5()),
     _patterns5SolutionCount,
+    allNotes,
+  );
+  hardFailures += _verifyPlacementGame(
+    PatternsGame.patterns4(data.forId('patterns4')),
+    searchPatterns(PatternsGame.patterns4()),
+    _patterns4SolutionCount,
     allNotes,
   );
 

@@ -50,7 +50,7 @@ void main() {
   });
 
   testWidgets(
-      'renders seven rows; exactly five are tappable; two show comingSoon',
+      'renders seven rows; exactly six are tappable; one shows comingSoon',
       (tester) async {
     await tester.pumpWidget(
       _wrap(saveService: saveService, child: const PlaygroundListScreen()),
@@ -60,10 +60,10 @@ void main() {
     expect(find.byType(ListTile), findsNWidgets(7));
 
     final tiles = tester.widgetList<ListTile>(find.byType(ListTile)).toList();
-    expect(tiles.where((t) => t.enabled).length, 5);
-    expect(tiles.where((t) => t.onTap != null).length, 5);
+    expect(tiles.where((t) => t.enabled).length, 6);
+    expect(tiles.where((t) => t.onTap != null).length, 6);
 
-    expect(find.text('Coming soon'), findsNWidgets(2));
+    expect(find.text('Coming soon'), findsOneWidget);
   });
 
   testWidgets('tapping a disabled row does not navigate', (tester) async {
@@ -72,8 +72,9 @@ void main() {
     );
     await _settle(tester);
 
-    // 'patterns4' is a disabled game in the fixed registry order.
-    await tester.tap(find.byKey(const ValueKey('pg-row-patterns4')));
+    // 'swap_blocks' is the one disabled game left in the fixed registry
+    // order.
+    await tester.tap(find.byKey(const ValueKey('pg-row-swap_blocks')));
     await _settle(tester);
     await tester.pump(const Duration(milliseconds: 400));
 

@@ -211,6 +211,7 @@ class _PlaygroundGameScreenState extends ConsumerState<PlaygroundGameScreen>
         return ThreeEachBoard(
             gameId: widget.gameId, previewState: _previewState);
       case 'patterns5':
+      case 'patterns4':
         return PatternsBoard(
           gameId: widget.gameId,
           game: game as PatternsGame,

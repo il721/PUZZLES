@@ -1,10 +1,11 @@
 /// Pure-Dart logic for the "playground" (Головоломки-игры) puzzle module: a
 /// shared game contract for seven small, unrelated play-puzzles; the
 /// token-graph engine (board, state, rules, BFS solver) shared by the
-/// slide-a-token-along-a-line family; the five shipped games
+/// slide-a-token-along-a-line family; the six shipped games
 /// ("Восемь фишек" / eight chips, "Кошки и собаки" / cats and dogs,
-/// "Песочные часы" / hourglass, "Всюду по три" / three each and
-/// "Узоры 5x5" / patterns5); puzzle-data parsing; and the module's game
+/// "Песочные часы" / hourglass, "Всюду по три" / three each,
+/// "Узоры 5x5" / patterns5 and "Узоры 4x4" / patterns4); puzzle-data
+/// parsing; and the module's game
 /// registry.
 library;
 

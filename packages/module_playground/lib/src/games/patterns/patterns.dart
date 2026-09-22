@@ -124,6 +124,16 @@ class PatternsGame extends PlaygroundGame {
         data: data,
       );
 
+  /// «Узоры 4x4»: the sixteen tiles of [patterns4Tiles], laid into a 4x4
+  /// square. Same rules and same win predicate as [PatternsGame.patterns5],
+  /// a separate game with its own tray, board and solved flag.
+  factory PatternsGame.patterns4([PlaygroundGameData? data]) => PatternsGame(
+        id: 'patterns4',
+        tiles: patterns4Tiles,
+        size: 4,
+        data: data,
+      );
+
   /// The number of board slots, [size] squared.
   int get slotCount => size * size;
 

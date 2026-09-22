@@ -51,9 +51,11 @@ class AppPlaygroundL10n implements PlaygroundL10n {
         return _l10n.playgroundRulesThreeEach;
       case 'patterns5':
         return _l10n.playgroundRulesPatterns5;
+      case 'patterns4':
+        return _l10n.playgroundRulesPatterns4;
       default:
-        // The other two games are greyed out and unreachable; their rules
-        // keys arrive in their own milestones.
+        // The last game is greyed out and unreachable; its rules key
+        // arrives in its own milestone.
         return '';
     }
   }

@@ -65,8 +65,8 @@ class UnshippedPlaygroundGame extends PlaygroundGame {
 
 /// Builds the playground module's full game registry, in the fixed order
 /// the list screen displays: `eight_chips`, `cats_dogs`, `hourglass`,
-/// `three_each` and `patterns5` (shipped), then the two remaining planned
-/// games as [UnshippedPlaygroundGame] placeholders.
+/// `three_each`, `patterns5` and `patterns4` (shipped), then the last
+/// planned game as an [UnshippedPlaygroundGame] placeholder.
 ///
 /// [data] supplies every shipped game's parsed par/solution metadata (see
 /// `assets/puzzles/module06.json`).
@@ -76,10 +76,7 @@ List<PlaygroundGame> buildPlaygroundRegistry(PlaygroundData data) => [
       HourglassGame(data.forId('hourglass')),
       ThreeEachGame(data.forId('three_each')),
       PatternsGame.patterns5(data.forId('patterns5')),
-      const UnshippedPlaygroundGame(
-        'patterns4',
-        PlaygroundFamily.tilePlacement,
-      ),
+      PatternsGame.patterns4(data.forId('patterns4')),
       const UnshippedPlaygroundGame(
         'swap_blocks',
         PlaygroundFamily.slidingBlocks,
