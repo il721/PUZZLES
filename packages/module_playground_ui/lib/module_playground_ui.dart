@@ -10,6 +10,7 @@ export 'src/games/cats_dogs/cats_dogs_board.dart';
 export 'src/games/eight_chips/eight_chips_board.dart';
 export 'src/games/hourglass/hourglass_board.dart';
 export 'src/games/patterns/patterns_board.dart';
+export 'src/games/swap_blocks/swap_blocks_board.dart';
 export 'src/games/three_each/three_each_board.dart';
 export 'src/playground_game_screen.dart';
 export 'src/playground_l10n.dart';

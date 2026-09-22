@@ -4,36 +4,66 @@
   "moduleRebusTitle": "Square Rebuses",
   "moduleRebusDescription": "Arithmetic rebuses: fill in the boxes so every equation checks out.",
   "moduleDigitRebusTitle": "Digit Rebuses",
-  "@moduleDigitRebusTitle": {"description": "Title of Module 02."},
+  "@moduleDigitRebusTitle": {
+    "description": "Title of Module 02."
+  },
   "moduleDigitRebusDescription": "Every row and every column is an equation: place digits following the glyph hints.",
-  "@moduleDigitRebusDescription": {"description": "Short description of Module 02, shown on its home-screen card."},
+  "@moduleDigitRebusDescription": {
+    "description": "Short description of Module 02, shown on its home-screen card."
+  },
   "digitRebusListTitle": "Digit Rebuses",
-  "@digitRebusListTitle": {"description": "Title of Module 02's puzzle list screen."},
+  "@digitRebusListTitle": {
+    "description": "Title of Module 02's puzzle list screen."
+  },
   "digitRebusResetConfirmBody": "All entered digits will be removed.",
-  "@digitRebusResetConfirmBody": {"description": "Body text of Module 02's reset confirmation dialog (no givens in this module)."},
+  "@digitRebusResetConfirmBody": {
+    "description": "Body text of Module 02's reset confirmation dialog (no givens in this module)."
+  },
   "digitRebusTutorialStep1": "This is a 4×4 square: every row and every column is an equation, solved strictly left to right (top to bottom), with no operator precedence. The fourth cell is the result.",
-  "@digitRebusTutorialStep1": {"description": "Module 02 tutorial step 1 of 9."},
+  "@digitRebusTutorialStep1": {
+    "description": "Module 02 tutorial step 1 of 9."
+  },
   "digitRebusTutorialStep2": "The digits are hidden behind glyphs. Each glyph admits only a few digits — the legend below the grid always shows which: a loop on top, for example, means 0, 8 or 9.",
-  "@digitRebusTutorialStep2": {"description": "Module 02 tutorial step 2 of 9."},
+  "@digitRebusTutorialStep2": {
+    "description": "Module 02 tutorial step 2 of 9."
+  },
   "digitRebusTutorialStep3": "Start with row 2: (a + b) × c. The result is a single digit and the multiplier is at least 3, so a + b is at most 3: only a = 1 and b = 2 fit.",
-  "@digitRebusTutorialStep3": {"description": "Module 02 tutorial step 3 of 9."},
+  "@digitRebusTutorialStep3": {
+    "description": "Module 02 tutorial step 3 of 9."
+  },
   "digitRebusTutorialStep4": "Then 1 + 2 = 3 and 3 × 3 = 9 — row 2 reads 1 + 2 × 3 = 9.",
-  "@digitRebusTutorialStep4": {"description": "Module 02 tutorial step 4 of 9."},
+  "@digitRebusTutorialStep4": {
+    "description": "Module 02 tutorial step 4 of 9."
+  },
   "digitRebusTutorialStep5": "Column 1: (a − 1) × c. The multiplier is again at least 3, so a − 1 = 3, meaning a = 4 — and 3 × 3 = 9: the column reads 4 − 1 × 3 = 9.",
-  "@digitRebusTutorialStep5": {"description": "Module 02 tutorial step 5 of 9."},
+  "@digitRebusTutorialStep5": {
+    "description": "Module 02 tutorial step 5 of 9."
+  },
   "digitRebusTutorialStep6": "Row 3: 3 + b + c. Of the admitted digits only 3 + 2 + 1 = 6 works.",
-  "@digitRebusTutorialStep6": {"description": "Module 02 tutorial step 6 of 9."},
+  "@digitRebusTutorialStep6": {
+    "description": "Module 02 tutorial step 6 of 9."
+  },
   "digitRebusTutorialStep7": "Column 3: a − 3 − 1. Of 0, 6 and 8 only 6 works: 6 − 3 − 1 = 2.",
-  "@digitRebusTutorialStep7": {"description": "Module 02 tutorial step 7 of 9."},
+  "@digitRebusTutorialStep7": {
+    "description": "Module 02 tutorial step 7 of 9."
+  },
   "digitRebusTutorialStep8": "The remaining cells follow from their rows: 4 + 8 : 6 = 2 and 9 − 3 : 2 = 3. All eight equations hold.",
-  "@digitRebusTutorialStep8": {"description": "Module 02 tutorial step 8 of 9."},
+  "@digitRebusTutorialStep8": {
+    "description": "Module 02 tutorial step 8 of 9."
+  },
   "digitRebusTutorialStep9": "Done! In the puzzles, tap a cell — the menu shows only the digits its glyph admits. Any filling where all eight equations hold wins.",
-  "@digitRebusTutorialStep9": {"description": "Module 02 tutorial step 9 of 9."},
+  "@digitRebusTutorialStep9": {
+    "description": "Module 02 tutorial step 9 of 9."
+  },
   "homeModuleProgress": "Solved: {solved} of {total}",
   "@homeModuleProgress": {
     "placeholders": {
-      "solved": {"type": "int"},
-      "total": {"type": "int"}
+      "solved": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "homeSettingsTooltip": "Settings",
@@ -58,7 +88,9 @@
   "puzzleN": "Puzzle {n}",
   "@puzzleN": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "puzzleStatusUntouched": "Not started",
@@ -77,13 +109,17 @@
   "winTime": "Time: {time}",
   "@winTime": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "winChecks": "Checks: {count}",
   "@winChecks": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "hasErrors": "The grid is full, but something doesn't add up. Check the highlighted cells.",
@@ -98,8 +134,12 @@
   "tutorialStepCounter": "Step {current} of {total}",
   "@tutorialStepCounter": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "tutorialStep1": "Each square holds exactly one digit. No number equals zero, and no number starts with zero (though numbers may end with zero).",
@@ -197,20 +237,31 @@
   "importConfirmTitle": "Load progress?",
   "importConfirmBody": "File created: {date}. Your current progress will not be lost — your best results are kept.",
   "@importConfirmBody": {
-    "placeholders": {"date": {"type": "String"}}
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "importConfirmApply": "Load",
   "importConfirmCancel": "Cancel",
   "importSuccess": "Puzzles added: {added}, updated: {updated}.",
   "@importSuccess": {
-    "placeholders": {"added": {"type": "int"}, "updated": {"type": "int"}}
+    "placeholders": {
+      "added": {
+        "type": "int"
+      },
+      "updated": {
+        "type": "int"
+      }
+    }
   },
   "importNothingNew": "No new results found.",
   "importFailedFormat": "That is not a progress file.",
   "importFailedVersion": "This file was made by a newer version of the app. Please update.",
   "modulePlaygroundTitle": "Puzzle games",
   "modulePlaygroundDescription": "Seven small play-puzzles: chips, tiles, blocks.",
-  "helpRulesPlayground": "This section isn't variants of one puzzle, but seven separate small games: each has its own board and its own rules, shown by the ℹ button on its screen. A puzzle counts as solved once its goal position is reached. For the move-economy puzzles, the app also records your best move count and marks it when it matches the proven minimum. Games not yet available are shown greyed out. Only the first six are open so far — \"Eight chips\", \"Cats and dogs\", \"Hourglass\", \"Three of each\", \"Patterns 5 × 5\" and \"Patterns 4 × 4\": in Eight chips, pieces 1–8 stand at the tips of an eight-pointed star; they can only move along straight lines (a piece may slide further through the free centre), and the goal is to arrange them in reverse order; the proven minimum is 28 moves. In Cats and dogs, three cats and three dogs swap sides of a park: each move sends one animal to an adjacent free square, and a cat and a dog must never end up next to each other; the proven minimum is 32 moves. In Hourglass, fifteen pieces must be brought from the upper triangle into the lower one: a move either steps a piece onto an adjacent free circle or jumps it over an adjacent piece, checkers-style, and several jumps in a row by one piece count as a single move; the proven minimum is 26 moves. In Three of each, nine 3×3 tiles carrying red, white and black circles must be arranged into a 9×9 square so that every row, every column and both diagonals hold exactly one circle of each colour; the tiles can be rotated but not flipped, and the move count doesn't matter here. In Patterns 5 × 5, twenty-five tiles drawn over with red lines must be laid into a 5 × 5 square so that all the segments join into one closed line that never crosses itself; the tiles can be rotated but not flipped, and the move count does not matter here either. In Patterns 4 × 4 the same closed line has to be built from only sixteen tiles - exactly the sixteen the book's own answer uses.",
+  "helpRulesPlayground": "This section isn't variants of one puzzle, but seven separate small games: each has its own board and its own rules, shown by the ℹ button on its screen. A puzzle counts as solved once its goal position is reached. For the move-economy puzzles, the app also records your best move count and marks it when it matches the proven minimum. Games not yet available are shown greyed out. Only the first six are open so far — \"Eight chips\", \"Cats and dogs\", \"Hourglass\", \"Three of each\", \"Patterns 5 × 5\" and \"Patterns 4 × 4\": in Eight chips, pieces 1–8 stand at the tips of an eight-pointed star; they can only move along straight lines (a piece may slide further through the free centre), and the goal is to arrange them in reverse order; the proven minimum is 28 moves. In Cats and dogs, three cats and three dogs swap sides of a park: each move sends one animal to an adjacent free square, and a cat and a dog must never end up next to each other; the proven minimum is 32 moves. In Hourglass, fifteen pieces must be brought from the upper triangle into the lower one: a move either steps a piece onto an adjacent free circle or jumps it over an adjacent piece, checkers-style, and several jumps in a row by one piece count as a single move; the proven minimum is 26 moves. In Three of each, nine 3×3 tiles carrying red, white and black circles must be arranged into a 9×9 square so that every row, every column and both diagonals hold exactly one circle of each colour; the tiles can be rotated but not flipped, and the move count doesn't matter here. In Patterns 5 × 5, twenty-five tiles drawn over with red lines must be laid into a 5 × 5 square so that all the segments join into one closed line that never crosses itself; the tiles can be rotated but not flipped, and the move count does not matter here either. In Patterns 4 × 4 the same closed line has to be built from only sixteen tiles - exactly the sixteen the book's own answer uses. Now all seven are open: in Swap the squares, twelve identical P-shaped blocks fill a box; each move slides one block through the free space and it may turn corners, but blocks are never rotated; the goal is for the red and black squares to swap places while every other block returns home; the proven minimum is 32 moves.",
   "playgroundListTitle": "Puzzle games",
   "playgroundTitleEightChips": "Eight chips",
   "playgroundTitleCatsDogs": "Cats and dogs",
@@ -225,22 +276,39 @@
   "playgroundRulesThreeEach": "Nine cardboard 3×3 tiles are printed with red, white and black circles. Arrange them into a 9×9 square so that each of the nine rows, each of the nine columns and both main diagonals holds exactly one circle of each colour. Empty cells don't count: there are 27 circles in all, exactly three per line. Tiles may be rotated a quarter turn but not flipped — the cardboard is printed on one side only. Tap a tile in the tray to select it; tap again to rotate it; then tap a free spot in the square. A tile already placed can be rotated in place or returned to the tray. The move count doesn't matter here — only the finished square does. Exhaustive search shows there are exactly sixteen such squares, counting rotations of the whole square.",
   "playgroundRulesPatterns5": "Twenty-five cardboard tiles are drawn over with red lines. Assemble them into a 5 × 5 square so that the red segments join into one closed line that never crosses itself. The line runs through every tile, so the only thing that can go wrong is a join: a red end meeting a neighbour's blank edge, a red end pointing off the square, or the segments closing into several separate loops instead of one. Tiles turn in quarter turns but never flip - the cardboard is one-sided. Tap a tile in the tray to pick it up; tap it again to turn it; then tap an empty place in the square. A tile already laid can be turned in place or sent back to the tray. The number of moves does not matter here - only the finished pattern does. An exhaustive search shows there are exactly 2048 such patterns, counting turns of the whole square.",
   "playgroundRulesPatterns4": "The same red lines, but only sixteen tiles now - exactly the sixteen of the twenty-five that the book's own answer uses. Assemble them into a 4 × 4 square so that the red segments join into one closed line that never crosses itself. The line runs through every tile, so the only thing that can go wrong is a join: a red end meeting a neighbour's blank edge, a red end pointing off the square, or the segments closing into several separate loops instead of one. Tiles turn in quarter turns but never flip - the cardboard is one-sided. Tap a tile in the tray to pick it up; tap it again to turn it; then tap an empty place in the square. A tile already laid can be turned in place or sent back to the tray. The number of moves does not matter here - only the finished pattern does. An exhaustive search shows there are exactly 512 such patterns, counting turns of the whole square.",
+  "playgroundRulesSwapBlocks": "A 16 by 8 rectangular box holds twelve identical P-shaped blocks. Each block covers eight cells, so 96 of the 128 cells are filled and 32 stay free — four empty rows across the middle. Two red blocks at the top form a square, two black blocks at the bottom form another. One block moves per move: it slides through the free space horizontally and vertically, any distance, and may turn corners — the whole journey counts as a single move. Blocks are never rotated and never flipped, even when the free space would allow it. The goal is for the red square and the black square to exchange places, with every other block ending up back where it started. Tap a block to select it; dots mark every place it can travel to; press and hold a dot to see a ghost of where the block will land, and release to move it. Illegal destinations are simply never marked. The book prints no answer for this puzzle. The minimum proven by exhaustive search is 32 moves.",
   "playgroundComingSoon": "Coming soon",
   "playgroundMoveCounter": "Moves: {moves}",
   "@playgroundMoveCounter": {
-    "placeholders": {"moves": {"type": "int"}}
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      }
+    }
   },
   "playgroundRecordLine": "Your best: {best} moves",
   "@playgroundRecordLine": {
-    "placeholders": {"best": {"type": "int"}}
+    "placeholders": {
+      "best": {
+        "type": "int"
+      }
+    }
   },
   "playgroundParProvenLine": "Minimum: {par} moves",
   "@playgroundParProvenLine": {
-    "placeholders": {"par": {"type": "int"}}
+    "placeholders": {
+      "par": {
+        "type": "int"
+      }
+    }
   },
   "playgroundParBookLine": "Best known: {par} moves",
   "@playgroundParBookLine": {
-    "placeholders": {"par": {"type": "int"}}
+    "placeholders": {
+      "par": {
+        "type": "int"
+      }
+    }
   },
   "playgroundOptimalBadge": "★ optimal",
   "playgroundBookMatchedBadge": "matches the book result",
@@ -252,7 +320,11 @@
   "playgroundWinTitle": "Solved!",
   "playgroundWinBody": "You solved it in {moves} moves.",
   "@playgroundWinBody": {
-    "placeholders": {"moves": {"type": "int"}}
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      }
+    }
   },
   "playgroundWinBodyOptimal": "You solved it in the minimum number of moves!",
   "playgroundShowSolution": "Show solution",

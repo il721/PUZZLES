@@ -23,7 +23,7 @@ void main() {
     expect(ids.toSet(), hasLength(ids.length));
   });
 
-  test('exactly six enabled games, the last one still a placeholder', () {
+  test('all seven games are enabled', () {
     final enabledIds =
         registry.where((g) => g.enabled).map((g) => g.id).toList();
     expect(enabledIds, [
@@ -33,6 +33,7 @@ void main() {
       'three_each',
       'patterns5',
       'patterns4',
+      'swap_blocks',
     ]);
   });
 

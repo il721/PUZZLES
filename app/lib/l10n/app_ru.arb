@@ -1,457 +1,879 @@
 {
   "@@locale": "ru",
   "appTitle": "Головоломки",
-  "@appTitle": {"description": "The application's display name."},
+  "@appTitle": {
+    "description": "The application's display name."
+  },
   "moduleRebusTitle": "Ребусы с квадратиками",
-  "@moduleRebusTitle": {"description": "Title of Module 01."},
+  "@moduleRebusTitle": {
+    "description": "Title of Module 01."
+  },
   "moduleRebusDescription": "Арифметические ребусы: заполните квадратики цифрами, чтобы все уравнения сошлись.",
-  "@moduleRebusDescription": {"description": "Short description of Module 01, shown on its home-screen card."},
+  "@moduleRebusDescription": {
+    "description": "Short description of Module 01, shown on its home-screen card."
+  },
   "moduleDigitRebusTitle": "Цифровые ребусы",
-  "@moduleDigitRebusTitle": {"description": "Title of Module 02."},
+  "@moduleDigitRebusTitle": {
+    "description": "Title of Module 02."
+  },
   "moduleDigitRebusDescription": "Каждая строка и каждый столбец — пример: расставьте цифры по значкам-подсказкам.",
-  "@moduleDigitRebusDescription": {"description": "Short description of Module 02, shown on its home-screen card."},
+  "@moduleDigitRebusDescription": {
+    "description": "Short description of Module 02, shown on its home-screen card."
+  },
   "digitRebusListTitle": "Цифровые ребусы",
-  "@digitRebusListTitle": {"description": "Title of Module 02's puzzle list screen."},
+  "@digitRebusListTitle": {
+    "description": "Title of Module 02's puzzle list screen."
+  },
   "digitRebusResetConfirmBody": "Все введённые цифры будут удалены.",
-  "@digitRebusResetConfirmBody": {"description": "Body text of Module 02's reset confirmation dialog (no givens in this module)."},
+  "@digitRebusResetConfirmBody": {
+    "description": "Body text of Module 02's reset confirmation dialog (no givens in this module)."
+  },
   "digitRebusTutorialStep1": "Перед вами квадрат 4×4: каждая строка и каждый столбец — пример, решаемый строго слева направо (сверху вниз), без порядка действий. Четвёртая клетка — результат.",
-  "@digitRebusTutorialStep1": {"description": "Module 02 tutorial step 1 of 9."},
+  "@digitRebusTutorialStep1": {
+    "description": "Module 02 tutorial step 1 of 9."
+  },
   "digitRebusTutorialStep2": "Цифры скрыты значками. Каждый значок допускает лишь несколько цифр — таблица под сеткой всегда подскажет: например, кружок сверху — это 0, 8 или 9.",
-  "@digitRebusTutorialStep2": {"description": "Module 02 tutorial step 2 of 9."},
+  "@digitRebusTutorialStep2": {
+    "description": "Module 02 tutorial step 2 of 9."
+  },
   "digitRebusTutorialStep3": "Начнём со второй строки: (a + b) × c. Результат — одна цифра, а множитель не меньше 3, значит a + b не больше 3: подходят только a = 1 и b = 2.",
-  "@digitRebusTutorialStep3": {"description": "Module 02 tutorial step 3 of 9."},
+  "@digitRebusTutorialStep3": {
+    "description": "Module 02 tutorial step 3 of 9."
+  },
   "digitRebusTutorialStep4": "Тогда 1 + 2 = 3 и 3 × 3 = 9 — вторая строка: 1 + 2 × 3 = 9.",
-  "@digitRebusTutorialStep4": {"description": "Module 02 tutorial step 4 of 9."},
+  "@digitRebusTutorialStep4": {
+    "description": "Module 02 tutorial step 4 of 9."
+  },
   "digitRebusTutorialStep5": "Первый столбец: (a − 1) × c. Множитель снова не меньше 3, значит a − 1 = 3, то есть a = 4 — и 3 × 3 = 9: столбец 4 − 1 × 3 = 9.",
-  "@digitRebusTutorialStep5": {"description": "Module 02 tutorial step 5 of 9."},
+  "@digitRebusTutorialStep5": {
+    "description": "Module 02 tutorial step 5 of 9."
+  },
   "digitRebusTutorialStep6": "Третья строка: 3 + b + c. Из допустимых цифр подходит только 3 + 2 + 1 = 6.",
-  "@digitRebusTutorialStep6": {"description": "Module 02 tutorial step 6 of 9."},
+  "@digitRebusTutorialStep6": {
+    "description": "Module 02 tutorial step 6 of 9."
+  },
   "digitRebusTutorialStep7": "Третий столбец: a − 3 − 1. Из цифр 0, 6 и 8 подходит только 6: получаем 6 − 3 − 1 = 2.",
-  "@digitRebusTutorialStep7": {"description": "Module 02 tutorial step 7 of 9."},
+  "@digitRebusTutorialStep7": {
+    "description": "Module 02 tutorial step 7 of 9."
+  },
   "digitRebusTutorialStep8": "Остальные клетки следуют из своих строк: 4 + 8 : 6 = 2 и 9 − 3 : 2 = 3. Все восемь примеров сходятся.",
-  "@digitRebusTutorialStep8": {"description": "Module 02 tutorial step 8 of 9."},
+  "@digitRebusTutorialStep8": {
+    "description": "Module 02 tutorial step 8 of 9."
+  },
   "digitRebusTutorialStep9": "Готово! В ребусах нажимайте на клетку — меню покажет только допустимые цифры. Побеждает любое заполнение, где сходятся все восемь примеров.",
-  "@digitRebusTutorialStep9": {"description": "Module 02 tutorial step 9 of 9."},
+  "@digitRebusTutorialStep9": {
+    "description": "Module 02 tutorial step 9 of 9."
+  },
   "homeModuleProgress": "Решено: {solved} из {total}",
   "@homeModuleProgress": {
     "description": "Progress line on a module card.",
     "placeholders": {
-      "solved": {"type": "int"},
-      "total": {"type": "int"}
+      "solved": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "homeSettingsTooltip": "Настройки",
-  "@homeSettingsTooltip": {"description": "Tooltip for the settings icon button on the home screen."},
+  "@homeSettingsTooltip": {
+    "description": "Tooltip for the settings icon button on the home screen."
+  },
   "homeHelpTooltip": "Справка",
-  "@homeHelpTooltip": {"description": "Tooltip for the help icon button on the home screen."},
+  "@homeHelpTooltip": {
+    "description": "Tooltip for the help icon button on the home screen."
+  },
   "settingsTitle": "Настройки",
-  "@settingsTitle": {"description": "Title of the settings screen."},
+  "@settingsTitle": {
+    "description": "Title of the settings screen."
+  },
   "settingsLanguage": "Язык",
-  "@settingsLanguage": {"description": "Label for the language selector."},
+  "@settingsLanguage": {
+    "description": "Label for the language selector."
+  },
   "languageSystem": "Как в системе",
-  "@languageSystem": {"description": "Language option: follow the device locale."},
+  "@languageSystem": {
+    "description": "Language option: follow the device locale."
+  },
   "languageRu": "Русский",
-  "@languageRu": {"description": "Language option: Russian."},
+  "@languageRu": {
+    "description": "Language option: Russian."
+  },
   "languageEn": "English",
-  "@languageEn": {"description": "Language option: English."},
+  "@languageEn": {
+    "description": "Language option: English."
+  },
   "languageDe": "Deutsch",
-  "@languageDe": {"description": "Language option: German."},
+  "@languageDe": {
+    "description": "Language option: German."
+  },
   "settingsSound": "Звук",
-  "@settingsSound": {"description": "Label for the sound-effects toggle."},
+  "@settingsSound": {
+    "description": "Label for the sound-effects toggle."
+  },
   "settingsTheme": "Тема",
-  "@settingsTheme": {"description": "Settings label: color theme selector."},
+  "@settingsTheme": {
+    "description": "Settings label: color theme selector."
+  },
   "themeDark": "Тёмная",
-  "@themeDark": {"description": "Theme option: dark scheme."},
+  "@themeDark": {
+    "description": "Theme option: dark scheme."
+  },
   "themeLight": "Светлая",
-  "@themeLight": {"description": "Theme option: light scheme."},
+  "@themeLight": {
+    "description": "Theme option: light scheme."
+  },
   "helpTitle": "Справка",
-  "@helpTitle": {"description": "Title of the help screen."},
+  "@helpTitle": {
+    "description": "Title of the help screen."
+  },
   "helpRulesRebus": "Каждая головоломка — это квадрат из четырёх строк вида «a op b op c op d = результат», где действия выполняются строго слева направо, без порядка операций. Сумма чисел в каждом столбце равна результату соответствующей строки, а в нижней строке показаны эти четыре суммы и их общий итог. Некоторые цифры уже вписаны и их нельзя менять. Головоломка решена, когда все клетки заполнены и ни одно правило не нарушено — даже если ваш вариант отличается от авторского.",
   "helpRulesDigitRebus": "Квадрат 4×4, в котором каждая строка и каждый столбец — пример: действия выполняются строго слева направо, без порядка операций, а четвёртая клетка — результат. Цифры спрятаны за значками, и каждый значок допускает лишь несколько цифр — легенда под сеткой показывает какие. Нажмите на клетку, и в меню появятся только допустимые для её значка цифры. Головоломка решена, когда сходятся все восемь примеров.",
   "helpRulesDomino": "На доске 56 клеток с цифрами от 0 до 6. Разбейте их на 28 косточек так, чтобы каждая пара значений от 0:0 до 6:6 встретилась ровно один раз — полный набор. Чтобы поставить косточку, нажмите две соседние клетки; чтобы снять — нажмите на готовую косточку. Под доской показаны список ещё не собранных пар и счётчик «поставлено N из 28»; если одна и та же пара собрана дважды, обе косточки краснеют.",
   "helpRulesLabyrinth": "Сетка 8×8 из букв. Проведите единственный путь из левого верхнего угла в правый нижний так, чтобы он прошёл через каждую букву алфавита ровно один раз. Нажмите клетку рядом с концом пути, чтобы продлить его; оба конца растут навстречу друг другу, и путь замыкается, когда они встречаются. Нажатие на клетку, не соседнюю с путём, ставит синюю метку — эта буква обязана быть на пути; долгое нажатие (правая кнопка мыши) вычёркивает клетку. Как только одна из нескольких одинаковых букв попадает на путь, остальные вычёркиваются автоматически.",
   "helpRulesSquareword": "Верхняя строка сетки — ключевое слово, несколько букв уже вписаны. Заполните сетку так, чтобы каждая буква ключевого слова встречалась ровно один раз в каждой строке, в каждом столбце и на обеих главных диагоналях. Буква, повторившаяся в строке, столбце или на диагонали, показывается красным.",
   "puzzleListTitle": "Ребусы",
-  "@puzzleListTitle": {"description": "Title of the puzzle list screen."},
+  "@puzzleListTitle": {
+    "description": "Title of the puzzle list screen."
+  },
   "puzzleN": "Ребус {n}",
   "@puzzleN": {
     "description": "Title for puzzle number n, used on the puzzle screen and list tiles.",
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "puzzleStatusUntouched": "Не начато",
-  "@puzzleStatusUntouched": {"description": "Status label: a puzzle that has never been opened."},
+  "@puzzleStatusUntouched": {
+    "description": "Status label: a puzzle that has never been opened."
+  },
   "puzzleStatusInProgress": "В процессе",
-  "@puzzleStatusInProgress": {"description": "Status label: a puzzle with saved progress that is not yet solved."},
+  "@puzzleStatusInProgress": {
+    "description": "Status label: a puzzle with saved progress that is not yet solved."
+  },
   "puzzleStatusSolved": "Решено",
-  "@puzzleStatusSolved": {"description": "Status label: a solved puzzle."},
+  "@puzzleStatusSolved": {
+    "description": "Status label: a solved puzzle."
+  },
   "check": "Проверить",
-  "@check": {"description": "Label for the Check action."},
+  "@check": {
+    "description": "Label for the Check action."
+  },
   "reset": "Сбросить",
-  "@reset": {"description": "Label for the Reset action."},
+  "@reset": {
+    "description": "Label for the Reset action."
+  },
   "replay": "Повторить",
-  "@replay": {"description": "Label for the Replay action."},
+  "@replay": {
+    "description": "Label for the Replay action."
+  },
   "next": "Следующий ребус",
-  "@next": {"description": "Label for the Next puzzle action in the win dialog."},
+  "@next": {
+    "description": "Label for the Next puzzle action in the win dialog."
+  },
   "backToList": "К списку",
-  "@backToList": {"description": "Label for the Back to list action in the win dialog."},
+  "@backToList": {
+    "description": "Label for the Back to list action in the win dialog."
+  },
   "resetConfirmTitle": "Сбросить ребус?",
-  "@resetConfirmTitle": {"description": "Title of the reset confirmation dialog."},
+  "@resetConfirmTitle": {
+    "description": "Title of the reset confirmation dialog."
+  },
   "resetConfirmBody": "Все введённые цифры будут удалены. Подсказки останутся на месте.",
-  "@resetConfirmBody": {"description": "Body text of the reset confirmation dialog."},
+  "@resetConfirmBody": {
+    "description": "Body text of the reset confirmation dialog."
+  },
   "resetConfirmCancel": "Отмена",
-  "@resetConfirmCancel": {"description": "Cancel button of the reset confirmation dialog."},
+  "@resetConfirmCancel": {
+    "description": "Cancel button of the reset confirmation dialog."
+  },
   "resetConfirmOk": "Сбросить",
-  "@resetConfirmOk": {"description": "Confirm button of the reset confirmation dialog."},
+  "@resetConfirmOk": {
+    "description": "Confirm button of the reset confirmation dialog."
+  },
   "winTitle": "Ребус решён!",
-  "@winTitle": {"description": "Title of the win dialog."},
+  "@winTitle": {
+    "description": "Title of the win dialog."
+  },
   "winTime": "Время: {time}",
   "@winTime": {
     "description": "Elapsed-time line of the win dialog, e.g. \"Time: 03:47\".",
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "winChecks": "Проверок: {count}",
   "@winChecks": {
     "description": "Check-count line of the win dialog.",
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "hasErrors": "Квадрат заполнен, но есть ошибка. Проверьте клетки.",
-  "@hasErrors": {"description": "Banner shown when the grid is complete but violates a rule."},
+  "@hasErrors": {
+    "description": "Banner shown when the grid is complete but violates a rule."
+  },
   "cellSemanticsGiven": "заданная цифра",
-  "@cellSemanticsGiven": {"description": "Accessibility (screen reader) label for a pre-filled, immutable grid cell."},
+  "@cellSemanticsGiven": {
+    "description": "Accessibility (screen reader) label for a pre-filled, immutable grid cell."
+  },
   "cellSemanticsEditable": "цифра для заполнения",
-  "@cellSemanticsEditable": {"description": "Accessibility (screen reader) label for an editable grid cell."},
+  "@cellSemanticsEditable": {
+    "description": "Accessibility (screen reader) label for an editable grid cell."
+  },
   "tutorialComingSoon": "Обучение появится в следующем обновлении.",
-  "@tutorialComingSoon": {"description": "Placeholder note for the not-yet-built guided tutorial."},
+  "@tutorialComingSoon": {
+    "description": "Placeholder note for the not-yet-built guided tutorial."
+  },
   "tutorialTitle": "Как решать",
-  "@tutorialTitle": {"description": "Title of the guided tutorial screen."},
+  "@tutorialTitle": {
+    "description": "Title of the guided tutorial screen."
+  },
   "tutorialNext": "Далее",
-  "@tutorialNext": {"description": "Label for the tutorial's Next action."},
+  "@tutorialNext": {
+    "description": "Label for the tutorial's Next action."
+  },
   "tutorialBack": "Назад",
-  "@tutorialBack": {"description": "Label for the tutorial's Back action."},
+  "@tutorialBack": {
+    "description": "Label for the tutorial's Back action."
+  },
   "tutorialSkip": "Пропустить",
-  "@tutorialSkip": {"description": "Label for the tutorial's Skip action."},
+  "@tutorialSkip": {
+    "description": "Label for the tutorial's Skip action."
+  },
   "tutorialDone": "Готово",
-  "@tutorialDone": {"description": "Label for the tutorial's final Done action."},
+  "@tutorialDone": {
+    "description": "Label for the tutorial's final Done action."
+  },
   "tutorialStepCounter": "Шаг {current} из {total}",
   "@tutorialStepCounter": {
     "description": "Step counter shown on the tutorial screen, e.g. \"Step 3 of 15\".",
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "tutorialStep1": "Каждый квадратик — одна цифра. Ни одно число не равно нулю и не начинается с нуля (но может нулём оканчиваться).",
-  "@tutorialStep1": {"description": "Tutorial step 1 of 15."},
+  "@tutorialStep1": {
+    "description": "Tutorial step 1 of 15."
+  },
   "tutorialStep2": "Действия в строке выполняются строго по порядку, слева направо — как будто каждая строка снабжена скобками.",
-  "@tutorialStep2": {"description": "Tutorial step 2 of 15."},
+  "@tutorialStep2": {
+    "description": "Tutorial step 2 of 15."
+  },
   "tutorialStep3": "Сумма чисел каждого вертикального ряда равна результату соответствующей строки. Пятая строка — эти суммы и общий итог.",
-  "@tutorialStep3": {"description": "Tutorial step 3 of 15."},
+  "@tutorialStep3": {
+    "description": "Tutorial step 3 of 15."
+  },
   "tutorialStep4": "Результат первой строки начинается с 3 — он же первое число пятой строки. А второе число пятой строки оканчивается на 6 — значит, и результат второй строки оканчивается на 6.",
-  "@tutorialStep4": {"description": "Tutorial step 4 of 15."},
+  "@tutorialStep4": {
+    "description": "Tutorial step 4 of 15."
+  },
   "tutorialStep5": "Вторая строка: сумма двух однозначных чисел не больше 18, поэтому третье число начинается с 1 — это 16. Сумма первых двух чисел — 17 или 18.",
-  "@tutorialStep5": {"description": "Tutorial step 5 of 15."},
+  "@tutorialStep5": {
+    "description": "Tutorial step 5 of 15."
+  },
   "tutorialStep6": "Если сумма равна 17, то (17 − 16) × 8 — однозначное число, а в результате два квадратика. Противоречие.",
-  "@tutorialStep6": {"description": "Tutorial step 6 of 15."},
+  "@tutorialStep6": {
+    "description": "Tutorial step 6 of 15."
+  },
   "tutorialStep7": "Значит, сумма равна 18: первое число 9 и второе 9. Тогда (18 − 16) × 8 = 16: четвёртое число 8, результат строки 16 — он же второе число пятой строки.",
-  "@tutorialStep7": {"description": "Tutorial step 7 of 15."},
+  "@tutorialStep7": {
+    "description": "Tutorial step 7 of 15."
+  },
   "tutorialStep8": "Второй вертикальный ряд: 2 + 9 уже дают 11 из 16. На третье и четвёртое числа остаётся 5 — каждое из них меньше 5.",
-  "@tutorialStep8": {"description": "Tutorial step 8 of 15."},
+  "@tutorialStep8": {
+    "description": "Tutorial step 8 of 15."
+  },
   "tutorialStep9": "Анализ третьей строки допускает для её второго числа только 3 или 8. Меньше 5 — значит 3. Тогда второе число четвёртой строки — 2.",
-  "@tutorialStep9": {"description": "Tutorial step 9 of 15."},
+  "@tutorialStep9": {
+    "description": "Tutorial step 9 of 15."
+  },
   "tutorialStep10": "Результат первой строки начинается с 3 и делится на 5 — это 30 или 35. То же верно для первого числа пятой строки.",
-  "@tutorialStep10": {"description": "Tutorial step 10 of 15."},
+  "@tutorialStep10": {
+    "description": "Tutorial step 10 of 15."
+  },
   "tutorialStep11": "Первое число третьей строки оканчивается на 7: 17, 27, 37… Уже при 27 сумма первого ряда превысила бы 35. Значит, 17 — и третья строка: 17 + 3 : 5 × 8 = 32.",
-  "@tutorialStep11": {"description": "Tutorial step 11 of 15."},
+  "@tutorialStep11": {
+    "description": "Tutorial step 11 of 15."
+  },
   "tutorialStep12": "Пусть результат первой строки равен 35. Тогда (первое число + 2) × третье = 7, и в третьем вертикальном ряду на четвёртое число остаётся 32 − 1 − 16 − 5 = 10 — но оно однозначное. Противоречие — значит, 30.",
-  "@tutorialStep12": {"description": "Tutorial step 12 of 15."},
+  "@tutorialStep12": {
+    "description": "Tutorial step 12 of 15."
+  },
   "tutorialStep13": "Первая строка: 1 + 2 × 2 × 5 = 30 (слева направо).",
-  "@tutorialStep13": {"description": "Tutorial step 13 of 15."},
+  "@tutorialStep13": {
+    "description": "Tutorial step 13 of 15."
+  },
   "tutorialStep14": "Первый и второй ряды подсказывают четвёртую строку: 3 + 2 × 9 − 12 = 33.",
-  "@tutorialStep14": {"description": "Tutorial step 14 of 15."},
+  "@tutorialStep14": {
+    "description": "Tutorial step 14 of 15."
+  },
   "tutorialStep15": "Проверим итог: 30 + 16 + 32 + 33 = 111. Ребус решён!",
-  "@tutorialStep15": {"description": "Tutorial step 15 of 15."},
+  "@tutorialStep15": {
+    "description": "Tutorial step 15 of 15."
+  },
   "moduleDominoTitle": "Домино-пасьянс",
-  "@moduleDominoTitle": {"description": "Title of Module 03."},
+  "@moduleDominoTitle": {
+    "description": "Title of Module 03."
+  },
   "moduleDominoDescription": "Восстановите 28 косточек домино в сетке из цифр — полный набор от 0:0 до 6:6.",
-  "@moduleDominoDescription": {"description": "Short description of Module 03, shown on its home-screen card."},
+  "@moduleDominoDescription": {
+    "description": "Short description of Module 03, shown on its home-screen card."
+  },
   "dominoListTitle": "Домино-пасьянс",
-  "@dominoListTitle": {"description": "Title of Module 03's puzzle list screen."},
+  "@dominoListTitle": {
+    "description": "Title of Module 03's puzzle list screen."
+  },
   "dominoPuzzleN": "Домино {n}",
   "@dominoPuzzleN": {
     "description": "Title for domino puzzle number n.",
-    "placeholders": {"n": {"type": "int"}}
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   },
   "dominoResetConfirmTitle": "Сбросить домино?",
-  "@dominoResetConfirmTitle": {"description": "Title of Module 03's reset confirmation dialog."},
+  "@dominoResetConfirmTitle": {
+    "description": "Title of Module 03's reset confirmation dialog."
+  },
   "dominoResetConfirmBody": "Все выставленные косточки будут убраны.",
-  "@dominoResetConfirmBody": {"description": "Body of Module 03's reset confirmation dialog."},
+  "@dominoResetConfirmBody": {
+    "description": "Body of Module 03's reset confirmation dialog."
+  },
   "dominoWinTitle": "Домино собрано!",
-  "@dominoWinTitle": {"description": "Title of Module 03's win dialog."},
+  "@dominoWinTitle": {
+    "description": "Title of Module 03's win dialog."
+  },
   "dominoWinBody": "Вы восстановили полный набор домино. Все 28 косточек на месте.",
-  "@dominoWinBody": {"description": "Body of Module 03's win dialog."},
+  "@dominoWinBody": {
+    "description": "Body of Module 03's win dialog."
+  },
   "dominoPlacedCounter": "Выставлено: {placed} из 28",
   "@dominoPlacedCounter": {
     "description": "Progress counter on the domino play screen.",
-    "placeholders": {"placed": {"type": "int"}}
+    "placeholders": {
+      "placed": {
+        "type": "int"
+      }
+    }
   },
   "dominoRemainingLabel": "Осталось собрать:",
-  "@dominoRemainingLabel": {"description": "Header above the list of not-yet-used domino values."},
+  "@dominoRemainingLabel": {
+    "description": "Header above the list of not-yet-used domino values."
+  },
   "dominoDuplicateWarning": "Есть повторяющиеся косточки — они выделены красным.",
-  "@dominoDuplicateWarning": {"description": "Warning shown when duplicate domino value-pairs are on the board."},
+  "@dominoDuplicateWarning": {
+    "description": "Warning shown when duplicate domino value-pairs are on the board."
+  },
   "dominoCellSemantics": "клетка домино",
-  "@dominoCellSemantics": {"description": "Accessibility label for a domino grid cell."},
+  "@dominoCellSemantics": {
+    "description": "Accessibility label for a domino grid cell."
+  },
   "dominoTutorialStep1": "Домино-пасьянс: перед вами 56 клеток с цифрами от 0 до 6. Разбейте их на 28 косточек так, чтобы вышел полный набор — каждая пара от 0:0 до 6:6 ровно один раз. Чтобы поставить косточку, коснитесь двух соседних клеток; чтобы убрать — коснитесь готовой косточки.",
-  "@dominoTutorialStep1": {"description": "Module 03 tutorial step 1 of 10."},
+  "@dominoTutorialStep1": {
+    "description": "Module 03 tutorial step 1 of 10."
+  },
   "dominoTutorialStep2": "Внизу — список ещё не собранных пар и счётчик «выставлено N из 28». Если одна и та же пара окажется дважды, обе косточки подсветятся красным: пасьянс не сойдётся, пока повтор не убран.",
-  "@dominoTutorialStep2": {"description": "Module 03 tutorial step 2 of 10."},
+  "@dominoTutorialStep2": {
+    "description": "Module 03 tutorial step 2 of 10."
+  },
   "dominoTutorialStep3": "Ищите клетки, у которых сосед-партнёр определён однозначно. Так ставятся первые три косточки: 0:1, 2:4 и 5:6 (они подсвечены).",
-  "@dominoTutorialStep3": {"description": "Module 03 tutorial step 3 of 10."},
+  "@dominoTutorialStep3": {
+    "description": "Module 03 tutorial step 3 of 10."
+  },
   "dominoTutorialStep4": "Дальше — два дубля: 5:5 и 3:3. Дубль занимает две одинаковые клетки рядом, и каждый дубль в наборе только один.",
-  "@dominoTutorialStep4": {"description": "Module 03 tutorial step 4 of 10."},
+  "@dominoTutorialStep4": {
+    "description": "Module 03 tutorial step 4 of 10."
+  },
   "dominoTutorialStep5": "Продолжаем внизу слева: 2:3 и 0:3 ложатся вынужденно, освобождая соседние цифры.",
-  "@dominoTutorialStep5": {"description": "Module 03 tutorial step 5 of 10."},
+  "@dominoTutorialStep5": {
+    "description": "Module 03 tutorial step 5 of 10."
+  },
   "dominoTutorialStep6": "Следующая четвёрка: 0:4, 4:4, 3:4 и 4:5. Косточки с четвёркой почти закончились — следите за списком снизу.",
-  "@dominoTutorialStep6": {"description": "Module 03 tutorial step 6 of 10."},
+  "@dominoTutorialStep6": {
+    "description": "Module 03 tutorial step 6 of 10."
+  },
   "dominoTutorialStep7": "Теперь пары с единицей: 1:4, 1:6 и 1:3.",
-  "@dominoTutorialStep7": {"description": "Module 03 tutorial step 7 of 10."},
+  "@dominoTutorialStep7": {
+    "description": "Module 03 tutorial step 7 of 10."
+  },
   "dominoTutorialStep8": "Ещё четыре: 3:5, 1:5, 1:2 и 2:5. Проверьте счётчик — уже больше половины.",
-  "@dominoTutorialStep8": {"description": "Module 03 tutorial step 8 of 10."},
+  "@dominoTutorialStep8": {
+    "description": "Module 03 tutorial step 8 of 10."
+  },
   "dominoTutorialStep9": "Верхняя часть поля: 2:6, 0:5, 0:6, 0:2 и 2:2.",
-  "@dominoTutorialStep9": {"description": "Module 03 tutorial step 9 of 10."},
+  "@dominoTutorialStep9": {
+    "description": "Module 03 tutorial step 9 of 10."
+  },
   "dominoTutorialStep10": "Последние пять закрывают набор: 0:0, 1:1, 6:6, 3:6 и 4:6. Все 28 пар на месте — пасьянс сошёлся! В любой головоломке действуйте так же: ищите вынужденные косточки и следите за списком оставшихся пар.",
-  "@dominoTutorialStep10": {"description": "Module 03 tutorial step 10 of 10."},
+  "@dominoTutorialStep10": {
+    "description": "Module 03 tutorial step 10 of 10."
+  },
   "moduleLabyrinthTitle": "Лабиринт-алфавит",
-  "@moduleLabyrinthTitle": {"description": "Title of Module 04."},
+  "@moduleLabyrinthTitle": {
+    "description": "Title of Module 04."
+  },
   "moduleLabyrinthDescription": "Проведите единственный путь по сетке 8×8 от А до Я, используя каждую букву алфавита ровно один раз.",
-  "@moduleLabyrinthDescription": {"description": "Short description of Module 04, shown on its home-screen card."},
+  "@moduleLabyrinthDescription": {
+    "description": "Short description of Module 04, shown on its home-screen card."
+  },
   "labyrinthListTitle": "Лабиринт-алфавит",
-  "@labyrinthListTitle": {"description": "Title of Module 04's puzzle list screen."},
+  "@labyrinthListTitle": {
+    "description": "Title of Module 04's puzzle list screen."
+  },
   "labyrinthPuzzleN": "Лабиринт {n}",
   "@labyrinthPuzzleN": {
     "description": "Title for labyrinth puzzle number n.",
-    "placeholders": {"n": {"type": "int"}}
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   },
   "labyrinthResetConfirmTitle": "Сбросить путь?",
-  "@labyrinthResetConfirmTitle": {"description": "Title of Module 04's reset confirmation dialog."},
+  "@labyrinthResetConfirmTitle": {
+    "description": "Title of Module 04's reset confirmation dialog."
+  },
   "labyrinthResetConfirmBody": "Весь проведённый путь будет стёрт.",
-  "@labyrinthResetConfirmBody": {"description": "Body of Module 04's reset confirmation dialog."},
+  "@labyrinthResetConfirmBody": {
+    "description": "Body of Module 04's reset confirmation dialog."
+  },
   "labyrinthWinTitle": "Путь найден!",
-  "@labyrinthWinTitle": {"description": "Title of Module 04's win dialog."},
+  "@labyrinthWinTitle": {
+    "description": "Title of Module 04's win dialog."
+  },
   "labyrinthWinBody": "Вы провели путь через все 33 буквы алфавита от А до Я.",
-  "@labyrinthWinBody": {"description": "Body of Module 04's win dialog."},
+  "@labyrinthWinBody": {
+    "description": "Body of Module 04's win dialog."
+  },
   "labyrinthPlacedCounter": "Букв: {placed} из 33",
   "@labyrinthPlacedCounter": {
     "description": "Progress counter on the labyrinth play screen.",
-    "placeholders": {"placed": {"type": "int"}}
+    "placeholders": {
+      "placed": {
+        "type": "int"
+      }
+    }
   },
   "labyrinthAlphabetLabel": "Алфавит",
-  "@labyrinthAlphabetLabel": {"description": "Header label above the labyrinth's alphabet tracker strip."},
+  "@labyrinthAlphabetLabel": {
+    "description": "Header label above the labyrinth's alphabet tracker strip."
+  },
   "labyrinthDuplicateWarning": "Одна из букв встречается на пути дважды — она выделена красным.",
-  "@labyrinthDuplicateWarning": {"description": "Warning shown when a letter appears twice on the labyrinth path."},
+  "@labyrinthDuplicateWarning": {
+    "description": "Warning shown when a letter appears twice on the labyrinth path."
+  },
   "labyrinthCellSemantics": "клетка лабиринта",
-  "@labyrinthCellSemantics": {"description": "Accessibility label for a labyrinth grid cell."},
+  "@labyrinthCellSemantics": {
+    "description": "Accessibility label for a labyrinth grid cell."
+  },
   "labyrinthMarkedSemantics": "отмечена как обязательная для пути",
-  "@labyrinthMarkedSemantics": {"description": "Accessibility fragment appended to a labyrinth cell's label when the player has marked it as \"must be on the path\"."},
+  "@labyrinthMarkedSemantics": {
+    "description": "Accessibility fragment appended to a labyrinth cell's label when the player has marked it as \"must be on the path\"."
+  },
   "labyrinthTutorialStep1": "Путь начинается в клетке А — в левом верхнем углу. Нажмите на соседнюю клетку, чтобы продлить его.",
-  "@labyrinthTutorialStep1": {"description": "Module 04 tutorial step 1 of 12."},
+  "@labyrinthTutorialStep1": {
+    "description": "Module 04 tutorial step 1 of 12."
+  },
   "labyrinthTutorialStep2": "Второй конец закреплён в клетке Я — в правом нижнем углу. Он растёт навстречу первому; когда концы окажутся рядом, путь замкнётся.",
-  "@labyrinthTutorialStep2": {"description": "Module 04 tutorial step 2 of 12."},
+  "@labyrinthTutorialStep2": {
+    "description": "Module 04 tutorial step 2 of 12."
+  },
   "labyrinthTutorialStep3": "Нажмите на клетку не рядом с путём, чтобы поставить синюю метку: эта буква обязательно на пути — как У, которая встречается в лабиринте один раз. Долгое нажатие (на компьютере — правая кнопка мыши) зачёркивает клетку крестом: эта буква в путь не войдёт — например, одна из двух Ю. Как только одна из одинаковых букв попадает на путь, остальные зачёркиваются сами.",
-  "@labyrinthTutorialStep3": {"description": "Module 04 tutorial step 3 of 12."},
+  "@labyrinthTutorialStep3": {
+    "description": "Module 04 tutorial step 3 of 12."
+  },
   "labyrinthTutorialStep4": "Из А путь идёт вниз, к Р, и дальше поворачивает к Ю и Й.",
-  "@labyrinthTutorialStep4": {"description": "Module 04 tutorial step 4 of 12."},
+  "@labyrinthTutorialStep4": {
+    "description": "Module 04 tutorial step 4 of 12."
+  },
   "labyrinthTutorialStep5": "Через И и Щ путь поднимается в верхний ряд, к Д и Т.",
-  "@labyrinthTutorialStep5": {"description": "Module 04 tutorial step 5 of 12."},
+  "@labyrinthTutorialStep5": {
+    "description": "Module 04 tutorial step 5 of 12."
+  },
   "labyrinthTutorialStep6": "Буква У встречается в лабиринте один раз, значит она обязательно на пути. Справа от неё — край квадрата и зачёркнутая А, поэтому звенья идут к З и К.",
-  "@labyrinthTutorialStep6": {"description": "Module 04 tutorial step 6 of 12."},
+  "@labyrinthTutorialStep6": {
+    "description": "Module 04 tutorial step 6 of 12."
+  },
   "labyrinthTutorialStep7": "От К путь спускается через П и Е к Ж и Ь.",
-  "@labyrinthTutorialStep7": {"description": "Module 04 tutorial step 7 of 12."},
+  "@labyrinthTutorialStep7": {
+    "description": "Module 04 tutorial step 7 of 12."
+  },
   "labyrinthTutorialStep8": "Ц, Л, Б и Ш ведут путь влево и вниз.",
-  "@labyrinthTutorialStep8": {"description": "Module 04 tutorial step 8 of 12."},
+  "@labyrinthTutorialStep8": {
+    "description": "Module 04 tutorial step 8 of 12."
+  },
   "labyrinthTutorialStep9": "Через Г, Ъ и Ф путь выходит к правому краю, к С.",
-  "@labyrinthTutorialStep9": {"description": "Module 04 tutorial step 9 of 12."},
+  "@labyrinthTutorialStep9": {
+    "description": "Module 04 tutorial step 9 of 12."
+  },
   "labyrinthTutorialStep10": "Э, Н и Ы поворачивают путь вниз.",
-  "@labyrinthTutorialStep10": {"description": "Module 04 tutorial step 10 of 12."},
+  "@labyrinthTutorialStep10": {
+    "description": "Module 04 tutorial step 10 of 12."
+  },
   "labyrinthTutorialStep11": "В в левом нижнем углу окружена с трёх сторон — это тупик, она непроводима. Зато вторая В упирается в низ квадрата и в зачёркнутую З, поэтому звенья идут к О и Ё.",
-  "@labyrinthTutorialStep11": {"description": "Module 04 tutorial step 11 of 12."},
+  "@labyrinthTutorialStep11": {
+    "description": "Module 04 tutorial step 11 of 12."
+  },
   "labyrinthTutorialStep12": "Х у левого края оказывается в тупике, значит проводима другая Х. Остаются М, Х и Я — путь замкнулся.",
-  "@labyrinthTutorialStep12": {"description": "Module 04 tutorial step 12 of 12."},
+  "@labyrinthTutorialStep12": {
+    "description": "Module 04 tutorial step 12 of 12."
+  },
   "moduleSquarewordTitle": "Сквэрворды",
-  "@moduleSquarewordTitle": {"description": "Title of Module 05."},
+  "@moduleSquarewordTitle": {
+    "description": "Title of Module 05."
+  },
   "moduleSquarewordDescription": "Заполните сетку так, чтобы каждая буква ключевого слова встречалась ровно один раз в каждой строке, столбце и на обеих диагоналях.",
-  "@moduleSquarewordDescription": {"description": "Short description of Module 05, shown on its home-screen card."},
+  "@moduleSquarewordDescription": {
+    "description": "Short description of Module 05, shown on its home-screen card."
+  },
   "squarewordListTitle": "Сквэрворды",
-  "@squarewordListTitle": {"description": "Title of Module 05's puzzle list screen."},
+  "@squarewordListTitle": {
+    "description": "Title of Module 05's puzzle list screen."
+  },
   "squarewordPuzzleN": "Сквэрворд {n}",
   "@squarewordPuzzleN": {
     "description": "Title for squareword puzzle number n.",
-    "placeholders": {"n": {"type": "int"}}
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   },
   "squarewordResetConfirmTitle": "Сбросить сетку?",
-  "@squarewordResetConfirmTitle": {"description": "Title of Module 05's reset confirmation dialog."},
+  "@squarewordResetConfirmTitle": {
+    "description": "Title of Module 05's reset confirmation dialog."
+  },
   "squarewordResetConfirmBody": "Все введённые буквы будут стёрты.",
-  "@squarewordResetConfirmBody": {"description": "Body of Module 05's reset confirmation dialog."},
+  "@squarewordResetConfirmBody": {
+    "description": "Body of Module 05's reset confirmation dialog."
+  },
   "squarewordWinTitle": "Сетка заполнена!",
-  "@squarewordWinTitle": {"description": "Title of Module 05's win dialog."},
+  "@squarewordWinTitle": {
+    "description": "Title of Module 05's win dialog."
+  },
   "squarewordWinBody": "Вы заполнили сетку без повторов в строках, столбцах и по диагоналям.",
-  "@squarewordWinBody": {"description": "Body of Module 05's win dialog."},
+  "@squarewordWinBody": {
+    "description": "Body of Module 05's win dialog."
+  },
   "squarewordFilledCounter": "Заполнено: {filled} из {total}",
   "@squarewordFilledCounter": {
     "description": "Progress counter on the squareword play screen.",
-    "placeholders": {"filled": {"type": "int"}, "total": {"type": "int"}}
+    "placeholders": {
+      "filled": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
   },
   "squarewordViolationWarning": "Буква повторяется в строке, столбце или по диагонали — она выделена красным.",
-  "@squarewordViolationWarning": {"description": "Warning shown when a letter repeats in a row, column, or diagonal of the squareword grid."},
+  "@squarewordViolationWarning": {
+    "description": "Warning shown when a letter repeats in a row, column, or diagonal of the squareword grid."
+  },
   "squarewordCellSemantics": "клетка сквэрворда",
-  "@squarewordCellSemantics": {"description": "Accessibility label for a squareword grid cell."},
+  "@squarewordCellSemantics": {
+    "description": "Accessibility label for a squareword grid cell."
+  },
   "squarewordTutorialStep1": "Верхняя строка — слово-ключ: С Л Е З А. В центре сетки уже вписано слово ЛЕС. Правило то же: в каждой строке, каждом столбце и на обеих главных диагоналях все пять букв встречаются ровно по одному разу.",
-  "@squarewordTutorialStep1": {"description": "Module 05 tutorial step 1 of 12."},
+  "@squarewordTutorialStep1": {
+    "description": "Module 05 tutorial step 1 of 12."
+  },
   "squarewordTutorialStep2": "Дальше каждая пустая клетка вычисляется однозначно — методом исключения, без угадывания.",
-  "@squarewordTutorialStep2": {"description": "Module 05 tutorial step 2 of 12."},
+  "@squarewordTutorialStep2": {
+    "description": "Module 05 tutorial step 2 of 12."
+  },
   "squarewordTutorialStep3": "Буква Л уже есть в столбцах b и c — значит её не может быть в b1 и c1. Клетка c3 стоит сразу на двух диагоналях (центр квадрата 5×5), и там уже стоит Л — поэтому Л нет ни в a1, ни в e1. Для неё остаётся только d1.",
-  "@squarewordTutorialStep3": {"description": "Module 05 tutorial step 3 of 12."},
+  "@squarewordTutorialStep3": {
+    "description": "Module 05 tutorial step 3 of 12."
+  },
   "squarewordTutorialStep4": "В столбце d уже есть З и Л. Клетка d4 лежит на побочной диагонали, где А уже занята (в e5) — значит в d2 может быть только А, а в d4 остаётся единственная буква С.",
-  "@squarewordTutorialStep4": {"description": "Module 05 tutorial step 4 of 12."},
+  "@squarewordTutorialStep4": {
+    "description": "Module 05 tutorial step 4 of 12."
+  },
   "squarewordTutorialStep5": "В столбце b букве С нет места ни на главной диагонали (С уже в a5), ни на побочной (С уже в d4), ни в третьей строке (С уже в e3). Остаётся только b1.",
-  "@squarewordTutorialStep5": {"description": "Module 05 tutorial step 5 of 12."},
+  "@squarewordTutorialStep5": {
+    "description": "Module 05 tutorial step 5 of 12."
+  },
   "squarewordTutorialStep6": "Пятая, последняя С встаёт в c2.",
-  "@squarewordTutorialStep6": {"description": "Module 05 tutorial step 6 of 12."},
+  "@squarewordTutorialStep6": {
+    "description": "Module 05 tutorial step 6 of 12."
+  },
   "squarewordTutorialStep7": "В нижней строке для А остаётся только клетка c1.",
-  "@squarewordTutorialStep7": {"description": "Module 05 tutorial step 7 of 12."},
+  "@squarewordTutorialStep7": {
+    "description": "Module 05 tutorial step 7 of 12."
+  },
   "squarewordTutorialStep8": "После этого в столбце c для буквы З остаётся только клетка c4.",
-  "@squarewordTutorialStep8": {"description": "Module 05 tutorial step 8 of 12."},
+  "@squarewordTutorialStep8": {
+    "description": "Module 05 tutorial step 8 of 12."
+  },
   "squarewordTutorialStep9": "Две оставшиеся А занимают a4 и b3.",
-  "@squarewordTutorialStep9": {"description": "Module 05 tutorial step 9 of 12."},
+  "@squarewordTutorialStep9": {
+    "description": "Module 05 tutorial step 9 of 12."
+  },
   "squarewordTutorialStep10": "В третьей строке для З остаётся только a3.",
-  "@squarewordTutorialStep10": {"description": "Module 05 tutorial step 10 of 12."},
+  "@squarewordTutorialStep10": {
+    "description": "Module 05 tutorial step 10 of 12."
+  },
   "squarewordTutorialStep11": "Всё остальное теперь однозначно: Е — в b4, Л — в e4, З — в e1, Е — в a1, Е — в e2, Л — в a2, З — в b2.",
-  "@squarewordTutorialStep11": {"description": "Module 05 tutorial step 11 of 12."},
+  "@squarewordTutorialStep11": {
+    "description": "Module 05 tutorial step 11 of 12."
+  },
   "squarewordTutorialStep12": "Сетка заполнена полностью, нарушений нет — головоломка решена. В каждой головоломке действуйте так же: ищите клетки, где буква вынуждена, и двигайтесь дальше по цепочке исключений.",
-  "@squarewordTutorialStep12": {"description": "Module 05 tutorial step 12 of 12."},
+  "@squarewordTutorialStep12": {
+    "description": "Module 05 tutorial step 12 of 12."
+  },
   "squarewordCyrillicNote": "",
-  "@squarewordCyrillicNote": {"description": "Note explaining that squareword letters stay Cyrillic in every locale. Empty for RU."},
+  "@squarewordCyrillicNote": {
+    "description": "Note explaining that squareword letters stay Cyrillic in every locale. Empty for RU."
+  },
   "settingsSyncSection": "Перенос прогресса",
-  "@settingsSyncSection": {"description": "Header of the settings section for exporting/importing progress between devices."},
+  "@settingsSyncSection": {
+    "description": "Header of the settings section for exporting/importing progress between devices."
+  },
   "settingsSyncHint": "Сохраните прогресс в файл и откройте его на другом устройстве.",
-  "@settingsSyncHint": {"description": "Subtitle under the progress-sync section header."},
+  "@settingsSyncHint": {
+    "description": "Subtitle under the progress-sync section header."
+  },
   "settingsExportProgress": "Сохранить прогресс в файл",
-  "@settingsExportProgress": {"description": "Label of the export tile in Settings."},
+  "@settingsExportProgress": {
+    "description": "Label of the export tile in Settings."
+  },
   "settingsImportProgress": "Загрузить прогресс из файла",
-  "@settingsImportProgress": {"description": "Label of the import tile in Settings."},
+  "@settingsImportProgress": {
+    "description": "Label of the import tile in Settings."
+  },
   "exportSuccess": "Прогресс сохранён.",
-  "@exportSuccess": {"description": "Snackbar shown after a successful export."},
+  "@exportSuccess": {
+    "description": "Snackbar shown after a successful export."
+  },
   "exportFailed": "Не удалось сохранить файл.",
-  "@exportFailed": {"description": "Snackbar shown when writing the export file failed."},
+  "@exportFailed": {
+    "description": "Snackbar shown when writing the export file failed."
+  },
   "importConfirmTitle": "Загрузить прогресс?",
-  "@importConfirmTitle": {"description": "Title of the import confirmation dialog."},
+  "@importConfirmTitle": {
+    "description": "Title of the import confirmation dialog."
+  },
   "importConfirmBody": "Файл создан: {date}. Ваш текущий прогресс не будет потерян — лучшие результаты сохранятся.",
   "@importConfirmBody": {
     "description": "Body of the import confirmation dialog, reassuring that the merge is non-destructive.",
-    "placeholders": {"date": {"type": "String"}}
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "importConfirmApply": "Загрузить",
-  "@importConfirmApply": {"description": "Confirm button of the import dialog."},
+  "@importConfirmApply": {
+    "description": "Confirm button of the import dialog."
+  },
   "importConfirmCancel": "Отмена",
-  "@importConfirmCancel": {"description": "Cancel button of the import dialog."},
+  "@importConfirmCancel": {
+    "description": "Cancel button of the import dialog."
+  },
   "importSuccess": "Добавлено головоломок: {added}, обновлено: {updated}.",
   "@importSuccess": {
     "description": "Snackbar shown after a successful import.",
-    "placeholders": {"added": {"type": "int"}, "updated": {"type": "int"}}
+    "placeholders": {
+      "added": {
+        "type": "int"
+      },
+      "updated": {
+        "type": "int"
+      }
+    }
   },
   "importNothingNew": "Новых результатов не найдено.",
-  "@importNothingNew": {"description": "Snackbar shown when an import applied cleanly but changed nothing."},
+  "@importNothingNew": {
+    "description": "Snackbar shown when an import applied cleanly but changed nothing."
+  },
   "importFailedFormat": "Это не файл прогресса.",
-  "@importFailedFormat": {"description": "Snackbar shown when the picked file is not a bundle."},
+  "@importFailedFormat": {
+    "description": "Snackbar shown when the picked file is not a bundle."
+  },
   "importFailedVersion": "Файл создан более новой версией приложения. Обновите приложение.",
-  "@importFailedVersion": {"description": "Snackbar shown when the bundle's version is newer than this build supports."},
+  "@importFailedVersion": {
+    "description": "Snackbar shown when the bundle's version is newer than this build supports."
+  },
   "modulePlaygroundTitle": "Головоломки-игры",
-  "@modulePlaygroundTitle": {"description": "Title of Module 06."},
+  "@modulePlaygroundTitle": {
+    "description": "Title of Module 06."
+  },
   "modulePlaygroundDescription": "Семь маленьких головоломок-игр: фишки, плитки, блоки.",
-  "@modulePlaygroundDescription": {"description": "Short description of Module 06, shown on its home-screen card."},
-  "helpRulesPlayground": "Этот раздел — не варианты одной головоломки, а семь отдельных маленьких игр: у каждой своё поле и свои правила, которые показывает кнопка ℹ на её экране. Головоломка считается решённой, когда достигнуто целевое положение. Для игр, где важна экономность ходов, приложение также запоминает ваш лучший результат и отмечает его, когда он совпадает с доказанным минимумом. Игры, которые ещё не доступны, показаны серым. Пока открыты только первые шесть — «Восемь фишек», «Кошки и собаки», «Песочные часы», «Всюду по три», «Узоры 5 × 5» и «Узоры 4 × 4»: в «Восьми фишках» фишки 1–8 стоят на концах восьмиконечной звезды, передвигать их можно только по прямым линиям (через свободный центр фишка может проскочить дальше), а цель — расставить их в обратном порядке; доказанный минимум — 28 ходов. В «Кошках и собаках» три кошки и три собаки меняются местами в сквере: за один ход одно животное перебегает на соседнюю свободную площадку, а кошка и собака никогда не должны оказаться рядом; доказанный минимум — 32 хода. В «Песочных часах» пятнадцать фишек нужно перевести из верхнего треугольника в нижний: за ход фишка переходит на соседний свободный кружок или прыгает через соседнюю фишку, как в шашках, причём несколько прыжков подряд одной фишкой считаются одним ходом; доказанный минимум — 26 ходов. В игре «Всюду по три» девять квадратиков 3 × 3 с красными, белыми и чёрными кружками нужно сложить в квадрат 9 × 9 так, чтобы на каждой горизонтали, вертикали и обеих диагоналях было ровно по одному кружку каждого цвета; квадратики поворачиваются, но не переворачиваются, а число ходов здесь не важно. В «Узорах 5 × 5» двадцать пять квадратиков с красными линиями нужно сложить в квадрат 5 × 5 так, чтобы все отрезки сомкнулись в одну замкнутую линию без самопересечений; квадратики поворачиваются, но не переворачиваются, а число ходов и здесь не важно. В «Узорах 4 × 4» та же линия собирается всего из шестнадцати квадратиков — ровно тех, которыми сложен ответ в книге.",
+  "@modulePlaygroundDescription": {
+    "description": "Short description of Module 06, shown on its home-screen card."
+  },
+  "helpRulesPlayground": "Этот раздел — не варианты одной головоломки, а семь отдельных маленьких игр: у каждой своё поле и свои правила, которые показывает кнопка ℹ на её экране. Головоломка считается решённой, когда достигнуто целевое положение. Для игр, где важна экономность ходов, приложение также запоминает ваш лучший результат и отмечает его, когда он совпадает с доказанным минимумом. Игры, которые ещё не доступны, показаны серым. Пока открыты только первые шесть — «Восемь фишек», «Кошки и собаки», «Песочные часы», «Всюду по три», «Узоры 5 × 5» и «Узоры 4 × 4»: в «Восьми фишках» фишки 1–8 стоят на концах восьмиконечной звезды, передвигать их можно только по прямым линиям (через свободный центр фишка может проскочить дальше), а цель — расставить их в обратном порядке; доказанный минимум — 28 ходов. В «Кошках и собаках» три кошки и три собаки меняются местами в сквере: за один ход одно животное перебегает на соседнюю свободную площадку, а кошка и собака никогда не должны оказаться рядом; доказанный минимум — 32 хода. В «Песочных часах» пятнадцать фишек нужно перевести из верхнего треугольника в нижний: за ход фишка переходит на соседний свободный кружок или прыгает через соседнюю фишку, как в шашках, причём несколько прыжков подряд одной фишкой считаются одним ходом; доказанный минимум — 26 ходов. В игре «Всюду по три» девять квадратиков 3 × 3 с красными, белыми и чёрными кружками нужно сложить в квадрат 9 × 9 так, чтобы на каждой горизонтали, вертикали и обеих диагоналях было ровно по одному кружку каждого цвета; квадратики поворачиваются, но не переворачиваются, а число ходов здесь не важно. В «Узорах 5 × 5» двадцать пять квадратиков с красными линиями нужно сложить в квадрат 5 × 5 так, чтобы все отрезки сомкнулись в одну замкнутую линию без самопересечений; квадратики поворачиваются, но не переворачиваются, а число ходов и здесь не важно. В «Узорах 4 × 4» та же линия собирается всего из шестнадцати квадратиков — ровно тех, которыми сложен ответ в книге. Теперь открыты все семь: в «Поменяйте местами» двенадцать одинаковых P-образных блоков заполняют ящик, за один ход один блок скользит по свободному пространству и может поворачивать за углы, но никогда не поворачивается; цель — поменять местами красный и чёрный квадраты, вернув остальные блоки на исходные места; доказанный минимум — 32 хода.",
   "playgroundListTitle": "Головоломки-игры",
-  "@playgroundListTitle": {"description": "Title of Module 06's game list screen."},
+  "@playgroundListTitle": {
+    "description": "Title of Module 06's game list screen."
+  },
   "playgroundTitleEightChips": "Восемь фишек",
-  "@playgroundTitleEightChips": {"description": "Title of the eight_chips game."},
+  "@playgroundTitleEightChips": {
+    "description": "Title of the eight_chips game."
+  },
   "playgroundTitleCatsDogs": "Кошки и собаки",
-  "@playgroundTitleCatsDogs": {"description": "Title of the (not yet shipped) cats_dogs game."},
+  "@playgroundTitleCatsDogs": {
+    "description": "Title of the (not yet shipped) cats_dogs game."
+  },
   "playgroundTitleHourglass": "Песочные часы",
-  "@playgroundTitleHourglass": {"description": "Title of the hourglass game."},
+  "@playgroundTitleHourglass": {
+    "description": "Title of the hourglass game."
+  },
   "playgroundTitleThreeEach": "Всюду по три",
-  "@playgroundTitleThreeEach": {"description": "Title of the (not yet shipped) three_each game."},
+  "@playgroundTitleThreeEach": {
+    "description": "Title of the (not yet shipped) three_each game."
+  },
   "playgroundTitlePatterns5": "Узоры 5×5",
-  "@playgroundTitlePatterns5": {"description": "Title of the (not yet shipped) patterns5 game."},
+  "@playgroundTitlePatterns5": {
+    "description": "Title of the (not yet shipped) patterns5 game."
+  },
   "playgroundTitlePatterns4": "Узоры 4×4",
-  "@playgroundTitlePatterns4": {"description": "Title of the patterns4 game."},
+  "@playgroundTitlePatterns4": {
+    "description": "Title of the patterns4 game."
+  },
   "playgroundTitleSwapBlocks": "Поменяйте местами",
-  "@playgroundTitleSwapBlocks": {"description": "Title of the (not yet shipped) swap_blocks game."},
+  "@playgroundTitleSwapBlocks": {
+    "description": "Title of the (not yet shipped) swap_blocks game."
+  },
   "playgroundRulesEightChips": "Фишки 1–8 стоят на концах восьмиконечной звезды. Передвигайте фишку только по прямой линии до свободного места; через свободный центр она может проскочить дальше по той же линии. Цель — расставить фишки в обратном порядке. Доказанный минимум — 28 ходов.",
-  "@playgroundRulesEightChips": {"description": "Rules sheet body for the eight_chips game."},
+  "@playgroundRulesEightChips": {
+    "description": "Rules sheet body for the eight_chips game."
+  },
   "playgroundRulesCatsDogs": "Три кошки (C) сидят на левых площадках сквера, три собаки (D) — на правых. За один ход одно животное перебегает по аллее на соседнюю свободную площадку. Кошка и собака никогда не должны оказаться на соседних площадках — такие ходы просто не предлагаются. Цель — поменять кошек и собак местами. Доказанный минимум — 32 хода: столько же обещали кошки в книге, и они оказались правы.",
-  "@playgroundRulesCatsDogs": {"description": "Rules sheet body for the cats_dogs game."},
+  "@playgroundRulesCatsDogs": {
+    "description": "Rules sheet body for the cats_dogs game."
+  },
   "playgroundRulesHourglass": "Пятнадцать фишек заполняют верхний треугольник песочных часов; их нужно все перевести в нижний. За один ход фишка либо переходит по линии на соседний свободный кружок, либо перепрыгивает, как в шашках, через соседнюю фишку на свободный кружок сразу за ней. Несколько прыжков подряд одной фишкой считаются одним ходом, и остановиться можно после любого прыжка; смешивать переход и прыжки в одном ходе нельзя. Двигаться можно только по нарисованным линиям. В книге ответа нет — доказанный перебором минимум составляет 26 ходов.",
-  "@playgroundRulesHourglass": {"description": "Rules sheet body for the hourglass game."},
+  "@playgroundRulesHourglass": {
+    "description": "Rules sheet body for the hourglass game."
+  },
   "playgroundRulesThreeEach": "Девять картонных квадратиков 3 × 3 расписаны красными, белыми и чёрными кружками. Сложите из них квадрат 9 × 9 так, чтобы на каждой из девяти горизонталей, на каждой из девяти вертикалей и на обеих больших диагоналях оказалось ровно по одному кружку каждого цвета. Пустые клетки не в счёт: кружков всего 27, то есть ровно по три на линию. Квадратики можно поворачивать на четверть оборота, но не переворачивать — картон односторонний. Нажмите на квадратик в наборе, чтобы выбрать его; нажмите ещё раз — он повернётся; затем нажмите на свободное место в квадрате. Уже выложенный квадратик можно повернуть на месте или вернуть в набор. Число ходов здесь не важно — важен только собранный квадрат. Перебор показывает, что таких квадратов ровно шестнадцать, считая повороты всего квадрата.",
-  "@playgroundRulesThreeEach": {"description": "Rules sheet body for the three_each game."},
+  "@playgroundRulesThreeEach": {
+    "description": "Rules sheet body for the three_each game."
+  },
   "playgroundRulesPatterns5": "Двадцать пять картонных квадратиков расчерчены красными линиями. Сложите из них квадрат 5 × 5 так, чтобы красные отрезки сомкнулись в одну замкнутую линию, которая нигде не пересекает сама себя. Линия проходит по всем квадратикам, поэтому ошибиться можно только на стыках: красный конец упирается в пустой край соседа, торчит за границу квадрата или отрезки замыкаются в несколько отдельных петель вместо одной. Квадратики можно поворачивать на четверть оборота, но не переворачивать — картон односторонний. Нажмите на квадратик в наборе, чтобы выбрать его; нажмите ещё раз — он повернётся; затем нажмите на свободное место в квадрате. Уже выложенный квадратик можно повернуть на месте или вернуть в набор. Число ходов здесь не важно — важен только сложенный узор. Перебор показывает, что таких узоров ровно 2048, считая повороты всего квадрата.",
-  "@playgroundRulesPatterns5": {"description": "Rules sheet body for the patterns5 game."},
+  "@playgroundRulesPatterns5": {
+    "description": "Rules sheet body for the patterns5 game."
+  },
   "playgroundRulesPatterns4": "Те же красные линии, но квадратиков теперь шестнадцать — ровно те шестнадцать из двадцати пяти, которыми сложен ответ в книге. Сложите из них квадрат 4 × 4 так, чтобы красные отрезки сомкнулись в одну замкнутую линию, которая нигде не пересекает сама себя. Линия проходит по всем квадратикам, поэтому ошибиться можно только на стыках: красный конец упирается в пустой край соседа, торчит за границу квадрата или отрезки замыкаются в несколько отдельных петель вместо одной. Квадратики можно поворачивать на четверть оборота, но не переворачивать — картон односторонний. Нажмите на квадратик в наборе, чтобы выбрать его; нажмите ещё раз — он повернётся; затем нажмите на свободное место в квадрате. Уже выложенный квадратик можно повернуть на месте или вернуть в набор. Число ходов здесь не важно — важен только сложенный узор. Перебор показывает, что таких узоров ровно 512, считая повороты всего квадрата.",
-  "@playgroundRulesPatterns4": {"description": "Rules sheet body for the patterns4 game."},
+  "@playgroundRulesPatterns4": {
+    "description": "Rules sheet body for the patterns4 game."
+  },
+  "playgroundRulesSwapBlocks": "Прямоугольный ящик 16 × 8 заполнен двенадцатью одинаковыми P-образными блоками: каждый занимает восемь клеток, поэтому заняты 96 из 128 клеток, а 32 остаются свободными — четыре пустые строки посередине. Два красных блока сверху образуют квадрат, два чёрных внизу — ещё один. За один ход двигается один блок: он скользит по свободному пространству горизонтально и вертикально на любое расстояние и может поворачивать за углы — всё это путешествие считается одним ходом. Блоки никогда не поворачиваются и не переворачиваются, даже если свободное место это допускает. Цель — красный квадрат и чёрный квадрат должны поменяться местами, а все остальные блоки вернуться на свои места. Нажмите на блок, чтобы выбрать его; точки отмечают каждое место, куда он может переехать; нажмите и удерживайте точку, чтобы увидеть призрак будущего места блока, и отпустите, чтобы его передвинуть. Недопустимые места просто не отмечаются. В книге ответа нет — доказанный перебором минимум составляет 32 хода.",
+  "@playgroundRulesSwapBlocks": {
+    "description": "Rules sheet body for the swap_blocks game."
+  },
   "playgroundComingSoon": "В разработке",
-  "@playgroundComingSoon": {"description": "Trailing label on a not-yet-shipped playground game row."},
+  "@playgroundComingSoon": {
+    "description": "Trailing label on a not-yet-shipped playground game row."
+  },
   "playgroundMoveCounter": "Ходов: {moves}",
   "@playgroundMoveCounter": {
     "description": "Move counter shown in the playground game footer.",
-    "placeholders": {"moves": {"type": "int"}}
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      }
+    }
   },
   "playgroundRecordLine": "Ваш рекорд: {best} ходов",
   "@playgroundRecordLine": {
     "description": "Best-recorded-moves line for a solved playground game.",
-    "placeholders": {"best": {"type": "int"}}
+    "placeholders": {
+      "best": {
+        "type": "int"
+      }
+    }
   },
   "playgroundParProvenLine": "Минимум: {par} ходов",
   "@playgroundParProvenLine": {
     "description": "Solver-proven par line in the playground rules sheet.",
-    "placeholders": {"par": {"type": "int"}}
+    "placeholders": {
+      "par": {
+        "type": "int"
+      }
+    }
   },
   "playgroundParBookLine": "Лучшее известное: {par} ходов",
   "@playgroundParBookLine": {
     "description": "Book-claimed (unverified) par line in the playground rules sheet.",
-    "placeholders": {"par": {"type": "int"}}
+    "placeholders": {
+      "par": {
+        "type": "int"
+      }
+    }
   },
   "playgroundOptimalBadge": "★ оптимально",
-  "@playgroundOptimalBadge": {"description": "Badge shown when the player's best matches a solver-proven par."},
+  "@playgroundOptimalBadge": {
+    "description": "Badge shown when the player's best matches a solver-proven par."
+  },
   "playgroundBookMatchedBadge": "повторён книжный результат",
-  "@playgroundBookMatchedBadge": {"description": "Badge shown when the player's best matches a book-claimed par."},
+  "@playgroundBookMatchedBadge": {
+    "description": "Badge shown when the player's best matches a book-claimed par."
+  },
   "playgroundUndo": "Отменить ход",
-  "@playgroundUndo": {"description": "Label/tooltip for the playground game screen's Undo action."},
+  "@playgroundUndo": {
+    "description": "Label/tooltip for the playground game screen's Undo action."
+  },
   "playgroundRules": "Правила",
-  "@playgroundRules": {"description": "Label/tooltip for the playground game screen's Rules (info) action."},
+  "@playgroundRules": {
+    "description": "Label/tooltip for the playground game screen's Rules (info) action."
+  },
   "playgroundClose": "Закрыть",
-  "@playgroundClose": {"description": "Label for the Close action in the playground rules sheet and win dialog."},
+  "@playgroundClose": {
+    "description": "Label for the Close action in the playground rules sheet and win dialog."
+  },
   "playgroundRestartConfirmTitle": "Начать заново?",
-  "@playgroundRestartConfirmTitle": {"description": "Title of the playground restart confirmation dialog."},
+  "@playgroundRestartConfirmTitle": {
+    "description": "Title of the playground restart confirmation dialog."
+  },
   "playgroundRestartConfirmBody": "Весь прогресс в этой игре будет сброшен.",
-  "@playgroundRestartConfirmBody": {"description": "Body text of the playground restart confirmation dialog."},
+  "@playgroundRestartConfirmBody": {
+    "description": "Body text of the playground restart confirmation dialog."
+  },
   "playgroundWinTitle": "Решено!",
-  "@playgroundWinTitle": {"description": "Title of the playground win dialog."},
+  "@playgroundWinTitle": {
+    "description": "Title of the playground win dialog."
+  },
   "playgroundWinBody": "Вы справились за {moves} ходов.",
   "@playgroundWinBody": {
     "description": "Body of the playground win dialog for a non-optimal solve.",
-    "placeholders": {"moves": {"type": "int"}}
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      }
+    }
   },
   "playgroundWinBodyOptimal": "Вы справились за минимальное число ходов!",
-  "@playgroundWinBodyOptimal": {"description": "Body of the playground win dialog when the solve matched or beat par."},
+  "@playgroundWinBodyOptimal": {
+    "description": "Body of the playground win dialog when the solve matched or beat par."
+  },
   "playgroundShowSolution": "Показать решение",
-  "@playgroundShowSolution": {"description": "Label for the playground rules sheet's Show solution action."},
+  "@playgroundShowSolution": {
+    "description": "Label for the playground rules sheet's Show solution action."
+  },
   "playgroundRotateTile": "Повернуть",
-  "@playgroundRotateTile": {"description": "Tooltip for the rotate-tile action button in tile-placement playground games."},
+  "@playgroundRotateTile": {
+    "description": "Tooltip for the rotate-tile action button in tile-placement playground games."
+  },
   "playgroundReturnTileToTray": "Вернуть в набор",
-  "@playgroundReturnTileToTray": {"description": "Tooltip for the return-tile-to-tray action button in tile-placement playground games."}
+  "@playgroundReturnTileToTray": {
+    "description": "Tooltip for the return-tile-to-tray action button in tile-placement playground games."
+  }
 }

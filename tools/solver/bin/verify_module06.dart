@@ -5,6 +5,7 @@ import 'package:module_playground/module_playground.dart';
 
 import 'hourglass_search.dart';
 import 'patterns5_search.dart';
+import 'swap_blocks_search.dart';
 import 'three_each_search.dart';
 
 /// One shipped playground game's identity plus everything BFS needs to
@@ -111,6 +112,21 @@ Map<String, dynamic> _emitPatterns5() => {
           .toList(),
     };
 
+/// Computes «Поменяйте местами»'s data from scratch: [searchSwapBlocks]'s
+/// proven-optimal par and one realizing move list. Unlike the tile-placement
+/// games above it does carry move economy, so `parProven`/`parSource` follow
+/// the same 'solver' convention as [_emitGame]'s BFS-backed games.
+Map<String, dynamic> _emitSwapBlocks() {
+  final result = searchSwapBlocks();
+  return {
+    'id': 'swap_blocks',
+    'par': result.optimalMoves,
+    'parProven': true,
+    'parSource': 'solver',
+    'solution': result.moves.map((m) => m.toJson()).toList(),
+  };
+}
+
 /// Computes «Узоры 4x4»'s data from scratch (one valid pattern, as sixteen
 /// placements), exactly the way [_emitPatterns5] does for the larger board.
 Map<String, dynamic> _emitPatterns4() => {
@@ -181,6 +197,87 @@ int _verifyPlacementGame(
   print(
     '${game.id.padRight(12)} | ${'n/a'.padRight(11)} | '
     '${'n/a'.padRight(8)} | ${'$replayedLength'.padRight(16)} | '
+    '${'n/a'.padRight(17)} | ${failures == 0 ? 'OK' : 'FAIL'}',
+  );
+
+  return failures;
+}
+
+/// Verifies «Поменяйте местами»'s `module06.json` entry. It is not a
+/// `_GameDescriptor`/[_verify]-loop game (no [TokenGraphBoard], no
+/// [TokenGraphState]) and not a placement game either (it does carry move
+/// economy), so it gets its own verification step, run alongside
+/// [_verifyPlacementGame]: recomputes par with [searchSwapBlocks], hard-fails
+/// if `module06.json` has no par or no solution, if the stored par differs
+/// from the computed one, if the stored solution's length differs from the
+/// par, or if replaying the stored solution through the shipped
+/// [SwapBlocksGame] rules does not end in a solved state. Prints a row in
+/// the same table format as [_verify]'s main loop (reachable closure is
+/// always `n/a` - the state space is far too large to enumerate).
+int _verifySwapBlocks(PlaygroundGame game, List<String> notes) {
+  var failures = 0;
+  final result = searchSwapBlocks();
+
+  final storedPar = game.par;
+  final storedSolution = game.optimalSolution;
+
+  if (storedPar == null) {
+    failures++;
+    notes.add('HARD FAIL: module06.json has no par for swap_blocks');
+  }
+  if (storedSolution == null) {
+    failures++;
+    notes.add('HARD FAIL: module06.json has no solution for swap_blocks');
+  }
+  if (storedPar != null &&
+      result.optimalMoves != null &&
+      storedPar != result.optimalMoves) {
+    failures++;
+    notes.add(
+      'HARD FAIL: stored par $storedPar != computed par '
+      '${result.optimalMoves} (swap_blocks)',
+    );
+  }
+
+  int? replayedLength;
+  if (storedSolution != null) {
+    replayedLength = storedSolution.length;
+    if (storedPar != null && storedSolution.length != storedPar) {
+      failures++;
+      notes.add(
+        'HARD FAIL: stored solution length ${storedSolution.length} != '
+        'stored par $storedPar (swap_blocks)',
+      );
+    }
+
+    var state = game.initialState();
+    var replayOk = true;
+    for (var i = 0; i < storedSolution.length; i++) {
+      final move = storedSolution[i];
+      if (!game.legalMoves(state, from: move.from).contains(move)) {
+        failures++;
+        notes.add(
+          'HARD FAIL: stored solution move #$i ($move) is not legal at that '
+          'point in the replay (swap_blocks)',
+        );
+        replayOk = false;
+        break;
+      }
+      state = game.applyMove(state, move);
+    }
+    if (replayOk && !game.isSolved(state)) {
+      failures++;
+      notes.add(
+        'HARD FAIL: replaying the stored solution ends unsolved '
+        '(swap_blocks)',
+      );
+    }
+  }
+
+  print(
+    '${game.id.padRight(12)} | ${'$storedPar'.padRight(11)} | '
+    '${'${result.optimalMoves}'.padRight(8)} | '
+    '${'$replayedLength'.padRight(16)} | '
     '${'n/a'.padRight(17)} | ${failures == 0 ? 'OK' : 'FAIL'}',
   );
 
@@ -261,6 +358,7 @@ void _emit() {
       _emitThreeEach(),
       _emitPatterns5(),
       _emitPatterns4(),
+      _emitSwapBlocks(),
     ],
   };
 
@@ -399,6 +497,10 @@ void _verify(String dataPath) {
     PatternsGame.patterns4(data.forId('patterns4')),
     searchPatterns(PatternsGame.patterns4()),
     _patterns4SolutionCount,
+    allNotes,
+  );
+  hardFailures += _verifySwapBlocks(
+    SwapBlocksGame(data.forId('swap_blocks')),
     allNotes,
   );
 
